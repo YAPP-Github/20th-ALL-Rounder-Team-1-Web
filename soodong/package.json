@@ -4,10 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack-dev-server --mode development --open --hot",
-    "build": "webpack --mode production",
+    "dev": "webpack-dev-server --config webpack.dev.js --open --hot",
+    "build": "webpack --config webpack.prod.js",
     "prestart": "npm run build",
-    "start": "webpack --mode development"
+    "start": "webpack --config webpack.dev.js"
   },
   "keywords": [],
   "author": "",
@@ -29,6 +29,7 @@
     "typescript": "^4.6.3",
     "webpack": "^5.72.0",
     "webpack-cli": "^4.9.2",
-    "webpack-dev-server": "^4.8.1"
+    "webpack-dev-server": "^4.8.1",
+    "webpack-merge": "^5.8.0"
   }
 }
