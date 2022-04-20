@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "dev": "webpack-dev-server --mode development --open --hot",
+    "build": "webpack --mode production",
+    "prestart": "npm run build",
+    "start": "webpack --mode development"
   },
   "keywords": [],
   "author": "",
@@ -21,6 +24,11 @@
     "@types/react": "^18.0.5",
     "@types/react-dom": "^18.0.1",
     "babel-loader": "^8.2.5",
-    "typescript": "^4.6.3"
+    "html-webpack-plugin": "^5.5.0",
+    "ts-loader": "^9.2.8",
+    "typescript": "^4.6.3",
+    "webpack": "^5.72.0",
+    "webpack-cli": "^4.9.2",
+    "webpack-dev-server": "^4.8.1"
   }
 }
