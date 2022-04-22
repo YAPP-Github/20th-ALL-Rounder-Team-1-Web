@@ -1,10 +1,9 @@
-import React from "react";
-
-const App = () => (
-  <>
-    <h1>Hello React by Production Mode...</h1>
-    <h1 style={{ color: "tomato" }}>{process.env.NODE_ENV}</h1>
-  </>
-);
+const App = () => {
+  return (
+    <div>
+      <h1>Initial Setting</h1>
+    </div>
+  );
+};
 
 export default App;

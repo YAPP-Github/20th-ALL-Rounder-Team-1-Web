@@ -5,9 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js --open --hot",
-    "build": "webpack --config webpack.prod.js",
-    "prestart": "npm run build",
-    "start": "webpack --config webpack.dev.js"
+    "build": "webpack --config webpack.prod.js"
   },
   "keywords": [],
   "author": "",

@@ -1,5 +1,4 @@
 const HtmlWebpackPlugin = require("html-webpack-plugin");
-const webpack = require("webpack");
 const path = require("path");
 
 module.exports = {
@@ -20,10 +19,6 @@ module.exports = {
     filename: "bundle.js",
   },
   plugins: [
-    new webpack.ProvidePlugin({
-      React: "react",
-    }),
-    new webpack.HotModuleReplacementPlugin(),
     new HtmlWebpackPlugin({
       template: "./public/index.html",
     }),

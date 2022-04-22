@@ -3,10 +3,9 @@ const common = require("./webpack.common.js");
 
 module.exports = merge(common, {
   mode: "development",
-  devtool: "eval",
+  devtool: "source-map",
   devServer: {
     historyApiFallback: true,
     port: 3000,
-    hot: true,
   },
 });
