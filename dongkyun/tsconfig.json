@@ -18,7 +18,7 @@
     // "rootDir": "./",                       /* 입력 파일들의 루트 디렉토리 설정. --outDir 옵션을 사용해 출력 디렉토리 설정이 가능 */
     // "composite": true,                     /* 프로젝트 컴파일 활성화 */
     // "tsBuildInfoFile": "./",               /* 증분 컴파일 정보를 저장할 파일 지정 */
-    "removeComments": true,                /* 출력 시, 주석 제거 설정 */
+    "removeComments": true,                   /* 출력 시, 주석 제거 설정 */
     "noEmit": true,                           /* 출력 방출(emit) 유무 설정 */
     // "importHelpers": true,                 /* 'tslib'로부터 헬퍼를 호출할 지 설정 */
     // "downlevelIteration": true,            /* 'ES5' 혹은 'ES3' 타겟 설정 시 Iterables 'for-of', 'spread', 'destructuring' 완벽 지원 설정 */
@@ -38,7 +38,7 @@
     /* 추가 검사 옵션
      * ------------------------------------------------------------------------------------------------------------------------------------------------ */
     // "noUnusedLocals": true,                /* 사용되지 않은 로컬이 있을 경우, 오류로 보고 */
-    "noUnusedParameters": true,            /* 사용되지 않은 매개변수가 있을 경우, 오류로 보고 */
+    "noUnusedParameters": true,               /* 사용되지 않은 매개변수가 있을 경우, 오류로 보고 */
     // "noImplicitReturns": true,             /* 함수가 값을 반환하지 않을 경우, 오류로 보고 */
     "noFallthroughCasesInSwitch": true,       /* switch 문 오류 유형에 대한 오류 보고 */
     // "noUncheckedIndexedAccess": true,      /* 인덱스 시그니처 결과에 'undefined' 포함 */
