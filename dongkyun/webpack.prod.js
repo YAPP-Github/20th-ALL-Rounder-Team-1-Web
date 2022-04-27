@@ -29,6 +29,11 @@ module.exports = merge(common, {
           },
         },
       }),
+      new TerserPlugin({
+        parallel: true,
+        cache: true,
+        sourceMap: true,
+      }),
     ],
   },
 });
