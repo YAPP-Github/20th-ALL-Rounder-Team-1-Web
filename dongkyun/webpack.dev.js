@@ -9,4 +9,12 @@ module.exports = merge(common, {
     port: 8080,
     historyApiFallback: true,
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
 });
