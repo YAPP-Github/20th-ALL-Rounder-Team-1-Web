@@ -27,8 +27,8 @@
       /* 엄격한 유형 검사 옵션
        * ------------------------------------------------------------------------------------------------------------------------------------------------ */
       "strict": true,                           /* 모든 엄격한 유형 검사 옵션 활성화 */
-      // "noImplicitAny": true,                 /* 명시적이지 않은 'any' 유형으로 표현식 및 선언 사용 시 오류 발생 */
-      // "strictNullChecks": true,              /* 엄격한 null 검사 사용 */
+      "noImplicitAny": true,                 /* 명시적이지 않은 'any' 유형으로 표현식 및 선언 사용 시 오류 발생 */
+      "strictNullChecks": true,              /* 엄격한 null 검사 사용 */
       // "strictFunctionTypes": true,           /* 엄격한 함수 유형 검사 사용 */
       // "strictBindCallApply": true,           /* 엄격한 'bind', 'call', 'apply' 함수 메서드 사용 */
       // "strictPropertyInitialization": true,  /* 클래스에서 속성 초기화 엄격 검사 사용 */
