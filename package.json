@@ -5,7 +5,10 @@
   "license": "MIT",
   "scripts": {
     "dev": "webpack-dev-server --config webpack.dev.js --open --hot",
-    "build": "webpack --config webpack.prod.js"
+    "build": "webpack --config webpack.prod.js",
+    "lint": "npx eslint 'src/**/*.{js,jsx,ts,tsx}'",
+    "lint:fix": "npx eslint --fix 'src/**/*.{js,jsx,ts,tsx}'",
+    "format": "npx prettier --write \"./**/*.{js,jsx,ts,tsx}\""
   },
   "dependencies": {
     "react": "^18.0.0",
@@ -18,13 +21,24 @@
     "@babel/preset-react": "^7.16.7",
     "@types/react": "^18.0.8",
     "@types/react-dom": "^18.0.3",
+    "@typescript-eslint/eslint-plugin": "^5.22.0",
+    "@typescript-eslint/parser": "^5.22.0",
     "babel-loader": "^8.2.5",
     "babel-plugin-styled-components": "^2.0.7",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
+    "eslint": "^8.14.0",
+    "eslint-config-prettier": "^8.5.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-jsx-a11y": "^6.5.1",
+    "eslint-plugin-prettier": "^4.0.0",
+    "eslint-plugin-react": "^7.29.4",
+    "eslint-plugin-react-hooks": "^4.5.0",
     "file-loader": "^6.2.0",
     "html-webpack-plugin": "^5.5.0",
+    "husky": "4",
+    "lint-staged": "^12.4.1",
     "mini-css-extract-plugin": "^2.6.0",
     "optimize-css-assets-webpack-plugin": "^6.0.1",
     "style-loader": "^3.3.1",
@@ -33,6 +47,17 @@
     "webpack-cli": "^4.9.2",
     "webpack-dev-server": "^4.8.1",
     "webpack-merge": "^5.8.0"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "**/*.{js,jsx,ts,tsx}": [
+      "yarn format",
+      "yarn lint:fix"
+    ]
   },
   "engines": {
     "npm": "please-use-yarn",

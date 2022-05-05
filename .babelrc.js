@@ -1,19 +1,19 @@
 module.exports = {
   presets: [
     [
-      "@babel/preset-env",
+      '@babel/preset-env',
       {
-        targets: "> 1%, not dead",
-        useBuiltIns: "usage",
+        targets: '> 1%, not dead',
+        useBuiltIns: 'usage',
         corejs: { version: 3, proposals: true },
       },
     ],
     [
-      "@babel/preset-react",
+      '@babel/preset-react',
       {
-        runtime: "automatic",
+        runtime: 'automatic',
       },
     ],
   ],
-  plugins: ["babel-plugin-styled-components"],
+  plugins: ['babel-plugin-styled-components'],
 };
