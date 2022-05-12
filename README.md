@@ -1,5 +1,34 @@
 # 20th-ALL-Rounder-Team-1-Web
 
-[20th] All-Rounder 1팀 Web
+### [20th] Weekand
 
 이수동(팀장), 장동균(팀원)
+
+[우리들의 컨벤션](https://github.com/YAPP-Github/20th-ALL-Rounder-Team-1-Web/wiki/%EC%BB%A8%EB%B2%A4%EC%85%98)
+
+---
+
+## 폴더구조
+
+```
+Frontend
+├──
+├── babel.config.json
+├── package.json
+└── /src
+    ├── /api
+    ├── /assets
+    ├── /components
+        ├── /common
+        ├── /user
+        ├── /admin
+    ├── /hooks
+        ├── /query(react-query 폴더는 아마 이곳에 위치할 듯?)
+    ├── /pages
+    ├── /typs
+    ├── /utils
+    ├── App.jsx
+    └── index.jsx
+```
+
+---
