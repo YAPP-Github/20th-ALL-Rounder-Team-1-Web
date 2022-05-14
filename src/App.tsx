@@ -1,8 +1,11 @@
+import TestPage from './pages/TestPage';
+import { PopUpContextProvider } from './store';
+
 const App = () => {
   return (
-    <div>
-      <h1>Initial Setting</h1>
-    </div>
+    <PopUpContextProvider>
+      <TestPage />
+    </PopUpContextProvider>
   );
 };
 
