@@ -1,6 +1,6 @@
 # 20th-ALL-Rounder-Team-1-Web
 
-### [20th] Weekand
+### [20th] Weekand 
 
 이수동(팀장), 장동균(팀원)
 
@@ -25,7 +25,7 @@ Frontend
     ├── /hooks
         ├── /query(react-query 폴더는 아마 이곳에 위치할 듯?)
     ├── /pages
-    ├── /typs
+    ├── /types
     ├── /utils
     ├── App.jsx
     └── index.jsx
