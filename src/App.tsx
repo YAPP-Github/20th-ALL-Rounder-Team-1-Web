@@ -1,6 +1,8 @@
 import React from 'react';
+
 import TestPage from './pages/TestPage';
-import { PopUpContextProvider } from './store';
+
+import { PopUpContextProvider } from './contexts';
 import { AppProvider } from './utils';
 
 const App = () => {

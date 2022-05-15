@@ -1,21 +1,22 @@
 import { createContext, Dispatch, useContext, useReducer } from 'react';
 
 type PopUpState = {
-  isOpen: boolean;
+  isCatOpen: boolean;
+  isGhostOpen: boolean;
 };
-
-const PopUpStateContext = createContext<PopUpState | undefined>(undefined);
-
-type Action = { type: 'TOGGLE_POP_UP' };
-
 type PopUpDispatch = Dispatch<Action>;
 
+type Action = { type: 'TOGGLE_CAT_POP_UP' } | { type: 'TOGGLE_GHOST_POP_UP' };
+
+const PopUpStateContext = createContext<PopUpState | undefined>(undefined);
 const PopUpDispatchContext = createContext<PopUpDispatch | undefined>(undefined);
 
 const popUpReducer = (state: PopUpState, action: Action): PopUpState => {
   switch (action.type) {
-    case 'TOGGLE_POP_UP':
-      return { ...state, isOpen: !state.isOpen };
+    case 'TOGGLE_CAT_POP_UP':
+      return { ...state, isCatOpen: !state.isCatOpen };
+    case 'TOGGLE_GHOST_POP_UP':
+      return { ...state, isGhostOpen: !state.isGhostOpen };
     default:
       throw new Error('Unhandled action');
   }
@@ -27,7 +28,8 @@ interface IProps {
 
 export const PopUpContextProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(popUpReducer, {
-    isOpen: false,
+    isCatOpen: false,
+    isGhostOpen: false,
   });
 
   return (

@@ -1,1 +1,2 @@
-export * from './common/PopUp';
+export * from './common/CatPopUp';
+export * from './common/GhostPopUp';

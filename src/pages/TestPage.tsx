@@ -1,16 +1,20 @@
 import React from 'react';
-import { usePopUpDispatch } from '../store';
-import { PopUp } from '../components';
+
+import { CatPopUp, GhostPopUp } from '../components';
+import { usePopUpDispatch } from '../contexts';
 
 const TestPage = () => {
   const dispatch = usePopUpDispatch();
 
-  const setIsOpen = () => dispatch({ type: 'TOGGLE_POP_UP' });
+  const setIsCatOpen = () => dispatch({ type: 'TOGGLE_CAT_POP_UP' });
+  const setIsGhostOpen = () => dispatch({ type: 'TOGGLE_GHOST_POP_UP' });
 
   return (
     <div>
-      <button onClick={setIsOpen}>PopUp</button>
-      <PopUp />
+      <button onClick={setIsCatOpen}>Cat PopUp</button>
+      <button onClick={setIsGhostOpen}>Ghost PopUp</button>
+      <CatPopUp />
+      <GhostPopUp />
     </div>
   );
 };
