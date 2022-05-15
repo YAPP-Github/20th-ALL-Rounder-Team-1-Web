@@ -1,6 +1,6 @@
 # 20th-ALL-Rounder-Team-1-Web
 
-### [20th] Weekand FE
+### [20th] Weekand
 
 이수동(팀장), 장동균(팀원)
 
