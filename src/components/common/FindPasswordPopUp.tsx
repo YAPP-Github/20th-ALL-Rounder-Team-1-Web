@@ -10,9 +10,8 @@ export const FindPasswordPopUp = () => {
   return (
     <Wrapper>
       <button onClick={setIsCalendarOpen}>Close PopUp</button>
-      <h1>Email</h1>
-      <input type="email" />
-      <button>임시 비밀번호 발급</button>
+      <h1>Find Password</h1>
+      <p>임시 비밀번호 발급...</p>
     </Wrapper>
   );
 };

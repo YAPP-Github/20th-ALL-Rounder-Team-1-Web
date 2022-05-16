@@ -1,10 +1,6 @@
-import { CalendarPopUp, FindPasswordPopUp } from '@/components';
-import { usePopUpDispatch, usePopUpState } from '@/contexts';
+import { usePopUpDispatch } from '@/contexts';
 
-const TestPage = () => {
-  const { isCalendarOpen } = usePopUpState();
-  const { isFindPasswordOpen } = usePopUpState();
-
+export const TestPage = () => {
   const dispatch = usePopUpDispatch();
 
   const setIsCalendarOpen = () => dispatch({ type: 'TOGGLE_CALENDAR_POP_UP' });
@@ -14,10 +10,6 @@ const TestPage = () => {
     <div>
       <button onClick={setIsCalendarOpen}>Calendar PopUp</button>
       <button onClick={setIsFindPasswordOpen}>Find Password PopUp</button>
-      {isCalendarOpen && <CalendarPopUp />}
-      {isFindPasswordOpen && <FindPasswordPopUp />}
     </div>
   );
 };
-
-export default TestPage;

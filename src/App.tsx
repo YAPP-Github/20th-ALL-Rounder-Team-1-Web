@@ -1,12 +1,15 @@
-import { PopUpContextProvider } from '@/contexts';
-import TestPage from '@/pages/TestPage';
-import { AppProvider } from '@/utils';
+import { ModalPortal } from './ModalPortal';
+import { Modal } from './components';
+import { TestPage } from './pages';
 
 const App = () => {
   return (
-    <AppProvider components={[PopUpContextProvider]}>
+    <>
       <TestPage />
-    </AppProvider>
+      <ModalPortal>
+        <Modal />
+      </ModalPortal>
+    </>
   );
 };
 
