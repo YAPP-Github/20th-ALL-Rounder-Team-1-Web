@@ -25,7 +25,7 @@ Frontend
     ├── /hooks
         ├── /query(react-query 폴더는 아마 이곳에 위치할 듯?)
     ├── /pages
-    ├── /typs
+    ├── /types
     ├── /utils
     ├── App.jsx
     └── index.jsx
