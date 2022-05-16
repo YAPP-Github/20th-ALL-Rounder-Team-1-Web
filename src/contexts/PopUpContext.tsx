@@ -1,22 +1,22 @@
 import { createContext, Dispatch, useContext, useReducer } from 'react';
 
 type PopUpState = {
-  isCatOpen: boolean;
-  isGhostOpen: boolean;
+  isFindPasswordOpen: boolean;
+  isCalendarOpen: boolean;
 };
 type PopUpDispatch = Dispatch<Action>;
 
-type Action = { type: 'TOGGLE_CAT_POP_UP' } | { type: 'TOGGLE_GHOST_POP_UP' };
+type Action = { type: 'TOGGLE_FIND_PASSWORD_POP_UP' } | { type: 'TOGGLE_CALENDAR_POP_UP' };
 
 const PopUpStateContext = createContext<PopUpState | undefined>(undefined);
 const PopUpDispatchContext = createContext<PopUpDispatch | undefined>(undefined);
 
 const popUpReducer = (state: PopUpState, action: Action): PopUpState => {
   switch (action.type) {
-    case 'TOGGLE_CAT_POP_UP':
-      return { ...state, isCatOpen: !state.isCatOpen };
-    case 'TOGGLE_GHOST_POP_UP':
-      return { ...state, isGhostOpen: !state.isGhostOpen };
+    case 'TOGGLE_FIND_PASSWORD_POP_UP':
+      return { ...state, isFindPasswordOpen: !state.isFindPasswordOpen };
+    case 'TOGGLE_CALENDAR_POP_UP':
+      return { ...state, isCalendarOpen: !state.isCalendarOpen };
     default:
       throw new Error('Unhandled action');
   }
@@ -28,8 +28,8 @@ interface IProps {
 
 export const PopUpContextProvider = ({ children }: IProps) => {
   const [state, dispatch] = useReducer(popUpReducer, {
-    isCatOpen: false,
-    isGhostOpen: false,
+    isFindPasswordOpen: false,
+    isCalendarOpen: false,
   });
 
   return (

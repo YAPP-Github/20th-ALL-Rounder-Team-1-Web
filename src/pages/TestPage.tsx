@@ -1,18 +1,21 @@
-import { CatPopUp, GhostPopUp } from '@/components';
-import { usePopUpDispatch } from '@/contexts';
+import { CalendarPopUp, FindPasswordPopUp } from '@/components';
+import { usePopUpDispatch, usePopUpState } from '@/contexts';
 
 const TestPage = () => {
+  const { isCalendarOpen } = usePopUpState();
+  const { isFindPasswordOpen } = usePopUpState();
+
   const dispatch = usePopUpDispatch();
 
-  const setIsCatOpen = () => dispatch({ type: 'TOGGLE_CAT_POP_UP' });
-  const setIsGhostOpen = () => dispatch({ type: 'TOGGLE_GHOST_POP_UP' });
+  const setIsCalendarOpen = () => dispatch({ type: 'TOGGLE_CALENDAR_POP_UP' });
+  const setIsFindPasswordOpen = () => dispatch({ type: 'TOGGLE_FIND_PASSWORD_POP_UP' });
 
   return (
     <div>
-      <button onClick={setIsCatOpen}>Cat PopUp</button>
-      <button onClick={setIsGhostOpen}>Ghost PopUp</button>
-      <CatPopUp />
-      <GhostPopUp />
+      <button onClick={setIsCalendarOpen}>Calendar PopUp</button>
+      <button onClick={setIsFindPasswordOpen}>Find Password PopUp</button>
+      {isCalendarOpen && <CalendarPopUp />}
+      {isFindPasswordOpen && <FindPasswordPopUp />}
     </div>
   );
 };
