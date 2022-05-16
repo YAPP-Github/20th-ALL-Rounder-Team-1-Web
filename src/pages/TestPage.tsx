@@ -1,7 +1,5 @@
-import React from 'react';
-
-import { CatPopUp, GhostPopUp } from '../components';
-import { usePopUpDispatch } from '../contexts';
+import { CatPopUp, GhostPopUp } from '@/components';
+import { usePopUpDispatch } from '@/contexts';
 
 const TestPage = () => {
   const dispatch = usePopUpDispatch();

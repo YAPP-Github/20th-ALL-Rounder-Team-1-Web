@@ -1,6 +1,4 @@
-import React from 'react';
-
-import { usePopUpState } from '../../contexts';
+import { usePopUpState } from '@/contexts';
 
 export const CatPopUp = () => {
   const { isCatOpen } = usePopUpState();
