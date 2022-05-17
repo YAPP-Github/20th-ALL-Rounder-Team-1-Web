@@ -11,6 +11,7 @@ const App = () => {
       <Input type="nickName" isValidNickName={undefined} />
       <Input type="password" setCurrentPassword={setCurrentPassword} />
       <Input type="retypedPassword" typedPassword={currentPassword} />
+      <Input type="planTitle" />
     </div>
   );
 };

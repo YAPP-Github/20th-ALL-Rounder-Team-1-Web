@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-type InputType = 'email' | 'authNumber' | 'nickName' | 'password' | 'retypedPassword';
+type InputType = 'email' | 'authNumber' | 'nickName' | 'password' | 'retypedPassword' | 'planTitle';
 
 interface IProps {
   type: InputType;
@@ -23,6 +23,7 @@ export const Input = ({
     nickName: '',
     password: '',
     retypedPassword: '',
+    planTitle: '',
   });
   const [message, setMessage] = useState({
     email: '',
@@ -30,6 +31,7 @@ export const Input = ({
     nickName: '',
     password: '',
     retypedPassword: '',
+    planTitle: '',
   });
 
   const checkEmail = () => {
@@ -114,6 +116,15 @@ export const Input = ({
     return setMessage({ ...message, retypedPassword: '' });
   };
 
+  const checkPlanTitle = () => {
+    const currentInput = inputValue['planTitle'];
+
+    if (currentInput.length === 10) {
+      return setMessage({ ...message, planTitle: '일정명은 최대 10자 입니다.' });
+    }
+    return setMessage({ ...message, planTitle: '' });
+  };
+
   const checkInput = () => {
     if (type === 'email') {
       return checkEmail();
@@ -129,6 +140,9 @@ export const Input = ({
     }
     if (type === 'retypedPassword') {
       return checkRetypedPassword();
+    }
+    if (type === 'planTitle') {
+      return checkPlanTitle();
     }
   };
 
@@ -201,6 +215,18 @@ export const Input = ({
             maxLength={50}
           />
           <p>{message['retypedPassword']}</p>
+        </>
+      )}
+      {type === 'planTitle' && (
+        <>
+          <input
+            onChange={(event) => onChange('planTitle', event)}
+            type="text"
+            name="planTitle"
+            id="planTitle"
+            maxLength={10}
+          />
+          <p>{message['planTitle']}</p>
         </>
       )}
     </>
