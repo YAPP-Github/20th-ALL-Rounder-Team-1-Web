@@ -5,6 +5,7 @@ const App = () => {
     <div>
       <h1>Initial Setting</h1>
       <Input type="email" />
+      <Input type="authNumber" authInput={123456} />
     </div>
   );
 };
