@@ -7,6 +7,7 @@ const App = () => {
       <Input type="email" />
       <Input type="authNumber" authInput={123456} />
       <Input type="nickName" isValidNickName={undefined} />
+      <Input type="password" />
     </div>
   );
 };

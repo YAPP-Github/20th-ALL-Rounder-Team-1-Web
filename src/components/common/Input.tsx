@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-type InputType = 'email' | 'authNumber' | 'nickName';
+type InputType = 'email' | 'authNumber' | 'nickName' | 'password';
 
 interface IProps {
   type: InputType;
@@ -13,11 +13,13 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
     email: '',
     authNumber: '',
     nickName: '',
+    password: '',
   });
   const [message, setMessage] = useState({
     email: '',
     authNumber: '',
-    nickName: '22',
+    nickName: '',
+    password: '',
   });
 
   const checkEmail = () => {
@@ -66,6 +68,22 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
     if (!isValidNickName) {
       return setMessage({ ...message, nickName: '이미 사용중인 닉네임 입니다.' });
     }
+    return setMessage({ ...message, nickName: '' });
+  };
+
+  const checkPassword = () => {
+    const currentInput = inputValue['password'];
+
+    const passwordRegex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,50}$/;
+
+    if (currentInput.length > 0 && !passwordRegex.test(currentInput)) {
+      return setMessage({
+        ...message,
+        password:
+          '비밀번호는 최소 8자 최대 50자이며, 숫자, 영어, 특수문자가 최소 1개씩 포함되어야 합니다.',
+      });
+    }
+    return setMessage({ ...message, password: '' });
   };
 
   const checkInput = () => {
@@ -77,6 +95,9 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
     }
     if (type === 'nickName') {
       return checkNickName();
+    }
+    if (type === 'password') {
+      return checkPassword();
     }
   };
 
@@ -125,6 +146,18 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
             maxLength={12}
           />
           <p>{message['nickName']}</p>
+        </>
+      )}
+      {type === 'password' && (
+        <>
+          <input
+            onChange={(event) => onChange('password', event)}
+            type="password"
+            name="password"
+            id="password"
+            maxLength={50}
+          />
+          <p>{message['password']}</p>
         </>
       )}
     </>
