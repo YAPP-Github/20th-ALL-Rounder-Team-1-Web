@@ -1,20 +1,23 @@
 import { useEffect, useState } from 'react';
 
-type InputType = 'email' | 'authNumber';
+type InputType = 'email' | 'authNumber' | 'nickName';
 
 interface IProps {
   type: InputType;
   authInput?: number;
+  isValidNickName?: boolean | undefined;
 }
 
-export const Input = ({ type, authInput }: IProps) => {
+export const Input = ({ type, authInput, isValidNickName }: IProps) => {
   const [inputValue, setInputValue] = useState({
     email: '',
     authNumber: '',
+    nickName: '',
   });
   const [message, setMessage] = useState({
     email: '',
     authNumber: '',
+    nickName: '22',
   });
 
   const checkEmail = () => {
@@ -48,12 +51,32 @@ export const Input = ({ type, authInput }: IProps) => {
     return setMessage({ ...message, authNumber: '' });
   };
 
+  const checkNickName = () => {
+    const currentInput = inputValue['nickName'];
+
+    if (currentInput.length === 12) {
+      return setMessage({ ...message, nickName: '닉네임은 최대 12자입니다.' });
+    }
+    if (isValidNickName === undefined) {
+      return setMessage({ ...message, nickName: '' });
+    }
+    if (isValidNickName) {
+      return setMessage({ ...message, nickName: '사용가능한 닉네임 입니다.' });
+    }
+    if (!isValidNickName) {
+      return setMessage({ ...message, nickName: '이미 사용중인 닉네임 입니다.' });
+    }
+  };
+
   const checkInput = () => {
     if (type === 'email') {
       return checkEmail();
     }
     if (type === 'authNumber' && authInput) {
       return checkAuthNumber(authInput);
+    }
+    if (type === 'nickName') {
+      return checkNickName();
     }
   };
 
@@ -90,6 +113,18 @@ export const Input = ({ type, authInput }: IProps) => {
             maxLength={6}
           />
           <p>{message['authNumber']}</p>
+        </>
+      )}
+      {type === 'nickName' && (
+        <>
+          <input
+            onChange={(event) => onChange('nickName', event)}
+            type="text"
+            name="nickName"
+            id="nickName"
+            maxLength={12}
+          />
+          <p>{message['nickName']}</p>
         </>
       )}
     </>
