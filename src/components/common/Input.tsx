@@ -1,25 +1,35 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-type InputType = 'email' | 'authNumber' | 'nickName' | 'password';
+type InputType = 'email' | 'authNumber' | 'nickName' | 'password' | 'retypedPassword';
 
 interface IProps {
   type: InputType;
   authInput?: number;
   isValidNickName?: boolean | undefined;
+  setCurrentPassword?: Dispatch<SetStateAction<string>>;
+  typedPassword?: string;
 }
 
-export const Input = ({ type, authInput, isValidNickName }: IProps) => {
+export const Input = ({
+  type,
+  authInput,
+  isValidNickName,
+  setCurrentPassword,
+  typedPassword,
+}: IProps) => {
   const [inputValue, setInputValue] = useState({
     email: '',
     authNumber: '',
     nickName: '',
     password: '',
+    retypedPassword: '',
   });
   const [message, setMessage] = useState({
     email: '',
     authNumber: '',
     nickName: '',
     password: '',
+    retypedPassword: '',
   });
 
   const checkEmail = () => {
@@ -83,7 +93,25 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
           '비밀번호는 최소 8자 최대 50자이며, 숫자, 영어, 특수문자가 최소 1개씩 포함되어야 합니다.',
       });
     }
+
+    if (setCurrentPassword) {
+      setCurrentPassword(currentInput);
+    }
     return setMessage({ ...message, password: '' });
+  };
+
+  const checkRetypedPassword = () => {
+    const currentInput = inputValue['retypedPassword'];
+
+    if (typedPassword) {
+      if (typedPassword !== currentInput) {
+        return setMessage({
+          ...message,
+          retypedPassword: '비밀번호가 일치하지 않습니다. 다시 확인해주세요',
+        });
+      }
+    }
+    return setMessage({ ...message, retypedPassword: '' });
   };
 
   const checkInput = () => {
@@ -98,6 +126,9 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
     }
     if (type === 'password') {
       return checkPassword();
+    }
+    if (type === 'retypedPassword') {
+      return checkRetypedPassword();
     }
   };
 
@@ -158,6 +189,18 @@ export const Input = ({ type, authInput, isValidNickName }: IProps) => {
             maxLength={50}
           />
           <p>{message['password']}</p>
+        </>
+      )}
+      {type === 'retypedPassword' && (
+        <>
+          <input
+            onChange={(event) => onChange('retypedPassword', event)}
+            type="password"
+            name="retypedPassword"
+            id="retypedPassword"
+            maxLength={50}
+          />
+          <p>{message['retypedPassword']}</p>
         </>
       )}
     </>
