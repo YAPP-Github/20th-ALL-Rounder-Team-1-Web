@@ -13,6 +13,7 @@ const App = () => {
       <Input type="retypedPassword" typedPassword={currentPassword} />
       <Input type="planTitle" />
       <Input type="time" />
+      <Input type="date" />
     </div>
   );
 };

@@ -7,7 +7,8 @@ type InputType =
   | 'password'
   | 'retypedPassword'
   | 'planTitle'
-  | 'time';
+  | 'time'
+  | 'date';
 
 interface IProps {
   type: InputType;
@@ -32,6 +33,7 @@ export const Input = ({
     retypedPassword: '',
     planTitle: '',
     time: '',
+    date: '',
   });
   const [message, setMessage] = useState({
     email: '',
@@ -41,6 +43,7 @@ export const Input = ({
     retypedPassword: '',
     planTitle: '',
     time: '',
+    date: '',
   });
 
   const checkEmail = () => {
@@ -132,10 +135,6 @@ export const Input = ({
       return setMessage({ ...message, planTitle: '일정명은 최대 10자 입니다.' });
     }
     return setMessage({ ...message, planTitle: '' });
-  };
-
-  const checkTime = () => {
-    const currentInput = inputValue['time'];
   };
 
   const checkInput = () => {
@@ -244,14 +243,14 @@ export const Input = ({
       )}
       {type === 'time' && (
         <>
-          <input
-            onChange={(event) => onChange('time', event)}
-            type="time"
-            name="time"
-            id="time"
-            maxLength={4}
-          />
+          <input onChange={(event) => onChange('time', event)} type="time" name="time" id="time" />
           <p>{message['time']}</p>
+        </>
+      )}
+      {type === 'date' && (
+        <>
+          <input onChange={(event) => onChange('date', event)} type="date" name="date" id="date" />
+          <p>{message['date']}</p>
         </>
       )}
     </>
