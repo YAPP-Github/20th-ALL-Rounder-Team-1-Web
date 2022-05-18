@@ -26,127 +26,99 @@ export const Input = ({
   setCurrentPassword,
   typedPassword,
 }: IProps) => {
-  const [inputValue, setInputValue] = useState({
-    email: '',
-    authNumber: '',
-    nickName: '',
-    password: '',
-    retypedPassword: '',
-    planTitle: '',
-    time: '',
-    date: '',
-    categoryTitle: '',
-  });
-  const [message, setMessage] = useState({
-    email: '',
-    authNumber: '',
-    nickName: '',
-    password: '',
-    retypedPassword: '',
-    planTitle: '',
-    time: '',
-    date: '',
-    categoryTitle: '',
-  });
+  const [inputValue, setInputValue] = useState('');
+  const [message, setMessage] = useState('');
 
   const checkEmail = () => {
-    const currentInput = inputValue['email'];
+    const currentInput = inputValue;
     const emailRegex =
       /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
 
     if (currentInput.length) {
       if (!emailRegex.test(currentInput)) {
-        return setMessage({ ...message, email: '이메일 형식이 아닙니다.' });
+        return setMessage('이메일 형식이 아닙니다.');
       }
       if (currentInput.length === 320) {
-        return setMessage({ ...message, email: '이메일 최대 길이는 320자 입니다.' });
+        return setMessage('이메일 최대 길이는 320자 입니다.');
       }
     }
-    return setMessage({ ...message, email: '' });
+    return setMessage('');
   };
 
   const checkAuthNumber = (authInput: number) => {
-    const currentInput = inputValue['authNumber'];
+    const currentInput = inputValue;
 
     if (currentInput.length === 6) {
       if (Number(currentInput) === authInput) {
-        return setMessage({ ...message, authNumber: '인증되었습니다.' });
+        return setMessage('인증되었습니다.');
       }
-      return setMessage({
-        ...message,
-        authNumber: '인증 번호가 맞지 않습니다. 다시 입력하여 주세요.',
-      });
+      return setMessage('인증 번호가 맞지 않습니다. 다시 입력하여 주세요.');
     }
-    return setMessage({ ...message, authNumber: '' });
+    return setMessage('');
   };
 
   const checkNickName = () => {
-    const currentInput = inputValue['nickName'];
+    const currentInput = inputValue;
 
     if (currentInput.length === 12) {
-      return setMessage({ ...message, nickName: '닉네임은 최대 12자입니다.' });
+      return setMessage('닉네임은 최대 12자입니다.');
     }
     if (isValidNickName === undefined) {
-      return setMessage({ ...message, nickName: '' });
+      return setMessage('');
     }
     if (isValidNickName) {
-      return setMessage({ ...message, nickName: '사용가능한 닉네임 입니다.' });
+      return setMessage('사용가능한 닉네임 입니다.');
     }
     if (!isValidNickName) {
-      return setMessage({ ...message, nickName: '이미 사용중인 닉네임 입니다.' });
+      return setMessage('이미 사용중인 닉네임 입니다.');
     }
-    return setMessage({ ...message, nickName: '' });
+    return setMessage('');
   };
 
   const checkPassword = () => {
-    const currentInput = inputValue['password'];
+    const currentInput = inputValue;
 
     const passwordRegex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,50}$/;
 
     if (currentInput.length > 0 && !passwordRegex.test(currentInput)) {
-      return setMessage({
-        ...message,
-        password:
-          '비밀번호는 최소 8자 최대 50자이며, 숫자, 영어, 특수문자가 최소 1개씩 포함되어야 합니다.',
-      });
+      return setMessage(
+        '비밀번호는 최소 8자 최대 50자이며, 숫자, 영어, 특수문자가 최소 1개씩 포함되어야 합니다.'
+      );
     }
 
     if (setCurrentPassword) {
       setCurrentPassword(currentInput);
     }
-    return setMessage({ ...message, password: '' });
+    return setMessage('');
   };
 
   const checkRetypedPassword = () => {
-    const currentInput = inputValue['retypedPassword'];
+    const currentInput = inputValue;
 
     if (typedPassword) {
       if (typedPassword !== currentInput) {
-        return setMessage({
-          ...message,
-          retypedPassword: '비밀번호가 일치하지 않습니다. 다시 확인해주세요',
-        });
+        return setMessage('비밀번호가 일치하지 않습니다. 다시 확인해주세요');
       }
     }
-    return setMessage({ ...message, retypedPassword: '' });
+    return setMessage('');
   };
 
   const checkPlanTitle = () => {
-    const currentInput = inputValue['planTitle'];
+    const currentInput = inputValue;
 
     if (currentInput.length === 10) {
-      return setMessage({ ...message, planTitle: '일정명은 최대 10자 입니다.' });
+      return setMessage('일정명은 최대 10자 입니다.');
     }
-    return setMessage({ ...message, planTitle: '' });
+    return setMessage('');
   };
 
   const checkCategoryTitle = () => {
-    const currentInput = inputValue['categoryTitle'];
+    const currentInput = inputValue;
 
     if (currentInput.length === 15) {
-      return setMessage({ ...message, categoryTitle: '일정명은 최대 15자 입니다.' });
+      return setMessage('카테고리 명은 최대 15자 입니다.');
     }
-    return setMessage({ ...message, categoryTitle: '' });
+    return setMessage('');
   };
 
   const checkInput = () => {
@@ -173,130 +145,118 @@ export const Input = ({
     }
   };
 
-  const onChange = (inputType: string, event: React.ChangeEvent<HTMLInputElement>) => {
+  const onChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    setInputValue({ ...inputValue, [inputType]: value });
+    setInputValue(value);
   };
 
   useEffect(() => {
     checkInput();
-  }, [inputValue[type]]);
+  }, [inputValue]);
 
   return (
     <>
       {type === 'email' && (
         <>
           <input
-            onChange={(event) => onChange('email', event)}
-            value={inputValue['email']}
+            onChange={onChange}
+            value={inputValue}
             name="email"
             id="email"
             maxLength={320}
             required
           />
-          <p>{message['email']}</p>
+          <p>{message}</p>
         </>
       )}
       {type === 'authNumber' && (
         <>
           <input
-            onChange={(event) => onChange('authNumber', event)}
+            onChange={onChange}
             type="text"
             name="authNumber"
             id="authNumber"
             maxLength={6}
             required
           />
-          <p>{message['authNumber']}</p>
+          <p>{message}</p>
         </>
       )}
       {type === 'nickName' && (
         <>
           <input
-            onChange={(event) => onChange('nickName', event)}
+            onChange={onChange}
             type="text"
             name="nickName"
             id="nickName"
             maxLength={12}
             required
           />
-          <p>{message['nickName']}</p>
+          <p>{message}</p>
         </>
       )}
       {type === 'password' && (
         <>
           <input
-            onChange={(event) => onChange('password', event)}
+            onChange={onChange}
             type="password"
             name="password"
             id="password"
             maxLength={50}
             required
           />
-          <p>{message['password']}</p>
+          <p>{message}</p>
         </>
       )}
       {type === 'retypedPassword' && (
         <>
           <input
-            onChange={(event) => onChange('retypedPassword', event)}
+            onChange={onChange}
             type="password"
             name="retypedPassword"
             id="retypedPassword"
             maxLength={50}
             required
           />
-          <p>{message['retypedPassword']}</p>
+          <p>{message}</p>
         </>
       )}
       {type === 'planTitle' && (
         <>
           <input
-            onChange={(event) => onChange('planTitle', event)}
+            onChange={onChange}
             type="text"
             name="planTitle"
             id="planTitle"
             maxLength={10}
             required
           />
-          <p>{message['planTitle']}</p>
+          <p>{message}</p>
         </>
       )}
       {type === 'time' && (
         <>
-          <input
-            onChange={(event) => onChange('time', event)}
-            type="time"
-            name="time"
-            id="time"
-            required
-          />
-          <p>{message['time']}</p>
+          <input onChange={onChange} type="time" name="time" id="time" required />
+          <p>{message}</p>
         </>
       )}
       {type === 'date' && (
         <>
-          <input
-            onChange={(event) => onChange('date', event)}
-            type="date"
-            name="date"
-            id="date"
-            required
-          />
-          <p>{message['date']}</p>
+          <input onChange={onChange} type="date" name="date" id="date" required />
+          <p>{message}</p>
         </>
       )}
       {type === 'categoryTitle' && (
         <>
           <input
-            onChange={(event) => onChange('categoryTitle', event)}
+            onChange={onChange}
             type="text"
             name="categoryTitle"
             id="categoryTitle"
             maxLength={15}
             required
           />
-          <p>{message['categoryTitle']}</p>
+          <p>{message}</p>
         </>
       )}
     </>
