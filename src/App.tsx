@@ -14,6 +14,7 @@ const App = () => {
       <Input type="planTitle" />
       <Input type="time" />
       <Input type="date" />
+      <Input type="categoryTitle" />
     </div>
   );
 };

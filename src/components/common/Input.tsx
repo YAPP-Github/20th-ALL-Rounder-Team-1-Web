@@ -8,7 +8,8 @@ type InputType =
   | 'retypedPassword'
   | 'planTitle'
   | 'time'
-  | 'date';
+  | 'date'
+  | 'categoryTitle';
 
 interface IProps {
   type: InputType;
@@ -34,6 +35,7 @@ export const Input = ({
     planTitle: '',
     time: '',
     date: '',
+    categoryTitle: '',
   });
   const [message, setMessage] = useState({
     email: '',
@@ -44,6 +46,7 @@ export const Input = ({
     planTitle: '',
     time: '',
     date: '',
+    categoryTitle: '',
   });
 
   const checkEmail = () => {
@@ -137,6 +140,15 @@ export const Input = ({
     return setMessage({ ...message, planTitle: '' });
   };
 
+  const checkCategoryTitle = () => {
+    const currentInput = inputValue['categoryTitle'];
+
+    if (currentInput.length === 15) {
+      return setMessage({ ...message, categoryTitle: '일정명은 최대 15자 입니다.' });
+    }
+    return setMessage({ ...message, categoryTitle: '' });
+  };
+
   const checkInput = () => {
     if (type === 'email') {
       return checkEmail();
@@ -155,6 +167,9 @@ export const Input = ({
     }
     if (type === 'planTitle') {
       return checkPlanTitle();
+    }
+    if (type === 'categoryTitle') {
+      return checkCategoryTitle();
     }
   };
 
@@ -251,6 +266,18 @@ export const Input = ({
         <>
           <input onChange={(event) => onChange('date', event)} type="date" name="date" id="date" />
           <p>{message['date']}</p>
+        </>
+      )}
+      {type === 'categoryTitle' && (
+        <>
+          <input
+            onChange={(event) => onChange('categoryTitle', event)}
+            type="text"
+            name="categoryTitle"
+            id="categoryTitle"
+            maxLength={15}
+          />
+          <p>{message['categoryTitle']}</p>
         </>
       )}
     </>
