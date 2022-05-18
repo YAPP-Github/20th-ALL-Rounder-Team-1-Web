@@ -1,6 +1,13 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-type InputType = 'email' | 'authNumber' | 'nickName' | 'password' | 'retypedPassword' | 'planTitle';
+type InputType =
+  | 'email'
+  | 'authNumber'
+  | 'nickName'
+  | 'password'
+  | 'retypedPassword'
+  | 'planTitle'
+  | 'time';
 
 interface IProps {
   type: InputType;
@@ -24,6 +31,7 @@ export const Input = ({
     password: '',
     retypedPassword: '',
     planTitle: '',
+    time: '',
   });
   const [message, setMessage] = useState({
     email: '',
@@ -32,6 +40,7 @@ export const Input = ({
     password: '',
     retypedPassword: '',
     planTitle: '',
+    time: '',
   });
 
   const checkEmail = () => {
@@ -123,6 +132,10 @@ export const Input = ({
       return setMessage({ ...message, planTitle: '일정명은 최대 10자 입니다.' });
     }
     return setMessage({ ...message, planTitle: '' });
+  };
+
+  const checkTime = () => {
+    const currentInput = inputValue['time'];
   };
 
   const checkInput = () => {
@@ -227,6 +240,18 @@ export const Input = ({
             maxLength={10}
           />
           <p>{message['planTitle']}</p>
+        </>
+      )}
+      {type === 'time' && (
+        <>
+          <input
+            onChange={(event) => onChange('time', event)}
+            type="time"
+            name="time"
+            id="time"
+            maxLength={4}
+          />
+          <p>{message['time']}</p>
         </>
       )}
     </>
