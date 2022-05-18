@@ -1,3 +1,5 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+
 import {
   checkAuthNumber,
   checkCategoryTitle,
@@ -6,59 +8,58 @@ import {
   checkPassword,
   checkPlanTitle,
   checkRetypedPassword,
-} from '@/utils/validation';
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+} from '@/utils';
 
 type InputType =
-  | 'email'
   | 'authNumber'
+  | 'categoryTitle'
+  | 'date'
+  | 'email'
   | 'nickName'
   | 'password'
-  | 'retypedPassword'
   | 'planTitle'
-  | 'time'
-  | 'date'
-  | 'categoryTitle';
+  | 'retypedPassword'
+  | 'time';
 
 interface IProps {
-  type: InputType;
   authInput?: number;
   isValidNickName?: boolean | undefined;
   setCurrentPassword?: Dispatch<SetStateAction<string>>;
+  type: InputType;
   typedPassword?: string;
 }
 
 export const Input = ({
-  type,
   authInput,
   isValidNickName,
   setCurrentPassword,
+  type,
   typedPassword,
 }: IProps) => {
   const [inputValue, setInputValue] = useState('');
   const [message, setMessage] = useState('');
 
   const checkInput = () => {
-    if (type === 'email') {
-      return checkEmail(inputValue, setMessage);
-    }
     if (type === 'authNumber' && authInput) {
       return checkAuthNumber(authInput, inputValue, setMessage);
     }
+    if (type === 'categoryTitle') {
+      return checkCategoryTitle(inputValue, setMessage);
+    }
+    if (type === 'email') {
+      return checkEmail(inputValue, setMessage);
+    }
     if (type === 'nickName') {
-      return checkNickName(inputValue, setMessage, isValidNickName);
+      return checkNickName(inputValue, isValidNickName, setMessage);
     }
     if (type === 'password' && setCurrentPassword) {
-      return checkPassword(inputValue, setMessage, setCurrentPassword);
-    }
-    if (type === 'retypedPassword' && typedPassword) {
-      return checkRetypedPassword(inputValue, setMessage, typedPassword);
+      return checkPassword(inputValue, setCurrentPassword, setMessage);
     }
     if (type === 'planTitle') {
       return checkPlanTitle(inputValue, setMessage);
     }
-    if (type === 'categoryTitle') {
-      return checkCategoryTitle(inputValue, setMessage);
+    if (type === 'retypedPassword' && typedPassword) {
+      return checkRetypedPassword(inputValue, setMessage, typedPassword);
     }
   };
 
@@ -73,19 +74,6 @@ export const Input = ({
 
   return (
     <>
-      {type === 'email' && (
-        <>
-          <input
-            onChange={onChange}
-            value={inputValue}
-            name="email"
-            id="email"
-            maxLength={320}
-            required
-          />
-          <p>{message}</p>
-        </>
-      )}
       {type === 'authNumber' && (
         <>
           <input
@@ -94,6 +82,38 @@ export const Input = ({
             name="authNumber"
             id="authNumber"
             maxLength={6}
+            required
+          />
+          <p>{message}</p>
+        </>
+      )}
+      {type === 'categoryTitle' && (
+        <>
+          <input
+            onChange={onChange}
+            type="text"
+            name="categoryTitle"
+            id="categoryTitle"
+            maxLength={15}
+            required
+          />
+          <p>{message}</p>
+        </>
+      )}
+      {type === 'date' && (
+        <>
+          <input onChange={onChange} type="date" name="date" id="date" required />
+          <p>{message}</p>
+        </>
+      )}
+      {type === 'email' && (
+        <>
+          <input
+            onChange={onChange}
+            value={inputValue}
+            name="email"
+            id="email"
+            maxLength={320}
             required
           />
           <p>{message}</p>
@@ -125,19 +145,6 @@ export const Input = ({
           <p>{message}</p>
         </>
       )}
-      {type === 'retypedPassword' && (
-        <>
-          <input
-            onChange={onChange}
-            type="password"
-            name="retypedPassword"
-            id="retypedPassword"
-            maxLength={50}
-            required
-          />
-          <p>{message}</p>
-        </>
-      )}
       {type === 'planTitle' && (
         <>
           <input
@@ -151,28 +158,22 @@ export const Input = ({
           <p>{message}</p>
         </>
       )}
-      {type === 'time' && (
-        <>
-          <input onChange={onChange} type="time" name="time" id="time" required />
-          <p>{message}</p>
-        </>
-      )}
-      {type === 'date' && (
-        <>
-          <input onChange={onChange} type="date" name="date" id="date" required />
-          <p>{message}</p>
-        </>
-      )}
-      {type === 'categoryTitle' && (
+      {type === 'retypedPassword' && (
         <>
           <input
             onChange={onChange}
-            type="text"
-            name="categoryTitle"
-            id="categoryTitle"
-            maxLength={15}
+            type="password"
+            name="retypedPassword"
+            id="retypedPassword"
+            maxLength={50}
             required
           />
+          <p>{message}</p>
+        </>
+      )}
+      {type === 'time' && (
+        <>
+          <input onChange={onChange} type="time" name="time" id="time" required />
           <p>{message}</p>
         </>
       )}
