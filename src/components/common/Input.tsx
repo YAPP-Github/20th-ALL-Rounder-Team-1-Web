@@ -1,3 +1,12 @@
+import {
+  checkAuthNumber,
+  checkCategoryTitle,
+  checkEmail,
+  checkNickName,
+  checkPassword,
+  checkPlanTitle,
+  checkRetypedPassword,
+} from '@/utils/validation';
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
 type InputType =
@@ -29,119 +38,27 @@ export const Input = ({
   const [inputValue, setInputValue] = useState('');
   const [message, setMessage] = useState('');
 
-  const checkEmail = () => {
-    const currentInput = inputValue;
-    const emailRegex =
-      /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-
-    if (currentInput.length) {
-      if (!emailRegex.test(currentInput)) {
-        return setMessage('이메일 형식이 아닙니다.');
-      }
-      if (currentInput.length === 320) {
-        return setMessage('이메일 최대 길이는 320자 입니다.');
-      }
-    }
-    return setMessage('');
-  };
-
-  const checkAuthNumber = (authInput: number) => {
-    const currentInput = inputValue;
-
-    if (currentInput.length === 6) {
-      if (Number(currentInput) === authInput) {
-        return setMessage('인증되었습니다.');
-      }
-      return setMessage('인증 번호가 맞지 않습니다. 다시 입력하여 주세요.');
-    }
-    return setMessage('');
-  };
-
-  const checkNickName = () => {
-    const currentInput = inputValue;
-
-    if (currentInput.length === 12) {
-      return setMessage('닉네임은 최대 12자입니다.');
-    }
-    if (isValidNickName === undefined) {
-      return setMessage('');
-    }
-    if (isValidNickName) {
-      return setMessage('사용가능한 닉네임 입니다.');
-    }
-    if (!isValidNickName) {
-      return setMessage('이미 사용중인 닉네임 입니다.');
-    }
-    return setMessage('');
-  };
-
-  const checkPassword = () => {
-    const currentInput = inputValue;
-
-    const passwordRegex = /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,50}$/;
-
-    if (currentInput.length > 0 && !passwordRegex.test(currentInput)) {
-      return setMessage(
-        '비밀번호는 최소 8자 최대 50자이며, 숫자, 영어, 특수문자가 최소 1개씩 포함되어야 합니다.'
-      );
-    }
-
-    if (setCurrentPassword) {
-      setCurrentPassword(currentInput);
-    }
-    return setMessage('');
-  };
-
-  const checkRetypedPassword = () => {
-    const currentInput = inputValue;
-
-    if (typedPassword) {
-      if (typedPassword !== currentInput) {
-        return setMessage('비밀번호가 일치하지 않습니다. 다시 확인해주세요');
-      }
-    }
-    return setMessage('');
-  };
-
-  const checkPlanTitle = () => {
-    const currentInput = inputValue;
-
-    if (currentInput.length === 10) {
-      return setMessage('일정명은 최대 10자 입니다.');
-    }
-    return setMessage('');
-  };
-
-  const checkCategoryTitle = () => {
-    const currentInput = inputValue;
-
-    if (currentInput.length === 15) {
-      return setMessage('카테고리 명은 최대 15자 입니다.');
-    }
-    return setMessage('');
-  };
-
   const checkInput = () => {
     if (type === 'email') {
-      return checkEmail();
+      return checkEmail(inputValue, setMessage);
     }
     if (type === 'authNumber' && authInput) {
-      return checkAuthNumber(authInput);
+      return checkAuthNumber(authInput, inputValue, setMessage);
     }
     if (type === 'nickName') {
-      return checkNickName();
+      return checkNickName(inputValue, setMessage, isValidNickName);
     }
-    if (type === 'password') {
-      return checkPassword();
+    if (type === 'password' && setCurrentPassword) {
+      return checkPassword(inputValue, setMessage, setCurrentPassword);
     }
-    if (type === 'retypedPassword') {
-      return checkRetypedPassword();
+    if (type === 'retypedPassword' && typedPassword) {
+      return checkRetypedPassword(inputValue, setMessage, typedPassword);
     }
     if (type === 'planTitle') {
-      return checkPlanTitle();
+      return checkPlanTitle(inputValue, setMessage);
     }
     if (type === 'categoryTitle') {
-      return checkCategoryTitle();
+      return checkCategoryTitle(inputValue, setMessage);
     }
   };
 
