@@ -192,6 +192,7 @@ export const Input = ({
             name="email"
             id="email"
             maxLength={320}
+            required
           />
           <p>{message['email']}</p>
         </>
@@ -204,6 +205,7 @@ export const Input = ({
             name="authNumber"
             id="authNumber"
             maxLength={6}
+            required
           />
           <p>{message['authNumber']}</p>
         </>
@@ -216,6 +218,7 @@ export const Input = ({
             name="nickName"
             id="nickName"
             maxLength={12}
+            required
           />
           <p>{message['nickName']}</p>
         </>
@@ -228,6 +231,7 @@ export const Input = ({
             name="password"
             id="password"
             maxLength={50}
+            required
           />
           <p>{message['password']}</p>
         </>
@@ -240,6 +244,7 @@ export const Input = ({
             name="retypedPassword"
             id="retypedPassword"
             maxLength={50}
+            required
           />
           <p>{message['retypedPassword']}</p>
         </>
@@ -252,19 +257,32 @@ export const Input = ({
             name="planTitle"
             id="planTitle"
             maxLength={10}
+            required
           />
           <p>{message['planTitle']}</p>
         </>
       )}
       {type === 'time' && (
         <>
-          <input onChange={(event) => onChange('time', event)} type="time" name="time" id="time" />
+          <input
+            onChange={(event) => onChange('time', event)}
+            type="time"
+            name="time"
+            id="time"
+            required
+          />
           <p>{message['time']}</p>
         </>
       )}
       {type === 'date' && (
         <>
-          <input onChange={(event) => onChange('date', event)} type="date" name="date" id="date" />
+          <input
+            onChange={(event) => onChange('date', event)}
+            type="date"
+            name="date"
+            id="date"
+            required
+          />
           <p>{message['date']}</p>
         </>
       )}
@@ -276,6 +294,7 @@ export const Input = ({
             name="categoryTitle"
             id="categoryTitle"
             maxLength={15}
+            required
           />
           <p>{message['categoryTitle']}</p>
         </>
