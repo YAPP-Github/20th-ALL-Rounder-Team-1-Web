@@ -8,15 +8,25 @@ const App = () => {
   return (
     <div>
       <h1>Initial Setting</h1>
-      <Input type="authNumber" authInput={123456} />
-      <Input type="categoryTitle" />
-      <Input type="date" />
-      <Input type="email" />
-      <Input type="nickName" isValidNickName={undefined} />
-      <Input type="password" setCurrentPassword={setCurrentPassword} />
-      <Input type="planTitle" />
-      <Input type="retypedPassword" typedPassword={currentPassword} />
-      <Input type="time" />
+      <Input type="authNumber" inputMaxLength={6} inputType="text" authInput={123456} />
+      <Input type="categoryTitle" inputMaxLength={15} inputType="text" />
+      <Input type="date" inputType="date" />
+      <Input type="email" inputMaxLength={320} inputType="email" />
+      <Input type="nickName" inputMaxLength={12} inputType="text" isValidNickName={undefined} />
+      <Input
+        type="password"
+        inputMaxLength={50}
+        inputType="password"
+        setCurrentPassword={setCurrentPassword}
+      />
+      <Input type="planTitle" inputMaxLength={10} inputType="text" />
+      <Input
+        type="retypedPassword"
+        inputMaxLength={50}
+        inputType="password"
+        typedPassword={currentPassword}
+      />
+      <Input type="time" inputType="time" />
     </div>
   );
 };
