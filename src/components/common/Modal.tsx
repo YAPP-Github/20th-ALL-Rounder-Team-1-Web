@@ -1,9 +1,9 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { CalendarPopUp } from './CalendarPopUp';
 import { FindPasswordPopUp } from './FindPasswordPopUp';
 import { usePopUpState } from '@/contexts';
-import { useEffect, useState } from 'react';
 
 export const Modal = () => {
   const [visible, setVisible] = useState(false);
