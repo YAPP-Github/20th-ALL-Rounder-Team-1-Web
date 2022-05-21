@@ -1,11 +1,11 @@
+import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-interface IPropsWithChildren {
+interface PageLayoutProps {
   title: string;
-  children: React.ReactNode;
 }
 
-export const PageLayout = ({ title, children }: IPropsWithChildren) => {
+export const PageLayout = ({ children, title }: PropsWithChildren<PageLayoutProps>) => {
   return (
     <Wrapper>
       <Header>
