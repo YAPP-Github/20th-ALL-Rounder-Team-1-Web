@@ -25,21 +25,21 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.header`
-  width: 100vw;
+  width: 100%;
   position: fixed;
   top: 0;
-  border-bottom: 1px solid black;
-  padding: 2em 0em;
+  border-bottom: 1px solid #000;
+  padding: 36px 0px;
 `;
 
 const Main = styled.main`
-  padding-top: 20vh;
+  padding-top: 144px;
 `;
 
-const Footer = styled.header`
-  width: 100vw;
+const Footer = styled.footer`
+  width: 100%;
   position: fixed;
   bottom: 0;
-  border-top: 1px solid black;
-  padding: 2em 0em;
+  border-top: 1px solid #000;
+  padding: 36px 0px;
 `;
