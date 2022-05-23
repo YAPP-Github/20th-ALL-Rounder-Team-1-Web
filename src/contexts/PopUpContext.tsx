@@ -8,8 +8,8 @@ type PopUpDispatch = Dispatch<Action>;
 
 type Action = { type: 'TOGGLE_FIND_PASSWORD_POP_UP' } | { type: 'TOGGLE_CALENDAR_POP_UP' };
 
-const PopUpStateContext = createContext<PopUpState | undefined>(undefined);
-const PopUpDispatchContext = createContext<PopUpDispatch | undefined>(undefined);
+const PopUpStateContext = createContext<PopUpState>({} as PopUpState);
+const PopUpDispatchContext = createContext<PopUpDispatch>({} as PopUpDispatch);
 
 const popUpReducer = (state: PopUpState, action: Action): PopUpState => {
   switch (action.type) {
