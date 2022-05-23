@@ -7,25 +7,25 @@ const App = () => {
   return (
     <div>
       <h1>Initial Setting</h1>
-      <Input type="authNumber" inputMaxLength={6} inputType="text" authInput={123456} />
-      <Input type="categoryTitle" inputMaxLength={15} inputType="text" />
-      <Input type="date" inputType="date" />
-      <Input type="email" inputMaxLength={320} inputType="email" />
-      <Input type="nickName" inputMaxLength={12} inputType="text" isValidNickName={undefined} />
+      <Input role="authNumber" maxLength={6} type="text" authInput={123456} />
+      <Input role="categoryTitle" maxLength={15} type="text" />
+      <Input role="date" type="date" />
+      <Input role="email" maxLength={320} type="email" />
+      <Input role="nickName" maxLength={12} type="text" isValidNickName={undefined} />
       <Input
+        role="password"
+        maxLength={50}
         type="password"
-        inputMaxLength={50}
-        inputType="password"
         setCurrentPassword={setCurrentPassword}
       />
-      <Input type="planTitle" inputMaxLength={10} inputType="text" />
+      <Input role="planTitle" maxLength={10} type="text" />
       <Input
-        type="retypedPassword"
-        inputMaxLength={50}
-        inputType="password"
+        role="retypedPassword"
+        maxLength={50}
+        type="password"
         typedPassword={currentPassword}
       />
-      <Input type="time" inputType="time" />
+      <Input role="time" type="time" />
     </div>
   );
 };

@@ -10,7 +10,7 @@ import {
   checkRetypedPassword,
 } from '@/utils';
 
-type InputType =
+type PossibleTypes =
   | 'authNumber'
   | 'categoryTitle'
   | 'date'
@@ -23,19 +23,19 @@ type InputType =
 
 interface IProps {
   authInput?: number;
-  inputMaxLength?: number;
-  inputType: string;
+  maxLength?: number;
   isValidNickName?: boolean | undefined;
+  role: PossibleTypes;
   setCurrentPassword?: Dispatch<SetStateAction<string>>;
-  type: InputType;
+  type: string;
   typedPassword?: string;
 }
 
 export const Input = ({
   authInput,
-  inputMaxLength,
-  inputType,
+  maxLength,
   isValidNickName,
+  role,
   setCurrentPassword,
   type,
   typedPassword,
@@ -44,25 +44,25 @@ export const Input = ({
   const [message, setMessage] = useState('');
 
   const checkInput = () => {
-    if (type === 'authNumber' && authInput) {
+    if (role === 'authNumber' && authInput) {
       return checkAuthNumber(authInput, inputValue, setMessage);
     }
-    if (type === 'categoryTitle') {
+    if (role === 'categoryTitle') {
       return checkCategoryTitle(inputValue, setMessage);
     }
-    if (type === 'email') {
+    if (role === 'email') {
       return checkEmail(inputValue, setMessage);
     }
-    if (type === 'nickName') {
+    if (role === 'nickName') {
       return checkNickName(inputValue, isValidNickName, setMessage);
     }
-    if (type === 'password' && setCurrentPassword) {
+    if (role === 'password' && setCurrentPassword) {
       return checkPassword(inputValue, setCurrentPassword, setMessage);
     }
-    if (type === 'planTitle') {
+    if (role === 'planTitle') {
       return checkPlanTitle(inputValue, setMessage);
     }
-    if (type === 'retypedPassword' && typedPassword) {
+    if (role === 'retypedPassword' && typedPassword) {
       return checkRetypedPassword(inputValue, setMessage, typedPassword);
     }
   };
@@ -81,10 +81,10 @@ export const Input = ({
       <input
         onChange={onChange}
         value={inputValue}
-        type={inputType}
-        name={type}
-        id={type}
-        maxLength={inputMaxLength}
+        type={type}
+        name={role}
+        id={role}
+        maxLength={maxLength}
         required
       />
       <p>{message}</p>
