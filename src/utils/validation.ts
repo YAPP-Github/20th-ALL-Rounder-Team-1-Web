@@ -27,13 +27,11 @@ export const checkCategoryTitle = (
 export const checkEmail = (currentInput: string, setMessage: Dispatch<SetStateAction<string>>) => {
   const emailRegex =
     /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i;
-  if (currentInput.length > 0) {
-    if (!emailRegex.test(currentInput)) {
-      return setMessage('이메일 형식이 아닙니다.');
-    }
-    if (currentInput.length === 320) {
-      return setMessage('이메일 최대 길이는 320자 입니다.');
-    }
+  if (currentInput.length > 0 && !emailRegex.test(currentInput)) {
+    return setMessage('이메일 형식이 아닙니다.');
+  }
+  if (currentInput.length === 320) {
+    return setMessage('이메일 최대 길이는 320자 입니다.');
   }
   return setMessage('');
 };
