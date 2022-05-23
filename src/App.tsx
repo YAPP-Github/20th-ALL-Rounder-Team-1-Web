@@ -1,6 +1,5 @@
 import { useState } from 'react';
-
-import { Input } from './components';
+import { Input } from '@/components';
 
 const App = () => {
   const [currentPassword, setCurrentPassword] = useState('');
