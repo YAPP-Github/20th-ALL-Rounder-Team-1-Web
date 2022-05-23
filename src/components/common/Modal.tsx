@@ -31,7 +31,7 @@ const Overlay = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   top: 0;
   left: 0;
-  z-index: 999;
+  z-index: 1;
   width: 100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.5);
@@ -40,11 +40,11 @@ const Overlay = styled.div<{ visible: boolean }>`
 const PopUpWrapper = styled.div<{ visible: boolean }>`
   position: fixed;
   display: ${({ visible }) => (visible ? 'block' : 'none')};
-  border: 1px solid black;
-  width: 80vw;
-  height: 80vh;
-  top: 10vh;
-  left: 10vw;
-  z-index: 1000;
-  background-color: white;
+  border: 1px solid #000;
+  width: 500px;
+  height: 500px;
+  top: 100px;
+  left: 100px;
+  z-index: 2;
+  background-color: #ffffff;
 `;
