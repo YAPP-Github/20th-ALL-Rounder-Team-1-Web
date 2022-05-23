@@ -1,6 +1,6 @@
 import { ModalPortal } from './ModalPortal';
-import { Modal } from './components';
-import { TestPage } from './pages';
+import { Modal } from '@/components';
+import { TestPage } from '@/pages';
 
 const App = () => {
   return (

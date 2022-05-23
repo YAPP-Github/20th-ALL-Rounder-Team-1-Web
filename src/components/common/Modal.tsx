@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { CalendarPopUp } from './CalendarPopUp';
-import { FindPasswordPopUp } from './FindPasswordPopUp';
+import { CalendarPopUp, FindPasswordPopUp } from '@/components';
 import { usePopUpState } from '@/contexts';
 
 export const Modal = () => {

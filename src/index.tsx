@@ -2,8 +2,8 @@ import { createRoot } from 'react-dom/client';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
-import { PopUpContextProvider } from './contexts';
-import { AppProvider } from './utils';
+import { PopUpContextProvider } from '@/contexts';
+import { AppProvider } from '@/utils';
 import { GlobalStyle, theme } from '@/style';
 
 const rootElement = document.getElementById('root');
