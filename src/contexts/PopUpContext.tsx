@@ -1,60 +1,28 @@
-import { createContext, Dispatch, useContext, useReducer } from 'react';
+import { createContext, Dispatch, PropsWithChildren, useState } from 'react';
 
-type PopUpState = {
-  isFindPasswordOpen: boolean;
+type PopUpProps = {
   isCalendarOpen: boolean;
-};
-type PopUpDispatch = Dispatch<Action>;
-
-type Action = { type: 'TOGGLE_FIND_PASSWORD_POP_UP' } | { type: 'TOGGLE_CALENDAR_POP_UP' };
-
-const PopUpStateContext = createContext<PopUpState>({} as PopUpState);
-const PopUpDispatchContext = createContext<PopUpDispatch>({} as PopUpDispatch);
-
-const popUpReducer = (state: PopUpState, action: Action): PopUpState => {
-  switch (action.type) {
-    case 'TOGGLE_FIND_PASSWORD_POP_UP':
-      return { ...state, isFindPasswordOpen: !state.isFindPasswordOpen };
-    case 'TOGGLE_CALENDAR_POP_UP':
-      return { ...state, isCalendarOpen: !state.isCalendarOpen };
-    default:
-      throw new Error('Unhandled action');
-  }
+  setIsCalendarOpen: Dispatch<React.SetStateAction<boolean>>;
+  isFindPasswordOpen: boolean;
+  setIsFindPasswordOpen: Dispatch<React.SetStateAction<boolean>>;
 };
 
-interface IProps {
-  children: React.ReactNode;
-}
+export const PopUpContext = createContext<PopUpProps>({} as PopUpProps);
 
-export const PopUpContextProvider = ({ children }: IProps) => {
-  const [state, dispatch] = useReducer(popUpReducer, {
-    isFindPasswordOpen: false,
-    isCalendarOpen: false,
-  });
+export const PopUpContextProvider = ({ children }: PropsWithChildren<unknown>) => {
+  const [isCalendarOpen, setIsCalendarOpen] = useState(false);
+  const [isFindPasswordOpen, setIsFindPasswordOpen] = useState(false);
 
   return (
-    <PopUpStateContext.Provider value={state}>
-      <PopUpDispatchContext.Provider value={dispatch}>{children}</PopUpDispatchContext.Provider>
-    </PopUpStateContext.Provider>
+    <PopUpContext.Provider
+      value={{
+        isCalendarOpen,
+        setIsCalendarOpen,
+        isFindPasswordOpen,
+        setIsFindPasswordOpen,
+      }}
+    >
+      {children}
+    </PopUpContext.Provider>
   );
-};
-
-export const usePopUpState = () => {
-  const state = useContext(PopUpStateContext);
-
-  if (!state) {
-    throw new Error('Cannot find PopUpStateContext');
-  }
-
-  return state;
-};
-
-export const usePopUpDispatch = () => {
-  const dispatch = useContext(PopUpDispatchContext);
-
-  if (!dispatch) {
-    throw new Error('Cannot find PopUpDispatchContext');
-  }
-
-  return dispatch;
 };

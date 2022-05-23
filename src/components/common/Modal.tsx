@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { CalendarPopUp, FindPasswordPopUp } from '@/components';
-import { usePopUpState } from '@/contexts';
+import { PopUpContext } from '@/contexts';
 
 export const Modal = () => {
+  const { isCalendarOpen, isFindPasswordOpen } = useContext(PopUpContext);
   const [visible, setVisible] = useState(false);
-  const { isCalendarOpen, isFindPasswordOpen } = usePopUpState();
 
   useEffect(() => {
     if (isCalendarOpen || isFindPasswordOpen) {

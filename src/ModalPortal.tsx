@@ -1,10 +1,7 @@
+import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
-interface IProps {
-  children: React.ReactNode;
-}
-
-export const ModalPortal = ({ children }: IProps) => {
+export const ModalPortal = ({ children }: PropsWithChildren<unknown>) => {
   const modalElement = document.getElementById('modal');
 
   if (!modalElement) {

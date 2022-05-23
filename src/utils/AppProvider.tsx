@@ -1,9 +1,10 @@
-interface IPropsWithChildren {
+import { PropsWithChildren } from 'react';
+
+interface AppProviderProps {
   components?: Array<React.JSXElementConstructor<React.PropsWithChildren<any>>>;
-  children: React.ReactNode;
 }
 
-export const AppProvider = ({ components = [], children }: IPropsWithChildren) => {
+export const AppProvider = ({ components = [], children }: PropsWithChildren<AppProviderProps>) => {
   return (
     <>
       {components.reduceRight((accumulatedComponents, CurrentComponent) => {
