@@ -10,6 +10,7 @@ export const DebounceInput = () => {
 
   useEffect(() => {
     const debounce = setTimeout(() => {
+      // 검색 관련 api를 console.log를 제거한 후 추가하면 됩니다!
       return console.log(currentWord);
     }, 400);
     return () => clearTimeout(debounce);
