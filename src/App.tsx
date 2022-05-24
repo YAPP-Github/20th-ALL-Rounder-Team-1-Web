@@ -1,11 +1,10 @@
 import { ModalPortal } from './ModalPortal';
 import { Modal } from '@/components';
-import { TestPage } from '@/pages';
 
 const App = () => {
   return (
     <>
-      <TestPage />
+      <h1>Initial Setting</h1>
       <ModalPortal>
         <Modal />
       </ModalPortal>
