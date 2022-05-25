@@ -1,8 +1,14 @@
+import { ModalPortal } from './ModalPortal';
+import { Modal } from '@/components';
+
 const App = () => {
   return (
-    <div>
+    <>
       <h1>Initial Setting</h1>
-    </div>
+      <ModalPortal>
+        <Modal />
+      </ModalPortal>
+    </>
   );
 };
 
