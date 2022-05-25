@@ -35,7 +35,7 @@ jobs:
         uses: docker/login-action@v1
         with:
           registry: ghcr.io
-          username: ${{ github.actor }}
+          username: dongkyun-dev
           password: ${{ secrets.GHCR_TOKEN }}
       - name: Build and push
         id: docker_build
