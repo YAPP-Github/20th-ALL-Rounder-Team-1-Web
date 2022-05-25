@@ -2,7 +2,7 @@
 
 ### [20th] Weekand
 
-이수동(팀장), 장동균
+이수동, 장동균
 
 [우리들의 컨벤션](https://github.com/YAPP-Github/20th-ALL-Rounder-Team-1-Web/wiki/%EC%BB%A8%EB%B2%A4%EC%85%98)
 
