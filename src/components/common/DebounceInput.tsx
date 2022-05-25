@@ -1,6 +1,6 @@
 import { ChangeEvent, useEffect, useState } from 'react';
 
-export const DebounceInput = () => {
+export const DebounceInput = ({ ...restProps }) => {
   const [currentWord, setCurrentWord] = useState('');
 
   const onChange = (event: ChangeEvent<HTMLInputElement>) => {
@@ -16,5 +16,5 @@ export const DebounceInput = () => {
     return () => clearTimeout(debounce);
   }, [currentWord]);
 
-  return <input type="text" onChange={onChange} />;
+  return <input type="text" onChange={onChange} {...restProps} />;
 };
