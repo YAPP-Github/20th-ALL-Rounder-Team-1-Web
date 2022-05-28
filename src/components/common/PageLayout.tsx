@@ -13,7 +13,7 @@ export const PageLayout = ({ children, title }: PropsWithChildren<PageLayoutProp
       </Header>
       <Main>{children}</Main>
       <Footer>
-        <p>© Copyright Weekand 2022</p>
+        <small>© Copyright Weekand 2022</small>
       </Footer>
     </Wrapper>
   );
@@ -25,21 +25,14 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.header`
-  width: 100%;
-  position: fixed;
-  top: 0;
   border-bottom: 1px solid #000;
   padding: 36px 0px;
 `;
 
 const Main = styled.main`
-  padding-top: 144px;
+  height: 1200px;
 `;
 
 const Footer = styled.footer`
-  width: 100%;
-  position: fixed;
-  bottom: 0;
   border-top: 1px solid #000;
-  padding: 36px 0px;
 `;
