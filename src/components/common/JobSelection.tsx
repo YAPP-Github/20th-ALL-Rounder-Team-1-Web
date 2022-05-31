@@ -9,7 +9,7 @@ interface JobSelectionProps {
 
 export const JobSelection = ({ name, isClicked, setIsClicked }: JobSelectionProps) => {
   const onClick = () => {
-    return setIsClicked(!isClicked);
+    setIsClicked(!isClicked);
   };
 
   return (
