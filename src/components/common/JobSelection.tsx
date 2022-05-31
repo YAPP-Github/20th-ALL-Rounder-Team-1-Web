@@ -24,17 +24,17 @@ export const JobSelection = ({ name, isClicked, setIsClicked }: JobSelectionProp
 };
 
 const Selected = styled.button`
-  background-color: #0000ff;
-  border: 1px solid #0000ff;
+  background-color: #00f;
+  border: 1px solid #00f;
   color: #ffffff;
   padding: 10px 20px;
   border-radius: 20px;
 `;
 
 const NotSelected = styled.button`
-  background-color: #ffffff;
-  border: 1px solid #0000ff;
-  color: #0000ff;
+  background-color: #fff;
+  border: 1px solid #00f;
+  color: #00f;
   padding: 10px 20px;
   border-radius: 20px;
 `;
