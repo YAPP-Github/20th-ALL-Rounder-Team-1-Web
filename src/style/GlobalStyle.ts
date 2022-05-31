@@ -11,4 +11,10 @@ export const GlobalStyle = createGlobalStyle`
    }
 
    ${reset}
+
+   #root {
+      max-width: 1190px;
+      margin: 0 auto;
+      position: relative;
+   }
 `;

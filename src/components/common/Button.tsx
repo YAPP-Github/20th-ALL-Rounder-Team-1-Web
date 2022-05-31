@@ -1,13 +1,13 @@
-import { ComponentProps } from 'react';
+import { ComponentPropsWithoutRef } from 'react';
 import styled from 'styled-components';
 
-interface ButtonProps extends ComponentProps<'button'> {
+interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   onClick: () => void;
 }
 
-export const Button = ({ children, onClick, type = 'button' }: ButtonProps) => {
+export const Button = ({ children, onClick, type = 'button', ...restProps }: ButtonProps) => {
   return (
-    <StyledButton type={type} onClick={onClick}>
+    <StyledButton type={type} onClick={onClick} {...restProps}>
       {children}
     </StyledButton>
   );
