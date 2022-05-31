@@ -26,7 +26,7 @@ export const JobSelection = ({ name, isClicked, setIsClicked }: JobSelectionProp
 const Selected = styled.button`
   background-color: #00f;
   border: 1px solid #00f;
-  color: #ffffff;
+  color: #fff;
   padding: 10px 20px;
   border-radius: 20px;
 `;
