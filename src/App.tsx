@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ModalPortal } from './ModalPortal';
+import { PopUpPortal } from './PopUpPortal';
 import { DimmedLayer, PageLayout, PopUp } from '@/components';
 
 const App = () => {
@@ -11,9 +11,9 @@ const App = () => {
     <PageLayout title="홈 페이지">
       <h1>Initial Setting</h1>
       <DimmedLayer visible={dimmedVisible} />
-      <ModalPortal>
+      <PopUpPortal>
         <PopUp visible={popUpVisible} />
-      </ModalPortal>
+      </PopUpPortal>
     </PageLayout>
   );
 };
