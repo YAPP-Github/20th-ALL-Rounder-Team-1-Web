@@ -1,13 +1,14 @@
-import { ModalPortal } from './ModalPortal';
-import { Modal, PageLayout } from '@/components';
+import { PopUpPortal } from './PopUpPortal';
+import { DimmedLayer, PageLayout, PopUp } from '@/components';
 
 const App = () => {
   return (
     <PageLayout title="홈 페이지">
       <h1>Initial Setting</h1>
-      <ModalPortal>
-        <Modal />
-      </ModalPortal>
+      <DimmedLayer />
+      <PopUpPortal>
+        <PopUp />
+      </PopUpPortal>
     </PageLayout>
   );
 };
