@@ -3,6 +3,10 @@ import { FlattenSimpleInterpolation } from 'styled-components';
 declare module 'styled-components' {
   export interface IColors {
     WeekandBlue: string;
+    WeekandBlueSub: string;
+    WeekandBluePressed: string;
+    WeekandBlueSubPressed: string;
+    WeekandRed: string;
     Gray900: string;
     Gray800: string;
     Gray700: string;

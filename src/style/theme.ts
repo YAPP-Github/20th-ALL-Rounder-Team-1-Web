@@ -2,6 +2,10 @@ import { css, IColors, IFonts, IDefaultTheme } from 'styled-components';
 
 const colors: IColors = {
   WeekandBlue: '#5086ff',
+  WeekandBlueSub: '#eaf0ff',
+  WeekandBluePressed: '#6d9aff',
+  WeekandBlueSubPressed: '#f6f9ff',
+  WeekandRed: '#ff7562',
   Gray900: '#17191c',
   Gray800: '#32353a',
   Gray700: '#515459',
