@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { CalendarPopUp, FindPasswordPopUp } from '@/components';
+import { CalendarPopUp, DimmedLayer, FindPasswordPopUp } from '@/components';
 import { PopUpContext } from '@/contexts';
 
 export const Modal = () => {
@@ -17,7 +17,7 @@ export const Modal = () => {
 
   return (
     <div>
-      <Overlay visible={visible} />
+      <DimmedLayer visible={visible} />
       <PopUpWrapper visible={visible}>
         {isCalendarOpen && <CalendarPopUp />}
         {isFindPasswordOpen && <FindPasswordPopUp />}
@@ -25,17 +25,6 @@ export const Modal = () => {
     </div>
   );
 };
-
-const Overlay = styled.div<{ visible: boolean }>`
-  position: fixed;
-  display: ${({ visible }) => (visible ? 'block' : 'none')};
-  top: 0;
-  left: 0;
-  z-index: 1;
-  width: 100%;
-  height: 100%;
-  background: rgba(0, 0, 0, 0.5);
-`;
 
 const PopUpWrapper = styled.div<{ visible: boolean }>`
   position: fixed;
