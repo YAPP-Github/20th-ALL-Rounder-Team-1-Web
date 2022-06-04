@@ -1,11 +1,12 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-interface DimmedLayerProps {
-  visible: boolean;
-}
+import { DimmedLayerContext } from '@/contexts/DimmedLayerContext';
 
-export const DimmedLayer = ({ visible }: DimmedLayerProps) => {
-  return <Wrapper visible={visible} />;
+export const DimmedLayer = () => {
+  const { isVisible } = useContext(DimmedLayerContext);
+
+  return <Wrapper visible={isVisible} />;
 };
 
 const Wrapper = styled.div<{ visible: boolean }>`
