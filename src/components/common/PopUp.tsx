@@ -4,16 +4,12 @@ import styled from 'styled-components';
 import { CalendarPopUp, FindPasswordPopUp } from '@/components';
 import { PopUpContext } from '@/contexts';
 
-interface PopUpProps {
-  visible: boolean;
-}
-
-export const PopUp = ({ visible }: PopUpProps) => {
-  const { isCalendarOpen, isFindPasswordOpen } = useContext(PopUpContext);
+export const PopUp = () => {
+  const { isCalendarOpen, isFindPasswordOpen, isVisible } = useContext(PopUpContext);
 
   return (
     <div>
-      <PopUpWrapper visible={visible}>
+      <PopUpWrapper visible={isVisible}>
         {isCalendarOpen && <CalendarPopUp />}
         {isFindPasswordOpen && <FindPasswordPopUp />}
       </PopUpWrapper>
