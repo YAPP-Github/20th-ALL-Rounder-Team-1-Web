@@ -1,12 +1,12 @@
-import { createContext, Dispatch, PropsWithChildren, useState } from 'react';
+import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
 
 type PopUpProps = {
   isVisible: boolean;
-  setIsVisible: Dispatch<React.SetStateAction<boolean>>;
+  setIsVisible: Dispatch<SetStateAction<boolean>>;
   isCalendarOpen: boolean;
-  setIsCalendarOpen: Dispatch<React.SetStateAction<boolean>>;
+  setIsCalendarOpen: Dispatch<SetStateAction<boolean>>;
   isFindPasswordOpen: boolean;
-  setIsFindPasswordOpen: Dispatch<React.SetStateAction<boolean>>;
+  setIsFindPasswordOpen: Dispatch<SetStateAction<boolean>>;
 };
 
 export const PopUpContext = createContext<PopUpProps>({} as PopUpProps);
