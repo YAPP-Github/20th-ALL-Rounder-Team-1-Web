@@ -4,5 +4,5 @@ export * from './DebounceInput';
 export * from './DimmedLayer';
 export * from './FindPasswordPopUp';
 export * from './Input';
-export * from './Modal';
+export * from './PopUp';
 export * from './PageLayout';

@@ -1,23 +1,18 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { CalendarPopUp, DimmedLayer, FindPasswordPopUp } from '@/components';
+import { CalendarPopUp, FindPasswordPopUp } from '@/components';
 import { PopUpContext } from '@/contexts';
 
-export const Modal = () => {
-  const { isCalendarOpen, isFindPasswordOpen } = useContext(PopUpContext);
-  const [visible, setVisible] = useState(false);
+interface PopUpProps {
+  visible: boolean;
+}
 
-  useEffect(() => {
-    if (isCalendarOpen || isFindPasswordOpen) {
-      return setVisible(true);
-    }
-    return setVisible(false);
-  }, [isCalendarOpen, isFindPasswordOpen]);
+export const PopUp = ({ visible }: PopUpProps) => {
+  const { isCalendarOpen, isFindPasswordOpen } = useContext(PopUpContext);
 
   return (
     <div>
-      <DimmedLayer visible={visible} />
       <PopUpWrapper visible={visible}>
         {isCalendarOpen && <CalendarPopUp />}
         {isFindPasswordOpen && <FindPasswordPopUp />}
