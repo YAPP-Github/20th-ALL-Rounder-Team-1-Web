@@ -1,4 +1,4 @@
-import { FlattenSimpleInterpolation } from 'styled-components';
+import { Interpolation } from 'styled-components';
 
 declare module 'styled-components' {
   export interface IColors {
@@ -19,20 +19,20 @@ declare module 'styled-components' {
   }
 
   export interface IFonts {
-    Head1: FlattenSimpleInterpolation;
-    Head2: FlattenSimpleInterpolation;
-    SubHead1: FlattenSimpleInterpolation;
-    SubHead2: FlattenSimpleInterpolation;
-    Body1: FlattenSimpleInterpolation;
-    Body2: FlattenSimpleInterpolation;
-    Body3: FlattenSimpleInterpolation;
+    Head1: Interpolation;
+    Head2: Interpolation;
+    SubHead1: Interpolation;
+    SubHead2: Interpolation;
+    Body1: Interpolation;
+    Body2: Interpolation;
+    Body3: Interpolation;
   }
 
   export interface IDefaultTheme {
-    clearFloat: FlattenSimpleInterpolation;
-    sr_only: FlattenSimpleInterpolation;
-    elip1: FlattenSimpleInterpolation;
-    multiElip: (lineHeight: number, rowNum: number) => FlattenSimpleInterpolation;
-    icon: (url: string, width: number, height: number) => FlattenSimpleInterpolation;
+    clearFloat: Interpolation;
+    sr_only: Interpolation;
+    elip1: Interpolation;
+    multiElip: (lineHeight: number, rowNum: number) => Interpolation;
+    icon: (url: string, width: number, height: number) => Interpolation;
   }
 }
