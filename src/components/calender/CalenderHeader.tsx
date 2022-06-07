@@ -1,6 +1,13 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-export const CalenderHeader = ({ date, setDate }: any) => {
+import { Day } from '@/hooks';
+interface CalerderHeaderProps {
+  date: Day;
+  setDate: Dispatch<SetStateAction<Day>>;
+}
+
+export const CalenderHeader = ({ date, setDate }: CalerderHeaderProps) => {
   const changegeMonth = (date: any, changeString: string) => {
     switch (changeString) {
       case 'add':

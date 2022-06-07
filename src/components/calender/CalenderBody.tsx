@@ -1,10 +1,18 @@
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 import cn from 'classnames';
 
+import { Day } from '@/hooks';
+
+interface CalenderBodyProps {
+  today: Day;
+  date: Day;
+  setDate: Dispatch<SetStateAction<Day>>;
+}
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
 // TODO: 타입을 받아서 한달 전체를 보여줄지 혹은 한 주만을 보여줄지 결정해야 할 듯
-export const CalenderBody = ({ today, date, setDate }: any) => {
+export const CalenderBody = ({ today, date, setDate }: CalenderBodyProps) => {
   const createCalendar = () => {
     const startWeek = date.startOf('month').week();
     const endWeek = date.endOf('month').week() === 1 ? 53 : date.endOf('month').week();
