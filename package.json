@@ -14,6 +14,7 @@
   },
   "dependencies": {
     "@apollo/client": "^3.6.6",
+    "dayjs": "^1.11.2",
     "graphql": "^16.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
@@ -32,6 +33,7 @@
     "@typescript-eslint/parser": "^5.22.0",
     "babel-loader": "^8.2.5",
     "babel-plugin-styled-components": "^2.0.7",
+    "classnames": "^2.3.1",
     "clean-webpack-plugin": "^4.0.0",
     "copy-webpack-plugin": "^10.2.4",
     "css-loader": "^6.7.1",
