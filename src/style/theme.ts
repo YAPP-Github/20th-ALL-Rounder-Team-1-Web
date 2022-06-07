@@ -17,49 +17,81 @@ const colors: IColors = {
   Gray100: '#f5f7f8',
 };
 
+const DEFAULT_FONT_COLOR = 'Gray900';
+
 const fonts: IFonts = {
-  Head1: css`
-    font-size: 20px;
-    line-height: 30px;
-    font-weight: 700;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
-  Head2: css`
-    font-size: 18px;
-    line-height: 27px;
-    font-weight: 700;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
-  SubHead1: css`
-    font-size: 18px;
-    line-height: 29px;
-    font-weight: 600;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
-  SubHead2: css`
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 600;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
-  Body1: css`
-    font-size: 16px;
-    line-height: 26px;
-    font-weight: 500;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
-  Body2: css`
+  Head1(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 20px;
+      line-height: 30px;
+      font-weight: 700;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  Head2(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 18px;
+      line-height: 27px;
+      font-weight: 700;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  SubHead1(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 18px;
+      line-height: 29px;
+      font-weight: 600;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  SubHead2(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 16px;
+      line-height: 26px;
+      font-weight: 600;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  SubHead3(color = DEFAULT_FONT_COLOR) {
+    return css`
     font-size: 14px;
     line-height: 22px;
-    font-weight: 500;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
-  Body3: css`
-    font-size: 12px;
-    line-height: 19px;
-    font-weight: 500;
-    color: ${({ theme: { colors } }) => colors.Gray900};
-  `,
+    font-weight: 600
+    color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  Body1(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 16px;
+      line-height: 26px;
+      font-weight: 500;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  Body2(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 500;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  Body3(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 12px;
+      line-height: 19px;
+      font-weight: 500;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
+  Body4(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 10px;
+      line-height: 16px;
+      font-weight: 500;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
 };
 
 const defaultTheme: IDefaultTheme = {
