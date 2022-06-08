@@ -3,18 +3,29 @@ import styled from 'styled-components';
 
 interface PageLayoutProps {
   title: string;
+  isHeader?: boolean;
+  isFooter?: boolean;
 }
 
-export const PageLayout = ({ children, title }: PropsWithChildren<PageLayoutProps>) => {
+export const PageLayout = ({
+  children,
+  title,
+  isHeader = true,
+  isFooter = true,
+}: PropsWithChildren<PageLayoutProps>) => {
   return (
     <Wrapper>
-      <Header>
-        <h1>{title}</h1>
-      </Header>
-      <Main>{children}</Main>
-      <Footer>
-        <small>© Copyright Weekand 2022</small>
-      </Footer>
+      {isHeader && (
+        <Header>
+          <h1>{title}</h1>
+        </Header>
+      )}
+      {children}
+      {isFooter && (
+        <Footer>
+          <small>© Copyright Weekand 2022</small>
+        </Footer>
+      )}
     </Wrapper>
   );
 };
@@ -27,10 +38,6 @@ const Wrapper = styled.div`
 const Header = styled.header`
   border-bottom: 1px solid #000;
   padding: 36px 0px;
-`;
-
-const Main = styled.main`
-  height: 1200px;
 `;
 
 const Footer = styled.footer`
