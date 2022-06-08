@@ -9,11 +9,12 @@ const App = () => {
   return (
     <Router>
       <Routes>
+        {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
         <Route
           path="/"
           element={
             <Suspense fallback={<>Loading...</>}>
-              <Home />
+              <Login />
             </Suspense>
           }
         />
