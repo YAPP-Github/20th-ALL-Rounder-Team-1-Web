@@ -20,6 +20,14 @@ const colors: IColors = {
 const DEFAULT_FONT_COLOR = 'Gray900';
 
 const fonts: IFonts = {
+  Head0(color = DEFAULT_FONT_COLOR) {
+    return css`
+      font-size: 22px;
+      line-height: 33px;
+      font-weight: 700;
+      color: ${({ theme: { colors } }) => colors[color]};
+    `;
+  },
   Head1(color = DEFAULT_FONT_COLOR) {
     return css`
       font-size: 20px;

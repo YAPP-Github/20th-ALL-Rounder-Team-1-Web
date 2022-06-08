@@ -14,6 +14,21 @@ export const Button = ({ children, onClick, type = 'button', ...restProps }: But
 };
 
 const StyledButton = styled.button`
-  width: 100px;
-  height: 50px;
+  &.login_button {
+    border-radius: 10px;
+    width: 353px;
+    background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
+    color: ${({ theme: { colors } }) => colors.Gray200};
+    ${({ theme: { fonts } }) => fonts.SubHead1}
+    line-height: 60px;
+  }
+
+  &.register_button {
+    border-radius: 10px;
+    width: 353px;
+    background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
+    color: ${({ theme: { colors } }) => colors.WeekandBlue};
+    ${({ theme: { fonts } }) => fonts.SubHead1}
+    line-height: 60px;
+  }
 `;

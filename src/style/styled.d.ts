@@ -19,6 +19,7 @@ declare module 'styled-components' {
   }
 
   export interface IFonts {
+    Head0: Interpolation;
     Head1: Interpolation;
     Head2: Interpolation;
     SubHead1: Interpolation;
