@@ -32,17 +32,21 @@ export const Interest = ({ name, totalChoices, setTotalChoices }: InterestProps)
 };
 
 const Selected = styled.button`
-  background-color: #00f;
-  border: 1px solid #00f;
-  color: #fff;
-  padding: 10px 20px;
-  border-radius: 20px;
+  background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
+  color: ${({ theme: { colors } }) => colors.WeekandBlue};
+  padding: 8px 16px;
+  border-radius: 108px;
+  margin: 0px 5px;
+  font-size: 16px;
+  font-weight: 700;
 `;
 
 const NotSelected = styled.button`
-  background-color: #fff;
-  border: 1px solid #00f;
-  color: #00f;
-  padding: 10px 20px;
-  border-radius: 20px;
+  background-color: ${({ theme: { colors } }) => colors.Gray100};
+  color: ${({ theme: { colors } }) => colors.Gray400};
+  padding: 8px 16px;
+  border-radius: 108px;
+  margin: 0px 5px;
+  font-size: 16px;
+  font-weight: 500;
 `;
