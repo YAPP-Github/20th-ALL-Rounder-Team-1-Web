@@ -1,13 +1,13 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
-interface JobSelectionProps {
+interface InterestProps {
   name: string;
   totalChoices: string[];
   setTotalChoices: Dispatch<SetStateAction<string[]>>;
 }
 
-export const JobSelection = ({ name, totalChoices, setTotalChoices }: JobSelectionProps) => {
+export const Interest = ({ name, totalChoices, setTotalChoices }: InterestProps) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const onClick = () => {
