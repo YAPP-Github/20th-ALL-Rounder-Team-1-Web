@@ -1,8 +1,8 @@
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
-import { ModalPortal } from './ModalPortal';
-import { Modal } from '@/components';
+import { PopUpPortal } from './PopUpPortal';
+import { DimmedLayer, PopUp } from '@/components';
 import { Home, Login } from '@/pages';
 
 const App = () => {
@@ -26,9 +26,10 @@ const App = () => {
           }
         />
       </Routes>
-      <ModalPortal>
-        <Modal />
-      </ModalPortal>
+      <DimmedLayer />
+      <PopUpPortal>
+        <PopUp />
+      </PopUpPortal>
     </Router>
   );
 };

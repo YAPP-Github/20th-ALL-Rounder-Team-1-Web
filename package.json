@@ -13,6 +13,8 @@
     "valid": "yarn lint && yarn format"
   },
   "dependencies": {
+    "@apollo/client": "^3.6.6",
+    "graphql": "^16.5.0",
     "react": "^18.0.0",
     "react-dom": "^18.0.0",
     "react-router-dom": "^6.3.0",
