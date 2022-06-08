@@ -23,9 +23,11 @@ declare module 'styled-components' {
     Head2: Interpolation;
     SubHead1: Interpolation;
     SubHead2: Interpolation;
+    SubHead3: Interpolation;
     Body1: Interpolation;
     Body2: Interpolation;
     Body3: Interpolation;
+    Body4: Interpolation;
   }
 
   export interface IDefaultTheme {
