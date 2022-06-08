@@ -1,14 +1,22 @@
-import { Dispatch, SetStateAction } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
 interface JobSelectionProps {
   name: string;
-  isClicked: boolean;
-  setIsClicked: Dispatch<SetStateAction<boolean>>;
+  totalChoices: string[];
+  setTotalChoices: Dispatch<SetStateAction<string[]>>;
 }
 
-export const JobSelection = ({ name, isClicked, setIsClicked }: JobSelectionProps) => {
+export const JobSelection = ({ name, totalChoices, setTotalChoices }: JobSelectionProps) => {
+  const [isClicked, setIsClicked] = useState(false);
+
   const onClick = () => {
+    if (isClicked) {
+      const exceptClickedName = totalChoices.filter((totalChoice) => totalChoice !== name);
+      setTotalChoices(exceptClickedName);
+    } else {
+      setTotalChoices([...totalChoices, name]);
+    }
     setIsClicked(!isClicked);
   };
 
