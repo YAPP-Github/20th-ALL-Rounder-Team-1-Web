@@ -30,7 +30,7 @@ const SelectInterest = () => {
     '특수직',
     '사업',
     '주부',
-  ];
+  ]; // 나중에 서버가 완성되면 해당 정보를 불러오는 방식으로 수정 예정
   const interests = [
     'N잡',
     '이직',
@@ -56,7 +56,7 @@ const SelectInterest = () => {
     '게임',
     '운동',
     '여행',
-  ];
+  ]; // 나중에 서버가 완성되면 해당 정보를 불러오는 방식으로 수정 예정
 
   const [totalJobs, setTotalJobs] = useState<string[]>([]);
   const [totalInterests, setTotalInterests] = useState<string[]>([]);
@@ -91,7 +91,7 @@ const SelectInterest = () => {
           <Button
             className="login_button"
             onClick={() => {
-              console.log('다음');
+              console.log('다음'); // 다음 페이지가 완성됨에 따라 다음 페이지 연결
             }}
           >
             다음
