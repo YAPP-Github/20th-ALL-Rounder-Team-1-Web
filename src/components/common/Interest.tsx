@@ -36,7 +36,7 @@ const Selected = styled.button`
   color: ${({ theme: { colors } }) => colors.WeekandBlue};
   padding: 8px 16px;
   border-radius: 108px;
-  margin: 0px 5px;
+  margin: 5px;
   font-size: 16px;
   font-weight: 700;
 `;
@@ -46,7 +46,7 @@ const NotSelected = styled.button`
   color: ${({ theme: { colors } }) => colors.Gray400};
   padding: 8px 16px;
   border-radius: 108px;
-  margin: 0px 5px;
+  margin: 5px;
   font-size: 16px;
   font-weight: 500;
 `;
