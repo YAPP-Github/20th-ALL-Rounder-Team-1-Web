@@ -3,6 +3,7 @@ export * from './CalendarPopUp';
 export * from './DebounceInput';
 export * from './DimmedLayer';
 export * from './FindPasswordPopUp';
+export * from './Header';
 export * from './Input';
 export * from './PopUp';
 export * from './PageLayout';

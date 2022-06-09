@@ -4,7 +4,7 @@ import { PageLayout, Input, Button } from '@/components';
 
 const Login = () => {
   return (
-    <PageLayout title="로그인 페이지" isHeader={false} isFooter={false}>
+    <PageLayout title="로그인 페이지" isFooter={false}>
       <Main role="main">
         <SmilingImage>
           <img src="../assets/smiling_emoji.png" width={569} height={511} />
