@@ -65,20 +65,20 @@ const SelectInterest = () => {
     <PageLayout title="관심사 페이지" isHeader={false} isFooter={false}>
       <Wrapper>
         <Title>조금 더 알려주시겠어요?</Title>
-        <div>
-          <SubContentWrapper>
+        <SubContentWrapper>
+          <ExplanationWrapper>
             <SubTitle>직업</SubTitle>
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
-          </SubContentWrapper>
+          </ExplanationWrapper>
           {jobs.map((job) => (
             <Interest name={job} totalChoices={totalJobs} setTotalChoices={setTotalJobs} />
           ))}
-        </div>
-        <div>
-          <SubContentWrapper>
+        </SubContentWrapper>
+        <SubContentWrapper>
+          <ExplanationWrapper>
             <SubTitle>관심사</SubTitle>
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
-          </SubContentWrapper>
+          </ExplanationWrapper>
           {interests.map((interest) => (
             <Interest
               name={interest}
@@ -86,7 +86,7 @@ const SelectInterest = () => {
               setTotalChoices={setTotalInterests}
             />
           ))}
-        </div>
+        </SubContentWrapper>
         <ButtonWrapper>
           <Button
             className="login_button"
@@ -112,9 +112,12 @@ const Title = styled.h1`
 `;
 
 const SubContentWrapper = styled.div`
+  margin-top: 50px;
+`;
+
+const ExplanationWrapper = styled.div`
   display: flex;
   gap: 12px;
-  margin-top: 50px;
   margin-bottom: 32px;
 `;
 

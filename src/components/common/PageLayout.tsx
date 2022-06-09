@@ -42,7 +42,6 @@ const Header = styled.header`
 
 const Main = styled.main`
   width: 1120px;
-  padding: 0 400px;
 `;
 
 const Footer = styled.footer`
