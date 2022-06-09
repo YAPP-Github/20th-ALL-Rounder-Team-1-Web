@@ -4,14 +4,12 @@ import styled from 'styled-components';
 import { Header } from '@/components';
 
 interface PageLayoutProps {
-  title: string;
   isHeader?: boolean;
   isFooter?: boolean;
 }
 
 export const PageLayout = ({
   children,
-  title,
   isHeader = true,
   isFooter = true,
 }: PropsWithChildren<PageLayoutProps>) => {
