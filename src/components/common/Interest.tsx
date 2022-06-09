@@ -15,9 +15,6 @@ export const Interest = ({ name, totalChoices, setTotalChoices }: InterestProps)
       const exceptClickedName = totalChoices.filter((totalChoice) => totalChoice !== name);
       setTotalChoices(exceptClickedName);
     } else {
-      if (totalChoices.length === 3) {
-        return;
-      }
       setTotalChoices([...totalChoices, name]);
     }
     setIsClicked(!isClicked);
