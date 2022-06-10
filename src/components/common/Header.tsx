@@ -1,9 +1,10 @@
+import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Header = () => {
+  const [alarmClicked, setAlarmClicked] = useState(false);
   const { pathname } = useLocation();
-  console.log(pathname);
 
   return (
     <Wrapper>
@@ -17,11 +18,25 @@ export const Header = () => {
           <Icon src="../../assets/write_icon.png" alt="Write Icon" />
         </Link>
         <Link to="/search">
-          <Icon src="../../assets/search_icon.png" alt="Search Icon" />
+          {pathname === '/search' ? (
+            <Icon src="../../assets/search_icon_clicked.png" alt="Search Icon" />
+          ) : (
+            <Icon src="../../assets/search_icon.png" alt="Search Icon" />
+          )}
         </Link>
-        <Icon src="../../assets/alarm_icon.png" alt="Alarm Icon" />
+        <button onClick={() => setAlarmClicked(!alarmClicked)}>
+          {alarmClicked ? (
+            <Icon src="../../assets/alarm_icon_clicked.png" alt="Alarm Icon" />
+          ) : (
+            <Icon src="../../assets/alarm_icon.png" alt="Alarm Icon" />
+          )}
+        </button>
         <Link to="/setting">
-          <Icon src="../../assets/setting_icon.png" alt="Setting Icon" />
+          {pathname === '/setting' ? (
+            <Icon src="../../assets/setting_icon_clicked.png" alt="Setting Icon" />
+          ) : (
+            <Icon src="../../assets/setting_icon.png" alt="Setting Icon" />
+          )}
         </Link>
       </div>
     </Wrapper>
@@ -46,3 +61,5 @@ const Icon = styled.img`
   height: 32px;
   margin-left: 30px;
 `;
+
+const Button = styled.button``;
