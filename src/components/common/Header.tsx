@@ -13,7 +13,9 @@ export const Header = () => {
         </Link>
       </div>
       <div>
-        <Icon src="../../assets/write_icon.png" alt="Write Icon" />
+        <Link to="/addRoutine">
+          <Icon src="../../assets/write_icon.png" alt="Write Icon" />
+        </Link>
         <Link to="/search">
           <Icon src="../../assets/search_icon.png" alt="Search Icon" />
         </Link>

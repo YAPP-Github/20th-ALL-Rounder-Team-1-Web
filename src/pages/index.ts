@@ -1,5 +1,6 @@
 import { lazy } from 'react';
 
+export const AddRoutine = lazy(() => import('./AddRoutine'));
 export const Home = lazy(() => import('./Home'));
 export const Login = lazy(() => import('./Login'));
 export const Search = lazy(() => import('./Search'));
