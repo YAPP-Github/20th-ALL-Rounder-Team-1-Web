@@ -15,17 +15,18 @@ export const FriendStory = ({ imgUrl, name, selected = false }: FriendStoryProps
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.li`
   width: 60px;
   height: 90px;
   gap: 8px;
 `;
 
 const Image = styled.div<{ selected: boolean }>`
-  width: 60px;
-  height: 60px;
+  width: 54px;
+  height: 54px;
   border-radius: 20.33px;
-  border: ${({ selected, theme: { colors } }) => selected && `3px solid ${colors.WeekandBlue}`};
+  border: ${({ selected, theme: { colors } }) =>
+    selected ? `3px solid ${colors.WeekandBlue}` : `3px solid ${colors.Gray300}`};
   background-color: ${({ theme: { colors } }) => colors.Gray300};
 
   .with_image {
