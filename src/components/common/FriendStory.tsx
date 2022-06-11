@@ -1,14 +1,40 @@
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface FriendStoryProps {
+  id: number;
   imgUrl?: string;
   name: string;
-  selected?: boolean;
+  clickedFriend: number;
+  setClickedFriend: Dispatch<SetStateAction<number>>;
 }
 
-export const FriendStory = ({ imgUrl, name, selected = false }: FriendStoryProps) => {
+export const FriendStory = ({
+  id,
+  imgUrl,
+  name,
+  clickedFriend,
+  setClickedFriend,
+}: FriendStoryProps) => {
+  const [selected, setSelected] = useState(false);
+
+  const onClick = () => {
+    setClickedFriend(id);
+  };
+
+  const handleSelected = () => {
+    if (id === clickedFriend) {
+      return setSelected(true);
+    }
+    setSelected(false);
+  };
+
+  useEffect(() => {
+    handleSelected();
+  }, [clickedFriend]);
+
   return (
-    <Wrapper>
+    <Wrapper onClick={onClick}>
       <Image selected={selected}>{imgUrl && <img className="with_image" src={imgUrl} />}</Image>
       <Name>{name}</Name>
     </Wrapper>

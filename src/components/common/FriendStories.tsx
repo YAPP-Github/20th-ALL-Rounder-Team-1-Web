@@ -28,6 +28,7 @@ export const FriendStories = () => {
   const [currentX, setCurrentX] = useState(0);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
+  const [clickedFriend, setClickedFriend] = useState(friends[0].id);
   const endX = calculateEndX(friends.length);
 
   const handleLeftButton = () => {
@@ -66,7 +67,14 @@ export const FriendStories = () => {
   return (
     <Wrapper currentLoc={currentX}>
       {friends.map((friend) => (
-        <FriendStory key={friend.id} name={friend.name} imgUrl={friend.imgUrl} />
+        <FriendStory
+          key={friend.id}
+          id={friend.id}
+          name={friend.name}
+          imgUrl={friend.imgUrl}
+          clickedFriend={clickedFriend}
+          setClickedFriend={setClickedFriend}
+        />
       ))}
       {showLeftButton && (
         <Button onClick={onClickLeft} className="left">
@@ -93,6 +101,7 @@ const Wrapper = styled.ul<{ currentLoc: number }>`
   background-color: #fff;
   overflow: hidden;
   position: relative;
+  cursor: pointer;
 
   li:nth-child(1) {
     transition: all 0.6s ease-in;
