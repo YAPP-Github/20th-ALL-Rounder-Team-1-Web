@@ -1,11 +1,11 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
 
 interface FriendStoryProps {
   id: number;
   imgUrl?: string;
   name: string;
-  clickedFriend: number;
+  isSelected: boolean;
   setClickedFriend: Dispatch<SetStateAction<number>>;
 }
 
@@ -13,29 +13,16 @@ export const FriendStory = ({
   id,
   imgUrl,
   name,
-  clickedFriend,
+  isSelected,
   setClickedFriend,
 }: FriendStoryProps) => {
-  const [selected, setSelected] = useState(false);
-
   const onClick = () => {
     setClickedFriend(id);
   };
 
-  const handleSelected = () => {
-    if (id === clickedFriend) {
-      return setSelected(true);
-    }
-    setSelected(false);
-  };
-
-  useEffect(() => {
-    handleSelected();
-  }, [clickedFriend]);
-
   return (
     <Wrapper onClick={onClick}>
-      <Image selected={selected}>{imgUrl && <img className="with_image" src={imgUrl} />}</Image>
+      <Image isSelected={isSelected}>{imgUrl && <img className="with_image" src={imgUrl} />}</Image>
       <Name>{name}</Name>
     </Wrapper>
   );
@@ -47,12 +34,12 @@ const Wrapper = styled.li`
   gap: 8px;
 `;
 
-const Image = styled.div<{ selected: boolean }>`
+const Image = styled.div<{ isSelected: boolean }>`
   width: 54px;
   height: 54px;
   border-radius: 20.33px;
-  border: ${({ selected, theme: { colors } }) =>
-    selected ? `3px solid ${colors.WeekandBlue}` : `3px solid ${colors.Gray300}`};
+  border: ${({ isSelected, theme: { colors } }) =>
+    isSelected ? `3px solid ${colors.WeekandBlue}` : `3px solid ${colors.Gray300}`};
   background-color: ${({ theme: { colors } }) => colors.Gray300};
 
   .with_image {
