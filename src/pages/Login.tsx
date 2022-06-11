@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import { PageLayout, Input, Button } from '@/components';
 
@@ -21,7 +22,9 @@ const Login = () => {
           </LoginInput>
           <Utils>
             <span className="auto_login">자동로그인</span>
-            <span className="find_password">비밀번호 찾기</span>
+            <Link to="/find-password" className="find_password">
+              비밀번호 찾기
+            </Link>
           </Utils>
           <Buttons>
             <Button
@@ -77,6 +80,10 @@ const Introduce = styled.div`
 const LoginInput = styled.div`
   margin-top: 40px;
   width: 353px;
+
+  Input + Input {
+    margin-top: 12px;
+  }
 `;
 
 const Utils = styled.div`
