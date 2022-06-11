@@ -20,7 +20,7 @@ export const PageLayout = ({
           <h1>{title}</h1>
         </Header>
       )}
-      <Main>{children}</Main>
+      {children}
       {isFooter && (
         <Footer>
           <small>© Copyright Weekand 2022</small>
@@ -38,10 +38,6 @@ const Wrapper = styled.div`
 const Header = styled.header`
   border-bottom: 1px solid #000;
   padding: 36px 0px;
-`;
-
-const Main = styled.main`
-  width: 1120px;
 `;
 
 const Footer = styled.footer`
