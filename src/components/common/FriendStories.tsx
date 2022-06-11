@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { FriendStory } from './FriendStory';
+import { FriendStory } from '@/components';
 import { calculateEndX } from '@/utils';
 
 const friends = [
@@ -27,8 +27,18 @@ const friends = [
   { id: 9, name: '2', imgUrl: '' },
   { id: 10, name: '3', imgUrl: '' },
   { id: 11, name: '4', imgUrl: '' },
-  { id: 12, name: '5', imgUrl: '' },
-  { id: 13, name: '6', imgUrl: '' },
+  {
+    id: 12,
+    name: 'Son',
+    imgUrl:
+      'https://w.namu.la/s/18cdc3e45fee5e76f3f3a29056396db782c12502afe39de7539f82893cd2339c70522a6bdbb849a2cf990ce554dca7db8307eac97b5591f4a623fc595694af5157adfb48ccdda9c8bbba83c73ff58ca7b74e3351d818772ba0f8d4aaad3d2f6f0273faf1fc9b0e5ada654b3f5b7ed6f6',
+  },
+  {
+    id: 13,
+    name: '모란트',
+    imgUrl:
+      'https://www.si.com/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTg5MzY3Mzc1ODIzMzgyNDk2/ja-morant-sneaks-among-the-mvp-candidates.jpg',
+  },
   { id: 14, name: '7', imgUrl: '' },
   { id: 15, name: '8', imgUrl: '' },
   { id: 16, name: '9', imgUrl: '' },
@@ -37,29 +47,10 @@ const friends = [
 
 export const FriendStories = () => {
   const [currentX, setCurrentX] = useState(0);
+  const endX = calculateEndX(friends.length);
+  const [clickedFriend, setClickedFriend] = useState(friends[0].id);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
-  const [clickedFriend, setClickedFriend] = useState(friends[0].id);
-  const endX = calculateEndX(friends.length);
-
-  const handleLeftButton = () => {
-    if (currentX === 0) {
-      return setShowLeftButton(false);
-    }
-    setShowLeftButton(true);
-  };
-
-  const handleRightButton = () => {
-    if (currentX === endX) {
-      return setShowRightButton(false);
-    }
-    setShowRightButton(true);
-  };
-
-  useEffect(() => {
-    handleLeftButton();
-    handleRightButton();
-  }, [currentX]);
 
   const isSelected = (id: number) => {
     if (id === clickedFriend) {
@@ -81,6 +72,25 @@ export const FriendStories = () => {
     }
     setCurrentX(currentX - 360);
   };
+
+  const handleLeftButton = () => {
+    if (currentX === 0) {
+      return setShowLeftButton(false);
+    }
+    setShowLeftButton(true);
+  };
+
+  const handleRightButton = () => {
+    if (currentX === endX) {
+      return setShowRightButton(false);
+    }
+    setShowRightButton(true);
+  };
+
+  useEffect(() => {
+    handleLeftButton();
+    handleRightButton();
+  }, [currentX]);
 
   return (
     <Wrapper currentLoc={currentX}>
