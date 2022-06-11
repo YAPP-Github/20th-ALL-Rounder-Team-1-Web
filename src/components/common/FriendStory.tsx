@@ -35,17 +35,19 @@ const Wrapper = styled.li`
 `;
 
 const Image = styled.div<{ isSelected: boolean }>`
-  width: 54px;
-  height: 54px;
+  width: ${({ isSelected }) => (isSelected ? '54px' : '60px')};
+  height: ${({ isSelected }) => (isSelected ? '54px' : '60px')};
   border-radius: 20.33px;
-  border: ${({ isSelected, theme: { colors } }) =>
-    isSelected ? `3px solid ${colors.WeekandBlue}` : `3px solid ${colors.Gray300}`};
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border: ${({ isSelected, theme: { colors } }) => isSelected && `3px solid ${colors.WeekandBlue}`};
   background-color: ${({ theme: { colors } }) => colors.Gray300};
 
   .with_image {
-    width: 60px;
-    height: 60px;
-    border-radius: 20.33px;
+    width: ${({ isSelected }) => (isSelected ? '54px' : '60px')};
+    height: ${({ isSelected }) => (isSelected ? '54px' : '60px')};
+    border-radius: 16px;
   }
 `;
 
