@@ -9,8 +9,7 @@ const friends = [
   {
     id: 1,
     name: '손흥민',
-    imgUrl:
-      'https://w.namu.la/s/18cdc3e45fee5e76f3f3a29056396db782c12502afe39de7539f82893cd2339c70522a6bdbb849a2cf990ce554dca7db8307eac97b5591f4a623fc595694af5157adfb48ccdda9c8bbba83c73ff58ca7b74e3351d818772ba0f8d4aaad3d2f6f0273faf1fc9b0e5ada654b3f5b7ed6f6',
+    imgUrl: 'https://img.khan.co.kr/news/2022/04/08/l_2022040901000999500089741.jpg',
   },
   {
     id: 2,
