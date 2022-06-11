@@ -13,7 +13,7 @@ const SelectInterest = () => {
 
   return (
     <PageLayout title="관심사 페이지" isHeader={false} isFooter={false}>
-      <Wrapper>
+      <Main role="main">
         <Title>조금 더 알려주시겠어요?</Title>
         <SubContentWrapper>
           <ExplanationWrapper>
@@ -47,12 +47,12 @@ const SelectInterest = () => {
             다음
           </Button>
         </ButtonWrapper>
-      </Wrapper>
+      </Main>
     </PageLayout>
   );
 };
 
-const Wrapper = styled.div`
+const Main = styled.div`
   padding: 176px 0px;
   text-align: start;
 `;
