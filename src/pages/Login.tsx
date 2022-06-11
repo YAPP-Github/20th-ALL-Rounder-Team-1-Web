@@ -69,7 +69,7 @@ const LoginForm = styled.div`
 `;
 
 const Introduce = styled.div`
-  ${({ theme: { fonts } }) => fonts.Head0}
+  ${({ theme: { fonts } }) => fonts.Title}
   width: 183px;
   text-align: left;
 `;
