@@ -3,9 +3,8 @@ import { FriendStories } from '@/components/common/FriendStories';
 
 const Home = () => {
   return (
-    <PageLayout title="홈 페이지">
+    <PageLayout title="홈 페이지" isFooter={false}>
       <FriendStories />
-      <h1>홈 페이지</h1>
     </PageLayout>
   );
 };

@@ -1,74 +1,81 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
+
 import { FriendStory } from './FriendStory';
+import { calculateEndX } from '@/utils';
+
+const friends = [
+  { id: 1, name: '손흥민', imgUrl: '' },
+  { id: 2, name: 'Morant', imgUrl: '' },
+  { id: 3, name: 'Cody', imgUrl: '' },
+  { id: 4, name: 'Woody', imgUrl: '' },
+  { id: 5, name: 'Corey', imgUrl: '' },
+  { id: 6, name: 'Trae', imgUrl: '' },
+  { id: 7, name: 'James', imgUrl: '' },
+  { id: 8, name: '1', imgUrl: '' },
+  { id: 9, name: '2', imgUrl: '' },
+  { id: 10, name: '3', imgUrl: '' },
+  { id: 11, name: '4', imgUrl: '' },
+  { id: 12, name: '5', imgUrl: '' },
+  { id: 13, name: '6', imgUrl: '' },
+  { id: 14, name: '7', imgUrl: '' },
+  { id: 15, name: '8', imgUrl: '' },
+  { id: 16, name: '9', imgUrl: '' },
+  { id: 17, name: '10', imgUrl: '' },
+]; // 서버가 완성되면 실제 데이터로 수정하면 됩니다.
 
 export const FriendStories = () => {
-  const friends = [
-    { name: '손흥민', imgUrl: '' },
-    { name: 'Morant', imgUrl: '' },
-    { name: 'Cody', imgUrl: '' },
-    { name: 'Woody', imgUrl: '' },
-    { name: 'Corey', imgUrl: '' },
-    { name: 'Trae', imgUrl: '' },
-    { name: 'James', imgUrl: '' },
-    { name: '1', imgUrl: '' },
-    { name: '2', imgUrl: '' },
-    { name: '3', imgUrl: '' },
-    { name: '4', imgUrl: '' },
-    { name: '5', imgUrl: '' },
-    { name: '6', imgUrl: '' },
-    { name: '7', imgUrl: '' },
-    { name: '8', imgUrl: '' },
-    { name: '9', imgUrl: '' },
-    { name: '10', imgUrl: '' },
-  ];
+  const [currentX, setCurrentX] = useState(0);
+  const [showLeftButton, setShowLeftButton] = useState(false);
+  const [showRightButton, setShowRightButton] = useState(false);
+  const endX = calculateEndX(friends.length);
 
-  const [start, setStart] = useState(0);
-  const endX = -(64 + 60 * friends.length + 26 * (friends.length - 1)) + 640;
-
-  const showLeftButton = () => {
-    if (start === 0) {
-      return false;
+  const handleLeftButton = () => {
+    if (currentX === 0) {
+      return setShowLeftButton(false);
     }
-    return true;
+    setShowLeftButton(true);
   };
 
-  const showRightButton = () => {
-    if (start === endX) {
-      return false;
+  const handleRightButton = () => {
+    if (currentX === endX) {
+      return setShowRightButton(false);
     }
-    return true;
+    setShowRightButton(true);
   };
+
+  useEffect(() => {
+    handleLeftButton();
+    handleRightButton();
+  }, [currentX]);
 
   const onClickLeft = () => {
-    if (start + 360 > 0) {
-      setStart(0);
-    } else {
-      setStart(start + 360);
+    if (currentX + 360 > 0) {
+      return setCurrentX(0);
     }
+    setCurrentX(currentX + 360);
   };
 
   const onClickRight = () => {
-    if (start - 360 < endX) {
-      setStart(endX);
-    } else {
-      setStart(start - 360);
+    if (currentX - 360 < endX) {
+      return setCurrentX(endX);
     }
+    setCurrentX(currentX - 360);
   };
 
   return (
-    <Wrapper currentLoc={start}>
-      {friends.map((friend, index) => (
-        <FriendStory key={index} name={friend.name} imgUrl={friend.imgUrl} />
+    <Wrapper currentLoc={currentX}>
+      {friends.map((friend) => (
+        <FriendStory key={friend.id} name={friend.name} imgUrl={friend.imgUrl} />
       ))}
-      {showLeftButton() && (
+      {showLeftButton && (
         <Button onClick={onClickLeft} className="left">
-          Left
+          <img src="../../assets/story_left_button.png" alt="Story Left Button" />
         </Button>
       )}
-      {showRightButton() && (
+      {showRightButton && (
         <Button onClick={onClickRight} className="right">
-          Right
+          <img src="../../assets/story_right_button.png" alt="Story Right Button" />
         </Button>
       )}
     </Wrapper>
@@ -83,7 +90,7 @@ const Wrapper = styled.ul<{ currentLoc: number }>`
   gap: 26px;
   padding: 0px 32px;
   border-radius: 10px;
-  background-color: greenyellow;
+  background-color: #fff;
   overflow: hidden;
   position: relative;
 
@@ -95,9 +102,12 @@ const Wrapper = styled.ul<{ currentLoc: number }>`
 
 const Button = styled.div`
   position: absolute;
+  cursor: pointer;
+
   &.left {
     left: 24px;
   }
+
   &.right {
     right: 24px;
   }
