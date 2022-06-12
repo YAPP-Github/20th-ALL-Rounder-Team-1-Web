@@ -5,14 +5,11 @@ import { CalendarPopUp, FindPasswordPopUp } from '@/components';
 import { PopUpContext } from '@/contexts';
 
 export const PopUp = () => {
-  const { isCalendarOpen, isFindPasswordOpen, isVisible } = useContext(PopUpContext);
+  const { isCalendarOpen, isFindPasswordOpen, isVisible, innerContent } = useContext(PopUpContext);
 
   return (
     <div>
-      <PopUpWrapper visible={isVisible}>
-        {isCalendarOpen && <CalendarPopUp />}
-        {isFindPasswordOpen && <FindPasswordPopUp />}
-      </PopUpWrapper>
+      <PopUpWrapper visible={isVisible}>{innerContent}</PopUpWrapper>
     </div>
   );
 };
