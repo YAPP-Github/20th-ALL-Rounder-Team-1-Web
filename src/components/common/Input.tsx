@@ -87,8 +87,9 @@ const StyledInput = styled.input`
     padding: 13px 20px;
     border-radius: 12px;
     box-sizing: border-box;
-  }
-  &.login_input + &.login_input {
-    margin-top: 12px;
+    ${({ theme: { fonts } }) => fonts.Body1};
+    ::placeholder {
+      color: #aaaeb6;
+    }
   }
 `;
