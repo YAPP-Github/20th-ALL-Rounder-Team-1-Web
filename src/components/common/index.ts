@@ -3,6 +3,8 @@ export * from './CalendarPopUp';
 export * from './DebounceInput';
 export * from './DimmedLayer';
 export * from './FindPasswordPopUp';
+export * from './FriendStories';
+export * from './FriendStory';
 export * from './Input';
 export * from './Interest';
 export * from './PopUp';
