@@ -7,7 +7,9 @@ export const DimmedLayer = () => {
   const { isVisible, setIsVisible, type } = useContext(DimmedLayerContext);
 
   const onClick = () => {
-    setIsVisible(!isVisible);
+    if (type === 'transparent') {
+      setIsVisible(!isVisible);
+    }
   };
 
   return <Wrapper onClick={onClick} visible={isVisible} type={type} />;
