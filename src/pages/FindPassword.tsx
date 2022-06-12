@@ -1,28 +1,30 @@
 import styled from 'styled-components';
 
-import { Button, Input } from '@/components';
+import { Button, Input, PageLayout } from '@/components';
 
 const FindPassword = () => {
   return (
-    <Main role="main">
-      <Title>비밀번호를 잊으셨나요?</Title>
-      <Description>
-        아래 이메일로 임시 비밀번호를 보내드려요.
-        <br />
-        임시 비밀번호로 로그인하신 후에 계정관리에서
-        <br />
-        비밀번호를 변경해주세요.
-      </Description>
-      <Input className="login_input" placeholder="이메일을 입력해주세요" />
-      <FindPasswordButton
-        className="login_button"
-        onClick={() => {
-          console.log(1);
-        }}
-      >
-        임시비밀번호 발급
-      </FindPasswordButton>
-    </Main>
+    <PageLayout title="비밀번호 찾기 페이지" isHeader={false} isFooter={false}>
+      <Main role="main">
+        <Title>비밀번호를 잊으셨나요?</Title>
+        <Description>
+          아래 이메일로 임시 비밀번호를 보내드려요.
+          <br />
+          임시 비밀번호로 로그인하신 후에 계정관리에서
+          <br />
+          비밀번호를 변경해주세요.
+        </Description>
+        <Input className="login_input" placeholder="이메일을 입력해주세요" />
+        <FindPasswordButton
+          className="login_button"
+          onClick={() => {
+            console.log(1);
+          }}
+        >
+          임시비밀번호 발급
+        </FindPasswordButton>
+      </Main>
+    </PageLayout>
   );
 };
 
