@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+import { AlarmList } from './AlarmList';
 
 export const Header = () => {
   const [alarmClicked, setAlarmClicked] = useState(false);
@@ -39,6 +40,7 @@ export const Header = () => {
           )}
         </Link>
       </div>
+      {alarmClicked && <AlarmList />}
     </Wrapper>
   );
 };
