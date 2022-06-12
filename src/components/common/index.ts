@@ -6,5 +6,6 @@ export * from './FindPasswordPopUp';
 export * from './FriendStories';
 export * from './FriendStory';
 export * from './Input';
+export * from './Interest';
 export * from './PopUp';
 export * from './PageLayout';
