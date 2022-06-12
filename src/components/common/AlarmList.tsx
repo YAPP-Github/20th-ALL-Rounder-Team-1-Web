@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
-import { getAlarms } from '@/utils';
 import { Alarm } from '@/components';
+import { getAlarms } from '@/utils';
 
-const alarms = getAlarms();
+const alarms = getAlarms(); // 추후에 서버가 제작되면 실제 데이터로 변경
 
 export const AlarmList = () => {
   return (

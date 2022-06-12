@@ -4,7 +4,7 @@ import { PageLayout, Input, Button } from '@/components';
 
 const Login = () => {
   return (
-    <PageLayout isFooter={false}>
+    <PageLayout isHeader={false} isFooter={false}>
       <Main role="main">
         <SmilingImage>
           <img src="../assets/smiling_emoji.png" width={569} height={511} />

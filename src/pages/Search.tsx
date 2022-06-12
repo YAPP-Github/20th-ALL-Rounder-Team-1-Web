@@ -2,7 +2,7 @@ import { PageLayout } from '@/components';
 
 const Search = () => {
   return (
-    <PageLayout>
+    <PageLayout isFooter={false}>
       <h1>Search 페이지</h1>
     </PageLayout>
   );

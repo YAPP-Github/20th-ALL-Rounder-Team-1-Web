@@ -1,8 +1,9 @@
-import { DimmedLayerContext } from '@/contexts';
 import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
+
 import { AlarmList } from './AlarmList';
+import { DimmedLayerContext } from '@/contexts';
 
 export const Header = () => {
   const [alarmClicked, setAlarmClicked] = useState(false);
