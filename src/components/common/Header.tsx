@@ -14,11 +14,11 @@ export const Header = () => {
         </Link>
       </div>
       <div>
-        <Link to="/addRoutine">
-          <Icon src="../../assets/write_icon.png" alt="Write Icon" />
+        <Link to="/manage-routine">
+          <Icon src="../../assets/manage_icon.png" alt="Write Icon" />
         </Link>
         <Link to="/search">
-          {pathname === '/search' ? (
+          {pathname === '/search' && !alarmClicked ? (
             <Icon src="../../assets/search_icon_clicked.png" alt="Search Icon" />
           ) : (
             <Icon src="../../assets/search_icon.png" alt="Search Icon" />
@@ -32,7 +32,7 @@ export const Header = () => {
           )}
         </button>
         <Link to="/setting">
-          {pathname === '/setting' ? (
+          {pathname === '/setting' && !alarmClicked ? (
             <Icon src="../../assets/setting_icon_clicked.png" alt="Setting Icon" />
           ) : (
             <Icon src="../../assets/setting_icon.png" alt="Setting Icon" />

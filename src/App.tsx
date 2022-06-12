@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import { PopUpPortal } from './PopUpPortal';
 import { DimmedLayer, PopUp } from '@/components';
-import { AddRoutine, Home, Login, Search, Setting } from '@/pages';
+import { AddRoutine, Home, Login, ManageRoutine, Search, Setting } from '@/pages';
 
 const App = () => {
   return (
@@ -27,10 +27,18 @@ const App = () => {
           }
         />
         <Route
-          path="/addRoutine"
+          path="/add-routine"
           element={
             <Suspense fallback={<>Loading...</>}>
               <AddRoutine />
+            </Suspense>
+          }
+        />
+        <Route
+          path="/manage-routine"
+          element={
+            <Suspense fallback={<>Loading...</>}>
+              <ManageRoutine />
             </Suspense>
           }
         />
