@@ -1,15 +1,19 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { DimmedLayerContext } from '@/contexts/DimmedLayerContext';
+import { DimmedLayerContext } from '@/contexts';
 
 export const DimmedLayer = () => {
-  const { isVisible } = useContext(DimmedLayerContext);
+  const { isVisible, setIsVisible, type } = useContext(DimmedLayerContext);
 
-  return <Wrapper visible={isVisible} />;
+  const onClick = () => {
+    setIsVisible(!isVisible);
+  };
+
+  return <Wrapper onClick={onClick} visible={isVisible} type={type} />;
 };
 
-const Wrapper = styled.div<{ visible: boolean }>`
+const Wrapper = styled.div<{ visible: boolean; type: string }>`
   position: fixed;
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   top: 0;
@@ -17,5 +21,5 @@ const Wrapper = styled.div<{ visible: boolean }>`
   z-index: 1;
   width: 100%;
   height: 100%;
-  background: rgba(0, 0, 0, 0.5);
+  background: ${({ type }) => (type === 'dark' ? 'rgba(0, 0, 0, 0.5)' : 'tranparent')};
 `;

@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { DimmedLayerContext } from '@/contexts';
+import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 import { AlarmList } from './AlarmList';
@@ -6,6 +7,19 @@ import { AlarmList } from './AlarmList';
 export const Header = () => {
   const [alarmClicked, setAlarmClicked] = useState(false);
   const { pathname } = useLocation();
+  const { isVisible, setIsVisible, setType } = useContext(DimmedLayerContext);
+
+  const onClickAlarm = () => {
+    setAlarmClicked(!alarmClicked);
+    setIsVisible(!isVisible);
+    setType('transparent');
+  };
+
+  useEffect(() => {
+    if (!isVisible && alarmClicked) {
+      setAlarmClicked(!alarmClicked);
+    }
+  }, [isVisible]);
 
   return (
     <Wrapper>
@@ -25,7 +39,7 @@ export const Header = () => {
             <Icon src="../../assets/search_icon.png" alt="Search Icon" />
           )}
         </Link>
-        <button onClick={() => setAlarmClicked(!alarmClicked)}>
+        <button onClick={onClickAlarm}>
           {alarmClicked ? (
             <Icon src="../../assets/alarm_icon_clicked.png" alt="Alarm Icon" />
           ) : (
