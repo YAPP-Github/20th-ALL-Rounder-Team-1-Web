@@ -44,11 +44,9 @@ export const SettingSidebar = () => {
 };
 
 const Wrapper = styled.ul`
-  width: 280px;
-  height: 900px;
+  width: 281px;
+  height: 878px;
   border-radius: 10px;
   background-color: #fff;
-  margin-top: 86px;
-  margin-bottom: 32px;
   border: 1px solid black;
 `;

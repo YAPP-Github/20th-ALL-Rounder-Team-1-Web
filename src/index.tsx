@@ -3,7 +3,11 @@ import { ThemeProvider } from 'styled-components';
 import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 import App from './App';
-import { PopUpContextProvider } from '@/contexts';
+import {
+  DimmedLayerContextProvider,
+  PopUpContextProvider,
+  SettingContextProvider,
+} from '@/contexts';
 import { AppProvider } from '@/utils';
 import { GlobalStyle, theme } from '@/style';
 
@@ -22,7 +26,9 @@ const client = new ApolloClient({
 
 root.render(
   <ApolloProvider client={client}>
-    <AppProvider components={[PopUpContextProvider]}>
+    <AppProvider
+      components={[DimmedLayerContextProvider, PopUpContextProvider, SettingContextProvider]}
+    >
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App />

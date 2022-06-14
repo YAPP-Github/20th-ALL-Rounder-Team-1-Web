@@ -62,10 +62,10 @@ const fonts: IFonts = {
   },
   SubHead3(color = DEFAULT_FONT_COLOR) {
     return css`
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 600
-    color: ${({ theme: { colors } }) => colors[color]};
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 600;
+      color: ${({ theme: { colors } }) => colors[color]};
     `;
   },
   Body1(color = DEFAULT_FONT_COLOR) {
