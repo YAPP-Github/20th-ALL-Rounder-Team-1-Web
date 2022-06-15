@@ -3,7 +3,7 @@ import { Button } from './Button';
 
 export const ChangePassword = () => {
   return (
-    <Wrapper>
+    <>
       <Title>
         <h1>비밀번호를 변경하여</h1>
         <h1>안전하게 관리하세요</h1>
@@ -22,20 +22,11 @@ export const ChangePassword = () => {
         <input type="password" />
       </Input>
       <Button onClick={() => console.log('완료')}>완료</Button>
-    </Wrapper>
+    </>
   );
 };
 
-const Wrapper = styled.div`
-  width: 739px;
-  height: 758px;
-  border-radius: 10px;
-  background-color: #fff;
-  border: 1px solid black;
-  padding: 60px 40px;
-`;
-
-const Title = styled.h1`
+const Title = styled.div`
   h1 {
     font-size: 24px;
     font-weight: 700;

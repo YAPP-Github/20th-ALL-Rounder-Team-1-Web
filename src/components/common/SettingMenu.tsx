@@ -1,4 +1,6 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { SettingContext } from '@/contexts';
+import { getCurrentSetting } from '@/utils/getCurrentSetting';
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface SettingMenuProps {
@@ -15,9 +17,11 @@ export const SettingMenu = ({
   setCurrentClicked,
 }: SettingMenuProps) => {
   const [isClicked, setIsClicked] = useState(false);
+  const { setCurrentContent } = useContext(SettingContext);
 
   const onClick = () => {
     setCurrentClicked(name);
+    setCurrentContent(getCurrentSetting(name));
   };
 
   const handleIsClicked = () => {

@@ -11,7 +11,7 @@ const Setting = () => {
     <PageLayout title="세팅 페이지" isFooter={false}>
       <Wrapper>
         <SettingSidebar />
-        {currentContent}
+        <ContentWrapper>{currentContent}</ContentWrapper>
       </Wrapper>
     </PageLayout>
   );
@@ -22,6 +22,15 @@ const Wrapper = styled.div`
   margin-top: 86px;
   margin-bottom: 32px;
   gap: 20px;
+`;
+
+const ContentWrapper = styled.div`
+  width: 739px;
+  height: 758px;
+  border-radius: 10px;
+  background-color: #fff;
+  border: 1px solid black;
+  padding: 60px 40px;
 `;
 
 export default Setting;
