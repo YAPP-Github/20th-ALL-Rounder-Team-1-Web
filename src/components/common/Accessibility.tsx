@@ -1,4 +1,4 @@
-import { ChangeEvent, useEffect, useState } from 'react';
+import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
 export const Accessibility = () => {
@@ -6,11 +6,8 @@ export const Accessibility = () => {
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
-    console.log(value);
     setSelected(value);
   };
-
-  console.log(selected);
 
   return (
     <Wrapper>
@@ -78,7 +75,6 @@ const Wrapper = styled.div`
   padding: 60px 40px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid black;
 `;
 
 const Title = styled.div`
