@@ -29,7 +29,6 @@ const ContentWrapper = styled.div`
   height: 758px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid black;
   padding: 60px 40px;
   text-align: start;
 `;
