@@ -13,7 +13,7 @@ type SettingProps = {
   setCurrentContent: Dispatch<SetStateAction<ReactNode>>;
 };
 
-export const SettingContext = createContext<SettingProps>({} as SettingProps);
+const SettingContext = createContext<SettingProps>({} as SettingProps);
 
 export const SettingContextProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [currentContent, setCurrentContent] = useState<ReactNode>(<EditProfile />);
