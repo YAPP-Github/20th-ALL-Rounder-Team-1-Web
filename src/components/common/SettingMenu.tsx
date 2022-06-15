@@ -1,7 +1,8 @@
-import { SettingContext } from '@/contexts';
-import { getCurrentSetting } from '@/utils/getCurrentSetting';
 import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { SettingContext } from '@/contexts';
+import { getCurrentSetting } from '@/utils';
 
 interface SettingMenuProps {
   name: string;

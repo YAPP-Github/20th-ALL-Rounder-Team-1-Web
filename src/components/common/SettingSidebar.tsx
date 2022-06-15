@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
-import { SettingMenu } from './SettingMenu';
+
+import { SettingMenu } from '@/components';
 
 export const SettingSidebar = () => {
   const [currentClicked, setCurrentClicked] = useState('프로필 편집');

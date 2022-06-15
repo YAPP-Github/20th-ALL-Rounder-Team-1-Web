@@ -1,13 +1,15 @@
-import { ChangePassword } from '@/components/common/ChangePassword';
-import { EditProfile } from '@/components/common/EditProfile';
-import { Question } from '@/components/common/Question';
+import { EditProfile, Question } from '@/components';
 
 export const getCurrentSetting = (name: string) => {
   if (name === '프로필 편집') {
     return <EditProfile />;
   }
   if (name === '비밀번호 변경') {
-    return <ChangePassword />;
+    return (
+      <div>
+        <h1>비밀번호 변경</h1>
+      </div>
+    );
   }
   if (name === '접근성 설정') {
     return (

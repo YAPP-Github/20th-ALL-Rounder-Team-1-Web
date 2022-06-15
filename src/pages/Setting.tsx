@@ -1,8 +1,8 @@
-import { PageLayout } from '@/components';
-import { SettingSidebar } from '@/components/common/SettingSidebar';
-import { SettingContext } from '@/contexts';
 import { useContext } from 'react';
 import styled from 'styled-components';
+
+import { PageLayout, SettingSidebar } from '@/components';
+import { SettingContext } from '@/contexts';
 
 const Setting = () => {
   const { currentContent } = useContext(SettingContext);
