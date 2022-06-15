@@ -1,9 +1,14 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 import { PageLayout, Input, Button } from '@/components';
 
 const Login = () => {
+  const [isChecked, setIsChecked] = useState(false);
+
+  const onClickAutoLogin = () => setIsChecked(!isChecked);
+
   return (
     <PageLayout title="로그인 페이지" isHeader={false} isFooter={false}>
       <Main role="main">
@@ -20,8 +25,10 @@ const Login = () => {
             <Input className="login_input" placeholder="이메일을 입력해주세요" />
             <Input className="login_input" type="password" placeholder="비밀번호를 입력해주세요" />
           </LoginInput>
-          <Utils>
-            <span className="auto_login">자동로그인</span>
+          <Utils isChecked={isChecked}>
+            <label className="auto_login" onClick={onClickAutoLogin}>
+              자동로그인
+            </label>
             <Link to="/find-password" className="find_password">
               비밀번호 찾기
             </Link>
@@ -86,13 +93,25 @@ const LoginInput = styled.div`
   }
 `;
 
-const Utils = styled.div`
+const Utils = styled.div<{ isChecked: boolean }>`
   margin-top: 13px;
   ${({ theme: { fonts } }) => fonts.Body2}
 
+  .auto_login::before {
+    content: '';
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 18, 18)}
+    margin: 2px 11px 0 0;
+    background-size: 310px 270px;
+    background-position: -186px -236px;
+    ${({ isChecked }) =>
+      isChecked &&
+      `
+    background-position: -224px -236px;
+  `}
+  }
+
   .auto_login {
     float: left;
-    margin-left: 25px;
   }
 
   .find_password {
