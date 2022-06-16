@@ -1,5 +1,16 @@
 import styled from 'styled-components';
 
+interface ScheduleProps {
+  categoryColor: string;
+  name: string;
+  process: string;
+  startTime: string;
+  endTime: string;
+  likeNumber: number;
+  likeTypes: string[];
+  isFriend?: boolean;
+}
+
 export const Schedule = () => {
   return (
     <Wrapper>
@@ -12,9 +23,15 @@ export const Schedule = () => {
           <img src="../../assets/fail_icon.png" alt="Schedule Fail Icon" />
           <h2>07:00 - 08:00</h2>
         </ProcessAndTime>
-        <LikeCountAndIcon>
+        <LikeCountAndIcon count={4}>
           <p>12</p>
-          <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
+          <Icons>
+            <img src="../../assets/emoji_smile.png" alt="Smiling Sticker" />
+            <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
+            <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
+            <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
+          </Icons>
+          <img src="../../assets/sticker_button.png" alt="Smiling Sticker" />
         </LikeCountAndIcon>
       </TimeAndLike>
     </Wrapper>
@@ -22,14 +39,15 @@ export const Schedule = () => {
 };
 
 const Wrapper = styled.div`
-  width: 610px;
-  height: 52px;
+  width: 594px;
+  height: 70px;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   padding: 16px 24px;
   gap: 6px;
   border: 1px solid black;
+  background-color: #fff;
 `;
 
 const CategoryAndName = styled.div`
@@ -73,20 +91,48 @@ const ProcessAndTime = styled.div`
   }
 `;
 
-const LikeCountAndIcon = styled.div`
+const LikeCountAndIcon = styled.div<{ count: number }>`
   display: flex;
   align-items: center;
   gap: 8px;
+  position: relative;
 
   p {
+    position: absolute;
     font-size: 14px;
     font-weight: 500;
     line-height: 22.4px;
+    right: ${({ count }) => `${count * 20 + 55}px`};
     color: ${({ theme: { colors } }) => colors.Gray400};
   }
+`;
+
+const Icons = styled.div`
+  display: flex;
+  align-items: center;
 
   img {
     width: 26.6px;
     height: 26.6px;
+  }
+
+  img:first-child {
+    position: absolute;
+    right: 40px;
+  }
+
+  img:nth-child(2) {
+    position: absolute;
+    right: 60px;
+  }
+
+  img:nth-child(3) {
+    position: absolute;
+    right: 80px;
+  }
+
+  img:nth-child(4) {
+    position: absolute;
+    right: 100px;
   }
 `;
