@@ -1,3 +1,4 @@
+export * from './Accessibility';
 export * from './Button';
 export * from './CalendarPopUp';
 export * from './DebounceInput';
