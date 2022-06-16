@@ -46,7 +46,7 @@ const Login = () => {
             <Button
               className="register_button"
               onClick={() => {
-                console.log(1);
+                location.href = '/register';
               }}
             >
               회원가입
@@ -126,6 +126,7 @@ const Utils = styled.div<{ isChecked: boolean }>`
 `;
 
 const Buttons = styled.div`
+  position: relative;
   width: 353px;
   margin-top: 61px;
 `;
@@ -133,4 +134,23 @@ const Buttons = styled.div`
 const Separate = styled.div`
   margin: 22px 0;
   ${({ theme: { fonts } }) => fonts.Body2('Gray400')}
+
+  &:before {
+    content: '';
+    position: absolute;
+    top: 93px;
+    left: 0;
+    width: 120px;
+    height: 1px;
+    background-color: #eceff2;
+  }
+  &:after {
+    content: '';
+    position: absolute;
+    top: 93px;
+    right: 0;
+    width: 120px;
+    height: 1px;
+    background-color: #eceff2;
+  }
 `;
