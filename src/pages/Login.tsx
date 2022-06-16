@@ -142,7 +142,7 @@ const Separate = styled.div`
     left: 0;
     width: 120px;
     height: 1px;
-    background-color: #eceff2;
+    background-color: ${({ theme: { colors } }) => colors.Gray200};
   }
   &:after {
     content: '';
@@ -151,6 +151,6 @@ const Separate = styled.div`
     right: 0;
     width: 120px;
     height: 1px;
-    background-color: #eceff2;
+    background-color: ${({ theme: { colors } }) => colors.Gray200};
   }
 `;
