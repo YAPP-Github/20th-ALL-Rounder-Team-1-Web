@@ -53,7 +53,6 @@ const Wrapper = styled.ul`
   height: 878px;
   border-radius: 10px;
   background-color: #fff;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
