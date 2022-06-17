@@ -6,14 +6,14 @@ import { getCurrentSetting } from '@/utils';
 
 interface SettingMenuProps {
   name: string;
-  hasButton?: boolean;
+  isMenu?: boolean;
   currentClicked: string;
   setCurrentClicked: Dispatch<SetStateAction<string>>;
 }
 
 export const SettingMenu = ({
   name,
-  hasButton = true,
+  isMenu = true,
   currentClicked,
   setCurrentClicked,
 }: SettingMenuProps) => {
@@ -37,11 +37,10 @@ export const SettingMenu = ({
   }, [currentClicked]);
 
   return (
-    <Wrapper onClick={onClick}>
-      <Title isClicked={isClicked} hasButton={hasButton}>
+    <Wrapper>
+      <Title onClick={onClick} isClicked={isClicked} isMenu={isMenu}>
         {name}
       </Title>
-      {hasButton && <img src="../../assets/setting_right_button.png" alt="Setting Right Button" />}
     </Wrapper>
   );
 };
@@ -54,12 +53,12 @@ const Wrapper = styled.li`
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  cursor: pointer;
 `;
 
-const Title = styled.p<{ isClicked: boolean; hasButton: boolean }>`
+const Title = styled.p<{ isClicked: boolean; isMenu: boolean }>`
   font-size: 18px;
   font-weight: 600;
-  color: ${({ theme: { colors }, isClicked, hasButton }) =>
-    hasButton ? (isClicked ? colors.WeekandBlue : colors.Gray900) : colors.Gray400};
+  cursor: pointer;
+  color: ${({ theme: { colors }, isClicked, isMenu }) =>
+    isMenu ? (isClicked ? colors.WeekandBlue : colors.Gray900) : colors.Gray400};
 `;
