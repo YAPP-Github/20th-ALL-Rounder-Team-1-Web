@@ -31,4 +31,13 @@ const StyledButton = styled.button`
     ${({ theme: { fonts } }) => fonts.SubHead1}
     line-height: 60px;
   }
+
+  &.question_button {
+    border-radius: 10px;
+    width: 110px;
+    background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
+    color: ${({ theme: { colors } }) => colors.Gray200};
+    ${({ theme: { fonts } }) => fonts.SubHead1}
+    line-height: 52px;
+  }
 `;

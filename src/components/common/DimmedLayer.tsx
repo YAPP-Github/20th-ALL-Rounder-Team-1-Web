@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { DimmedLayerContext } from '@/contexts/DimmedLayerContext';
+import { DimmedLayerContext } from '@/contexts';
 
 export const DimmedLayer = () => {
   const { isVisible } = useContext(DimmedLayerContext);
