@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import styled from 'styled-components';
 import { Link } from 'react-router-dom';
+import styled from 'styled-components';
 
-import { PageLayout, Input, Button } from '@/components';
+import { Button, Input, PageLayout } from '@/components';
 
 const Login = () => {
   const [isChecked, setIsChecked] = useState(false);
