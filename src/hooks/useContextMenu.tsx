@@ -8,7 +8,12 @@ export const useContextMenu = () => {
   const handleContextMenu = useCallback(
     (event: MouseEvent) => {
       event.preventDefault();
-      setPointX(event.pageX);
+      if (window.innerWidth > 1120) {
+        const extraPadding = (window.innerWidth - 1120) / 2;
+        setPointX(event.pageX - extraPadding);
+      } else {
+        setPointX(event.pageX);
+      }
       setPointY(event.pageY);
       setShow(true);
     },

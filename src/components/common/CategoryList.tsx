@@ -27,6 +27,7 @@ export const CategoryList = () => {
           <SortMenu
             onMouseOver={() => setShowSorting(true)}
             onMouseLeave={() => setShowSorting(false)}
+            showSorting={showSorting}
           >
             <p>정렬</p>
             <img src="../../assets/setting_right_button.png" alt="" />
@@ -71,7 +72,7 @@ const ContextMenu = styled.div<{ pointX: number; pointY: number }>`
   text-align: start;
 `;
 
-const Menu = styled.p`
+const Menu = styled.div`
   height: 26px;
   color: ${({ theme: { colors } }) => colors.Gray700};
   ${({ theme: { fonts } }) => fonts.Body1}
@@ -90,11 +91,11 @@ const Menu = styled.p`
   }
 `;
 
-const SortMenu = styled(Menu)`
+const SortMenu = styled(Menu)<{ showSorting: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
-
+  background-color: ${({ theme: { colors }, showSorting }) => showSorting && colors.Gray100};
   img {
     width: 6.55px;
     height: 11.15px;
