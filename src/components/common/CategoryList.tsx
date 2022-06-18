@@ -1,13 +1,20 @@
 import styled from 'styled-components';
+
+import { getCategories } from '@/utils';
 import { Category } from './Category';
 
-const categories = Array(10).fill(1);
+const categories = getCategories();
 
 export const CategoryList = () => {
   return (
     <Wrapper>
-      {categories.map((_) => (
-        <Category />
+      {categories.map((category) => (
+        <Category
+          key={category.id}
+          color={category.color}
+          visibility={category.visible}
+          content={category.content}
+        />
       ))}
     </Wrapper>
   );
@@ -15,6 +22,7 @@ export const CategoryList = () => {
 
 const Wrapper = styled.div`
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: repeat(3, 356px);
   gap: 32px;
+  align-items: center;
 `;

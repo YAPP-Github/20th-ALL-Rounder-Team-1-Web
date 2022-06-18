@@ -1,20 +1,26 @@
 import styled from 'styled-components';
 
-export const Category = () => {
+interface CategoryProps {
+  color: string;
+  visibility: string;
+  content: string;
+}
+
+export const Category = ({ color, visibility, content }: CategoryProps) => {
   return (
     <Wrapper>
-      <Color />
+      <Color color={color} />
       <Content>
-        <p>공개 여부</p>
-        <h1>운동</h1>
+        <p>{visibility}</p>
+        <h1>{content}</h1>
       </Content>
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  width: 352px;
-  height: 73px;
+  width: 324px;
+  height: 50px;
   border-radius: 10px;
   padding: 12px 14px;
   background-color: #fff;
@@ -23,11 +29,11 @@ const Wrapper = styled.div`
   align-items: center;
 `;
 
-const Color = styled.div`
+const Color = styled.div<{ color: string }>`
   width: 43px;
   height: 43px;
   border-radius: 8px;
-  background-color: #ffc8c8;
+  background-color: ${({ color }) => color};
   margin-right: 12px;
 `;
 
