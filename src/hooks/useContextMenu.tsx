@@ -4,23 +4,24 @@ export const useContextMenu = () => {
   const [pointX, setPointX] = useState(0);
   const [pointY, setPointY] = useState(0);
   const [show, setShow] = useState(false);
+  const [isCategoryClicked, setIsCategoryClicked] = useState(false);
 
-  const handleContextMenu = useCallback(
-    (event: MouseEvent) => {
-      event.preventDefault();
-      if (window.innerWidth > 1120) {
-        const extraPadding = (window.innerWidth - 1120) / 2;
-        setPointX(event.pageX - extraPadding);
-      } else {
-        setPointX(event.pageX);
-      }
-      setPointY(event.pageY);
-      setShow(true);
-    },
-    [setShow, setPointX, setPointY]
-  );
+  const handleContextMenu = useCallback((event: MouseEvent) => {
+    event.preventDefault();
+    if (window.innerWidth > 1120) {
+      const extraPadding = (window.innerWidth - 1120) / 2;
+      setPointX(event.pageX - extraPadding);
+    } else {
+      setPointX(event.pageX);
+    }
+    setPointY(event.pageY);
+    setShow(true);
+  }, []);
 
-  const handleClick = useCallback(() => (show ? setShow(false) : null), [show]);
+  const handleClick = useCallback(() => {
+    setIsCategoryClicked(false);
+    show && setShow(false);
+  }, [show]);
 
   useEffect(() => {
     document.addEventListener('click', handleClick);
@@ -31,5 +32,5 @@ export const useContextMenu = () => {
     };
   });
 
-  return { pointX, pointY, show };
+  return { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked };
 };

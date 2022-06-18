@@ -1,14 +1,21 @@
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface CategoryProps {
   color: string;
   visibility: string;
   content: string;
+  setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Category = ({ color, visibility, content }: CategoryProps) => {
+export const Category = ({ color, visibility, content, setIsCategoryClicked }: CategoryProps) => {
+  const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsCategoryClicked(true);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onContextMenu={handleRightClick}>
       <Color color={color} />
       <Content>
         <p>{visibility}</p>
