@@ -6,7 +6,7 @@ export * from './EditProfile';
 export * from './FriendStories';
 export * from './FriendStory';
 export * from './Input';
-export * from './layout/PageLayout';
+export * from './layout';
 export * from './PopUp';
 export * from './Question';
 export * from './calender';
