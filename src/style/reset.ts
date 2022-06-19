@@ -68,4 +68,8 @@ export const reset = css`
     background-color: transparent;
     border: 0;
   }
+
+  body {
+    background-color: ${({ theme: { colors } }) => colors.Gray100};
+  }
 `;
