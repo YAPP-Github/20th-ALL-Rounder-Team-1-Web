@@ -13,7 +13,7 @@ export const GlobalStyle = createGlobalStyle`
    ${reset}
 
    #root {
-      max-width: 1190px;
+      max-width: 1120px;
       margin: 0 auto;
       position: relative;
    }
