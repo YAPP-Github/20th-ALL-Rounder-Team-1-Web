@@ -1,4 +1,4 @@
-import { css, IColors, IFonts, IDefaultTheme } from 'styled-components';
+import { css, IColors, IDefaultTheme, IFonts } from 'styled-components';
 
 const colors: IColors = {
   WeekandBlue: '#5086ff',
