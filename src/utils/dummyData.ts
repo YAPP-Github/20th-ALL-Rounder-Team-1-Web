@@ -97,55 +97,53 @@ export const getFriends = () => {
   ];
 };
 
-export const getCategories = () => {
-  return [
-    {
-      id: 0,
-      color: '#FFA6A7',
-      visible: '친구공개',
-      content: '운동',
-    },
-    {
-      id: 1,
-      color: '#83A5FF',
-      visible: '전체공개',
-      content: '코딩',
-    },
-    {
-      id: 2,
-      color: '#C081FF',
-      visible: '친구공개',
-      content: '취미',
-    },
-    {
-      id: 3,
-      color: '#FFE500',
-      visible: '전체공개',
-      content: '테니스',
-    },
-    {
-      id: 4,
-      color: '#66DBFF',
-      visible: '전체공개',
-      content: '직장',
-    },
-    {
-      id: 5,
-      color: '#94EB9D',
-      visible: '친구공개',
-      content: '여행',
-    },
-    {
-      id: 6,
-      color: '#FFC59C',
-      visible: '비공개',
-      content: '운동',
-    },
-    {
-      id: 7,
-      color: '#E9D3FF',
-      visible: '비공개',
-      content: '독서',
-    },
-  ];
-};
+export const CATEGORIES = [
+  {
+    id: 0,
+    color: '#FFA6A7',
+    visible: '친구공개',
+    content: '운동',
+  },
+  {
+    id: 1,
+    color: '#83A5FF',
+    visible: '전체공개',
+    content: '코딩',
+  },
+  {
+    id: 2,
+    color: '#C081FF',
+    visible: '친구공개',
+    content: '취미',
+  },
+  {
+    id: 3,
+    color: '#FFE500',
+    visible: '전체공개',
+    content: '테니스',
+  },
+  {
+    id: 4,
+    color: '#66DBFF',
+    visible: '전체공개',
+    content: '직장',
+  },
+  {
+    id: 5,
+    color: '#94EB9D',
+    visible: '친구공개',
+    content: '여행',
+  },
+  {
+    id: 6,
+    color: '#FFC59C',
+    visible: '비공개',
+    content: '운동',
+  },
+  {
+    id: 7,
+    color: '#E9D3FF',
+    visible: '비공개',
+    content: '독서',
+  },
+];

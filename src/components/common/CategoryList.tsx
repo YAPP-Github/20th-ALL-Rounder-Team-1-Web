@@ -1,18 +1,16 @@
 import styled from 'styled-components';
 
 import { Category } from './Category';
-import { useContextMenu } from '@/hooks';
-import { getCategories } from '@/utils';
 import { CategorySubMenu } from './CategorySubMenu';
-
-const categories = getCategories();
+import { useContextMenu } from '@/hooks';
+import { CATEGORIES } from '@/utils';
 
 export const CategoryList = () => {
   const { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked } = useContextMenu();
 
   return (
     <Wrapper>
-      {categories.map((category) => (
+      {CATEGORIES.map((category) => (
         <Category
           key={category.id}
           color={category.color}
