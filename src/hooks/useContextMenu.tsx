@@ -8,14 +8,13 @@ export const useContextMenu = () => {
 
   const handleContextMenu = useCallback((event: MouseEvent) => {
     event.preventDefault();
-    if (window.innerWidth > 1120) {
-      const extraPadding = (window.innerWidth - 1120) / 2;
-      setPointX(event.pageX - extraPadding);
-    } else {
-      setPointX(event.pageX);
-    }
     setPointY(event.pageY);
     setShow(true);
+    if (window.innerWidth > 1120) {
+      const extraPadding = (window.innerWidth - 1120) / 2;
+      return setPointX(event.pageX - extraPadding);
+    }
+    setPointX(event.pageX);
   }, []);
 
   const handleClick = useCallback(() => {
