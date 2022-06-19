@@ -1,42 +1,10 @@
+import { getCertainCategories } from '@/utils';
 import { useState } from 'react';
 import styled from 'styled-components';
 import { CurrentCategoryMenu } from './CurrentCategoryMenu';
 import { SearchBar } from './SearchBar';
 
-const certainCategories = [
-  {
-    name: '운동',
-    startDate: '2022.05.21.',
-    startTime: '06:00',
-    endDate: '2022.05.28.',
-    endTime: '08:00',
-    period: '매주 화요일 반복',
-  },
-  {
-    name: '운동',
-    startDate: '2022.05.21.',
-    startTime: '06:00',
-    endDate: '2022.05.28.',
-    endTime: '08:00',
-    period: '매주 화요일 반복',
-  },
-  {
-    name: '운동',
-    startDate: '2022.05.21.',
-    startTime: '06:00',
-    endDate: '2022.05.28.',
-    endTime: '08:00',
-    period: '매주 화요일 반복',
-  },
-  {
-    name: '운동',
-    startDate: '2022.05.21.',
-    startTime: '06:00',
-    endDate: '2022.05.28.',
-    endTime: '08:00',
-    period: '매주 화요일 반복',
-  },
-];
+const certainCategories = getCertainCategories();
 
 export const CurrentCategoryList = () => {
   const [currentSort, setCurrentSort] = useState('최신순');
@@ -56,8 +24,9 @@ export const CurrentCategoryList = () => {
       <SearchBar />
       <Options>
         <p>공개여부 · nn개의 일정</p>
-        <Sorting>
-          <h1 onClick={onClickSort}>{currentSort}</h1>
+        <Sorting onClick={onClickSort}>
+          <h1>{currentSort}</h1>
+          <div />
           {isSortOpen && (
             <SortMenu>
               <li onClick={() => onClickSortType('최신순')}>최신순</li>
@@ -68,7 +37,7 @@ export const CurrentCategoryList = () => {
           )}
         </Sorting>
       </Options>
-      <div>
+      <ExistingSchedules>
         {certainCategories.map((category) => (
           <CurrentCategoryMenu
             name={category.name}
@@ -78,7 +47,7 @@ export const CurrentCategoryList = () => {
             endTime={category.endTime}
           />
         ))}
-      </div>
+      </ExistingSchedules>
     </Wrapper>
   );
 };
@@ -108,15 +77,6 @@ const Options = styled.div`
     color: ${({ theme: { colors } }) => colors.WeekandBlue};
     ${({ theme: { fonts } }) => fonts.Body2}
   }
-
-  &::before {
-    content: '';
-    position: absolute;
-    right: 14px;
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid ${({ theme: { colors } }) => colors.Gray700};
-  }
 `;
 
 const Sorting = styled.div`
@@ -128,17 +88,24 @@ const Sorting = styled.div`
   border-radius: 10px;
   padding: 8px 16px;
   display: flex;
+  justify-content: space-between;
   align-items: center;
 
   h1 {
     color: ${({ theme: { colors } }) => colors.Gray700};
     ${({ theme: { fonts } }) => fonts.Body1}
   }
+
+  div {
+    border-left: 6px solid transparent;
+    border-right: 6px solid transparent;
+    border-top: 6px solid ${({ theme: { colors } }) => colors.Gray700};
+  }
 `;
 
 const SortMenu = styled.ul`
   position: absolute;
-  top: 50px;
+  top: 61px;
   right: 0px;
   background-color: #fff;
   width: 118px;
@@ -151,9 +118,14 @@ const SortMenu = styled.ul`
     padding: 10px 20px;
     color: ${({ theme: { colors } }) => colors.Gray700};
     ${({ theme: { fonts } }) => fonts.Body1}
+    text-align:start;
   }
 
   li:hover {
     background-color: ${({ theme: { colors } }) => colors.Gray100};
   }
+`;
+
+const ExistingSchedules = styled.div`
+  overflow-y: hidden;
 `;

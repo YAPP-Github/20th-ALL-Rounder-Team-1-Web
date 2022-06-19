@@ -96,3 +96,72 @@ export const getFriends = () => {
     { id: 17, name: '10', imgUrl: '' },
   ];
 };
+
+export const getCertainCategories = () => {
+  return [
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+    {
+      name: '운동',
+      startDate: '2022.05.21.',
+      startTime: '06:00',
+      endDate: '2022.05.28.',
+      endTime: '08:00',
+      period: '매주 화요일 반복',
+    },
+  ];
+};
