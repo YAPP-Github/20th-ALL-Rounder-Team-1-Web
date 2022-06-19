@@ -59,7 +59,7 @@ const ContextMenu = styled.div<{ pointX: number; pointY: number }>`
   flex-direction: column;
   justify-content: center;
   text-align: start;
-  /* border: 1px solid #eceff2; */
+  border: 1px solid #eceff2;
   filter: drop-shadow(5.3202px 7.9803px 28px rgba(25, 28, 50, 0.07));
 `;
 
