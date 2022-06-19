@@ -59,8 +59,8 @@ const ContextMenu = styled.div<{ pointX: number; pointY: number }>`
   flex-direction: column;
   justify-content: center;
   text-align: start;
-  border: 1px solid #eceff2;
-  filter: drop-shadow(5.3202px 7.9803px 28px rgba(25, 28, 50, 0.07));
+  border: 1px solid ${({ theme: { colors } }) => colors.Gray200};
+  box-shadow: 5.320197582244873px 7.9802961349487305px 28px 0px rgba(25, 28, 50, 0.07);
 `;
 
 const Menu = styled.div`
@@ -87,20 +87,17 @@ const SortMenu = styled(Menu)<{ showSorting: boolean }>`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme: { colors }, showSorting }) => showSorting && colors.Gray100};
-  img {
-    width: 6.55px;
-    height: 11.15px;
-  }
 `;
 
 const SortingMenu = styled.ul<{ pointX: number; pointY: number }>`
   position: absolute;
-  left: 138px;
+  left: 140px;
   top: 46px;
   width: 138px;
   height: 184px;
   background-color: #fff;
   border-radius: 10px;
+  box-shadow: 5.320197582244873px 7.9802961349487305px 28px 0px rgba(25, 28, 50, 0.07);
 
   li {
     height: 26px;

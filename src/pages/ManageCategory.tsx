@@ -12,9 +12,7 @@ const ManageCategory = () => {
 };
 
 const Title = styled.h1`
-  font-size: 22px;
-  font-weight: 700;
-  line-height: 33px;
+  ${({ theme: { fonts } }) => fonts.Title}
   color: ${({ theme: { colors } }) => colors.Gray900};
   text-align: start;
   margin-top: 86px;
