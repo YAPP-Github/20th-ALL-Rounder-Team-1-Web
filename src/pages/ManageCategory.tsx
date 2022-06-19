@@ -1,6 +1,6 @@
-import { PageLayout } from '@/components';
-import { CategoryList } from '@/components/common/CategoryList';
 import styled from 'styled-components';
+
+import { CategoryList, PageLayout } from '@/components';
 
 const ManageCategory = () => {
   return (
