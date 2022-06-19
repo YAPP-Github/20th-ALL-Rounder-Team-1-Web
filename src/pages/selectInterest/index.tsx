@@ -1,7 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { Button, Interest, PageLayout } from '@/components';
+import { Interest } from './components';
+
+import { Button, PageLayout } from '@/common';
 import { getInterests, getJobs } from '@/utils';
 
 const SelectInterest = () => {

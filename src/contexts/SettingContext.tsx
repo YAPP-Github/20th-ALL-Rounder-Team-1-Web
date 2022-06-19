@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-import { EditProfile } from '@/components/common/EditProfile';
+import { EditProfile } from '@/common';
 
 type SettingProps = {
   currentContent: ReactNode;

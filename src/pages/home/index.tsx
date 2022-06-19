@@ -1,4 +1,4 @@
-import { PageLayout } from '@/components';
+import { PageLayout } from '@/common';
 
 const Home = () => {
   return (
