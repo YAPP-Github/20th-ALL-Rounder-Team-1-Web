@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { Button, Input, PageLayout } from '@/components';
+import { Button, Input, PageLayout } from '@/common';
 
 const FindPassword = () => {
   return (

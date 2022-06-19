@@ -1,7 +1,9 @@
 import { useContext } from 'react';
 import styled from 'styled-components';
 
-import { PageLayout, SettingSidebar } from '@/components';
+import { SettingSidebar } from './components';
+
+import { PageLayout } from '@/common';
 import { SettingContext } from '@/contexts';
 
 const Setting = () => {
