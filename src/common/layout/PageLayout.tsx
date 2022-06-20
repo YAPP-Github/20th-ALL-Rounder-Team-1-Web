@@ -33,10 +33,6 @@ export const PageLayout = ({
 const Wrapper = styled.div`
   ${({ theme: { fonts } }) => fonts.Head1}
   text-align: center;
-  max-width: 1120px;
-  margin: 0 auto;
-  position: relative;
-  height: 100vh;
 `;
 
 const Header = styled.header`
