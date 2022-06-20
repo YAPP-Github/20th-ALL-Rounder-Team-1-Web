@@ -1,4 +1,4 @@
-import { ReactNode, PropsWithChildren } from 'react';
+import { PropsWithChildren, ReactNode } from 'react';
 import styled from 'styled-components';
 
 export const ModalLayout = ({ children }: PropsWithChildren<unknown>) => {

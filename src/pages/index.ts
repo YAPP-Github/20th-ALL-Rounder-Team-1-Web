@@ -1,8 +1,8 @@
 import { lazy } from 'react';
 
-export const FindPassword = lazy(() => import('./FindPassword'));
-export const Home = lazy(() => import('./Home'));
-export const Login = lazy(() => import('./Login'));
-export const ManageCategory = lazy(() => import('./ManageCategory'));
-export const SelectInterest = lazy(() => import('./SelectInterest'));
-export const Setting = lazy(() => import('./Setting'));
+export const Home = lazy(() => import('./home'));
+export const Login = lazy(() => import('./login'));
+export const SelectInterest = lazy(() => import('./selectInterest'));
+export const Setting = lazy(() => import('./setting'));
+export const FindPassword = lazy(() => import('./findPassword'));
+export const Register = lazy(() => import('./register'));

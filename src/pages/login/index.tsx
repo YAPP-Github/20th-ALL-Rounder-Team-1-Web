@@ -1,10 +1,12 @@
 import { useState } from 'react';
+import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
-import { Link } from 'react-router-dom';
 
-import { PageLayout, Input, Button } from '@/components';
+import { Button, Input, PageLayout } from '@/common';
 
 const Login = () => {
+  const navigate = useNavigate();
+
   const [isChecked, setIsChecked] = useState(false);
 
   const onClickAutoLogin = () => setIsChecked(!isChecked);
@@ -46,7 +48,7 @@ const Login = () => {
             <Button
               className="register_button"
               onClick={() => {
-                location.href = '/register';
+                navigate('/register');
               }}
             >
               회원가입
@@ -102,12 +104,9 @@ const Utils = styled.div<{ isChecked: boolean }>`
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 18, 18)}
     margin: 2px 11px 0 0;
     background-size: 310px 270px;
-    background-position: -186px -236px;
+
     ${({ isChecked }) =>
-      isChecked &&
-      `
-    background-position: -224px -236px;
-  `}
+      isChecked ? `background-position: -224px -236px;` : `background-position: -186px -236px;`}
   }
 
   .auto_login {

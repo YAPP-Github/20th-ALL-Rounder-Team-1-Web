@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
-import { FriendStory } from '@/components';
+import { FriendStory } from '.';
+
 import { calculateEndX, getFriends } from '@/utils';
 
 export const FriendStories = () => {

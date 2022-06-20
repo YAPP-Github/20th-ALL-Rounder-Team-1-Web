@@ -1,4 +1,4 @@
-import { EditProfile, Question } from '@/components';
+import { EditProfile, Question } from '@/common';
 
 export const getCurrentSetting = (name: string) => {
   if (name === '프로필 편집') {

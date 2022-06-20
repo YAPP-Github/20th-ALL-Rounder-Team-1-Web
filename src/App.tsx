@@ -1,60 +1,29 @@
 import { Suspense } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { PopUpPortal } from './PopUpPortal';
-import { DimmedLayer, PopUp } from '@/components';
-import { Home, Login, FindPassword, Setting, ManageCategory } from '@/pages';
+
+import { DimmedLayer, PopUp } from '@/common';
+import { FindPassword, Home, Login, Register, Setting } from '@/pages';
 
 const App = () => {
   return (
     <Router>
-      <Routes>
-        {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
-        <Route
-          path="/"
-          element={
-            <Suspense fallback={<>Loading...</>}>
-              <Login />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/login"
-          element={
-            <Suspense fallback={<>Loading...</>}>
-              <Login />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/find-password"
-          element={
-            <Suspense fallback={<>Loading...</>}>
-              <FindPassword />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/category"
-          element={
-            <Suspense fallback={<>Loading...</>}>
-              <ManageCategory />
-            </Suspense>
-          }
-        />
-        <Route
-          path="/setting"
-          element={
-            <Suspense fallback={<>Loading...</>}>
-              <Setting />
-            </Suspense>
-          }
-        />
-      </Routes>
-      <DimmedLayer />
-      <PopUpPortal>
-        <PopUp />
-      </PopUpPortal>
+      <Suspense fallback={<p> Loading...</p>}>
+        <Routes>
+          {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
+          <Route path="/" element={<Login />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/find-password" element={<FindPassword />} />
+          <Route path="/setting" element={<Setting />} />
+          <Route path="/register" element={<Register />} />
+          <Route path="*" element={<div>아직 없는 페이지입니다.</div>} />
+        </Routes>
+        <DimmedLayer />
+        <PopUpPortal>
+          <PopUp />
+        </PopUpPortal>
+      </Suspense>
     </Router>
   );
 };

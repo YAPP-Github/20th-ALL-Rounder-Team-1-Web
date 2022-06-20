@@ -1,4 +1,3 @@
-import { EditProfile } from '@/components/common/EditProfile';
 import {
   createContext,
   Dispatch,
@@ -7,6 +6,8 @@ import {
   SetStateAction,
   useState,
 } from 'react';
+
+import { EditProfile } from '@/common';
 
 type SettingProps = {
   currentContent: ReactNode;
