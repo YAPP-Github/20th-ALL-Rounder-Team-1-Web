@@ -1,5 +1,5 @@
 export * from './AppProvider';
 export * from './dummyData';
-export * from './getCurrentSetting';
+export * from './setting';
 export * from './story';
 export * from './validation';
