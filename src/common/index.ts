@@ -2,7 +2,6 @@ export * from './Accessibility';
 export * from './Button';
 export * from './DebounceInput';
 export * from './layer/DimmedLayer';
-export * from './EditProfile';
 export * from './FriendStories';
 export * from './FriendStory';
 export * from './Input';

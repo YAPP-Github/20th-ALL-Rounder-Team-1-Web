@@ -23,7 +23,12 @@ const SelectInterest = () => {
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
           {jobs.map((job) => (
-            <Interest name={job} totalChoices={totalJobs} setTotalChoices={setTotalJobs} />
+            <Interest
+              className="select_interest"
+              name={job}
+              totalChoices={totalJobs}
+              setTotalChoices={setTotalJobs}
+            />
           ))}
         </SubContentWrapper>
         <SubContentWrapper>
@@ -33,6 +38,7 @@ const SelectInterest = () => {
           </ExplanationWrapper>
           {interests.map((interest) => (
             <Interest
+              className="select_interest"
               name={interest}
               totalChoices={totalInterests}
               setTotalChoices={setTotalInterests}

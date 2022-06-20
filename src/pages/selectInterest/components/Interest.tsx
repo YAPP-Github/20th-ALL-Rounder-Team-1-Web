@@ -1,13 +1,13 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
-interface InterestProps {
+interface InterestProps extends ComponentPropsWithoutRef<'button'> {
   name: string;
   totalChoices: string[];
   setTotalChoices: Dispatch<SetStateAction<string[]>>;
 }
 
-export const Interest = ({ name, totalChoices, setTotalChoices }: InterestProps) => {
+export const Interest = ({ name, totalChoices, setTotalChoices, ...restProps }: InterestProps) => {
   const [isClicked, setIsClicked] = useState(false);
 
   const onClick = () => {
@@ -26,9 +26,13 @@ export const Interest = ({ name, totalChoices, setTotalChoices }: InterestProps)
   return (
     <>
       {isClicked ? (
-        <Selected onClick={onClick}>{name}</Selected>
+        <Selected onClick={onClick} {...restProps}>
+          {name}
+        </Selected>
       ) : (
-        <NotSelected onClick={onClick}>{name}</NotSelected>
+        <NotSelected onClick={onClick} {...restProps}>
+          {name}
+        </NotSelected>
       )}
     </>
   );
@@ -37,19 +41,37 @@ export const Interest = ({ name, totalChoices, setTotalChoices }: InterestProps)
 const Selected = styled.button`
   background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
   color: ${({ theme: { colors } }) => colors.WeekandBlue};
-  padding: 8px 16px;
   border-radius: 108px;
-  margin: 5px;
-  font-size: 16px;
-  font-weight: 700;
+
+  &.select_interest {
+    padding: 8px 16px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: 700;
+  }
+
+  &.setting_interest {
+    padding: 8px 14px;
+    margin: 4px;
+    ${({ theme: { fonts } }) => fonts.SubHead3}
+  }
 `;
 
 const NotSelected = styled.button`
   background-color: ${({ theme: { colors } }) => colors.Gray100};
   color: ${({ theme: { colors } }) => colors.Gray400};
-  padding: 8px 16px;
   border-radius: 108px;
-  margin: 5px;
-  font-size: 16px;
-  font-weight: 500;
+
+  &.select_interest {
+    padding: 8px 16px;
+    margin: 5px;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  &.setting_interest {
+    padding: 8px 14px;
+    margin: 4px;
+    ${({ theme: { fonts } }) => fonts.Body2}
+  }
 `;

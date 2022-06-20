@@ -56,4 +56,5 @@ const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  border: 1px solid black;
 `;
