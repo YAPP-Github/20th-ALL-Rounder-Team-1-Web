@@ -2,10 +2,10 @@ import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { PopUpPortal } from './PopUpPortal';
-import { handleBackgroundColor } from './utils';
 
 import { DimmedLayer, PopUp } from '@/common';
 import { FindPassword, Home, Login, Register, SelectInterest, Setting } from '@/pages';
+import { handleBackgroundColor } from '@/utils';
 
 const App = () => {
   useEffect(() => {
