@@ -1,8 +1,6 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
-import { getBackgroundColor } from '@/utils';
-
 interface PageLayoutProps {
   title: string;
   isHeader?: boolean;
@@ -15,32 +13,24 @@ export const PageLayout = ({
   isHeader = true,
   isFooter = true,
 }: PropsWithChildren<PageLayoutProps>) => {
-  const bgColor = getBackgroundColor();
-
   return (
-    <Wrapper bgColor={bgColor}>
-      <Content>
-        {isHeader && (
-          <Header>
-            <h1>{title}</h1>
-          </Header>
-        )}
-        {children}
-        {isFooter && (
-          <Footer>
-            <small>© Copyright Weekand 2022</small>
-          </Footer>
-        )}
-      </Content>
+    <Wrapper>
+      {isHeader && (
+        <Header>
+          <h1>{title}</h1>
+        </Header>
+      )}
+      {children}
+      {isFooter && (
+        <Footer>
+          <small>© Copyright Weekand 2022</small>
+        </Footer>
+      )}
     </Wrapper>
   );
 };
 
-const Wrapper = styled.div<{ bgColor: string }>`
-  background-color: ${({ bgColor }) => bgColor};
-`;
-
-const Content = styled.div`
+const Wrapper = styled.div`
   ${({ theme: { fonts } }) => fonts.Head1}
   text-align: center;
   max-width: 1120px;
