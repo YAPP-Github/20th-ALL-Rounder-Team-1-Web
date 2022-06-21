@@ -4,7 +4,15 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { PopUpPortal } from './PopUpPortal';
 
 import { DimmedLayer, PopUp } from '@/common';
-import { FindPassword, Home, Login, Register, SelectInterest, Setting } from '@/pages';
+import {
+  FindPassword,
+  Home,
+  Login,
+  ManageCategory,
+  Register,
+  SelectInterest,
+  Setting,
+} from '@/pages';
 
 const App = () => {
   return (
@@ -16,6 +24,7 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/select-interest" element={<SelectInterest />} />
+          <Route path="/manage-category" element={<ManageCategory />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<div>아직 없는 페이지입니다.</div>} />

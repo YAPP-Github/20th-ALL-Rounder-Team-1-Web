@@ -31,7 +31,6 @@ const ContentWrapper = styled.div`
   background-color: #fff;
   padding: 40px 40px;
   text-align: start;
-  border: 1px solid black;
 `;
 
 export default Setting;
