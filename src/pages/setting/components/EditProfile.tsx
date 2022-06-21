@@ -22,41 +22,59 @@ export const EditProfile = () => {
   const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
   const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
+  const onClickReset = () => {
+    setTotalInterests([]);
+  };
+
+  const isSelectedInterest = (name: string, totalSelected: string[]) => {
+    if (totalSelected.includes(name)) {
+      return true;
+    }
+
+    return false;
+  };
+
   return (
     <>
       <ImageAndEmail>
         <img src={imageUrl} alt="User Image" />
         <div>
           <p>{email}</p>
-          <button>프로필 사진 바꾸기</button>
+          <button onClick={() => console.log('프로필 편집 팝업')}>프로필 사진 바꾸기</button>
         </div>
       </ImageAndEmail>
       <ProfileInfo title="닉네임" content={nickName} />
       <ProfileInfo title="한줄목표" content={purpose} />
       <ProfileInfo title="직업" content={totalJobs.join(', ')} />
       <SelectInterests>
-        <p>초기화</p>
+        <button className="reset">초기화</button>
         <div>
-          {JOBS.map((job) => (
+          {JOBS.map((job, index) => (
             <Interest
+              key={index}
               className="setting_interest"
               name={job}
               totalChoices={totalJobs}
               setTotalChoices={setTotalJobs}
+              isChosen={isSelectedInterest(job, totalJobs)}
             />
           ))}
         </div>
       </SelectInterests>
       <ProfileInfo title="관심사" content={totalInterests.join(', ')} />
       <SelectInterests>
-        <p>초기화</p>
+        <button onClick={onClickReset} className="reset">
+          초기화
+        </button>
         <div>
-          {INTERESTS.map((interest) => (
+          {INTERESTS.map((interest, index) => (
             <Interest
+              key={index}
               className="setting_interest"
               name={interest}
               totalChoices={totalInterests}
               setTotalChoices={setTotalInterests}
+              isChosen={isSelectedInterest(interest, totalInterests)}
             />
           ))}
         </div>
@@ -86,6 +104,7 @@ const ImageAndEmail = styled.div`
     justify-content: space-evenly;
     align-items: flex-start;
     margin-left: 34px;
+
     p {
       color: ${({ theme: { colors } }) => colors.Gray900};
       ${({ theme: { fonts } }) => fonts.Body1}
@@ -100,12 +119,13 @@ const ImageAndEmail = styled.div`
 
 const SelectInterests = styled.div`
   display: flex;
+  align-items: flex-start;
   margin: 8px 0px;
 
-  p {
+  button.reset {
     width: 83px;
     text-align: end;
-    margin-top: 4px;
+    margin-top: 8px;
     margin-right: 32px;
     color: ${({ theme: { colors } }) => colors.WeekandBlue};
     ${({ theme: { fonts } }) => fonts.Body3}
