@@ -6,7 +6,6 @@ export * from './FriendStories';
 export * from './FriendStory';
 export * from './Input';
 export * from './Interest';
-export * from './layout';
 export * from './PopUp';
 export * from './Question';
 export * from './calender';

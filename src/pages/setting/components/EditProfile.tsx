@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { ProfileInfo } from './ProfileInfo';
+import { ProfileInfo } from '.';
 
 import { Button, Interest } from '@/common';
 import { INTERESTS, JOBS } from '@/utils';
