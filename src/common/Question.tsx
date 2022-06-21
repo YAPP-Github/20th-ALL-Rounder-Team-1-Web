@@ -4,7 +4,7 @@ import { Button } from '.';
 
 export const Question = () => {
   return (
-    <>
+    <Wrapper>
       <Title>
         <h1>문의하실 내용을</h1>
         <h1>작성해주세요 :)</h1>
@@ -14,9 +14,13 @@ export const Question = () => {
       <Button className="question_button" onClick={() => console.log('문의하기')}>
         문의하기
       </Button>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 20px 0px;
+`;
 
 const Title = styled.div`
   h1 {

@@ -42,7 +42,7 @@ export const EditProfile = () => {
   };
 
   return (
-    <>
+    <Wrapper>
       <ImageAndEmail>
         <img src={imageUrl} alt="User Image" />
         <div>
@@ -93,9 +93,13 @@ export const EditProfile = () => {
           확인
         </Button>
       </ButtonWrapper>
-    </>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  padding: 0px 20px;
+`;
 
 const ImageAndEmail = styled.div`
   display: flex;

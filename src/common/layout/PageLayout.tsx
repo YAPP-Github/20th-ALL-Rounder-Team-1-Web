@@ -36,7 +36,7 @@ const Wrapper = styled.div`
 `;
 
 const Header = styled.header`
-  border-bottom: 1px solid #000;
+  height: 36px;
   padding: 36px 0px;
 `;
 
