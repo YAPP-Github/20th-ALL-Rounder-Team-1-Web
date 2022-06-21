@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
+import { ProfileInfo } from './ProfileInfo';
+
 import { Interest } from '@/common';
 import { INTERESTS, JOBS } from '@/utils';
 
@@ -10,14 +12,14 @@ export const EditProfile = () => {
     imageUrl: '',
     nickName: '김아무개',
     purpose: 'We can do, Weekand!',
-    jobs: ['취준생', '프리랜서', '디자인'],
+    jobs: ['취준생', '프리랜서'],
     interests: ['N잡', '사업', '자기계발'],
   };
 
   const { email, imageUrl, nickName, purpose, jobs, interests } = userProfile;
 
-  const [totalJobs, setTotalJobs] = useState<string[]>([]);
-  const [totalInterests, setTotalInterests] = useState<string[]>([]);
+  const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
+  const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
   return (
     <>
@@ -28,18 +30,10 @@ export const EditProfile = () => {
           <button>프로필 사진 바꾸기</button>
         </div>
       </div>
-      <div>
-        <p>닉네임</p>
-        <input type="text" value={'Hi'} />
-      </div>
-      <div>
-        <p>한줄목표</p>
-        <input type="text" value={'We can do, Weekand!'} />
-      </div>
-      <div>
-        <p>직업</p>
-        <p>{totalJobs}</p>
-      </div>
+      <ProfileInfo title="닉네임" content={nickName} />
+      <ProfileInfo title="한줄목표" content={purpose} />
+      {/* <ProfileInfo title="직업" content={totalJobs} />
+      <ProfileInfo title="관심사" content={totalInterests} /> */}
       <div>
         <p>초기화</p>
         {JOBS.map((job) => (
@@ -50,10 +44,6 @@ export const EditProfile = () => {
             setTotalChoices={setTotalJobs}
           />
         ))}
-      </div>
-      <div>
-        <p>관심사</p>
-        <p>{totalInterests}</p>
       </div>
       <div>
         <p>초기화</p>
