@@ -21,9 +21,7 @@ const Agreement = () => {
   const navigate = useNavigate();
 
   const [chkAllAgreements, setChkAllAgreements] = useState(false);
-  const [chkAgreements, setChkAgreements] = useState(
-    new Array(AGREEMENTS.length).fill(undefined).map((_) => false)
-  );
+  const [chkAgreements, setChkAgreements] = useState(new Array(AGREEMENTS.length).fill(false));
 
   useEffect(() => {
     if (chkAgreements.every((_) => _)) {
