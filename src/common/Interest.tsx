@@ -5,10 +5,17 @@ interface InterestProps extends ComponentPropsWithoutRef<'button'> {
   name: string;
   totalChoices: string[];
   setTotalChoices: Dispatch<SetStateAction<string[]>>;
+  isChosen?: boolean;
 }
 
-export const Interest = ({ name, totalChoices, setTotalChoices, ...restProps }: InterestProps) => {
-  const [isClicked, setIsClicked] = useState(false);
+export const Interest = ({
+  name,
+  totalChoices,
+  setTotalChoices,
+  isChosen = false,
+  ...restProps
+}: InterestProps) => {
+  const [isClicked, setIsClicked] = useState(isChosen);
 
   const onClick = () => {
     if (isClicked) {

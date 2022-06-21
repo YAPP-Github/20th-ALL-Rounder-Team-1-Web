@@ -1,15 +1,10 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { Interest } from './components';
-
-import { Button, PageLayout } from '@/common';
-import { getInterests, getJobs } from '@/utils';
+import { Button, Interest, PageLayout } from '@/common';
+import { INTERESTS, JOBS } from '@/utils';
 
 const SelectInterest = () => {
-  const jobs = getJobs(); // 나중에 서버가 완성되면 해당 정보를 불러오는 방식으로 수정 예정
-  const interests = getInterests(); // 나중에 서버가 완성되면 해당 정보를 불러오는 방식으로 수정 예정
-
   const [totalJobs, setTotalJobs] = useState<string[]>([]);
   const [totalInterests, setTotalInterests] = useState<string[]>([]);
 
@@ -22,7 +17,7 @@ const SelectInterest = () => {
             <SubTitle>직업</SubTitle>
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
-          {jobs.map((job) => (
+          {JOBS.map((job) => (
             <Interest
               className="select_interest"
               name={job}
@@ -36,7 +31,7 @@ const SelectInterest = () => {
             <SubTitle>관심사</SubTitle>
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
-          {interests.map((interest) => (
+          {INTERESTS.map((interest) => (
             <Interest
               className="select_interest"
               name={interest}
