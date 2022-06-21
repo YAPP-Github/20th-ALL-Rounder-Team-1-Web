@@ -1,13 +1,27 @@
 import { ComponentPropsWithoutRef } from 'react';
+import cn from 'classnames';
 import styled from 'styled-components';
 
 interface ButtonProps extends ComponentPropsWithoutRef<'button'> {
   onClick: () => void;
 }
 
-export const Button = ({ children, onClick, type = 'button', ...restProps }: ButtonProps) => {
+export const Button = ({
+  children,
+  onClick,
+  type = 'button',
+  className,
+  disabled,
+  ...restProps
+}: ButtonProps) => {
   return (
-    <StyledButton type={type} onClick={onClick} {...restProps}>
+    <StyledButton
+      className={cn(className && className, disabled && 'disabled')}
+      type={type}
+      onClick={onClick}
+      disabled={disabled}
+      {...restProps}
+    >
       {children}
     </StyledButton>
   );
@@ -39,5 +53,9 @@ const StyledButton = styled.button`
     color: ${({ theme: { colors } }) => colors.Gray200};
     ${({ theme: { fonts } }) => fonts.SubHead1}
     line-height: 52px;
+  }
+
+  &.disabled {
+    background-color: ${({ theme: { colors } }) => colors.Gray300};
   }
 `;
