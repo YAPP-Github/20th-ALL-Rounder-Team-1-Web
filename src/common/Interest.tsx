@@ -1,4 +1,4 @@
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useState } from 'react';
+import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface InterestProps extends ComponentPropsWithoutRef<'button'> {
@@ -29,6 +29,12 @@ export const Interest = ({
     }
     setIsClicked(!isClicked);
   };
+
+  useEffect(() => {
+    if (totalChoices.length === 0) {
+      setIsClicked(false);
+    }
+  }, [totalChoices]);
 
   return (
     <>

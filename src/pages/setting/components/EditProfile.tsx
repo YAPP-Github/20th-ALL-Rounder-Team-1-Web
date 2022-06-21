@@ -22,8 +22,15 @@ export const EditProfile = () => {
   const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
   const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
-  const onClickReset = () => {
-    setTotalInterests([]);
+  const onClickReset = (type: string) => {
+    if (type === 'JOBS') {
+      return setTotalJobs([]);
+    }
+    if (type === 'INTERESTS') {
+      return setTotalInterests([]);
+    }
+
+    return;
   };
 
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
@@ -47,7 +54,9 @@ export const EditProfile = () => {
       <ProfileInfo title="한줄목표" content={purpose} />
       <ProfileInfo title="직업" content={totalJobs.join(', ')} />
       <SelectInterests>
-        <button className="reset">초기화</button>
+        <button onClick={() => onClickReset('JOBS')} className="reset">
+          초기화
+        </button>
         <div>
           {JOBS.map((job, index) => (
             <Interest
@@ -63,7 +72,7 @@ export const EditProfile = () => {
       </SelectInterests>
       <ProfileInfo title="관심사" content={totalInterests.join(', ')} />
       <SelectInterests>
-        <button onClick={onClickReset} className="reset">
+        <button onClick={() => onClickReset('INTERESTS')} className="reset">
           초기화
         </button>
         <div>
