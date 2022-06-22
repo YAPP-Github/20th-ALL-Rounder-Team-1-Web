@@ -210,11 +210,11 @@ const ToastMessage = styled.div<{ isSuccess: boolean }>`
   display: flex;
   justify-content: center;
   align-items: center;
-  position: absolute;
-  width: 1920px;
+  position: fixed;
+  width: 100%;
   height: 48px;
-  left: -400px;
-  bottom: -56px;
+  left: 0px;
+  bottom: 0px;
   background-color: ${({ isSuccess, theme: { colors } }) =>
     isSuccess ? colors.WeekandBlue : colors.WeekandRed};
 
