@@ -5,6 +5,7 @@ import { PopUpPortal } from './PopUpPortal';
 
 import { DimmedLayer, PopUp } from '@/common';
 import {
+  Agreement,
   FindPassword,
   Home,
   Login,
@@ -21,6 +22,7 @@ const App = () => {
         <Routes>
           {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
           <Route path="/" element={<Login />} />
+          <Route path="/agreement" element={<Agreement />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/select-interest" element={<SelectInterest />} />

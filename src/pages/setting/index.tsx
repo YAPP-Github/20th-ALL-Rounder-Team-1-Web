@@ -1,18 +1,17 @@
-import { useContext } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
-import { SettingSidebar } from './components';
+import { EditProfile, SettingSidebar } from './components';
 
 import { PageLayout } from '@/common';
-import { SettingContext } from '@/contexts';
 
 const Setting = () => {
-  const { currentContent } = useContext(SettingContext);
+  const [currentContent, setCurrentContent] = useState(<EditProfile />);
 
   return (
     <PageLayout title="세팅 페이지" isFooter={false}>
       <Wrapper>
-        <SettingSidebar />
+        <SettingSidebar setCurrentContent={setCurrentContent} />
         <ContentWrapper>{currentContent}</ContentWrapper>
       </Wrapper>
     </PageLayout>
