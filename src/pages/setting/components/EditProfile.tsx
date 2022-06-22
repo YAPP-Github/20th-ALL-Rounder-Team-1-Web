@@ -34,11 +34,7 @@ export const EditProfile = () => {
   };
 
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
-    if (totalSelected.includes(name)) {
-      return true;
-    }
-
-    return false;
+    return totalSelected.includes(name);
   };
 
   return (
