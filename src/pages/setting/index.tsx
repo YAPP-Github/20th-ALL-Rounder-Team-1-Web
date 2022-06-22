@@ -21,6 +21,7 @@ const Setting = () => {
 const Wrapper = styled.div`
   display: flex;
   gap: 20px;
+  margin-bottom: 56px;
 `;
 
 const ContentWrapper = styled.div`
