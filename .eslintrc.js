@@ -4,7 +4,7 @@ module.exports = {
     es2021: true,
   },
   parser: '@typescript-eslint/parser',
-  plugins: ['prettier'],
+  plugins: ['prettier', 'simple-import-sort'],
   extends: [
     'plugin:import/errors',
     'plugin:import/warnings',
@@ -23,5 +23,33 @@ module.exports = {
     'react/prop-types': 0,
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'import/named': 0,
+    '@typescript-eslint/no-non-null-asserted-optional-chain': 0,
   },
+  overrides: [
+    // override "simple-import-sort" config
+    {
+      files: ['*.js', '*.jsx', '*.ts', '*.tsx'],
+      rules: {
+        'simple-import-sort/imports': [
+          'error',
+          {
+            groups: [
+              // Packages `react` related packages come first.
+              ['^react', '^@?\\w'],
+              // Other relative imports. Put same-folder imports and `.` last.
+              ['^\\./(?=.*/)(?!/?$)', '^\\.(?!/?$)', '^\\./?$'],
+              // Internal packages.
+              ['^(@|components)(/.*|$)'],
+              // Side effect imports.
+              ['^\\u0000'],
+              // Parent imports. Put `..` last.
+              ['^\\.\\.(?!/?$)', '^\\.\\./?$'],
+              // Style imports.
+              ['^.+\\.?(css)$'],
+            ],
+          },
+        ],
+      },
+    },
+  ],
 };

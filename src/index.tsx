@@ -1,15 +1,12 @@
 import { createRoot } from 'react-dom/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { ThemeProvider } from 'styled-components';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 import App from './App';
-import {
-  DimmedLayerContextProvider,
-  PopUpContextProvider,
-  SettingContextProvider,
-} from '@/contexts';
-import { AppProvider } from '@/utils';
+
+import { DimmedLayerContextProvider, PopUpContextProvider } from '@/contexts';
 import { GlobalStyle, theme } from '@/style';
+import { AppProvider } from '@/utils';
 
 const rootElement = document.getElementById('root');
 
@@ -26,9 +23,7 @@ const client = new ApolloClient({
 
 root.render(
   <ApolloProvider client={client}>
-    <AppProvider
-      components={[DimmedLayerContextProvider, PopUpContextProvider, SettingContextProvider]}
-    >
+    <AppProvider components={[DimmedLayerContextProvider, PopUpContextProvider]}>
       <ThemeProvider theme={theme}>
         <GlobalStyle />
         <App />
