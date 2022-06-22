@@ -1,7 +1,7 @@
 export const handleBackgroundColor = () => {
   const whitePages = ['/login', '/find-password', '/register', '/select-interest'];
 
-  if (whitePages.find((whitePage) => whitePage === location.pathname)) {
+  if (whitePages.includes(location.pathname)) {
     return (document.body.style.backgroundColor = '#fff');
   }
 
