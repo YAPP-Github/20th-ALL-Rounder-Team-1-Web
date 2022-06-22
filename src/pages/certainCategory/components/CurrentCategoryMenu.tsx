@@ -1,3 +1,4 @@
+import { Dispatch, MouseEvent, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface CurrentCategoryMenuProps {
@@ -6,6 +7,7 @@ interface CurrentCategoryMenuProps {
   startTime: string;
   endDate: string;
   endTime: string;
+  setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
 }
 
 export const CurrentCategoryMenu = ({
@@ -14,9 +16,15 @@ export const CurrentCategoryMenu = ({
   startTime,
   endDate,
   endTime,
+  setIsCategoryClicked,
 }: CurrentCategoryMenuProps) => {
+  const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsCategoryClicked(true);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onContextMenu={handleRightClick}>
       <Title>
         <div />
         <h2>{name}</h2>

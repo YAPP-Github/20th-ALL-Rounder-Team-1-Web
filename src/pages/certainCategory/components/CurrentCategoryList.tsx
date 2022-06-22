@@ -2,6 +2,7 @@ import { useState } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from './CurrentCategoryMenu';
+import { CurrentCategoryMenus } from './CurrentCategoryMenus';
 import { SearchBar } from './SearchBar';
 
 import { CERTAINCATEGORIES } from '@/utils';
@@ -37,17 +38,7 @@ export const CurrentCategoryList = () => {
           )}
         </Sorting>
       </Options>
-      <ExistingSchedules>
-        {CERTAINCATEGORIES.map((category) => (
-          <CurrentCategoryMenu
-            name={category.name}
-            startDate={category.startDate}
-            startTime={category.startTime}
-            endDate={category.endDate}
-            endTime={category.endTime}
-          />
-        ))}
-      </ExistingSchedules>
+      <CurrentCategoryMenus />
     </Wrapper>
   );
 };
@@ -58,7 +49,6 @@ const Wrapper = styled.div`
   margin-top: 38px;
   background-color: #fff;
   border-radius: 10px;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -124,8 +114,4 @@ const SortMenu = styled.ul`
   li:hover {
     background-color: ${({ theme: { colors } }) => colors.Gray100};
   }
-`;
-
-const ExistingSchedules = styled.div`
-  overflow-y: hidden;
 `;

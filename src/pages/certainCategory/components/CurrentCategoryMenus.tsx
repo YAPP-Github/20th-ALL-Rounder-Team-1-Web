@@ -1,22 +1,23 @@
 import styled from 'styled-components';
 
-import { Category } from '.';
+import { CurrentCategoryMenu } from './CurrentCategoryMenu';
 
 import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
-import { CATEGORIES } from '@/utils';
+import { CERTAINCATEGORIES } from '@/utils';
 
-export const CategoryList = () => {
+export const CurrentCategoryMenus = () => {
   const { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked } = useContextMenu();
 
   return (
     <Wrapper>
-      {CATEGORIES.map((category) => (
-        <Category
-          key={category.id}
-          color={category.color}
-          visibility={category.visible}
-          content={category.content}
+      {CERTAINCATEGORIES.map((category) => (
+        <CurrentCategoryMenu
+          name={category.name}
+          startDate={category.startDate}
+          startTime={category.startTime}
+          endDate={category.endDate}
+          endTime={category.endTime}
           setIsCategoryClicked={setIsCategoryClicked}
         />
       ))}
@@ -28,8 +29,5 @@ export const CategoryList = () => {
 };
 
 const Wrapper = styled.div`
-  display: grid;
-  grid-template-columns: repeat(3, 356px);
-  gap: 32px;
-  align-items: center;
+  overflow-y: hidden;
 `;

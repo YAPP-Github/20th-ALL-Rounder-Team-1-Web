@@ -35,7 +35,7 @@ const App = () => {
           <Route path="/manage-category" element={<ManageCategory />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/register" element={<Register />} />
-          <Route path="/category/:id" element={<CertainCategory />} />
+          <Route path="/manage-category/:id" element={<CertainCategory />} />
           <Route path="*" element={<div>아직 없는 페이지입니다.</div>} />
         </Routes>
         <DimmedLayer />
