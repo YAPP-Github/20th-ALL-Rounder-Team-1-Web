@@ -15,7 +15,7 @@ const Login = () => {
     <PageLayout title="로그인 페이지" isHeader={false} isFooter={false}>
       <Main role="main">
         <SmilingImage>
-          <img src="../assets/smiling_emoji.png" width={569} height={511} />
+          <img src="../assets/smiling_emoji.png" />
         </SmilingImage>
         <LoginForm>
           <Introduce>
@@ -69,15 +69,13 @@ const Main = styled.div`
 
 const SmilingImage = styled.div`
   line-height: 100vh;
-
   img {
     vertical-align: middle;
   }
 `;
 
 const LoginForm = styled.div`
-  margin-top: -50px;
-  margin-left: 188px;
+  margin-left: 78px;
 `;
 
 const Introduce = styled.div`
