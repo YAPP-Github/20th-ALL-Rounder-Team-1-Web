@@ -1,4 +1,4 @@
-import { EditProfile, Question } from '@/common';
+import { EditProfile, Question } from '@/pages/setting/components';
 
 export const getCurrentSetting = (name: string) => {
   if (name === '프로필 편집') {
