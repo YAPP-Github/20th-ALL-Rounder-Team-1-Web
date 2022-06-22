@@ -1,16 +1,38 @@
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
 interface ProfileInfoProps {
   title: string;
   content: string;
+  changeContent?: Dispatch<SetStateAction<string>>;
+  isInput?: boolean;
 }
 
-export const ProfileInfo = ({ title, content }: ProfileInfoProps) => {
+export const ProfileInfo = ({
+  title,
+  content,
+  changeContent,
+  isInput = false,
+}: ProfileInfoProps) => {
+  const [value, setValue] = useState(content);
+
+  const onChange = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setValue(value);
+    if (changeContent) {
+      changeContent(value);
+    }
+  };
+
   return (
     <Wrapper>
       <Title>{title}</Title>
       <Content>
-        <p>{content}</p>
+        {isInput ? (
+          <input className="input" type="text" value={value} onChange={onChange} />
+        ) : (
+          <p className="text">{content}</p>
+        )}
       </Content>
     </Wrapper>
   );
@@ -37,7 +59,18 @@ const Content = styled.div`
   padding: 12px 18px;
   margin: 18px 0px;
 
-  p {
+  .input {
+    border: none;
+    background-color: transparent;
+    color: ${({ theme: { colors } }) => colors.Gray900};
+    ${({ theme: { fonts } }) => fonts.SubHead1}
+  }
+
+  .input:focus {
+    outline: none;
+  }
+
+  .text {
     color: ${({ theme: { colors } }) => colors.Gray900};
     ${({ theme: { fonts } }) => fonts.SubHead1}
   }

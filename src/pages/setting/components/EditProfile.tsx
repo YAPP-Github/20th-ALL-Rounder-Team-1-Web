@@ -19,6 +19,8 @@ export const EditProfile = () => {
 
   const { email, imageUrl, nickName, purpose, jobs, interests } = userProfile;
 
+  const [currentNickname, setCurrentNickname] = useState(nickName);
+  const [currentPurpose, setCurrentPurpose] = useState(purpose);
   const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
   const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
@@ -48,8 +50,18 @@ export const EditProfile = () => {
           </button>
         </div>
       </ImageAndEmail>
-      <ProfileInfo title="닉네임" content={nickName} />
-      <ProfileInfo title="한줄목표" content={purpose} />
+      <ProfileInfo
+        title="닉네임"
+        content={currentNickname}
+        changeContent={setCurrentNickname}
+        isInput={true}
+      />
+      <ProfileInfo
+        title="한줄목표"
+        content={currentPurpose}
+        changeContent={setCurrentPurpose}
+        isInput={true}
+      />
       <ProfileInfo title="직업" content={totalJobs.join(', ')} />
       <SelectInterests>
         <button className="reset" onClick={() => onClickReset('JOBS')}>
