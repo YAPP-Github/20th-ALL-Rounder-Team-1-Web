@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { SettingSidebar } from './components';
+import { EditProfile, SettingSidebar } from './components';
 
-import { EditProfile, PageLayout } from '@/common';
+import { PageLayout } from '@/common';
 
 const Setting = () => {
   const [currentContent, setCurrentContent] = useState(<EditProfile />);

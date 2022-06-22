@@ -1,12 +1,26 @@
-import { Suspense } from 'react';
+import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { PopUpPortal } from './PopUpPortal';
 
 import { DimmedLayer, PopUp } from '@/common';
-import { Agreement, FindPassword, Home, Login, ManageCategory, Register, Setting } from '@/pages';
+import {
+  Agreement,
+  FindPassword,
+  Home,
+  Login,
+  ManageCategory,
+  Register,
+  SelectInterest,
+  Setting,
+} from '@/pages';
+import { handleBackgroundColor } from '@/utils';
 
 const App = () => {
+  useEffect(() => {
+    handleBackgroundColor();
+  }, [location.pathname]);
+
   return (
     <Router>
       <Suspense fallback={<p> Loading...</p>}>
@@ -16,6 +30,7 @@ const App = () => {
           <Route path="/agreement" element={<Agreement />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-password" element={<FindPassword />} />
+          <Route path="/select-interest" element={<SelectInterest />} />
           <Route path="/manage-category" element={<ManageCategory />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/register" element={<Register />} />
