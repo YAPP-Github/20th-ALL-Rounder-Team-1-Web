@@ -44,20 +44,22 @@ export const EditProfile = () => {
   return (
     <Wrapper>
       <ImageAndEmail>
-        <img src={imageUrl} alt="User Image" />
+        <img src={imageUrl} alt="User Image" width={80} height={80} />
         <div>
-          <p>{email}</p>
-          <button onClick={() => console.log('프로필 편집 팝업')}>프로필 사진 바꾸기</button>
+          <p className="email">{email}</p>
+          <button className="edit_profile_img" onClick={() => console.log('프로필 편집 팝업')}>
+            프로필 사진 바꾸기
+          </button>
         </div>
       </ImageAndEmail>
       <ProfileInfo title="닉네임" content={nickName} />
       <ProfileInfo title="한줄목표" content={purpose} />
       <ProfileInfo title="직업" content={totalJobs.join(', ')} />
       <SelectInterests>
-        <button onClick={() => onClickReset('JOBS')} className="reset">
+        <button className="reset" onClick={() => onClickReset('JOBS')}>
           초기화
         </button>
-        <div>
+        <div className="interest_list">
           {JOBS.map((job, index) => (
             <Interest
               key={index}
@@ -72,10 +74,10 @@ export const EditProfile = () => {
       </SelectInterests>
       <ProfileInfo title="관심사" content={totalInterests.join(', ')} />
       <SelectInterests>
-        <button onClick={() => onClickReset('INTERESTS')} className="reset">
+        <button className="reset" onClick={() => onClickReset('INTERESTS')}>
           초기화
         </button>
-        <div>
+        <div className="interest_list">
           {INTERESTS.map((interest, index) => (
             <Interest
               key={index}
@@ -105,8 +107,6 @@ const ImageAndEmail = styled.div`
   display: flex;
 
   img {
-    width: 80px;
-    height: 80px;
     border-radius: 24px;
     background-color: ${({ theme: { colors } }) => colors.Gray300};
   }
@@ -118,12 +118,12 @@ const ImageAndEmail = styled.div`
     align-items: flex-start;
     margin-left: 34px;
 
-    p {
+    .email {
       color: ${({ theme: { colors } }) => colors.Gray900};
       ${({ theme: { fonts } }) => fonts.Body1}
     }
 
-    button {
+    .edit_profile_img {
       color: ${({ theme: { colors } }) => colors.WeekandBlue};
       ${({ theme: { fonts } }) => fonts.SubHead2}
     }
@@ -135,7 +135,7 @@ const SelectInterests = styled.div`
   align-items: flex-start;
   margin: 8px 0px;
 
-  button.reset {
+  .reset {
     width: 83px;
     text-align: end;
     margin-top: 8px;
@@ -144,7 +144,7 @@ const SelectInterests = styled.div`
     ${({ theme: { fonts } }) => fonts.Body3}
   }
 
-  div {
+  .interest_list {
     width: 580px;
   }
 `;
