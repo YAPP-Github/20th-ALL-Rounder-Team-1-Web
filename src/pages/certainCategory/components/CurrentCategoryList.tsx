@@ -1,11 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { CurrentCategoryMenu } from './CurrentCategoryMenu';
-import { CurrentCategoryMenus } from './CurrentCategoryMenus';
-import { SearchBar } from './SearchBar';
-
-import { CERTAINCATEGORIES } from '@/utils';
+import { CurrentCategoryMenus, SearchBar } from '.';
 
 export const CurrentCategoryList = () => {
   const [currentSort, setCurrentSort] = useState('최신순');
