@@ -1,30 +1,46 @@
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface CurrentCategoryMenuProps {
+  currentIndex: number;
   name: string;
   startDate: string;
   startTime: string;
   endDate: string;
   endTime: string;
   setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
+  clickedIndex: number;
+  setClickedIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const CurrentCategoryMenu = ({
+  currentIndex,
   name,
   startDate,
   startTime,
   endDate,
   endTime,
   setIsCategoryClicked,
+  clickedIndex,
+  setClickedIndex,
 }: CurrentCategoryMenuProps) => {
+  const [isClicked, setIsClicked] = useState(false);
+
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsCategoryClicked(true);
+    setClickedIndex(currentIndex);
   };
 
+  useEffect(() => {
+    if (currentIndex === clickedIndex) {
+      return setIsClicked(true);
+    }
+    setIsClicked(false);
+  }, [clickedIndex]);
+
   return (
-    <Wrapper onContextMenu={handleRightClick}>
+    <Wrapper onContextMenu={handleRightClick} isClicked={isClicked}>
       <Title>
         <div />
         <h2>{name}</h2>
@@ -46,7 +62,7 @@ export const CurrentCategoryMenu = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isClicked: boolean }>`
   width: 578px;
   height: 74px;
   border-bottom: 1px solid ${({ theme: { colors } }) => colors.Gray200};
@@ -55,6 +71,7 @@ const Wrapper = styled.div`
   justify-content: center;
   padding: 12px 26px;
   gap: 2px;
+  background-color: ${({ theme: { colors }, isClicked }) => isClicked && colors.WeekandBlueSub};
 `;
 
 const Title = styled.div`
