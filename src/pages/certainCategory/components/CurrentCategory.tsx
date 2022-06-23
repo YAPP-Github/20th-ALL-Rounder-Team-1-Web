@@ -4,7 +4,12 @@ export const CurrentCategory = () => {
   return (
     <Wrapper>
       <p>카테고리</p>
-      <img src="../../assets/setting_right_button.png" alt="" />
+      <img
+        src="../../assets/setting_right_button.png"
+        alt="Right Icon"
+        width={6.55}
+        height={11.15}
+      />
       <Info>
         <Color />
         <p>Google 캘린더 시작 Google</p>
@@ -20,14 +25,11 @@ const Wrapper = styled.div`
   margin-top: 86px;
 
   p {
+    width: 77px;
+    height: 33px;
     color: ${({ theme: { colors } }) => colors.Gray900};
     ${({ theme: { fonts } }) => fonts.Title}
     margin-right: 16.64px;
-  }
-
-  img {
-    width: 6.55px;
-    height: 11.15px;
   }
 `;
 
@@ -37,6 +39,8 @@ const Info = styled.div`
   margin-left: 20.81px;
 
   p {
+    width: 293px;
+    height: 33px;
     color: ${({ theme: { colors } }) => colors.Gray900};
     ${({ theme: { fonts } }) => fonts.Title}
   }
