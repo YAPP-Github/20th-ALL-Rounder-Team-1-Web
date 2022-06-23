@@ -12,35 +12,10 @@ export const CategorySubMenu = ({ isCategoryClicked, pointX, pointY }: CategoryS
 
   return (
     <>
-      {isCategoryClicked ? (
+      {isCategoryClicked && (
         <ContextMenu pointX={pointX} pointY={pointY}>
           <Menu>수정</Menu>
           <Menu>삭제</Menu>
-        </ContextMenu>
-      ) : (
-        <ContextMenu pointX={pointX} pointY={pointY}>
-          <Menu>새 카테고리</Menu>
-          <SortMenu
-            onMouseOver={() => setShowSorting(true)}
-            onMouseLeave={() => setShowSorting(false)}
-            showSorting={showSorting}
-          >
-            <p>정렬</p>
-            <img src="../../assets/setting_right_button.png" alt="" />
-          </SortMenu>
-          {showSorting && (
-            <SortingMenu
-              pointX={pointX}
-              pointY={pointY}
-              onMouseOver={() => setShowSorting(true)}
-              onMouseLeave={() => setShowSorting(false)}
-            >
-              <li>최신순</li>
-              <li>오래된순</li>
-              <li>오름차순</li>
-              <li>내림차순</li>
-            </SortingMenu>
-          )}
         </ContextMenu>
       )}
     </>
