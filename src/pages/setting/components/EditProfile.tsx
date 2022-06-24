@@ -1,10 +1,11 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { ProfileInfo } from '.';
 
 import { Button, Interest } from '@/common';
-import { INTERESTS, JOBS } from '@/utils';
+import { ToastContext } from '@/contexts';
+import { checkNickname, checkPurpose, INTERESTS, JOBS } from '@/utils';
 
 export const EditProfile = () => {
   const userProfile = {
@@ -24,8 +25,45 @@ export const EditProfile = () => {
   const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
   const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
+  const { setIsVisible, setText, setIsSuccess } = useContext(ToastContext);
+
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
     return totalSelected.includes(name);
+  };
+
+  const handleToastMessage = () => {
+    setIsVisible(true);
+    setTimeout(() => {
+      setIsVisible(false);
+    }, 5000);
+  };
+
+  const isValid = () => {
+    const { type: nickNameType, message: nickNameMessage } = checkNickname(currentNickname);
+
+    if (nickNameType === 'error') {
+      setText(nickNameMessage);
+      return false;
+    }
+
+    const { type: purposeType, message: purposeMessage } = checkPurpose(currentPurpose);
+    if (purposeType === 'error') {
+      setText(purposeMessage);
+      return false;
+    }
+
+    return true;
+  };
+
+  const onClickSubmit = () => {
+    handleToastMessage();
+    if (isValid()) {
+      setText('프로필 정보가 저장되었습니다.');
+      setIsSuccess(true);
+      return;
+    }
+    setIsSuccess(false);
+    return;
   };
 
   const onClickReset = (type: string) => {
@@ -45,7 +83,7 @@ export const EditProfile = () => {
         <img src={imageUrl} alt="User Image" width={80} height={80} />
         <div>
           <p className="email">{email}</p>
-          <button className="edit_profile_img" onClick={() => console.log('프로필 편집 팝업')}>
+          <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
             프로필 사진 바꾸기
           </button>
         </div>
@@ -99,7 +137,7 @@ export const EditProfile = () => {
         </div>
       </SelectInterests>
       <ButtonWrapper>
-        <Button className="question_button" onClick={() => console.log('변경 버튼 클릭')}>
+        <Button className="question_button" onClick={onClickSubmit}>
           확인
         </Button>
       </ButtonWrapper>
