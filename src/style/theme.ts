@@ -1,4 +1,4 @@
-import { css, IColors, IFonts, IDefaultTheme } from 'styled-components';
+import { css, IColors, IDefaultTheme, IFonts } from 'styled-components';
 
 const colors: IColors = {
   WeekandBlue: '#5086ff',
@@ -62,10 +62,10 @@ const fonts: IFonts = {
   },
   SubHead3(color = DEFAULT_FONT_COLOR) {
     return css`
-    font-size: 14px;
-    line-height: 22px;
-    font-weight: 600
-    color: ${({ theme: { colors } }) => colors[color]};
+      font-size: 14px;
+      line-height: 22px;
+      font-weight: 600;
+      color: ${({ theme: { colors } }) => colors[color]};
     `;
   },
   Body1(color = DEFAULT_FONT_COLOR) {
