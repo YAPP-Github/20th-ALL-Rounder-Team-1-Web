@@ -8,28 +8,36 @@ interface ScheduleProps {
   endTime: string;
   likeNumber: number;
   likeTypes: string[];
-  isFriend?: boolean;
 }
 
-export const Schedule = () => {
+export const Schedule = ({
+  categoryColor,
+  name,
+  process,
+  startTime,
+  endTime,
+  likeNumber,
+  likeTypes,
+}: ScheduleProps) => {
   return (
     <Wrapper>
-      <CategoryAndName>
+      <CategoryAndName categoryColor={categoryColor}>
         <div />
-        <h1>아침 런닝하기</h1>
+        <h1>{name}</h1>
       </CategoryAndName>
       <TimeAndLike>
         <ProcessAndTime>
-          <img src="../../assets/fail_icon.png" alt="Schedule Fail Icon" />
-          <h2>07:00 - 08:00</h2>
+          <img src={`../../assets/${process}_icon.png`} alt="Schedule Process Icon" />
+          <h2>
+            {startTime} - {endTime}
+          </h2>
         </ProcessAndTime>
-        <LikeCountAndIcon count={4}>
-          <p>12</p>
+        <LikeCountAndIcon count={likeTypes.length}>
+          {likeNumber > 0 && <p>{likeNumber}</p>}
           <Icons>
-            <img src="../../assets/emoji_smile.png" alt="Smiling Sticker" />
-            <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
-            <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
-            <img src="../../assets/smile_sticker.png" alt="Smiling Sticker" />
+            {likeTypes.map((_) => (
+              <img src="../../assets/emoji_smile.png" alt="Smiling Sticker" />
+            ))}
           </Icons>
           <img src="../../assets/sticker_button.png" alt="Smiling Sticker" />
         </LikeCountAndIcon>
@@ -50,7 +58,7 @@ const Wrapper = styled.div`
   background-color: #fff;
 `;
 
-const CategoryAndName = styled.div`
+const CategoryAndName = styled.div<{ categoryColor: string }>`
   display: flex;
   align-items: center;
   width: 301px;
@@ -60,7 +68,7 @@ const CategoryAndName = styled.div`
     width: 11.67px;
     height: 11.67px;
     border-radius: 3px;
-    background-color: #b6eebc;
+    background-color: ${({ categoryColor }) => categoryColor};
   }
 
   h1 {

@@ -147,3 +147,51 @@ export const CATEGORIES = [
     content: '독서',
   },
 ];
+
+export const SCHEDULES = [
+  {
+    categoryColor: '#B6EEBD',
+    name: '아침 런닝하기',
+    process: 'failed',
+    startTime: '07:00',
+    endTime: '08:00',
+    likeNumber: 12,
+    likeTypes: ['basic', 'excited'],
+  },
+  {
+    categoryColor: '#FFC59C',
+    name: '맛있는 아침 차려먹기',
+    process: 'success',
+    startTime: '08:00',
+    endTime: '08:30',
+    likeNumber: 25,
+    likeTypes: ['like', 'surprised', 'excited'],
+  },
+  {
+    categoryColor: '#B1C7FF',
+    name: '샤워하기',
+    process: 'missed',
+    startTime: '08:30',
+    endTime: '09:00',
+    likeNumber: 9,
+    likeTypes: ['excited'],
+  },
+  {
+    categoryColor: '#D4AAFF',
+    name: '업무 시간',
+    process: 'started',
+    startTime: '09:00',
+    endTime: '19:00',
+    likeNumber: 35,
+    likeTypes: ['basic', 'like'],
+  },
+  {
+    categoryColor: '#D4AAFF',
+    name: '기획, 디자인 회의',
+    process: 'unstarted',
+    startTime: '10:00',
+    endTime: '12:00',
+    likeNumber: 0,
+    likeTypes: [],
+  },
+];
