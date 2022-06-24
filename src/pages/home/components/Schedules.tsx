@@ -8,7 +8,7 @@ import { useContextMenu } from '@/hooks';
 import { SCHEDULES } from '@/utils';
 
 export const Schedules = () => {
-  const [isFriend, setIsFriend] = useState(false);
+  const [isFriend, setIsFriend] = useState(true);
 
   const {
     pointX,
