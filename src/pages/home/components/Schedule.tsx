@@ -8,6 +8,7 @@ interface ScheduleProps {
   endTime: string;
   likeNumber: number;
   likeTypes: string[];
+  isFriend?: boolean;
 }
 
 export const Schedule = ({
@@ -18,6 +19,7 @@ export const Schedule = ({
   endTime,
   likeNumber,
   likeTypes,
+  isFriend = true,
 }: ScheduleProps) => {
   return (
     <Wrapper>
@@ -27,19 +29,29 @@ export const Schedule = ({
       </CategoryAndName>
       <TimeAndLike>
         <ProcessAndTime>
-          <img src={`../../assets/${process}_icon.png`} alt="Schedule Process Icon" />
+          <img
+            src={`../../assets/${process}_icon.png`}
+            alt="Schedule Process Icon"
+            width={11.67}
+            height={11.67}
+          />
           <h2>
             {startTime} - {endTime}
           </h2>
         </ProcessAndTime>
-        <LikeCountAndIcon count={likeTypes.length}>
+        <LikeCountAndIcon count={likeTypes.length} isFriend={isFriend}>
           {likeNumber > 0 && <p>{likeNumber}</p>}
-          <Icons>
+          <Icons isFriend={isFriend}>
             {likeTypes.map((_) => (
-              <img src="../../assets/emoji_smile.png" alt="Smiling Sticker" />
+              <img
+                src="../../assets/emoji_smile.png"
+                alt="Smiling Sticker"
+                width={26.6}
+                height={26.6}
+              />
             ))}
           </Icons>
-          <img src="../../assets/sticker_button.png" alt="Smiling Sticker" />
+          {isFriend && <img src="../../assets/sticker_button.png" alt="Smiling Sticker" />}
         </LikeCountAndIcon>
       </TimeAndLike>
     </Wrapper>
@@ -54,7 +66,6 @@ const Wrapper = styled.div`
   align-items: flex-start;
   padding: 16px 24px;
   gap: 6px;
-  border: 1px solid black;
   background-color: #fff;
 `;
 
@@ -88,18 +99,13 @@ const ProcessAndTime = styled.div`
   align-items: center;
   gap: 9px;
 
-  img {
-    width: 11.67px;
-    height: 11.67px;
-  }
-
   h2 {
     ${({ theme: { fonts } }) => fonts.Body1}
     color: ${({ theme: { colors } }) => colors.Gray400};
   }
 `;
 
-const LikeCountAndIcon = styled.div<{ count: number }>`
+const LikeCountAndIcon = styled.div<{ count: number; isFriend: boolean }>`
   display: flex;
   align-items: center;
   gap: 8px;
@@ -110,37 +116,32 @@ const LikeCountAndIcon = styled.div<{ count: number }>`
     font-size: 14px;
     font-weight: 500;
     line-height: 22.4px;
-    right: ${({ count }) => `${count * 20 + 55}px`};
+    right: ${({ count, isFriend }) => (isFriend ? `${count * 20 + 55}px` : `${count * 20 + 15}px`)};
     color: ${({ theme: { colors } }) => colors.Gray400};
   }
 `;
 
-const Icons = styled.div`
+const Icons = styled.div<{ isFriend: boolean }>`
   display: flex;
   align-items: center;
 
-  img {
-    width: 26.6px;
-    height: 26.6px;
-  }
-
   img:first-child {
     position: absolute;
-    right: 40px;
+    right: ${({ isFriend }) => (isFriend ? '40px' : '0px')};
   }
 
   img:nth-child(2) {
     position: absolute;
-    right: 60px;
+    right: ${({ isFriend }) => (isFriend ? '60px' : '20px')};
   }
 
   img:nth-child(3) {
     position: absolute;
-    right: 80px;
+    right: ${({ isFriend }) => (isFriend ? '80px' : '40px')};
   }
 
   img:nth-child(4) {
     position: absolute;
-    right: 100px;
+    right: ${({ isFriend }) => (isFriend ? '100px' : '60px')};
   }
 `;
