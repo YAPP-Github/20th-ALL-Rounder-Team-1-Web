@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { ProfileInfo } from '.';
 
 import { Button, Interest } from '@/common';
-import { checkNickname, checkPurpose, INTERESTS, JOBS } from '@/utils';
+import { INTERESTS, JOBS } from '@/utils';
 
 export const EditProfile = () => {
   const userProfile = {
@@ -24,10 +24,6 @@ export const EditProfile = () => {
   const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
   const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
-  const [currentMessage, setCurrentMessage] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [showToastMessage, setShowToastMessage] = useState(true);
-
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
     return totalSelected.includes(name);
   };
@@ -40,41 +36,6 @@ export const EditProfile = () => {
       return setTotalInterests([]);
     }
 
-    return;
-  };
-
-  const handleToastMessage = () => {
-    setShowToastMessage(true);
-    setTimeout(() => {
-      setShowToastMessage(false);
-    }, 5000);
-  };
-
-  const isValid = () => {
-    const { type: nickNameType, message: nickNameMessage } = checkNickname(currentNickname);
-
-    if (nickNameType === 'error') {
-      setCurrentMessage(nickNameMessage);
-      return false;
-    }
-
-    const { type: purposeType, message: purposeMessage } = checkPurpose(currentPurpose);
-    if (purposeType === 'error') {
-      setCurrentMessage(purposeMessage);
-      return false;
-    }
-
-    return true;
-  };
-
-  const onClickSubmit = () => {
-    handleToastMessage();
-    if (isValid()) {
-      setCurrentMessage('프로필 정보가 저장되었습니다.');
-      setIsSuccess(true);
-      return;
-    }
-    setIsSuccess(false);
     return;
   };
 
@@ -138,15 +99,10 @@ export const EditProfile = () => {
         </div>
       </SelectInterests>
       <ButtonWrapper>
-        <Button className="question_button" onClick={onClickSubmit}>
+        <Button className="question_button" onClick={() => console.log('변경 버튼 클릭')}>
           확인
         </Button>
       </ButtonWrapper>
-      {showToastMessage && currentMessage.length > 0 && (
-        <ToastMessage isSuccess={isSuccess}>
-          <p className="content">{currentMessage}</p>
-        </ToastMessage>
-      )}
     </Wrapper>
   );
 };
@@ -204,22 +160,4 @@ const SelectInterests = styled.div`
 const ButtonWrapper = styled.div`
   margin-left: 112px;
   margin-top: 28px;
-`;
-
-const ToastMessage = styled.div<{ isSuccess: boolean }>`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: fixed;
-  width: 100%;
-  height: 48px;
-  left: 0px;
-  bottom: 0px;
-  background-color: ${({ isSuccess, theme: { colors } }) =>
-    isSuccess ? colors.WeekandBlue : colors.WeekandRed};
-
-  p.content {
-    color: #fff;
-    ${({ theme: { fonts } }) => fonts.Body1};
-  }
 `;
