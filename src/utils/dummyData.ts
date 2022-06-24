@@ -156,7 +156,7 @@ export const SCHEDULES = [
     startTime: '07:00',
     endTime: '08:00',
     likeNumber: 12,
-    likeTypes: ['basic', 'excited'],
+    likeTypes: ['smile', 'congrats'],
   },
   {
     categoryColor: '#FFC59C',
@@ -165,7 +165,7 @@ export const SCHEDULES = [
     startTime: '08:00',
     endTime: '08:30',
     likeNumber: 25,
-    likeTypes: ['like', 'surprised', 'excited'],
+    likeTypes: ['good', 'cool', 'congrats'],
   },
   {
     categoryColor: '#B1C7FF',
@@ -174,7 +174,7 @@ export const SCHEDULES = [
     startTime: '08:30',
     endTime: '09:00',
     likeNumber: 9,
-    likeTypes: ['excited'],
+    likeTypes: ['congrats'],
   },
   {
     categoryColor: '#D4AAFF',
@@ -183,7 +183,7 @@ export const SCHEDULES = [
     startTime: '09:00',
     endTime: '19:00',
     likeNumber: 35,
-    likeTypes: ['basic', 'like'],
+    likeTypes: ['smile', 'good'],
   },
   {
     categoryColor: '#D4AAFF',

@@ -42,9 +42,9 @@ export const Schedule = ({
         <LikeCountAndIcon count={likeTypes.length} isFriend={isFriend}>
           {likeNumber > 0 && <p>{likeNumber}</p>}
           <Icons isFriend={isFriend}>
-            {likeTypes.map((_) => (
+            {likeTypes.reverse().map((likeType) => (
               <img
-                src="../../assets/emoji_smile.png"
+                src={`../../assets/emoji_${likeType}.png`}
                 alt="Smiling Sticker"
                 width={26.6}
                 height={26.6}
