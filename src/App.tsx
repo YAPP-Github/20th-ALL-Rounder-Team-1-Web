@@ -1,9 +1,9 @@
 import { Suspense, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { PopUpPortal } from './PopUpPortal';
+import { PopUpPortal, ToastPortal } from './portals';
 
-import { DimmedLayer, PopUp } from '@/common';
+import { DimmedLayer, PopUp, Toast } from '@/common';
 import {
   Agreement,
   FindPassword,
@@ -40,6 +40,9 @@ const App = () => {
         <PopUpPortal>
           <PopUp />
         </PopUpPortal>
+        <ToastPortal>
+          <Toast />
+        </ToastPortal>
       </Suspense>
     </Router>
   );
