@@ -1,6 +1,8 @@
+import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface ScheduleProps {
+  currentIndex: number;
   categoryColor: string;
   name: string;
   process: string;
@@ -9,9 +11,13 @@ interface ScheduleProps {
   likeNumber: number;
   likeTypes: string[];
   isFriend?: boolean;
+  setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
+  clickedIndex: number;
+  setClickedIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const Schedule = ({
+  currentIndex,
   categoryColor,
   name,
   process,
@@ -20,9 +26,27 @@ export const Schedule = ({
   likeNumber,
   likeTypes,
   isFriend = true,
+  setIsCategoryClicked,
+  clickedIndex,
+  setClickedIndex,
 }: ScheduleProps) => {
+  const [isClicked, setIsClicked] = useState(false);
+
+  const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
+    event.preventDefault();
+    setIsCategoryClicked(true);
+    setClickedIndex(currentIndex);
+  };
+
+  useEffect(() => {
+    if (currentIndex === clickedIndex) {
+      return setIsClicked(true);
+    }
+    setIsClicked(false);
+  }, [clickedIndex]);
+
   return (
-    <Wrapper>
+    <Wrapper onContextMenu={handleRightClick} isClicked={isClicked}>
       <CategoryAndName categoryColor={categoryColor}>
         <div />
         <h1>{name}</h1>
@@ -58,7 +82,7 @@ export const Schedule = ({
   );
 };
 
-const Wrapper = styled.div`
+const Wrapper = styled.div<{ isClicked: boolean }>`
   width: 594px;
   height: 70px;
   display: flex;
@@ -66,7 +90,8 @@ const Wrapper = styled.div`
   align-items: flex-start;
   padding: 16px 24px;
   gap: 6px;
-  background-color: #fff;
+  background-color: ${({ theme: { colors }, isClicked }) =>
+    isClicked ? colors.WeekandBlueSub : '#fff'};
 `;
 
 const CategoryAndName = styled.div<{ categoryColor: string }>`

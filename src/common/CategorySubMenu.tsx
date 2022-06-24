@@ -5,10 +5,29 @@ interface CategorySubMenuProps {
   isCategoryClicked: boolean;
   pointX: number;
   pointY: number;
+  isSubMenu?: boolean;
 }
 
-export const CategorySubMenu = ({ isCategoryClicked, pointX, pointY }: CategorySubMenuProps) => {
+export const CategorySubMenu = ({
+  isCategoryClicked,
+  pointX,
+  pointY,
+  isSubMenu = false,
+}: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
+
+  if (isSubMenu) {
+    return (
+      <>
+        {isCategoryClicked && (
+          <ContextMenu pointX={pointX} pointY={pointY}>
+            <Menu>수정</Menu>
+            <Menu>삭제</Menu>
+          </ContextMenu>
+        )}
+      </>
+    );
+  }
 
   return (
     <>

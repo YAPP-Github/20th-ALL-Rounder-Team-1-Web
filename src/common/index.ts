@@ -1,4 +1,5 @@
 export * from './Button';
+export * from './CategorySubMenu';
 export * from './DebounceInput';
 export * from './Input';
 export * from './PopUp';
