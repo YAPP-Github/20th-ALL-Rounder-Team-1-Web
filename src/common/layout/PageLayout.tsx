@@ -1,6 +1,8 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
+import { useBackgroundColor } from '@/hooks';
+
 interface PageLayoutProps {
   title: string;
   isHeader?: boolean;
@@ -13,6 +15,8 @@ export const PageLayout = ({
   isHeader = true,
   isFooter = true,
 }: PropsWithChildren<PageLayoutProps>) => {
+  useBackgroundColor();
+
   return (
     <Wrapper>
       {isHeader && (

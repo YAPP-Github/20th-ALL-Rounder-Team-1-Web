@@ -14,13 +14,8 @@ import {
   SelectInterest,
   Setting,
 } from '@/pages';
-import { handleBackgroundColor } from '@/utils';
 
 const App = () => {
-  useEffect(() => {
-    handleBackgroundColor();
-  }, [location.pathname]);
-
   return (
     <Router>
       <Suspense fallback={<p> Loading...</p>}>
