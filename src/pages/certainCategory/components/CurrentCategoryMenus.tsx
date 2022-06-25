@@ -2,7 +2,7 @@ import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from './CurrentCategoryMenu';
 
-import { CategorySubMenu } from '@/common';
+import { CategorySubMenu, PageLayout } from '@/common';
 import { useContextMenu } from '@/hooks';
 import { CERTAINCATEGORIES } from '@/utils';
 
@@ -46,5 +46,16 @@ export const CurrentCategoryMenus = () => {
 };
 
 const Wrapper = styled.div`
-  overflow-y: hidden;
+  overflow-y: auto;
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+  &::-webkit-scrollbar-thumb {
+    background-color: ${({ theme: { colors } }) => colors.Gray300};
+    border-radius: 54px;
+  }
+  &::-webkit-scrollbar-button {
+    width: 0;
+    height: 0;
+  }
 `;
