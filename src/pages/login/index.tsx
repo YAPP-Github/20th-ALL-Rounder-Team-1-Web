@@ -15,7 +15,7 @@ const Login = () => {
     <PageLayout title="로그인 페이지" isHeader={false} isFooter={false}>
       <Main role="main">
         <SmilingImage>
-          <img src="../assets/smiling_emoji.png" width={569} height={511} />
+          <img src="../assets/smiling_emoji.png" />
         </SmilingImage>
         <LoginForm>
           <Introduce>
@@ -69,15 +69,13 @@ const Main = styled.div`
 
 const SmilingImage = styled.div`
   line-height: 100vh;
-
   img {
     vertical-align: middle;
   }
 `;
 
 const LoginForm = styled.div`
-  margin-top: -50px;
-  margin-left: 188px;
+  margin-left: 78px;
 `;
 
 const Introduce = styled.div`
@@ -101,12 +99,12 @@ const Utils = styled.div<{ isChecked: boolean }>`
 
   .auto_login::before {
     content: '';
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 18, 18)}
-    margin: 2px 11px 0 0;
-    background-size: 310px 270px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 24, 24)}
+    margin: -1px 8px 0 0;
+    background-size: 455px 385px;
 
     ${({ isChecked }) =>
-      isChecked ? `background-position: -224px -236px;` : `background-position: -186px -236px;`}
+      isChecked ? `background-position: -10px -351px;` : `background-position: -373px -290px;`}
   }
 
   .auto_login {

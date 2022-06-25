@@ -74,6 +74,7 @@ export const checkPlanTitle = (
   }
   return setMessage('');
 };
+
 export const checkCategoryTitle = (
   currentInput: string,
   setMessage: Dispatch<SetStateAction<string>>
@@ -82,4 +83,12 @@ export const checkCategoryTitle = (
     return setMessage('카테고리 명은 최대 15자 입니다.');
   }
   return setMessage('');
+};
+
+export const checkPurpose = (purpose: string) => {
+  if (purpose.length > 20) {
+    return { type: 'error', message: '한줄 목표는 최대 20자입니다' };
+  }
+
+  return { type: 'success', message: '' };
 };

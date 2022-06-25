@@ -2,6 +2,7 @@ import { ComponentPropsWithRef, Dispatch, SetStateAction, useEffect, useState } 
 import cn from 'classnames';
 import styled from 'styled-components';
 
+import { Button } from '@/common';
 import { checkPassword, checkPasswordConfirm } from '@/utils';
 
 interface BasicInputProps extends ComponentPropsWithRef<'input'> {
@@ -130,20 +131,20 @@ const StyledInput = styled.input`
   }
 `;
 
-const ShowPassword = styled.button`
+const ShowPassword = styled(Button)`
   &:after {
     position: absolute;
     right: 0;
     content: '';
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 24, 24)}
     margin: 14px 28px 0 0;
-    background-size: 310px 270px;
+    background-size: 455px 385px;
   }
   &.password:after {
-    background-position: -10px -192px;
+    background-position: -98px -351px;
   }
   &.text:after {
-    background-position: -196px -142px;
+    background-position: -54px -351px;
   }
 `;
 
