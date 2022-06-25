@@ -20,17 +20,16 @@ const Setting = () => {
 
 const Wrapper = styled.div`
   display: flex;
-  margin-top: 86px;
-  margin-bottom: 32px;
   gap: 20px;
+  margin-bottom: 56px;
 `;
 
 const ContentWrapper = styled.div`
   width: 739px;
-  height: 758px;
+  height: 798px;
   border-radius: 10px;
   background-color: #fff;
-  padding: 60px 40px;
+  padding: 40px 40px;
   text-align: start;
 `;
 

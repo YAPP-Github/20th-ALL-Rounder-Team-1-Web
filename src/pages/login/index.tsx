@@ -99,12 +99,12 @@ const Utils = styled.div<{ isChecked: boolean }>`
 
   .auto_login::before {
     content: '';
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 18, 18)}
-    margin: 2px 11px 0 0;
-    background-size: 310px 270px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 24, 24)}
+    margin: -1px 8px 0 0;
+    background-size: 455px 385px;
 
     ${({ isChecked }) =>
-      isChecked ? `background-position: -224px -236px;` : `background-position: -186px -236px;`}
+      isChecked ? `background-position: -10px -351px;` : `background-position: -373px -290px;`}
   }
 
   .auto_login {

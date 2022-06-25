@@ -141,12 +141,12 @@ const Separator = styled.div`
 const CheckAllLabel = styled.label<{ checked: boolean }>`
   &:before {
     content: '';
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 18, 18)}
-    margin: 7px 16px 0 0;
-    background-size: 310px 270px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    margin: 1px 12px 0 0;
+    background-size: 455px 385px;
 
     ${({ checked }) =>
-      checked ? `background-position: -224px -236px;` : `background-position: -186px -236px;`}
+      checked ? `background-position: -62px -199px;` : `background-position: -10px -199px;`}
   }
 
   .title {
@@ -155,8 +155,7 @@ const CheckAllLabel = styled.label<{ checked: boolean }>`
 
   .description {
     display: block;
-    // 아이콘의 크기가 더 커질 것이기 때문!
-    margin: 7px 0 0 40px;
+    margin: 7px 0 0 44px;
     ${({ theme: { fonts } }) => fonts.SubHead2('Gray500')}
   }
 `;
@@ -170,12 +169,12 @@ const CheckAgreement = styled.div`
 const Icon = styled.i<{ checked: boolean }>`
   &:before {
     content: '';
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 18, 18)}
-    margin: 7px 16px 0 0;
-    background-size: 310px 270px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    margin: 1px 16px 0 0;
+    background-size: 455px 385px;
 
     ${({ checked }) =>
-      checked ? `background-position: -224px -236px;` : `background-position: -186px -236px;`}
+      checked ? `background-position: -62px -199px;` : `background-position: -10px -199px;`}
   }
 `;
 

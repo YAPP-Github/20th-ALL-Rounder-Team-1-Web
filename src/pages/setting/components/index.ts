@@ -1,3 +1,5 @@
+export * from './EditProfile';
+export * from './ProfileInfo';
 export * from './Accessibility';
 export * from './EditProfile';
 export * from './Question';
