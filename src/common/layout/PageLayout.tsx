@@ -1,9 +1,8 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
+import { Header } from '@/common';
 import { useBackgroundColor } from '@/hooks';
-
-import { Header } from '../Header';
 
 interface PageLayoutProps {
   isHeader?: boolean;

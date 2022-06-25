@@ -22,7 +22,7 @@ const App = () => {
       <Suspense fallback={<p> Loading...</p>}>
         <Routes>
           {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
-          <Route path="/" element={<Home />} />
+          <Route path="/" element={<Login />} />
           <Route path="/agreement" element={<Agreement />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-password" element={<FindPassword />} />

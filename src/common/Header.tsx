@@ -2,7 +2,7 @@ import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { AlarmList } from './AlarmList';
+import { AlarmList } from '.';
 
 import { DimmedLayerContext } from '@/contexts';
 
