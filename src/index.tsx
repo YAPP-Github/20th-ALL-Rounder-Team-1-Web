@@ -1,11 +1,12 @@
 import { createRoot } from 'react-dom/client';
+import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
 import { ThemeProvider } from 'styled-components';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
 
 import App from './App';
+
 import { DimmedLayerContextProvider, PopUpContextProvider } from '@/contexts';
-import { AppProvider } from '@/utils';
 import { GlobalStyle, theme } from '@/style';
+import { AppProvider } from '@/utils';
 
 const rootElement = document.getElementById('root');
 
