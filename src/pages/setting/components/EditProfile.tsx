@@ -25,22 +25,14 @@ export const EditProfile = () => {
   const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
   const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
 
-  const { setIsVisible, setText, setIsSuccess } = useContext(ToastContext);
+  const { setIsClicked, setText, setIsSuccess } = useContext(ToastContext);
 
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
     return totalSelected.includes(name);
   };
 
-  const handleToastMessage = () => {
-    setIsVisible(true);
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 5000);
-  };
-
   const isValid = () => {
     const { type: nickNameType, message: nickNameMessage } = checkNickname(currentNickname);
-
     if (nickNameType === 'error') {
       setText(nickNameMessage);
       return false;
@@ -56,7 +48,7 @@ export const EditProfile = () => {
   };
 
   const onClickSubmit = () => {
-    handleToastMessage();
+    setIsClicked(true);
     if (isValid()) {
       setText('프로필 정보가 저장되었습니다.');
       setIsSuccess(true);
@@ -73,7 +65,6 @@ export const EditProfile = () => {
     if (type === 'INTERESTS') {
       return setTotalInterests([]);
     }
-
     return;
   };
 
