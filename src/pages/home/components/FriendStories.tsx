@@ -55,24 +55,24 @@ export const FriendStories = () => {
 
   return (
     <Wrapper currentLoc={currentX}>
-      {friends.map((friend) => (
+      {friends.map(({ id, name, imgUrl }) => (
         <FriendStory
-          key={friend.id}
-          id={friend.id}
-          name={friend.name}
-          imgUrl={friend.imgUrl}
-          isSelected={isSelected(friend.id)}
+          key={id}
+          id={id}
+          name={name}
+          imgUrl={imgUrl}
+          isSelected={isSelected(id)}
           setClickedFriend={setClickedFriend}
         />
       ))}
       {showLeftButton && (
         <Button onClick={onClickLeft} className="left">
-          <img src="../../assets/story_left_button.png" alt="Story Left Button" />
+          <i className="left-icon" />
         </Button>
       )}
       {showRightButton && (
         <Button onClick={onClickRight} className="right">
-          <img src="../../assets/story_right_button.png" alt="Story Right Button" />
+          <i className="right-icon" />
         </Button>
       )}
     </Wrapper>
@@ -104,9 +104,19 @@ const Button = styled.div`
 
   &.left {
     left: 24px;
+
+    i.left-icon {
+      ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 50, 50)}
+      background-position: -10px -10px;
+    }
   }
 
   &.right {
     right: 24px;
+
+    i.right-icon {
+      ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 50, 50)}
+      background-position: -80px -10px;
+    }
   }
 `;

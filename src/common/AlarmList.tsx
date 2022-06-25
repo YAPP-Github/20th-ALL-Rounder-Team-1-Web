@@ -2,15 +2,13 @@ import styled from 'styled-components';
 
 import { Alarm } from '.';
 
-import { getAlarms } from '@/utils';
-
-const alarms = getAlarms(); // 추후에 서버가 제작되면 실제 데이터로 변경
+import { ALARMS } from '@/utils';
 
 export const AlarmList = () => {
   return (
     <Wrapper>
-      {alarms.map((alarm) => (
-        <Alarm key={alarm.id} type={alarm.type} content={alarm.content} imgUrl={alarm.imgUrl} />
+      {ALARMS.map(({ id, type, content }) => (
+        <Alarm key={id} type={type} content={content} />
       ))}
     </Wrapper>
   );

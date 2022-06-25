@@ -32,27 +32,31 @@ export const Header = () => {
       </div>
       <div>
         <Link to="/manage-category">
-          <Icon src="../../assets/manage_icon.png" alt="Write Icon" />
+          {pathname === '/manage-category' && !alarmClicked ? (
+            <Icon className="manage-category" isClicked={true} />
+          ) : (
+            <Icon className="manage-category" isClicked={false} />
+          )}
         </Link>
         <Link to="/search">
           {pathname === '/search' && !alarmClicked ? (
-            <Icon src="../../assets/search_icon_clicked.png" alt="Search Icon" />
+            <Icon className="search" isClicked={true} />
           ) : (
-            <Icon src="../../assets/search_icon.png" alt="Search Icon" />
+            <Icon className="search" isClicked={false} />
           )}
         </Link>
         <button onClick={onClickAlarm}>
           {alarmClicked ? (
-            <Icon src="../../assets/alarm_icon_clicked.png" alt="Alarm Icon" />
+            <Icon className="alarm" isClicked={true} />
           ) : (
-            <Icon src="../../assets/alarm_icon.png" alt="Alarm Icon" />
+            <Icon className="alarm" isClicked={false} />
           )}
         </button>
         <Link to="/setting">
           {pathname === '/setting' && !alarmClicked ? (
-            <Icon src="../../assets/setting_icon_clicked.png" alt="Setting Icon" />
+            <Icon className="setting" isClicked={true} />
           ) : (
-            <Icon src="../../assets/setting_icon.png" alt="Setting Icon" />
+            <Icon className="setting" isClicked={false} />
           )}
         </Link>
       </div>
@@ -74,8 +78,32 @@ const Logo = styled.img`
   height: 40px;
 `;
 
-const Icon = styled.img`
+const Icon = styled.i<{ isClicked: boolean }>`
   width: 32px;
   height: 32px;
   margin-left: 30px;
+
+  &.manage-category {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    ${({ isClicked }) =>
+      isClicked ? `background-position: -62px -251px;` : `background-position: -269px -62px;`}
+  }
+
+  &.search {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    ${({ isClicked }) =>
+      isClicked ? `background-position: -10px -251px;` : `background-position: -269px -10px;`}
+  }
+
+  &.alarm {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    ${({ isClicked }) =>
+      isClicked ? `background-position: -166px -251px;` : `background-position: -269px -114px;`}
+  }
+
+  &.setting {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    ${({ isClicked }) =>
+      isClicked ? `background-position: -114px -251px;` : `background-position: -269px -166px;`}
+  }
 `;

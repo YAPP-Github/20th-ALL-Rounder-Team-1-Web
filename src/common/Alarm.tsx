@@ -4,10 +4,9 @@ import styled from 'styled-components';
 interface AlarmProps {
   type: string;
   content: string;
-  imgUrl?: string;
 }
 
-export const Alarm = ({ type, content, imgUrl }: AlarmProps) => {
+export const Alarm = ({ type, content }: AlarmProps) => {
   const [currentText, setCurrentText] = useState('');
 
   const handleContent = () => {
@@ -29,15 +28,7 @@ export const Alarm = ({ type, content, imgUrl }: AlarmProps) => {
   return (
     <Wrapper>
       <Icon>
-        {imgUrl?.length ? (
-          type === 'Follow' ? (
-            <img src={imgUrl} alt="Friend Image" width={40} height={40} />
-          ) : (
-            <img src={imgUrl} alt="Alarm Content" width={16} height={20} />
-          )
-        ) : (
-          <DefaultIcon />
-        )}
+        <i className="alarm" />
       </Icon>
       <Content>{currentText}</Content>
     </Wrapper>
@@ -54,24 +45,19 @@ const Wrapper = styled.li`
   border-bottom: 1px solid ${({ theme: { colors } }) => colors.Gray200};
 `;
 
-const Icon = styled.div`
+const Icon = styled.i`
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
   display: flex;
   justify-content: center;
   align-items: center;
-  img {
-    border-radius: 12px;
-  }
-`;
+  background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
 
-const DefaultIcon = styled.div`
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background-color: ${({ theme: { colors } }) => colors.Gray300};
+  .alarm {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 24, 24)}
+    background-position: -421px -10px;
+  }
 `;
 
 const Content = styled.span`
