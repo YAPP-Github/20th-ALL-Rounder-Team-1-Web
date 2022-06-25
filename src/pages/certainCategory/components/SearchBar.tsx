@@ -4,7 +4,7 @@ export const SearchBar = () => {
   return (
     <Wrapper>
       <input type="text" placeholder="일정을 검색해보세요" />
-      <img src="../../assets/search_button.png" alt="" />
+      <i className="search_icon" />
     </Wrapper>
   );
 };
@@ -36,8 +36,8 @@ const Wrapper = styled.div`
     color: ${({ theme: { colors } }) => colors.Gray400};
   }
 
-  img {
-    width: 20.53px;
-    height: 20.5px;
+  i.search_icon {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -250px -303px;
   }
 `;

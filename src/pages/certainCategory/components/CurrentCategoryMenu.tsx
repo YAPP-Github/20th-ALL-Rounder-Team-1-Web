@@ -46,13 +46,13 @@ export const CurrentCategoryMenu = ({
         <h2>{name}</h2>
       </Title>
       <Time>
-        <img src="../../assets/start_time_icon.png" alt="" />
+        <i className="start_time" />
         <p>{startDate}</p>
         <p>{startTime}</p>
       </Time>
       <WithPeriod>
         <Time>
-          <img src="../../assets/end_time_icon.png" alt="" />
+          <i className="end_time" />
           <p>{endDate}</p>
           <p>{endTime}</p>
         </Time>
@@ -108,6 +108,16 @@ const Time = styled.div`
     color: ${({ theme: { colors } }) => colors.Gray500};
     ${({ theme: { fonts } }) => fonts.Body2}
     width: 78px;
+  }
+
+  i.start_time {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 16, 16)}
+    background-position: -421px -178px;
+  }
+
+  i.end_time {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 16, 16)}
+    background-position: -421px -142px;
   }
 `;
 

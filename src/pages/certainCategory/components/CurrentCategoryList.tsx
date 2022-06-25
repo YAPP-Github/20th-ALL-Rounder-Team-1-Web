@@ -23,7 +23,7 @@ export const CurrentCategoryList = () => {
         <p>공개여부 · nn개의 일정</p>
         <Sorting onClick={onClickSort}>
           <h1>{currentSort}</h1>
-          <div />
+          <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
               <li onClick={() => onClickSortType('최신순')}>최신순</li>
@@ -82,10 +82,9 @@ const Sorting = styled.div`
     ${({ theme: { fonts } }) => fonts.Body1}
   }
 
-  div {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid ${({ theme: { colors } }) => colors.Gray700};
+  i.sort_icon {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 24, 24)}
+    background-position: -142px -351px;
   }
 `;
 

@@ -4,12 +4,7 @@ export const CurrentCategory = () => {
   return (
     <Wrapper>
       <p>카테고리</p>
-      <img
-        src="../../assets/setting_right_button.png"
-        alt="Right Icon"
-        width={6.55}
-        height={11.15}
-      />
+      <i className="right" />
       <Info>
         <Color />
         <p>Google 캘린더 시작 Google</p>
@@ -30,6 +25,11 @@ const Wrapper = styled.div`
     color: ${({ theme: { colors } }) => colors.Gray900};
     ${({ theme: { fonts } }) => fonts.Title}
     margin-right: 16.64px;
+  }
+
+  i.right {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 29, 30)}
+    background-position: -270px -251px;
   }
 `;
 
