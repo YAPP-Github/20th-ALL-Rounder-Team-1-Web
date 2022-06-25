@@ -53,12 +53,7 @@ export const Schedule = ({
       </CategoryAndName>
       <TimeAndLike>
         <ProcessAndTime>
-          <img
-            src={`../../assets/${process}_icon.png`}
-            alt="Schedule Process Icon"
-            width={11.67}
-            height={11.67}
-          />
+          <i className={process} />
           <h2>
             {startTime} - {endTime}
           </h2>
@@ -67,15 +62,10 @@ export const Schedule = ({
           {likeNumber > 0 && <p>{likeNumber}</p>}
           <Icons isFriend={isFriend}>
             {likeTypes.map((likeType) => (
-              <img
-                src={`../../assets/emoji_${likeType}.png`}
-                alt="Smiling Sticker"
-                width={26.6}
-                height={26.6}
-              />
+              <i className={likeType} />
             ))}
           </Icons>
-          {isFriend && <img src="../../assets/sticker_button.png" alt="Smiling Sticker" />}
+          {isFriend && <LikeSticker />}
         </LikeCountAndIcon>
       </TimeAndLike>
     </Wrapper>
@@ -98,11 +88,11 @@ const CategoryAndName = styled.div<{ categoryColor: string }>`
   display: flex;
   align-items: center;
   width: 301px;
-  gap: 9px;
 
   div {
     width: 11.67px;
     height: 11.67px;
+    margin: 8.167px;
     border-radius: 3px;
     background-color: ${({ categoryColor }) => categoryColor};
   }
@@ -122,11 +112,35 @@ const TimeAndLike = styled.div`
 const ProcessAndTime = styled.div`
   display: flex;
   align-items: center;
-  gap: 9px;
 
   h2 {
     ${({ theme: { fonts } }) => fonts.Body1}
     color: ${({ theme: { colors } }) => colors.Gray400};
+  }
+
+  i.uncompleted {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -373px -106px;
+  }
+
+  i.completed {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -298px -303px;
+  }
+
+  i.beforecheck {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -373px -154px;
+  }
+
+  i.ongoing {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -202px -303px;
+  }
+
+  i.prearranged {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -373px -10px;
   }
 `;
 
@@ -150,23 +164,48 @@ const Icons = styled.div<{ isFriend: boolean }>`
   display: flex;
   align-items: center;
 
-  img:first-child {
+  i.smile {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -106px -303px;
+  }
+
+  i.good {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -154px -303px;
+  }
+
+  i.cool {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -58px -303px;
+  }
+
+  i.congrats {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
+    background-position: -10px -303px;
+  }
+
+  i:first-child {
     position: absolute;
     right: ${({ isFriend }) => (isFriend ? '40px' : '0px')};
   }
 
-  img:nth-child(2) {
+  i:nth-child(2) {
     position: absolute;
     right: ${({ isFriend }) => (isFriend ? '60px' : '20px')};
   }
 
-  img:nth-child(3) {
+  i:nth-child(3) {
     position: absolute;
     right: ${({ isFriend }) => (isFriend ? '80px' : '40px')};
   }
 
-  img:nth-child(4) {
+  i:nth-child(4) {
     position: absolute;
     right: ${({ isFriend }) => (isFriend ? '100px' : '60px')};
   }
+`;
+
+const LikeSticker = styled.i`
+  ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+  background-position: -321px -62px;
 `;

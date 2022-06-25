@@ -150,7 +150,7 @@ export const SCHEDULES = [
   {
     categoryColor: '#B6EEBD',
     name: '아침 런닝하기',
-    process: 'failed',
+    process: 'uncompleted',
     startTime: '07:00',
     endTime: '08:00',
     likeNumber: 12,
@@ -159,7 +159,7 @@ export const SCHEDULES = [
   {
     categoryColor: '#FFC59C',
     name: '맛있는 아침 차려먹기',
-    process: 'success',
+    process: 'completed',
     startTime: '08:00',
     endTime: '08:30',
     likeNumber: 25,
@@ -168,7 +168,7 @@ export const SCHEDULES = [
   {
     categoryColor: '#B1C7FF',
     name: '샤워하기',
-    process: 'missed',
+    process: 'beforecheck',
     startTime: '08:30',
     endTime: '09:00',
     likeNumber: 9,
@@ -177,7 +177,7 @@ export const SCHEDULES = [
   {
     categoryColor: '#D4AAFF',
     name: '업무 시간',
-    process: 'started',
+    process: 'ongoing',
     startTime: '09:00',
     endTime: '19:00',
     likeNumber: 35,
@@ -186,7 +186,7 @@ export const SCHEDULES = [
   {
     categoryColor: '#D4AAFF',
     name: '기획, 디자인 회의',
-    process: 'unstarted',
+    process: 'prearranged',
     startTime: '10:00',
     endTime: '12:00',
     likeNumber: 0,
