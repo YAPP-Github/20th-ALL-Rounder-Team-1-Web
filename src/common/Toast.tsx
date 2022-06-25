@@ -7,11 +7,9 @@ export const Toast = () => {
   const { isVisible, text, isSuccess } = useContext(ToastContext);
 
   return (
-    <div>
-      <Wrapper visible={isVisible} isSuccess={isSuccess}>
-        <p className="content">{text}</p>
-      </Wrapper>
-    </div>
+    <Wrapper visible={isVisible} isSuccess={isSuccess}>
+      <p className="content">{text}</p>
+    </Wrapper>
   );
 };
 
