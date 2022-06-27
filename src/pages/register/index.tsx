@@ -14,7 +14,7 @@ const Register = () => {
   const [passwordConfirm, setPasswordConfirm] = useState('');
 
   return (
-    <PageLayout title="회원가입" isHeader={false} isFooter={false}>
+    <PageLayout isHeader={false} isFooter={false}>
       <Main role="main">
         <form action="#">
           <Title>Weekand와 함께 시작해요!</Title>

@@ -54,7 +54,7 @@ const Agreement = () => {
   };
 
   return (
-    <PageLayout title="비밀번호 찾기 페이지" isHeader={false} isFooter={false}>
+    <PageLayout isHeader={false} isFooter={false}>
       <Main role="main">
         <Title>
           Weekand

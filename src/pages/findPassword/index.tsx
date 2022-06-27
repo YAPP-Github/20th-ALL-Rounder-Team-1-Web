@@ -4,7 +4,7 @@ import { Button, Input, PageLayout } from '@/common';
 
 const FindPassword = () => {
   return (
-    <PageLayout title="비밀번호 찾기 페이지" isHeader={false} isFooter={false}>
+    <PageLayout isHeader={false} isFooter={false}>
       <Main role="main">
         <Title>비밀번호를 잊으셨나요?</Title>
         <Description>

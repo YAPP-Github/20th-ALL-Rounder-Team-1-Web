@@ -1,3 +1,36 @@
+export const ALARMS = [
+  {
+    id: 0,
+    type: 'Start',
+    content: '일하기',
+  },
+  {
+    id: 1,
+    type: 'Follow',
+    content: '빌리',
+  },
+  {
+    id: 2,
+    type: 'Follow',
+    content: 'Ja Morant',
+  },
+  {
+    id: 3,
+    type: 'End',
+    content: '일하기',
+  },
+  {
+    id: 4,
+    type: 'Start',
+    content: '운동하기',
+  },
+  {
+    id: 5,
+    type: 'End',
+    content: '운동하기',
+  },
+];
+
 export const JOBS = [
   '학생',
   '취준생',

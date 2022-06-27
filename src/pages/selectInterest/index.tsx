@@ -9,7 +9,7 @@ const SelectInterest = () => {
   const [totalInterests, setTotalInterests] = useState<string[]>([]);
 
   return (
-    <PageLayout title="관심사 페이지" isHeader={false} isFooter={false}>
+    <PageLayout isHeader={false} isFooter={false}>
       <Main role="main">
         <Title>조금 더 알려주시겠어요?</Title>
         <SubContentWrapper>

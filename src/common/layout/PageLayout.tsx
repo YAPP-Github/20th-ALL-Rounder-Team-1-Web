@@ -1,17 +1,16 @@
 import { PropsWithChildren } from 'react';
 import styled from 'styled-components';
 
+import { Header } from '@/common';
 import { useBackgroundColor } from '@/hooks';
 
 interface PageLayoutProps {
-  title: string;
   isHeader?: boolean;
   isFooter?: boolean;
 }
 
 export const PageLayout = ({
   children,
-  title,
   isHeader = true,
   isFooter = true,
 }: PropsWithChildren<PageLayoutProps>) => {
@@ -19,11 +18,7 @@ export const PageLayout = ({
 
   return (
     <Wrapper>
-      {isHeader && (
-        <Header>
-          <h1>{title}</h1>
-        </Header>
-      )}
+      {isHeader && <Header />}
       {children}
       {isFooter && (
         <Footer>
@@ -37,11 +32,6 @@ export const PageLayout = ({
 const Wrapper = styled.div`
   ${({ theme: { fonts } }) => fonts.Head1}
   text-align: center;
-`;
-
-const Header = styled.header`
-  height: 36px;
-  padding: 36px 0px;
 `;
 
 const Footer = styled.footer`

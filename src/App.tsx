@@ -11,6 +11,7 @@ import {
   Login,
   ManageCategory,
   Register,
+  Search,
   SelectInterest,
   Setting,
 } from '@/pages';
@@ -27,6 +28,7 @@ const App = () => {
           <Route path="/find-password" element={<FindPassword />} />
           <Route path="/select-interest" element={<SelectInterest />} />
           <Route path="/manage-category" element={<ManageCategory />} />
+          <Route path="/search" element={<Search />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/register" element={<Register />} />
           <Route path="*" element={<div>아직 없는 페이지입니다.</div>} />

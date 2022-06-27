@@ -9,7 +9,7 @@ const Setting = () => {
   const [currentContent, setCurrentContent] = useState(<EditProfile />);
 
   return (
-    <PageLayout title="세팅 페이지" isFooter={false}>
+    <PageLayout isFooter={false}>
       <Wrapper>
         <SettingSidebar setCurrentContent={setCurrentContent} />
         <ContentWrapper>{currentContent}</ContentWrapper>

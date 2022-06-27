@@ -12,7 +12,7 @@ const Login = () => {
   const onClickAutoLogin = () => setIsChecked(!isChecked);
 
   return (
-    <PageLayout title="로그인 페이지" isHeader={false} isFooter={false}>
+    <PageLayout isHeader={false} isFooter={false}>
       <Main role="main">
         <SmilingImage>
           <img src="../assets/smiling_emoji.png" />
