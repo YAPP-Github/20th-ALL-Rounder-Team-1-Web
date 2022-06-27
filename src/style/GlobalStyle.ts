@@ -17,4 +17,19 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 auto;
       position: relative;
    }
+
+   :focus {
+      outline-width: 0;
+      outline-style: solid;
+   }
+
+   :focus-visible{
+      border-radius: 12px;
+      box-shadow: 0 0 0 3px #5086ff;
+   }
+
+   input:focus {
+      border-radius: 12px;
+      box-shadow: 0 0 0 3px #5086ff;
+   }
 `;
