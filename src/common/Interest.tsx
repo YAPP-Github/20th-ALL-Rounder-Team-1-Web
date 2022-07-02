@@ -52,14 +52,15 @@ export const Interest = ({
 };
 
 const Selected = styled.button`
+  width: 74px;
   background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
   color: ${({ theme: { colors } }) => colors.WeekandBlue};
   border-radius: 108px;
 
   &.select_interest {
     padding: 8px 16px;
-    margin: 5px;
-    font-size: 16px;
+    margin: 6px 5px;
+    ${({ theme: { fonts } }) => fonts.SubHead2};
     font-weight: 700;
   }
 
@@ -77,8 +78,8 @@ const NotSelected = styled.button`
 
   &.select_interest {
     padding: 8px 16px;
-    margin: 5px;
-    font-size: 16px;
+    margin: 6px 5px;
+    ${({ theme: { fonts } }) => fonts.SubHead2};
     font-weight: 500;
   }
 

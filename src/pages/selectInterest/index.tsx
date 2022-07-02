@@ -17,28 +17,32 @@ const SelectInterest = () => {
             <SubTitle>직업</SubTitle>
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
-          {JOBS.map((job) => (
-            <Interest
-              className="select_interest"
-              name={job}
-              totalChoices={totalJobs}
-              setTotalChoices={setTotalJobs}
-            />
-          ))}
+          <InterestWrapper>
+            {JOBS.map((job) => (
+              <Interest
+                className="select_interest"
+                name={job}
+                totalChoices={totalJobs}
+                setTotalChoices={setTotalJobs}
+              />
+            ))}
+          </InterestWrapper>
         </SubContentWrapper>
         <SubContentWrapper>
           <ExplanationWrapper>
             <SubTitle>관심사</SubTitle>
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
-          {INTERESTS.map((interest) => (
-            <Interest
-              className="select_interest"
-              name={interest}
-              totalChoices={totalInterests}
-              setTotalChoices={setTotalInterests}
-            />
-          ))}
+          <InterestWrapper>
+            {INTERESTS.map((interest) => (
+              <Interest
+                className="select_interest"
+                name={interest}
+                totalChoices={totalInterests}
+                setTotalChoices={setTotalInterests}
+              />
+            ))}
+          </InterestWrapper>
         </SubContentWrapper>
         <ButtonWrapper>
           <Button
@@ -56,22 +60,25 @@ const SelectInterest = () => {
 };
 
 const Main = styled.div`
-  padding: 176px 0px;
-  text-align: start;
+  width: 672px;
+  margin: 0 auto;
+  margin-top: calc((100vh - 727px) / 2);
+  text-align: left;
 `;
 
 const Title = styled.h1`
-  ${({ theme: { fonts } }) => fonts.Head1}
+  width: 213px;
+  ${({ theme: { fonts } }) => fonts.Title}
 `;
 
 const SubContentWrapper = styled.div`
-  margin-top: 50px;
+  margin-top: 42px;
 `;
 
 const ExplanationWrapper = styled.div`
   display: flex;
   gap: 12px;
-  margin-bottom: 32px;
+  margin-bottom: 26px;
 `;
 
 const SubTitle = styled.h2`
@@ -79,12 +86,16 @@ const SubTitle = styled.h2`
 `;
 
 const Condition = styled.span`
-  ${({ theme: { fonts } }) => fonts.Body1}
+  ${({ theme: { fonts } }) => fonts.Body1('Gray500')}
 `;
 
 const ButtonWrapper = styled.div`
   margin-top: 120px;
   text-align: center;
+`;
+
+const InterestWrapper = styled.div`
+  margin-left: -5px;
 `;
 
 export default SelectInterest;
