@@ -1,10 +1,13 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button, Interest, PageLayout } from '@/common';
 import { INTERESTS, JOBS } from '@/utils';
 
 const SelectInterest = () => {
+  const navigate = useNavigate();
+
   const [totalJobs, setTotalJobs] = useState<string[]>([]);
   const [totalInterests, setTotalInterests] = useState<string[]>([]);
 
@@ -44,7 +47,7 @@ const SelectInterest = () => {
           <Button
             className="login_button"
             onClick={() => {
-              console.log('다음'); // 다음 페이지가 완성됨에 따라 다음 페이지 연결
+              navigate('/agreement');
             }}
           >
             다음

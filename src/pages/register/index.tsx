@@ -1,4 +1,5 @@
 import { useRef, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { ValidationControlledInput, ValidationUncontrolledInput } from './components';
@@ -6,6 +7,8 @@ import { ValidationControlledInput, ValidationUncontrolledInput } from './compon
 import { Button, InputRef, PageLayout } from '@/common';
 
 const Register = () => {
+  const navigate = useNavigate();
+
   const emailRef = useRef<InputRef>(null);
   const validationNumRef = useRef<InputRef>(null);
   const nicknameRef = useRef<InputRef>(null);
@@ -65,7 +68,7 @@ const Register = () => {
             className="login_button"
             type="submit"
             onClick={() => {
-              console.log(1);
+              navigate('/select-interest');
             }}
           >
             다음
