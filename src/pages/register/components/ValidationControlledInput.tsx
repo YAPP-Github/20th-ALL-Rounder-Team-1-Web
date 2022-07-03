@@ -3,6 +3,7 @@ import cn from 'classnames';
 import styled from 'styled-components';
 
 import { Button } from '@/common';
+import { Validation } from '@/types';
 import { checkPassword, checkPasswordConfirm } from '@/utils';
 
 interface BasicInputProps extends ComponentPropsWithRef<'input'> {
@@ -11,6 +12,8 @@ interface BasicInputProps extends ComponentPropsWithRef<'input'> {
   type?: string;
   htmlFor: string;
   label: string;
+  validation: Validation;
+  setValidation: Dispatch<SetStateAction<Validation>>;
 }
 
 interface PasswordProps extends BasicInputProps {
@@ -34,10 +37,11 @@ export const ValidationControlledInput = ({
   placeholder,
   type = 'text',
   validationType,
+  validation,
+  setValidation,
   password,
   ...restProps
 }: InputProps) => {
-  const [validation, setValidation] = useState({ type: '', message: '' });
   const [inputType, setInputType] = useState(type);
 
   useEffect(() => {
