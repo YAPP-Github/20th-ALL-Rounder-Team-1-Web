@@ -17,7 +17,7 @@ export const PageLayout = ({
   useBackgroundColor();
 
   return (
-    <Wrapper>
+    <>
       {isHeader && <Header />}
       {children}
       {isFooter && (
@@ -25,14 +25,9 @@ export const PageLayout = ({
           <small>© Copyright Weekand 2022</small>
         </Footer>
       )}
-    </Wrapper>
+    </>
   );
 };
-
-const Wrapper = styled.div`
-  ${({ theme: { fonts } }) => fonts.Head1}
-  text-align: center;
-`;
 
 const Footer = styled.footer`
   border-top: 1px solid #000;
