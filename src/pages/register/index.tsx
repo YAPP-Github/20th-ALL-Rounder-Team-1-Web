@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -13,8 +13,40 @@ const Register = () => {
   const validationNumRef = useRef<InputRef>(null);
   const nicknameRef = useRef<InputRef>(null);
 
+  const [emailValidation, setEmailValidation] = useState({ type: '', message: '' });
+  const [numValidation, setNumValidation] = useState({ type: '', message: '' });
+  const [nicknameValidation, setNicknameValidation] = useState({ type: '', message: '' });
+  const [passwordValidation, setPasswordValidation] = useState({ type: '', message: '' });
+  const [passwordConfirmValidation, setPasswordConfirmValidation] = useState({
+    type: '',
+    message: '',
+  });
+
+  const [emailButtonDisabled, setEmailButtonDisabled] = useState(false);
+  const [numValidationButtonDisabled, setNumValidationButtonDisabled] = useState(false);
+
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
+
+  const chkRegisterButtonDisabled = () => {
+    if (
+      emailValidation.type === 'success' &&
+      numValidation.type === 'success' &&
+      nicknameValidation.type === 'success' &&
+      passwordValidation.type === 'success' &&
+      passwordConfirmValidation.type === 'success'
+    ) {
+      return false;
+    }
+    return true;
+  };
+
+  useEffect(() => {
+    if (emailValidation.type === 'success' && numValidation.type === 'success') {
+      setEmailButtonDisabled(true);
+      setNumValidationButtonDisabled(true);
+    }
+  }, [numValidation.type]);
 
   return (
     <PageLayout isHeader={false} isFooter={false}>
@@ -27,6 +59,9 @@ const Register = () => {
             buttonText="인증"
             placeholder="이메일을 입력해주세요"
             validationType="checkEmail"
+            validation={emailValidation}
+            setValidation={setEmailValidation}
+            buttonDisabled={emailButtonDisabled}
             ref={emailRef}
           />
           <ValidationUncontrolledInput
@@ -35,6 +70,9 @@ const Register = () => {
             buttonText="확인"
             placeholder="인증번호를 입력해주세요"
             validationType="checkCertificateNumber"
+            validation={numValidation}
+            setValidation={setNumValidation}
+            buttonDisabled={numValidationButtonDisabled}
             ref={validationNumRef}
           />
           <ValidationUncontrolledInput
@@ -43,6 +81,8 @@ const Register = () => {
             buttonText="중복확인"
             placeholder="닉네임을 입력해주세요"
             validationType="checkNickname"
+            validation={nicknameValidation}
+            setValidation={setNicknameValidation}
             ref={nicknameRef}
           />
           <ValidationControlledInput
@@ -53,6 +93,8 @@ const Register = () => {
             placeholder="비밀번호를 입력해주세요"
             type="password"
             validationType="password"
+            validation={passwordValidation}
+            setValidation={setPasswordValidation}
           />
           <ValidationControlledInput
             value={passwordConfirm}
@@ -62,11 +104,14 @@ const Register = () => {
             placeholder="비밀번호를 확인해주세요"
             type="password"
             validationType="password_confirm"
+            validation={passwordConfirmValidation}
+            setValidation={setPasswordConfirmValidation}
             password={password}
           />
           <RegisterButton
             className="login_button"
             type="submit"
+            disabled={chkRegisterButtonDisabled()}
             onClick={() => {
               navigate('/select-interest');
             }}
