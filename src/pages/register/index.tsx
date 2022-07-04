@@ -34,7 +34,7 @@ const Register = () => {
       numValidation.type === 'success' &&
       nicknameValidation.type === 'success' &&
       passwordValidation.type === 'success' &&
-      passwordConfirmValidation.type === 'success'
+      password === passwordConfirm
     ) {
       return false;
     }
