@@ -22,7 +22,7 @@ const App = () => {
 
   return (
     <Router>
-      <Suspense fallback={<p> Loading...</p>}>
+      <Suspense fallback={<></>}>
         <Routes>
           {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
           <Route path="/" element={<Login />} />
