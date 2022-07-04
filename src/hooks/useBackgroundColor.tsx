@@ -2,7 +2,6 @@ import { useEffect } from 'react';
 import { useLocation } from 'react-router';
 
 const BACKGROUND_COLOR_WHITE_PAGES = [
-  '/',
   '/agreement',
   '/login',
   '/find-password',
