@@ -1,15 +1,26 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Button, Input, PageLayout } from '@/common';
+import { Button, Input, InputRef, PageLayout } from '@/common';
 
 const Login = () => {
   const navigate = useNavigate();
 
+  const emailRef = useRef<InputRef>(null);
+  const passwordRef = useRef<InputRef>(null);
+
   const [isChecked, setIsChecked] = useState(false);
 
   const onClickAutoLogin = () => setIsChecked(!isChecked);
+
+  const chkLogin = () => {
+    if (emailRef.current?.value === 'test' && passwordRef.current?.value === '1234') {
+      navigate('/');
+      return;
+    }
+    return;
+  };
 
   return (
     <PageLayout isHeader={false} isFooter={false}>
@@ -24,8 +35,13 @@ const Login = () => {
             함께 일정 관리해요 :)
           </Introduce>
           <LoginInput>
-            <Input className="login_input" placeholder="이메일을 입력해주세요" />
-            <Input className="login_input" type="password" placeholder="비밀번호를 입력해주세요" />
+            <Input className="login_input" placeholder="이메일을 입력해주세요" ref={emailRef} />
+            <Input
+              className="login_input"
+              type="password"
+              placeholder="비밀번호를 입력해주세요"
+              ref={passwordRef}
+            />
           </LoginInput>
           <Utils isChecked={isChecked}>
             <label className="auto_login" onClick={onClickAutoLogin}>
@@ -36,12 +52,7 @@ const Login = () => {
             </Link>
           </Utils>
           <Buttons>
-            <Button
-              className="login_button"
-              onClick={() => {
-                console.log(1);
-              }}
-            >
+            <Button className="login_button" onClick={chkLogin}>
               로그인
             </Button>
             <Separate>처음이신가요?</Separate>
@@ -109,6 +120,13 @@ const Utils = styled.div<{ isChecked: boolean }>`
 
   .auto_login {
     float: left;
+    cursor: pointer;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
   }
 
   .find_password {
