@@ -102,7 +102,7 @@ const ValidationMessage = styled.span`
 const ValidationButton = styled(Button)`
   position: absolute;
   right: 4px;
-  top: 32px;
+  top: 40px;
   width: 72px;
   height: 44px;
   ${({ theme: { fonts } }) => fonts.Body2};
