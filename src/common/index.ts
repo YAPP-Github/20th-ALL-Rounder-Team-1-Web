@@ -2,6 +2,7 @@ export * from './Alarm';
 export * from './AlarmList';
 export * from './Button';
 export * from './DebounceInput';
+export * from './FloatingButton';
 export * from './Header';
 export * from './Input';
 export * from './Interest';
