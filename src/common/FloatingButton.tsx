@@ -28,8 +28,6 @@ export const FloatingButton = () => {
 };
 
 const Wrapper = styled(Button)`
-  width: 72px;
-  height: 72px;
   background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
   position: absolute;
   right: 70px;
@@ -38,7 +36,7 @@ const Wrapper = styled(Button)`
 
   &::before {
     content: '';
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 30, 30)}
     margin: 21px;
     background-size: 455px 385px;
     background-position: -321px -214px;
