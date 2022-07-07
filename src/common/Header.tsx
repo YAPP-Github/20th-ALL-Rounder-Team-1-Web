@@ -1,15 +1,18 @@
 import { useContext, useEffect, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
+import cn from 'classnames';
 import styled from 'styled-components';
 
 import { AlarmList } from '.';
 
+import { Button } from '@/common/Button';
 import { DimmedLayerContext } from '@/contexts';
 
 export const Header = () => {
-  const [alarmClicked, setAlarmClicked] = useState(false);
   const { pathname } = useLocation();
   const { isVisible, setIsVisible, setType } = useContext(DimmedLayerContext);
+
+  const [alarmClicked, setAlarmClicked] = useState(false);
 
   const onClickAlarm = () => {
     setAlarmClicked(!alarmClicked);
@@ -23,87 +26,104 @@ export const Header = () => {
     }
   }, [isVisible]);
 
+  const chkClicked = (query: string) => {
+    if (pathname === query && !alarmClicked) {
+      return true;
+    }
+    return false;
+  };
+
   return (
     <Wrapper>
-      <div>
-        <Link to="/">
-          <Logo src="../../assets/weekand_logo.png" alt="Weekand Logo" />
+      <Link to="/">
+        <img
+          src="../../assets/weekand_logo.png"
+          alt="위크엔드 홈으로 가기"
+          width={149}
+          height={40}
+        />
+      </Link>
+      <Icons>
+        <Link
+          className={cn('category', chkClicked('/manage-category') && 'clicked')}
+          to="/manage-category"
+        >
+          <BlindText>카테고리 관리 페이지로 이동하기</BlindText>
         </Link>
-      </div>
-      <div>
-        <Link to="/manage-category">
-          {pathname === '/manage-category' && !alarmClicked ? (
-            <Icon className="manage-category" isClicked={true} />
-          ) : (
-            <Icon className="manage-category" isClicked={false} />
-          )}
+        <Link className={cn('search', chkClicked('/search') && 'clicked')} to="/search">
+          <BlindText>검색 페이지로 이동하기</BlindText>
         </Link>
-        <Link to="/search">
-          {pathname === '/search' && !alarmClicked ? (
-            <Icon className="search" isClicked={true} />
-          ) : (
-            <Icon className="search" isClicked={false} />
-          )}
+        <Button className={cn('alarm', alarmClicked && 'clicked')} onClick={onClickAlarm}>
+          <BlindText>알림 확인하기</BlindText>
+        </Button>
+        <Link className={cn('setting', chkClicked('/setting') && 'clicked')} to="/setting">
+          <BlindText>설정 페이지로 이동하기</BlindText>
         </Link>
-        <button onClick={onClickAlarm}>
-          {alarmClicked ? (
-            <Icon className="alarm" isClicked={true} />
-          ) : (
-            <Icon className="alarm" isClicked={false} />
-          )}
-        </button>
-        <Link to="/setting">
-          {pathname === '/setting' && !alarmClicked ? (
-            <Icon className="setting" isClicked={true} />
-          ) : (
-            <Icon className="setting" isClicked={false} />
-          )}
-        </Link>
-      </div>
+      </Icons>
       {alarmClicked && <AlarmList />}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.div`
-  width: 1120px;
-  height: 32px;
-  margin: 24px 0px 52px 0px;
+  margin: 20px 0px 52px 0px;
   display: flex;
   justify-content: space-between;
 `;
 
-const Logo = styled.img`
-  width: 150px;
-  height: 40px;
+const Icons = styled.div`
+  *:not(:first-child) {
+    margin-left: 30px;
+  }
+
+  a,
+  button {
+    background-size: 455px 385px;
+    display: inline-block;
+    margin-top: 4px;
+  }
+
+  .category::before {
+    content: '';
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)};
+    background-position: -269px -62px;
+  }
+
+  .category.clicked::before {
+    background-position: -62px -251px;
+  }
+
+  .search::before {
+    content: '';
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)};
+    background-position: -269px -10px;
+  }
+
+  .search.clicked::before {
+    background-position: -10px -251px;
+  }
+
+  .alarm::before {
+    content: '';
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)};
+    background-position: -269px -114px;
+  }
+
+  .alarm.clicked::before {
+    background-position: -166px -251px;
+  }
+
+  .setting::before {
+    content: '';
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)};
+    background-position: -269px -166px;
+  }
+
+  .setting.clicked::before {
+    background-position: -114px -251px;
+  }
 `;
 
-const Icon = styled.i<{ isClicked: boolean }>`
-  width: 32px;
-  height: 32px;
-  margin-left: 30px;
-
-  &.manage-category {
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
-    ${({ isClicked }) =>
-      isClicked ? `background-position: -62px -251px;` : `background-position: -269px -62px;`}
-  }
-
-  &.search {
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
-    ${({ isClicked }) =>
-      isClicked ? `background-position: -10px -251px;` : `background-position: -269px -10px;`}
-  }
-
-  &.alarm {
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
-    ${({ isClicked }) =>
-      isClicked ? `background-position: -166px -251px;` : `background-position: -269px -114px;`}
-  }
-
-  &.setting {
-    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
-    ${({ isClicked }) =>
-      isClicked ? `background-position: -114px -251px;` : `background-position: -269px -166px;`}
-  }
+const BlindText = styled.span`
+  ${({ theme: { sr_only } }) => sr_only}
 `;
