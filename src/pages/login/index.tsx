@@ -147,7 +147,7 @@ const Buttons = styled.div`
 `;
 
 const Separate = styled.div`
-  margin: 22px 0;
+  margin: 22px 0 22px 135px;
   ${({ theme: { fonts } }) => fonts.Body2('Gray400')}
 
   &:before {
