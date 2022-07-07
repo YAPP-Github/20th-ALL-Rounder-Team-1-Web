@@ -1,4 +1,4 @@
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { PopUpPortal, ToastPortal } from './portals';
@@ -22,10 +22,9 @@ const App = () => {
 
   return (
     <Router>
-      <Suspense fallback={<p> Loading...</p>}>
+      <Suspense fallback={<></>}>
         <Routes>
-          {/* TODO: 추후에 토큰 유무 확인을 통해 다른 라우팅 처리 필요 */}
-          <Route path="/" element={<Login />} />
+          <Route path="/" element={<Home />} />
           <Route path="/agreement" element={<Agreement />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-password" element={<FindPassword />} />

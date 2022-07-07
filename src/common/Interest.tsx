@@ -52,7 +52,6 @@ export const Interest = ({
 };
 
 const Selected = styled.button`
-  width: 74px;
   background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
   color: ${({ theme: { colors } }) => colors.WeekandBlue};
   border-radius: 108px;
@@ -65,8 +64,8 @@ const Selected = styled.button`
   }
 
   &.setting_interest {
-    padding: 8px 14px;
-    margin: 4px;
+    padding: 8px 16px;
+    margin: 6px 5px;
     ${({ theme: { fonts } }) => fonts.SubHead3}
   }
 `;
@@ -84,8 +83,8 @@ const NotSelected = styled.button`
   }
 
   &.setting_interest {
-    padding: 8px 14px;
-    margin: 4px;
+    padding: 8px 16px;
+    margin: 6px 5px;
     ${({ theme: { fonts } }) => fonts.Body2}
   }
 `;
