@@ -6,7 +6,7 @@ import { PageLayout } from '@/common';
 
 const ManageCategory = () => {
   return (
-    <PageLayout title="카테고리" isFooter={false}>
+    <PageLayout isFooter={false}>
       <Title>카테고리</Title>
       <CategoryList />
     </PageLayout>

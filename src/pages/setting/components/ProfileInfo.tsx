@@ -60,6 +60,7 @@ const Content = styled.div`
   margin: 18px 0px;
 
   .input {
+    width: 540px;
     border: none;
     background-color: transparent;
     color: ${({ theme: { colors } }) => colors.Gray900};

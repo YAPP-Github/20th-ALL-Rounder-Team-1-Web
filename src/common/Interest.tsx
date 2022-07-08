@@ -58,14 +58,14 @@ const Selected = styled.button`
 
   &.select_interest {
     padding: 8px 16px;
-    margin: 5px;
-    font-size: 16px;
+    margin: 6px 5px;
+    ${({ theme: { fonts } }) => fonts.SubHead2};
     font-weight: 700;
   }
 
   &.setting_interest {
-    padding: 8px 14px;
-    margin: 4px;
+    padding: 8px 16px;
+    margin: 6px 5px;
     ${({ theme: { fonts } }) => fonts.SubHead3}
   }
 `;
@@ -77,14 +77,14 @@ const NotSelected = styled.button`
 
   &.select_interest {
     padding: 8px 16px;
-    margin: 5px;
-    font-size: 16px;
+    margin: 6px 5px;
+    ${({ theme: { fonts } }) => fonts.SubHead2};
     font-weight: 500;
   }
 
   &.setting_interest {
-    padding: 8px 14px;
-    margin: 4px;
+    padding: 8px 16px;
+    margin: 6px 5px;
     ${({ theme: { fonts } }) => fonts.Body2}
   }
 `;

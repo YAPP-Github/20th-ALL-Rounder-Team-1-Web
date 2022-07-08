@@ -6,11 +6,7 @@ import { PopUpContext } from '@/contexts';
 export const PopUp = () => {
   const { isVisible, innerContent } = useContext(PopUpContext);
 
-  return (
-    <div>
-      <PopUpWrapper visible={isVisible}>{innerContent}</PopUpWrapper>
-    </div>
-  );
+  return <PopUpWrapper visible={isVisible}>{innerContent}</PopUpWrapper>;
 };
 
 const PopUpWrapper = styled.div<{ visible: boolean }>`
