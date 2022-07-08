@@ -39,10 +39,8 @@ export const Schedule = ({
   };
 
   useEffect(() => {
-    if (currentIndex === clickedIndex) {
-      return setIsClicked(true);
-    }
-    setIsClicked(false);
+    const isClicked = currentIndex === clickedIndex;
+    setIsClicked(isClicked);
   }, [clickedIndex]);
 
   return (
