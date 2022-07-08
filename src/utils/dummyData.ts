@@ -179,6 +179,54 @@ export const CATEGORIES = [
   },
 ];
 
+export const SCHEDULES = [
+  {
+    categoryColor: '#B6EEBD',
+    name: '아침 런닝하기',
+    process: 'uncompleted',
+    startTime: '07:00',
+    endTime: '08:00',
+    likeNumber: 12,
+    likeTypes: ['smile', 'congrats'],
+  },
+  {
+    categoryColor: '#FFC59C',
+    name: '맛있는 아침 차려먹기',
+    process: 'completed',
+    startTime: '08:00',
+    endTime: '08:30',
+    likeNumber: 25,
+    likeTypes: ['good', 'cool', 'congrats'],
+  },
+  {
+    categoryColor: '#B1C7FF',
+    name: '샤워하기',
+    process: 'beforecheck',
+    startTime: '08:30',
+    endTime: '09:00',
+    likeNumber: 9,
+    likeTypes: ['congrats'],
+  },
+  {
+    categoryColor: '#D4AAFF',
+    name: '업무 시간',
+    process: 'ongoing',
+    startTime: '09:00',
+    endTime: '19:00',
+    likeNumber: 35,
+    likeTypes: ['smile', 'good'],
+  },
+  {
+    categoryColor: '#D4AAFF',
+    name: '기획, 디자인 회의',
+    process: 'prearranged',
+    startTime: '10:00',
+    endTime: '12:00',
+    likeNumber: 0,
+    likeTypes: [],
+  },
+];
+
 export const CERTAINCATEGORIES = [
   {
     name: '운동',
