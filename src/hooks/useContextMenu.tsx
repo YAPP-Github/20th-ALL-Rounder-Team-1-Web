@@ -5,6 +5,7 @@ export const useContextMenu = () => {
   const [pointY, setPointY] = useState(0);
   const [show, setShow] = useState(false);
   const [isCategoryClicked, setIsCategoryClicked] = useState(false);
+  const [clickedIndex, setClickedIndex] = useState(-1);
 
   const handleContextMenu = useCallback((event: MouseEvent) => {
     event.preventDefault();
@@ -19,6 +20,7 @@ export const useContextMenu = () => {
 
   const handleClick = useCallback(() => {
     setIsCategoryClicked(false);
+    setClickedIndex(-1);
     show && setShow(false);
   }, [show]);
 
@@ -31,5 +33,13 @@ export const useContextMenu = () => {
     };
   });
 
-  return { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked };
+  return {
+    pointX,
+    pointY,
+    show,
+    isCategoryClicked,
+    setIsCategoryClicked,
+    clickedIndex,
+    setClickedIndex,
+  };
 };

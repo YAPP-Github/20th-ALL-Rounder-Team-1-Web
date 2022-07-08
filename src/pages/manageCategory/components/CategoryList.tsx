@@ -1,7 +1,8 @@
 import styled from 'styled-components';
 
-import { Category, CategorySubMenu } from '.';
+import { Category } from '.';
 
+import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
 import { CATEGORIES } from '@/utils';
 

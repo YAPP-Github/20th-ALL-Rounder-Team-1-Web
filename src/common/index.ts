@@ -1,6 +1,7 @@
 export * from './Alarm';
 export * from './AlarmList';
 export * from './Button';
+export * from './CategorySubMenu';
 export * from './DebounceInput';
 export * from './Header';
 export * from './Input';

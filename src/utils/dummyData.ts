@@ -178,3 +178,69 @@ export const CATEGORIES = [
     content: '독서',
   },
 ];
+
+export const CERTAINCATEGORIES = [
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+  {
+    name: '운동',
+    startDate: '22.05.21.',
+    startTime: '06:00',
+    endDate: '22.05.28.',
+    endTime: '08:00',
+  },
+];
