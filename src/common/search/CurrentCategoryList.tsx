@@ -1,10 +1,20 @@
-import { useState } from 'react';
+import { ReactNode, useState } from 'react';
 import styled from 'styled-components';
 
-import { CurrentCategoryMenus, SearchBar } from '.';
+import { SearchBar } from '.';
 
-export const CurrentCategoryList = () => {
-  const [currentSort, setCurrentSort] = useState('최신순');
+interface CurrentCategoryListProps {
+  showAllowingRange?: boolean;
+  sortingMenus: string[];
+  listingContents: ReactNode;
+}
+
+export const CurrentCategoryList = ({
+  showAllowingRange = true,
+  sortingMenus,
+  listingContents,
+}: CurrentCategoryListProps) => {
+  const [currentSort, setCurrentSort] = useState(sortingMenus[0]);
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   const onClickSort = () => {
@@ -19,22 +29,21 @@ export const CurrentCategoryList = () => {
   return (
     <Wrapper>
       <SearchBar />
-      <Options>
+      <Options showAllowingRange={showAllowingRange}>
         <p>공개여부 · nn개의 일정</p>
         <Sorting onClick={onClickSort}>
           <h1>{currentSort}</h1>
           <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
-              <li onClick={() => onClickSortType('최신순')}>최신순</li>
-              <li onClick={() => onClickSortType('오래된순')}>오래된순</li>
-              <li onClick={() => onClickSortType('오름차순')}>오름차순</li>
-              <li onClick={() => onClickSortType('내림차순')}>내림차순</li>
+              {sortingMenus.map((sortingMenu) => (
+                <li onClick={() => onClickSortType(sortingMenu)}>{sortingMenu}</li>
+              ))}
             </SortMenu>
           )}
         </Sorting>
       </Options>
-      <CurrentCategoryMenus />
+      {listingContents}
     </Wrapper>
   );
 };
@@ -51,7 +60,7 @@ const Wrapper = styled.div`
   padding: 36px 24px;
 `;
 
-const Options = styled.div`
+const Options = styled.div<{ showAllowingRange: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -60,6 +69,7 @@ const Options = styled.div`
   position: relative;
 
   p {
+    visibility: ${({ showAllowingRange }) => !showAllowingRange && 'hidden'};
     color: ${({ theme: { colors } }) => colors.WeekandBlue};
     ${({ theme: { fonts } }) => fonts.Body2}
   }

@@ -11,3 +11,4 @@ export * from './Toast';
 export * from './layout';
 export * from './calender';
 export * from './layer';
+export * from './search';

@@ -1,4 +1,4 @@
-import { FriendStories,Schedules  } from './components';
+import { FriendStories, Schedules } from './components';
 
 import { PageLayout } from '@/common';
 

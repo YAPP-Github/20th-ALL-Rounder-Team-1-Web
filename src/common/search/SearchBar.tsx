@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const SearchBar = () => {
   return (
     <Wrapper>
-      <input type="text" placeholder="일정을 검색해보세요" />
       <i className="search_icon" />
+      <input type="text" placeholder="일정을 검색해보세요" />
     </Wrapper>
   );
 };

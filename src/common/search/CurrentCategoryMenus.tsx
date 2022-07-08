@@ -1,8 +1,8 @@
 import styled from 'styled-components';
 
-import { CurrentCategoryMenu } from './CurrentCategoryMenu';
+import { CurrentCategoryMenu } from '.';
 
-import { CategorySubMenu, PageLayout } from '@/common';
+import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
 import { CERTAINCATEGORIES } from '@/utils';
 
