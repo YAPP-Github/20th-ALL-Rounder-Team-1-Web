@@ -15,7 +15,6 @@ export const GlobalStyle = createGlobalStyle`
    #root {
       max-width: 1120px;
       margin: 0 auto;
-      position: relative;
    }
 
    :focus {

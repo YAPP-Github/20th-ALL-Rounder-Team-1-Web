@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
 import { PopUpPortal, ToastPortal } from './portals';
 
-import { DimmedLayer, PopUp, Toast } from '@/common';
+import { DimmedLayer, FloatingButton, PopUp, Toast } from '@/common';
 import { useDocumentTitle } from '@/hooks';
 import {
   Agreement,
@@ -45,6 +45,7 @@ const App = () => {
           <Toast />
         </ToastPortal>
       </Suspense>
+      <FloatingButton />
     </Router>
   );
 };
