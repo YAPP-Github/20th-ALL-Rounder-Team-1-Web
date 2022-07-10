@@ -113,6 +113,7 @@ const Input = styled.div`
     padding: 3px;
     background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
     background-clip: content-box;
+    box-shadow: none;
   }
 
   p {
