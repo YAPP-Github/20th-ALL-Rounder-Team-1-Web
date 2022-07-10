@@ -49,8 +49,8 @@ export const SettingMenu = ({
 };
 
 const Wrapper = styled.li`
-  width: 232px;
-  height: 64px;
+  width: 201px;
+  height: 29px;
   padding: 16px 24px;
   display: flex;
   flex-direction: row;

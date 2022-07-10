@@ -1,4 +1,4 @@
-import { EditProfile, Question } from '@/pages/setting/components';
+import { Accessibility, EditProfile, Question } from '@/pages/setting/components';
 
 export const getCurrentSetting = (name: string) => {
   if (name === '프로필 편집') {
@@ -12,11 +12,7 @@ export const getCurrentSetting = (name: string) => {
     );
   }
   if (name === '접근성 설정') {
-    return (
-      <div>
-        <h1>접근성 설정</h1>
-      </div>
-    );
+    return <Accessibility />;
   }
   if (name === '문의하기') {
     return <Question />;
