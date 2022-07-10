@@ -51,7 +51,6 @@ export const CurrentCategoryList = ({
 const Wrapper = styled.div`
   width: 582px;
   height: 844px;
-  margin-top: 38px;
   background-color: #fff;
   border-radius: 10px;
   display: flex;
@@ -79,7 +78,7 @@ const Sorting = styled.div`
   appearance: none;
   border: 1px solid ${({ theme: { colors } }) => colors.Gray200};
   cursor: pointer;
-  width: 68px;
+  width: 86px;
   height: 28px;
   border-radius: 10px;
   padding: 8px 16px;
@@ -90,6 +89,7 @@ const Sorting = styled.div`
   h1 {
     color: ${({ theme: { colors } }) => colors.Gray700};
     ${({ theme: { fonts } }) => fonts.Body1}
+    width: 56px;
   }
 
   i.sort_icon {
