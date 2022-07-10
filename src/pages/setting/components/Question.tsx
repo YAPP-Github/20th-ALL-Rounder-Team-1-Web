@@ -16,7 +16,9 @@ export const Question = () => {
 };
 
 const Wrapper = styled.div`
-  padding: 20px 0px;
+  width: 739px;
+  height: 758px;
+  padding: 60px 40px;
 `;
 
 const Title = styled.h1`

@@ -1,51 +1,121 @@
 import { Dispatch, SetStateAction } from 'react';
+import cn from 'classnames';
+import { ManipulateType } from 'dayjs';
 import styled from 'styled-components';
 
 import { Day } from '@/hooks';
+
+import { Button } from '..';
 interface CalerderHeaderProps {
+  today: Day;
   date: Day;
   setDate: Dispatch<SetStateAction<Day>>;
+  mode: ManipulateType;
+  setMode: Dispatch<SetStateAction<ManipulateType>>;
 }
 
-export const CalenderHeader = ({ date, setDate }: CalerderHeaderProps) => {
-  const changegeMonth = (date: any, changeString: string) => {
+export const CalenderHeader = ({ today, date, setDate, mode, setMode }: CalerderHeaderProps) => {
+  const changeDate = (date: Day, changeString: string) => () => {
     switch (changeString) {
       case 'add':
-        return setDate(date.add(1, 'month'));
+        return setDate(date.add(1, mode));
       case 'subtract':
-        return setDate(date.subtract(1, 'month'));
+        return setDate(date.subtract(1, mode));
       default:
         return date;
     }
   };
 
+  console.log(date.week());
+  console.log(date.startOf('month').week());
+
   return (
     <StyledHeader>
       <span className="thisMonth">
-        {date.format('YYYY')}년 {date.format('M')}월
+        {mode === 'week'
+          ? `${date.format('M')}월 ${date.week() - date.startOf('month').week() + 1}주차`
+          : `${date.format('YYYY')}년 ${date.format('M')}월`}
       </span>
-      <button className="previous_icon" onClick={() => changegeMonth(date, 'subtract')}></button>
-      <button className="next_icon" onClick={() => changegeMonth(date, 'add')}></button>
+      <ToggleCalenderButton
+        className={cn(mode === 'month' && 'month')}
+        onClick={() => {
+          if (mode === 'week') {
+            setMode('month');
+            return;
+          }
+          setMode('week');
+        }}
+      ></ToggleCalenderButton>
+      <WrapperButtons>
+        <Button
+          className="today"
+          onClick={() => {
+            setDate(today);
+          }}
+        >
+          오늘
+        </Button>
+        <Button className="previous_icon" onClick={changeDate(date, 'subtract')}></Button>
+        <Button className="next_icon" onClick={changeDate(date, 'add')}></Button>
+      </WrapperButtons>
     </StyledHeader>
   );
 };
 
 const StyledHeader = styled.div`
-  margin-bottom: 29px;
+  margin-bottom: 25px;
+
   .thisMonth {
     ${({ theme: { fonts } }) => fonts.SubHead1};
-    float: left;
+    display: inline-block;
+    vertical-align: top;
+    margin: 3px 0 4px 1px;
   }
-  button {
-    width: 24px;
-    margin: 0 8px;
+`;
+
+const ToggleCalenderButton = styled(Button)`
+  &:before {
+    content: '';
+    margin-left: 8px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 36, 36)}
+    background-size: 455px 385px;
+    background-position: -66px -143px;
   }
+
+  &.month::before {
+    background-position: -10px -143px;
+  }
+`;
+
+const WrapperButtons = styled.div`
+  float: right;
+  display: inline-block;
+  vertical-align: top;
+
+  .today {
+    padding: 7px 16px;
+    background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
+    border-radius: 8px;
+    ${({ theme: { fonts } }) => fonts.Body2('WeekandBlue')};
+  }
+
   .previous_icon {
-    width: 24px;
-    height: 24px;
+    margin-left: 32px;
   }
-  .next_icon {
-    width: 24px;
-    height: 24px;
+
+  .previous_icon::before {
+    content: '';
+    margin: 2px 0;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    background-size: 455px 385px;
+    background-position: -218px -251px;
+  }
+
+  .next_icon::before {
+    content: '';
+    margin: 2px 0 0 16px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
+    background-size: 455px 385px;
+    background-position: -321px -10px;
   }
 `;

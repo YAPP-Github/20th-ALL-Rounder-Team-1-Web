@@ -66,8 +66,8 @@ const Selected = styled.button`
   }
 
   &.setting_interest {
-    padding: 8px 16px;
-    margin: 6px 5px;
+    padding: 8px 14px;
+    margin: 5px 4px;
     ${({ theme: { fonts } }) => fonts.SubHead3}
   }
 
@@ -94,8 +94,8 @@ const NotSelected = styled.button<{ defaultWhiteBgColor: boolean }>`
   }
 
   &.setting_interest {
-    padding: 8px 16px;
-    margin: 6px 5px;
+    padding: 8px 14px;
+    margin: 5px 4px;
     ${({ theme: { fonts } }) => fonts.Body2}
   }
 
