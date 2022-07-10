@@ -58,7 +58,7 @@ export const SettingSidebar = ({ setCurrentContent }: SettingSidebarProps) => {
 
 const Wrapper = styled.ul`
   width: 281px;
-  height: 878px;
+  height: 916px;
   border-radius: 10px;
   background-color: #fff;
   display: flex;

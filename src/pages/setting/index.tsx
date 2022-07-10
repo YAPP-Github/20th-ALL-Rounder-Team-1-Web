@@ -25,11 +25,8 @@ const Wrapper = styled.div`
 `;
 
 const ContentWrapper = styled.div`
-  width: 739px;
-  height: 798px;
   border-radius: 10px;
   background-color: #fff;
-  padding: 40px 40px;
   text-align: start;
 `;
 

@@ -137,7 +137,9 @@ export const EditProfile = () => {
 };
 
 const Wrapper = styled.div`
-  padding: 0px 20px;
+  width: 689px;
+  height: 832px;
+  padding: 42px 64px;
 `;
 
 const ImageAndEmail = styled.div`
@@ -170,23 +172,23 @@ const ImageAndEmail = styled.div`
 const SelectInterests = styled.div`
   display: flex;
   align-items: flex-start;
-  margin: 8px 0px;
+  margin: 7px 0px;
 
   .reset {
-    width: 83px;
+    width: 90px;
     text-align: end;
     margin-top: 8px;
-    margin-right: 32px;
+    margin-right: 26px;
     color: ${({ theme: { colors } }) => colors.WeekandBlue};
     ${({ theme: { fonts } }) => fonts.Body3}
   }
 
   .interest_list {
-    width: 580px;
+    width: 620px;
   }
 `;
 
 const ButtonWrapper = styled.div`
   margin-left: 112px;
-  margin-top: 28px;
+  margin-top: 19px;
 `;
