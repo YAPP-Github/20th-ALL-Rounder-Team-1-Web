@@ -47,7 +47,7 @@ export const FilterResult = () => {
           <JobWrapper>
             {JOBS.map((job) => (
               <Interest
-                className="select_interest"
+                className="search_interest"
                 name={job}
                 totalChoices={totalJobs}
                 setTotalChoices={setTotalJobs}
@@ -61,7 +61,7 @@ export const FilterResult = () => {
           <JobWrapper>
             {INTERESTS.map((interest) => (
               <Interest
-                className="select_interest"
+                className="search_interest"
                 name={interest}
                 totalChoices={totalInterests}
                 setTotalChoices={setTotalInterests}

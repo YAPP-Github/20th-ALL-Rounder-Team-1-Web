@@ -70,6 +70,14 @@ const Selected = styled.button`
     margin: 6px 5px;
     ${({ theme: { fonts } }) => fonts.SubHead3}
   }
+
+  &.search_interest {
+    padding: 8px 16px;
+    margin: 6px 5px;
+    ${({ theme: { fonts } }) => fonts.SubHead2}
+    color: #fff;
+    background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
+  }
 `;
 
 const NotSelected = styled.button<{ defaultWhiteBgColor: boolean }>`
@@ -89,5 +97,11 @@ const NotSelected = styled.button<{ defaultWhiteBgColor: boolean }>`
     padding: 8px 16px;
     margin: 6px 5px;
     ${({ theme: { fonts } }) => fonts.Body2}
+  }
+
+  &.search_interest {
+    padding: 8px 16px;
+    margin: 6px 5px;
+    ${({ theme: { fonts } }) => fonts.Body1}
   }
 `;
