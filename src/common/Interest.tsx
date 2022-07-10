@@ -6,6 +6,7 @@ interface InterestProps extends ComponentPropsWithoutRef<'button'> {
   totalChoices: string[];
   setTotalChoices: Dispatch<SetStateAction<string[]>>;
   isChosen?: boolean;
+  defaultWhiteBgColor?: boolean;
 }
 
 export const Interest = ({
@@ -13,6 +14,7 @@ export const Interest = ({
   totalChoices,
   setTotalChoices,
   isChosen = false,
+  defaultWhiteBgColor = false,
   ...restProps
 }: InterestProps) => {
   const [isClicked, setIsClicked] = useState(isChosen);
@@ -43,7 +45,7 @@ export const Interest = ({
           {name}
         </Selected>
       ) : (
-        <NotSelected onClick={onClick} {...restProps}>
+        <NotSelected onClick={onClick} defaultWhiteBgColor={defaultWhiteBgColor} {...restProps}>
           {name}
         </NotSelected>
       )}
@@ -70,8 +72,9 @@ const Selected = styled.button`
   }
 `;
 
-const NotSelected = styled.button`
-  background-color: ${({ theme: { colors } }) => colors.Gray100};
+const NotSelected = styled.button<{ defaultWhiteBgColor: boolean }>`
+  background-color: ${({ theme: { colors }, defaultWhiteBgColor }) =>
+    defaultWhiteBgColor ? '#fff' : colors.Gray100};
   color: ${({ theme: { colors } }) => colors.Gray400};
   border-radius: 108px;
 

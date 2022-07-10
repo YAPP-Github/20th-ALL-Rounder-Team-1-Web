@@ -52,6 +52,7 @@ export const FilterResult = () => {
                 totalChoices={totalJobs}
                 setTotalChoices={setTotalJobs}
                 isChosen={isChosen(job, totalJobs)}
+                defaultWhiteBgColor={true}
               />
             ))}
           </JobWrapper>
@@ -65,6 +66,7 @@ export const FilterResult = () => {
                 totalChoices={totalInterests}
                 setTotalChoices={setTotalInterests}
                 isChosen={isChosen(interest, totalInterests)}
+                defaultWhiteBgColor={true}
               />
             ))}
           </JobWrapper>
