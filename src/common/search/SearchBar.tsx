@@ -1,10 +1,37 @@
+import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
-export const SearchBar = () => {
+interface SearchBarProps {
+  setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
+}
+
+export const SearchBar = ({ setIsInputFocused }: SearchBarProps) => {
+  const [inputValue, setInputValue] = useState('');
+
+  const onClickInput = () => {
+    if (setIsInputFocused && inputValue.length === 0) {
+      setIsInputFocused(true);
+    }
+  };
+
+  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+    const { value } = event.target;
+    setInputValue(value);
+    if (setIsInputFocused) {
+      setIsInputFocused(false);
+    }
+  };
+
   return (
     <Wrapper>
       <i className="search_icon" />
-      <input type="text" placeholder="일정을 검색해보세요" />
+      <input
+        value={inputValue}
+        onChange={onChangeInput}
+        type="text"
+        placeholder="일정을 검색해보세요"
+        onClick={onClickInput}
+      />
     </Wrapper>
   );
 };
@@ -26,14 +53,14 @@ const Wrapper = styled.div`
     font-size: 18px;
     font-weight: 500;
     line-height: 28.8px;
-  }
 
-  input:focus {
-    outline: none;
-  }
+    &:focus {
+      box-shadow: none;
+    }
 
-  input::placeholder {
-    color: ${({ theme: { colors } }) => colors.Gray400};
+    &::placeholder {
+      color: ${({ theme: { colors } }) => colors.Gray400};
+    }
   }
 
   i.search_icon {

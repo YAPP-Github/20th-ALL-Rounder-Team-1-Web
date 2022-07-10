@@ -1,4 +1,4 @@
-import { ReactNode, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
 import { SearchBar } from '.';
@@ -7,12 +7,14 @@ interface CurrentCategoryListProps {
   showAllowingRange?: boolean;
   sortingMenus: string[];
   listingContents: ReactNode;
+  setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
 }
 
 export const CurrentCategoryList = ({
   showAllowingRange = true,
   sortingMenus,
   listingContents,
+  setIsInputFocused,
 }: CurrentCategoryListProps) => {
   const [currentSort, setCurrentSort] = useState(sortingMenus[0]);
   const [isSortOpen, setIsSortOpen] = useState(false);
@@ -28,7 +30,7 @@ export const CurrentCategoryList = ({
 
   return (
     <Wrapper>
-      <SearchBar />
+      <SearchBar setIsInputFocused={setIsInputFocused && setIsInputFocused} />
       <Options showAllowingRange={showAllowingRange}>
         <p>공개여부 · nn개의 일정</p>
         <Sorting onClick={onClickSort}>

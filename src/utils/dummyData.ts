@@ -292,3 +292,12 @@ export const CERTAINCATEGORIES = [
     endTime: '08:00',
   },
 ];
+
+export const SEARCH_HISTORIES = [
+  '김밥',
+  '떡볶이',
+  '돈수백',
+  '오뎅',
+  '물만두',
+  '물만두물만두물만두물만두물만두물만두물만두물만두물만두i물만두',
+];
