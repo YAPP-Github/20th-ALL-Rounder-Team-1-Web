@@ -1,5 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 import cn from 'classnames';
+import { ManipulateType } from 'dayjs';
 import styled from 'styled-components';
 
 import { Day } from '@/hooks';
@@ -8,17 +9,27 @@ interface CalenderBodyProps {
   today: Day;
   date: Day;
   setDate: Dispatch<SetStateAction<Day>>;
+  mode: ManipulateType;
 }
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
-// TODO: 타입을 받아서 한달 전체를 보여줄지 혹은 한 주만을 보여줄지 결정해야 할 듯
-export const CalenderBody = ({ today, date, setDate }: CalenderBodyProps) => {
+export const CalenderBody = ({ today, date, setDate, mode }: CalenderBodyProps) => {
+  const getEndWeek = () => {
+    if (date.endOf('month').week() === 1) {
+      return 53;
+    }
+    if (mode === 'month') {
+      return date.endOf('month').week() + 1;
+    }
+    return date.week() + 1;
+  };
+
   const createCalendar = () => {
-    const startWeek = date.startOf('month').week();
-    const endWeek = date.endOf('month').week() === 1 ? 53 : date.endOf('month').week();
+    const startWeek = mode === 'month' ? date.startOf('month').week() : date.week();
+    const endWeek = getEndWeek();
     const calender = [];
 
-    for (let week = startWeek; week < endWeek + 1; week++) {
+    for (let week = startWeek; week < endWeek; week++) {
       calender.push(
         <div className="row" key={week}>
           {Array(7)
@@ -37,18 +48,15 @@ export const CalenderBody = ({ today, date, setDate }: CalenderBodyProps) => {
 
               return (
                 <div
-                  className={`box`}
+                  className={cn('box', 'day', isToday && 'today', isNone && 'none')}
                   key={`${week}_${idx}`}
                   onClick={() => {
                     setDate(current);
                   }}
                 >
-                  <span className={cn('day', isToday && 'today', isNone && 'none')}>
-                    {current.format('D')}
-                    <BlindText>일</BlindText>
-                  </span>
-
-                  {!isToday && isSelected && <span className="isSelected"></span>}
+                  <span className={cn(isSelected && 'selected')}>{current.format('D')}</span>
+                  <BlindText>일</BlindText>
+                  {isSelected && <span className="isSelected"></span>}
                 </div>
               );
             })}
@@ -62,11 +70,7 @@ export const CalenderBody = ({ today, date, setDate }: CalenderBodyProps) => {
     <Wrapper>
       <div className="row">
         {weekdays.map((day) => {
-          return (
-            <div className="box">
-              <span className="text">{day}</span>
-            </div>
-          );
+          return <div className="day_name">{day}</div>;
         })}
       </div>
       <Dates>{createCalendar()}</Dates>
@@ -75,44 +79,57 @@ export const CalenderBody = ({ today, date, setDate }: CalenderBodyProps) => {
 };
 
 const Wrapper = styled.div`
-  text-align: center;
+  ${({ theme: { fonts } }) => fonts.Body2('Gray400')}
+
   .row {
     display: flex;
     justify-content: space-between;
     align-items: center;
     cursor: pointer;
-    color: ${({ theme: { colors } }) => colors.Gray400};
   }
-  .box {
+
+  .day_name {
+    text-align: center;
     position: relative;
-    width: 13px;
+    width: 56px;
+  }
+
+  .box {
     padding: 8px 0;
   }
 `;
 
 const Dates = styled.div`
+  ${({ theme: { fonts } }) => fonts.Body1('Gray900')}
+
   .day {
     position: relative;
     z-index: 10;
     display: flex;
     align-items: center;
     justify-content: center;
-    font-size: 16px;
-    line-height: 26px;
-    color: ${({ theme: { colors } }) => colors.Gray900};
+    padding: 8px 0;
+    width: 56px;
   }
+
   .day.today {
     color: ${({ theme: { colors } }) => colors.WeekandBlue};
   }
+
+  .selected {
+    color: #fff;
+    z-index: 20;
+  }
+
   .isSelected {
     position: absolute;
-    top: 7px;
-    left: -9px;
+    top: 6px;
     border-radius: 50%;
     width: 30px;
     height: 30px;
     background: ${({ theme: { colors } }) => colors.WeekandBlue};
   }
+
   .none {
     color: ${({ theme: { colors } }) => colors.Gray300};
   }
