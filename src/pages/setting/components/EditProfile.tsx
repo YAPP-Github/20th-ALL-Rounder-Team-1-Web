@@ -190,5 +190,5 @@ const SelectInterests = styled.div`
 
 const ButtonWrapper = styled.div`
   margin-left: 112px;
-  margin-top: 19px;
+  margin-top: 31px;
 `;
