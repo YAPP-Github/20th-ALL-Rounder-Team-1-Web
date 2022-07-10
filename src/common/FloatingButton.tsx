@@ -29,7 +29,7 @@ export const FloatingButton = () => {
 
 const Wrapper = styled(Button)`
   background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
-  position: absolute;
+  position: fixed;
   right: 70px;
   bottom: 70px;
   border-radius: 100%;
