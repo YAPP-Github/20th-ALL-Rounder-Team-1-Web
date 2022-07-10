@@ -1,9 +1,7 @@
 import { useState } from 'react';
 import styled from 'styled-components';
 
-import { SearchContents } from './components/SearchContents';
-import { SearchHistory } from './components/SearchHistory';
-import { FilterResult } from './components';
+import { FilterResult, SearchContents, SearchHistory } from './components';
 
 import { CurrentCategoryList, PageLayout } from '@/common';
 

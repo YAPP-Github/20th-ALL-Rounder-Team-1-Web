@@ -1,4 +1,4 @@
-import { SearchContent } from './SearchContent';
+import { SearchContent } from '.';
 
 const dummyData = Array(6).fill({ name: '유저 닉네임', comment: '오늘도 화이팅:)' });
 
