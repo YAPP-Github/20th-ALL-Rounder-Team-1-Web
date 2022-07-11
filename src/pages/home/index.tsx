@@ -1,6 +1,6 @@
 import styled from 'styled-components';
 
-import { FriendStories, Profile, Schedules } from './components';
+import { Follow, FriendStories, Interest, Job, Profile, Purpose, Schedules } from './components';
 
 import { Calender, PageLayout } from '@/common';
 
@@ -15,6 +15,12 @@ const Home = () => {
         <Right>
           <Profile />
           <Calender />
+          <Purpose />
+          <TopSeparator />
+          <Job />
+          <Interest />
+          <BottomSeparator />
+          <Follow />
         </Right>
       </Wrapper>
     </PageLayout>
@@ -29,4 +35,18 @@ const Wrapper = styled.div`
 
 const Right = styled.div`
   margin-left: 60px;
+`;
+
+const TopSeparator = styled.div`
+  width: 390px;
+  height: 1px;
+  background-color: ${({ theme: { colors } }) => colors.Gray300};
+  margin: 20px 0 24px 0;
+`;
+
+const BottomSeparator = styled.div`
+  width: 390px;
+  height: 1px;
+  background-color: ${({ theme: { colors } }) => colors.Gray300};
+  margin: 24px 0 20px 0;
 `;
