@@ -1,15 +1,22 @@
-import { useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
-import { CurrentCategoryMenu } from './CurrentCategoryMenu';
-import { SearchBar } from './SearchBar';
+import { SearchBar } from '.';
 
-import { getCertainCategories } from '@/utils';
+interface CurrentCategoryListProps {
+  showAllowingRange?: boolean;
+  sortingMenus: string[];
+  listingContents: ReactNode;
+  setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
+}
 
-const certainCategories = getCertainCategories();
-
-export const CurrentCategoryList = () => {
-  const [currentSort, setCurrentSort] = useState('최신순');
+export const CurrentCategoryList = ({
+  showAllowingRange = true,
+  sortingMenus,
+  listingContents,
+  setIsInputFocused,
+}: CurrentCategoryListProps) => {
+  const [currentSort, setCurrentSort] = useState(sortingMenus[0]);
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   const onClickSort = () => {
@@ -23,33 +30,22 @@ export const CurrentCategoryList = () => {
 
   return (
     <Wrapper>
-      <SearchBar />
-      <Options>
+      <SearchBar setIsInputFocused={setIsInputFocused && setIsInputFocused} />
+      <Options showAllowingRange={showAllowingRange}>
         <p>공개여부 · nn개의 일정</p>
         <Sorting onClick={onClickSort}>
           <h1>{currentSort}</h1>
-          <div />
+          <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
-              <li onClick={() => onClickSortType('최신순')}>최신순</li>
-              <li onClick={() => onClickSortType('오래된순')}>오래된순</li>
-              <li onClick={() => onClickSortType('오름차순')}>오름차순</li>
-              <li onClick={() => onClickSortType('내림차순')}>내림차순</li>
+              {sortingMenus.map((sortingMenu) => (
+                <li onClick={() => onClickSortType(sortingMenu)}>{sortingMenu}</li>
+              ))}
             </SortMenu>
           )}
         </Sorting>
       </Options>
-      <ExistingSchedules>
-        {certainCategories.map((category) => (
-          <CurrentCategoryMenu
-            name={category.name}
-            startDate={category.startDate}
-            startTime={category.startTime}
-            endDate={category.endDate}
-            endTime={category.endTime}
-          />
-        ))}
-      </ExistingSchedules>
+      {listingContents}
     </Wrapper>
   );
 };
@@ -57,17 +53,15 @@ export const CurrentCategoryList = () => {
 const Wrapper = styled.div`
   width: 582px;
   height: 844px;
-  margin-top: 38px;
   background-color: #fff;
   border-radius: 10px;
-  border: 1px solid black;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 36px 24px;
 `;
 
-const Options = styled.div`
+const Options = styled.div<{ showAllowingRange: boolean }>`
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -76,6 +70,7 @@ const Options = styled.div`
   position: relative;
 
   p {
+    visibility: ${({ showAllowingRange }) => !showAllowingRange && 'hidden'};
     color: ${({ theme: { colors } }) => colors.WeekandBlue};
     ${({ theme: { fonts } }) => fonts.Body2}
   }
@@ -85,7 +80,7 @@ const Sorting = styled.div`
   appearance: none;
   border: 1px solid ${({ theme: { colors } }) => colors.Gray200};
   cursor: pointer;
-  width: 68px;
+  width: 86px;
   height: 28px;
   border-radius: 10px;
   padding: 8px 16px;
@@ -96,12 +91,12 @@ const Sorting = styled.div`
   h1 {
     color: ${({ theme: { colors } }) => colors.Gray700};
     ${({ theme: { fonts } }) => fonts.Body1}
+    width: 56px;
   }
 
-  div {
-    border-left: 6px solid transparent;
-    border-right: 6px solid transparent;
-    border-top: 6px solid ${({ theme: { colors } }) => colors.Gray700};
+  i.sort_icon {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 24, 24)}
+    background-position: -142px -351px;
   }
 `;
 
@@ -126,8 +121,4 @@ const SortMenu = styled.ul`
   li:hover {
     background-color: ${({ theme: { colors } }) => colors.Gray100};
   }
-`;
-
-const ExistingSchedules = styled.div`
-  overflow-y: hidden;
 `;

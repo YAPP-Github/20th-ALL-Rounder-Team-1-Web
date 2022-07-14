@@ -1,15 +1,18 @@
 import styled from 'styled-components';
 
-import { CurrentCategory, CurrentCategoryList } from './components';
+import { CurrentCategory } from './components';
 
-import { PageLayout } from '@/common';
+import { CurrentCategoryList, CurrentCategoryMenus, PageLayout } from '@/common';
 
 const CertainCategory = () => {
   return (
-    <PageLayout title="카테고리 세부 페이지" isFooter={false}>
+    <PageLayout isFooter={false}>
       <Wrapper>
         <CurrentCategory />
-        <CurrentCategoryList />
+        <CurrentCategoryList
+          sortingMenus={['최신순', '오래된순', '오름차순', '내림차순']}
+          listingContents={<CurrentCategoryMenus />}
+        />
       </Wrapper>
     </PageLayout>
   );
