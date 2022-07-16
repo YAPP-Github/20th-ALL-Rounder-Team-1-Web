@@ -3,13 +3,12 @@ import styled from 'styled-components';
 
 import { FriendStory } from '.';
 
-import { calculateEndX, getFriends } from '@/utils';
+import { calculateEndX, FRIENDS } from '@/utils';
 
 export const FriendStories = () => {
-  const friends = getFriends(); // 서버가 완성되면 실제 데이터로 수정하면 됩니다.
   const [currentX, setCurrentX] = useState(0);
-  const endX = calculateEndX(friends.length);
-  const [clickedFriend, setClickedFriend] = useState(friends[0].id);
+  const endX = calculateEndX(FRIENDS.length);
+  const [clickedFriend, setClickedFriend] = useState(FRIENDS[0].id);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
 
@@ -55,7 +54,7 @@ export const FriendStories = () => {
 
   return (
     <Wrapper currentLoc={currentX}>
-      {friends.map(({ id, name, imgUrl }) => (
+      {FRIENDS.map(({ id, name, imgUrl }) => (
         <FriendStory
           key={id}
           id={id}

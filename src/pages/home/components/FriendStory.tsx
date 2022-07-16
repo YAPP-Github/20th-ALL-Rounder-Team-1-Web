@@ -33,6 +33,9 @@ export const FriendStory = ({
 const Wrapper = styled.li`
   width: 60px;
   height: 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   gap: 8px;
 `;
 
@@ -58,5 +61,11 @@ const Border = styled.div<{ isSelected: boolean }>`
 const Name = styled.h1`
   font-size: 14px;
   font-weight: 500;
+  width: 49px;
+  line-height: 22.4px;
+  text-align: center;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: ${({ theme: { colors } }) => colors.Gray600};
 `;
