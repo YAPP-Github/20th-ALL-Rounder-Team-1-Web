@@ -1,21 +1,35 @@
 import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface CategoryProps {
+  id: number;
   color: string;
   visibility: string;
   content: string;
   setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
 }
 
-export const Category = ({ color, visibility, content, setIsCategoryClicked }: CategoryProps) => {
+export const Category = ({
+  id,
+  color,
+  visibility,
+  content,
+  setIsCategoryClicked,
+}: CategoryProps) => {
+  const navigate = useNavigate();
+
+  const onClickCategory = () => {
+    navigate(`/manage-category/${id}`);
+  };
+
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsCategoryClicked(true);
   };
 
   return (
-    <Wrapper onContextMenu={handleRightClick}>
+    <Wrapper onClick={onClickCategory} onContextMenu={handleRightClick}>
       <Color color={color} />
       <Content>
         <p>{visibility}</p>
@@ -33,6 +47,7 @@ const Wrapper = styled.div`
   background-color: #fff;
   display: flex;
   align-items: center;
+  cursor: pointer;
 `;
 
 const Color = styled.div<{ color: string }>`

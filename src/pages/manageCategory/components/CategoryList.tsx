@@ -14,6 +14,7 @@ export const CategoryList = () => {
       {CATEGORIES.map((category) => (
         <Category
           key={category.id}
+          id={category.id}
           color={category.color}
           visibility={category.visible}
           content={category.content}
