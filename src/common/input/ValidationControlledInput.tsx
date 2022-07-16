@@ -12,21 +12,30 @@ interface BasicInputProps extends ComponentPropsWithRef<'input'> {
   type?: string;
   htmlFor: string;
   label: string;
-  validation: Validation;
-  setValidation: Dispatch<SetStateAction<Validation>>;
 }
 
 interface PasswordProps extends BasicInputProps {
-  validationType: string;
+  validation: Validation;
+  setValidation: Dispatch<SetStateAction<Validation>>;
+  validationType: 'password';
   password?: never;
 }
 
 interface PasswordConfirmProps extends BasicInputProps {
+  validation: Validation;
+  setValidation: Dispatch<SetStateAction<Validation>>;
   validationType: 'password_confirm';
   password: string;
 }
 
-type InputProps = PasswordProps | PasswordConfirmProps;
+interface ChangePasswordProps extends BasicInputProps {
+  validation?: Validation;
+  setValidation?: Dispatch<SetStateAction<Validation>>;
+  validationType: 'setting';
+  password?: never;
+}
+
+type InputProps = PasswordProps | PasswordConfirmProps | ChangePasswordProps;
 
 export const ValidationControlledInput = ({
   value,
@@ -45,11 +54,16 @@ export const ValidationControlledInput = ({
   const [inputType, setInputType] = useState(type);
 
   useEffect(() => {
+    if (!setValidation) {
+      return;
+    }
+
     if (validationType === 'password') {
       const validation = checkPassword(value);
       setValidation(validation);
       return;
     }
+
     if (validationType === 'password_confirm') {
       const validation = checkPasswordConfirm(value, password || '');
       setValidation(validation);
@@ -57,11 +71,15 @@ export const ValidationControlledInput = ({
     }
   }, [value]);
 
+  const isInline = validationType === 'setting';
+
   return (
-    <Wrapper>
-      <Labels>
-        <ValidationLabel htmlFor={htmlFor}>{label}</ValidationLabel>
-        {validation.message && (
+    <Wrapper className={cn(isInline && 'inline')}>
+      <Labels className={cn(isInline && 'inline')}>
+        <ValidationLabel className={cn(isInline && 'inline')} htmlFor={htmlFor}>
+          {label}
+        </ValidationLabel>
+        {validation && validation.message && (
           <ValidationMessage className={cn(validation.type && validation.type)}>
             {validation.message}
           </ValidationMessage>
@@ -70,7 +88,7 @@ export const ValidationControlledInput = ({
       <StyledInput
         id={htmlFor}
         type={inputType}
-        className={cn('login_input', className && className)}
+        className={cn('login_input', isInline && 'inline', className && className)}
         placeholder={placeholder}
         onChange={(e) => {
           setValue(e.target.value);
@@ -78,7 +96,7 @@ export const ValidationControlledInput = ({
         {...restProps}
       />
       <ShowPassword
-        className={inputType}
+        className={cn(inputType, isInline && 'inline')}
         onClick={() => {
           const toggleType = inputType === 'password' ? 'text' : 'password';
           setInputType(toggleType);
@@ -93,14 +111,30 @@ export const ValidationControlledInput = ({
 const Wrapper = styled.div`
   position: relative;
   text-align: left;
+
+  &.inline {
+    display: flex;
+    padding-right: 25px;
+  }
 `;
 
 const Labels = styled.div`
   margin-bottom: 6px;
+
+  &.inline {
+    margin: 12px 32px 0 0;
+  }
 `;
 
 const ValidationLabel = styled.label`
   ${({ theme: { fonts } }) => fonts.Body2('Gray800')};
+
+  &.inline {
+    text-align: right;
+    display: inline-block;
+    width: 106px;
+    ${({ theme: { fonts } }) => fonts.SubHead1('Gray500')};
+  }
 `;
 
 const ValidationMessage = styled.span`
@@ -133,6 +167,12 @@ const StyledInput = styled.input`
       color: #aaaeb6;
     }
   }
+
+  &.inline {
+    box-sizing: border-box;
+    width: 576px;
+    padding: 13px 28px 13px 16px;
+  }
 `;
 
 const ShowPassword = styled(Button)`
@@ -149,6 +189,12 @@ const ShowPassword = styled(Button)`
   }
   &.text:after {
     background-position: -54px -351px;
+  }
+
+  &.inline:after {
+    margin: 0;
+    top: 14px;
+    right: 52px;
   }
 `;
 

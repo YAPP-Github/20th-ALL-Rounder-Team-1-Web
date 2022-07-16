@@ -46,7 +46,8 @@ const StyledButton = styled.button`
     line-height: 60px;
   }
 
-  &.question_button {
+  &.question_button,
+  &.change_password {
     border-radius: 10px;
     width: 110px;
     background-color: ${({ theme: { colors } }) => colors.WeekandBlue};
