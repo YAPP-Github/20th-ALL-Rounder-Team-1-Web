@@ -2,9 +2,13 @@ import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { ValidationControlledInput, ValidationUncontrolledInput } from './components';
-
-import { Button, InputRef, PageLayout } from '@/common';
+import {
+  Button,
+  InputRef,
+  PageLayout,
+  ValidationControlledInput,
+  ValidationUncontrolledInput,
+} from '@/common';
 
 const Register = () => {
   const navigate = useNavigate();
