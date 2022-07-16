@@ -33,7 +33,6 @@ export const FriendStory = ({
 const Wrapper = styled.li`
   width: 60px;
   height: 90px;
-  gap: 8px;
 `;
 
 const Image = styled.div<{ imgUrl?: string }>`
@@ -58,5 +57,8 @@ const Border = styled.div<{ isSelected: boolean }>`
 const Name = styled.h1`
   font-size: 14px;
   font-weight: 500;
+  line-height: 22.4px;
+  text-align: center;
+  margin-top: 8px;
   color: ${({ theme: { colors } }) => colors.Gray600};
 `;
