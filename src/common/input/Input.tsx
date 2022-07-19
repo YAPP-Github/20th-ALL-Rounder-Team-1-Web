@@ -2,10 +2,12 @@ import { ComponentPropsWithoutRef, forwardRef, useImperativeHandle, useRef } fro
 import cn from 'classnames';
 import styled from 'styled-components';
 
-import { checkCertificateNumber, checkEmail, checkNickname } from '@/utils';
+import { useChkDuplicateNickname, useSendAuthKey, useValidAuthKey } from '@/api';
+import { Validation } from '@/types';
+import { checkCertificateNumber, checkEmail, checkNicknameValidation } from '@/utils';
 export interface InputRef {
   value: string;
-  chkValidation: (type: string) => { type: string; message: string };
+  chkValidation: (type: string) => Promise<Validation>;
 }
 
 // 여기에서 setState 함수를 받아서 처리하는 형태로 바꿔야 할듯
@@ -15,6 +17,10 @@ export const Input = forwardRef<InputRef, InputProps>(
   ({ type = 'text', placeholder, className, ...restProps }, ref) => {
     const imperativeRef = ref;
     const inputRef = useRef<HTMLInputElement>(null);
+
+    const { sendAuthkey } = useSendAuthKey();
+    const { check_duplicate_nickname } = useChkDuplicateNickname();
+    const { validAuthkey } = useValidAuthKey();
 
     useImperativeHandle(
       imperativeRef,
@@ -28,15 +34,45 @@ export const Input = forwardRef<InputRef, InputProps>(
           }
           inputRef.current.value = value;
         },
-        chkValidation(type: string) {
+        async chkValidation(type: string) {
           if (type === 'checkEmail') {
-            return checkEmail(inputRef.current?.value!);
+            const emailValidation = checkEmail(inputRef.current?.value!);
+
+            if (emailValidation.type === 'success') {
+              sendAuthkey({
+                variables: {
+                  email: inputRef.current?.value,
+                },
+              });
+            }
+
+            return emailValidation;
           }
+
           if (type === 'checkCertificateNumber') {
-            return checkCertificateNumber(inputRef.current?.value!);
+            const email = (document.querySelector('#email') as HTMLInputElement).value;
+            const {
+              data: { validAuthKey },
+            } = await validAuthkey({
+              variables: {
+                validAuthKeyInput: {
+                  authKey: inputRef.current?.value,
+                  email,
+                },
+              },
+            });
+            return checkCertificateNumber(validAuthKey);
           }
+
           if (type === 'checkNickname') {
-            return checkNickname(inputRef.current?.value!);
+            const {
+              data: { checkDuplicateNickname },
+            } = await check_duplicate_nickname({
+              variables: {
+                nickname: inputRef.current?.value,
+              },
+            });
+            return checkNicknameValidation(checkDuplicateNickname);
           }
           return { type: '', message: '' };
         },
