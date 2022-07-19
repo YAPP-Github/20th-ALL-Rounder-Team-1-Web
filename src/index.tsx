@@ -17,7 +17,7 @@ if (!rootElement) {
 const root = createRoot(rootElement);
 
 const client = new ApolloClient({
-  uri: '', // 추후에 생성될 서버의 url을 추가하면 됩니다.
+  uri: process.env.REACT_APP_SERVER_URL,
   cache: new InMemoryCache(),
 });
 
