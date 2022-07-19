@@ -24,6 +24,7 @@ module.exports = {
     'jsx-a11y/no-noninteractive-element-interactions': 0,
     'import/named': 0,
     '@typescript-eslint/no-non-null-asserted-optional-chain': 0,
+    '@typescript-eslint/no-var-requires': 0,
   },
   overrides: [
     // override "simple-import-sort" config
