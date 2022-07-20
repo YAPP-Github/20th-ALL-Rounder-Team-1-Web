@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction } from 'react';
 
 const REGEX = {
   EMAIL: /^[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_\.]?[0-9a-zA-Z])*\.[a-zA-Z]{2,3}$/i,
-  PASSWORD: /^(?=.*[a-zA-z])(?=.*[0-9])(?=.*[$`~!@$!%*#^?&\\(\\)\-_=+]).{8,50}$/,
+  PASSWORD: /^(?=.*[a-zA-z])(?=.*[0-9]).{8,50}$/,
 };
 
 export const checkEmail = (email: string) => {
@@ -19,19 +19,18 @@ export const checkEmail = (email: string) => {
   return { type: 'success', message: '유효한 이메일입니다' };
 };
 
-export const checkCertificateNumber = (certificateNumber: string) => {
-  if (certificateNumber === '1234') {
+export const checkCertificateNumber = (isRightCertificateNumber: boolean) => {
+  if (isRightCertificateNumber) {
     return { type: 'success', message: '인증이 완료되었습니다' };
   }
 
   return { type: 'error', message: '잘못된 인증번호입니다' };
 };
 
-export const checkNickname = (nickname: string) => {
-  if (nickname === '장동균') {
+export const checkNicknameValidation = (isDuplicateNickname: boolean) => {
+  if (isDuplicateNickname) {
     return { type: 'error', message: '중복된 닉네임입니다' };
   }
-
   return { type: 'success', message: '사용 가능한 닉네임입니다' };
 };
 

@@ -5,7 +5,7 @@ import { ProfileInfo } from '.';
 
 import { Button, Interest } from '@/common';
 import { ToastContext } from '@/contexts';
-import { checkNickname, checkPurpose, INTERESTS, JOBS } from '@/utils';
+import { checkNicknameValidation, checkPurpose, INTERESTS, JOBS } from '@/utils';
 
 export const EditProfile = () => {
   const userProfile = {
@@ -32,7 +32,7 @@ export const EditProfile = () => {
   };
 
   const isValid = () => {
-    const { type: nickNameType, message: nickNameMessage } = checkNickname(currentNickname);
+    const { type: nickNameType, message: nickNameMessage } = checkNicknameValidation(true);
     if (nickNameType === 'error') {
       setText(nickNameMessage);
       return false;

@@ -26,8 +26,8 @@ const Register = () => {
     message: '',
   });
 
-  const [emailButtonDisabled, setEmailButtonDisabled] = useState(false);
-  const [numValidationButtonDisabled, setNumValidationButtonDisabled] = useState(false);
+  const [emailDisabled, setEmailDisabled] = useState(false);
+  const [numValidationDisabled, setNumValidationDisabled] = useState(false);
 
   const [password, setPassword] = useState('');
   const [passwordConfirm, setPasswordConfirm] = useState('');
@@ -47,10 +47,10 @@ const Register = () => {
 
   useEffect(() => {
     if (emailValidation.type === 'success' && numValidation.type === 'success') {
-      setEmailButtonDisabled(true);
-      setNumValidationButtonDisabled(true);
+      setEmailDisabled(true);
+      setNumValidationDisabled(true);
     }
-  }, [numValidation.type]);
+  }, [emailValidation.type, numValidation.type]);
 
   return (
     <PageLayout isHeader={false} isFooter={false}>
@@ -65,7 +65,7 @@ const Register = () => {
             validationType="checkEmail"
             validation={emailValidation}
             setValidation={setEmailValidation}
-            buttonDisabled={emailButtonDisabled}
+            disabled={emailDisabled}
             ref={emailRef}
           />
           <ValidationUncontrolledInput
@@ -76,7 +76,7 @@ const Register = () => {
             validationType="checkCertificateNumber"
             validation={numValidation}
             setValidation={setNumValidation}
-            buttonDisabled={numValidationButtonDisabled}
+            disabled={numValidationDisabled}
             ref={validationNumRef}
           />
           <ValidationUncontrolledInput

@@ -19,7 +19,7 @@ interface InputProps extends ComponentPropsWithRef<'input'> {
   validationType: string;
   validation: Validation;
   setValidation: Dispatch<SetStateAction<Validation>>;
-  buttonDisabled?: boolean;
+  disabled?: boolean;
 }
 
 export const ValidationUncontrolledInput = forwardRef<InputRef, InputProps>(
@@ -34,11 +34,18 @@ export const ValidationUncontrolledInput = forwardRef<InputRef, InputProps>(
       validationType,
       validation,
       setValidation,
-      buttonDisabled,
+      disabled,
       ...restProps
     },
     ref
   ) => {
+    const validationButtonClick = async () => {
+      const validation = await (ref as MutableRefObject<InputRef>).current?.chkValidation(
+        validationType
+      );
+      setValidation(validation);
+    };
+
     return (
       <Wrapper>
         <Labels>
@@ -52,20 +59,13 @@ export const ValidationUncontrolledInput = forwardRef<InputRef, InputProps>(
         <Input
           id={htmlFor}
           type={type}
+          disabled={disabled}
           className={cn('login_input', className && className)}
           placeholder={placeholder}
           {...restProps}
           ref={ref}
         />
-        <ValidationButton
-          disabled={buttonDisabled}
-          onClick={() => {
-            const validation = (ref as MutableRefObject<InputRef>).current?.chkValidation(
-              validationType
-            );
-            setValidation(validation);
-          }}
-        >
+        <ValidationButton disabled={disabled} onClick={validationButtonClick}>
           {buttonText}
         </ValidationButton>
       </Wrapper>
