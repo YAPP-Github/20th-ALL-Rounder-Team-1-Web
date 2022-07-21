@@ -1,12 +1,14 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button, Interest, PageLayout } from '@/common';
+import { RegisterContext } from '@/contexts';
 import { INTERESTS, JOBS } from '@/utils';
 
 const SelectInterest = () => {
   const navigate = useNavigate();
+  const { setPersonalInformation } = useContext(RegisterContext);
 
   const [totalJobs, setTotalJobs] = useState<string[]>([]);
   const [totalInterests, setTotalInterests] = useState<string[]>([]);
@@ -53,6 +55,10 @@ const SelectInterest = () => {
           <Button
             className="login_button"
             onClick={() => {
+              setPersonalInformation({
+                jobs: totalJobs,
+                interests: totalInterests,
+              });
               navigate('/agreement');
             }}
           >
