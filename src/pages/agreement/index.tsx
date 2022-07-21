@@ -1,8 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useNavigate } from 'react-router';
 import styled from 'styled-components';
 
+import { useSignUp } from '@/api';
 import { Button, PageLayout } from '@/common';
+import { RegisterContext } from '@/contexts';
 
 const AGREEMENTS = [
   {
@@ -19,6 +21,8 @@ const AGREEMENTS = [
 
 const Agreement = () => {
   const navigate = useNavigate();
+  const { sign_up } = useSignUp();
+  const { getPersonalInformation } = useContext(RegisterContext);
 
   const [chkAllAgreements, setChkAllAgreements] = useState(false);
   const [chkAgreements, setChkAgreements] = useState(new Array(AGREEMENTS.length).fill(false));
@@ -51,6 +55,15 @@ const Agreement = () => {
 
   const chkButtonDisabled = () => {
     return chkAgreements.some((chkAgreement) => chkAgreement === false);
+  };
+
+  const onClickSignUp = async () => {
+    const { data } = await sign_up({
+      variables: {
+        signUpInput: getPersonalInformation(),
+      },
+    });
+    navigate('/login');
   };
 
   return (
@@ -98,9 +111,7 @@ const Agreement = () => {
         <LoginLinkButton
           className="login_button"
           disabled={chkButtonDisabled()}
-          onClick={() => {
-            navigate('/login');
-          }}
+          onClick={onClickSignUp}
         >
           로그인 하러가기
         </LoginLinkButton>
