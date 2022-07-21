@@ -21,8 +21,9 @@ const SelectInterest = () => {
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
           <InterestWrapper>
-            {JOBS.map((job) => (
+            {JOBS.map((job, idx) => (
               <Interest
+                key={idx}
                 className="select_interest"
                 name={job}
                 totalChoices={totalJobs}
@@ -37,8 +38,9 @@ const SelectInterest = () => {
             <Condition>최대 3개까지 선택할 수 있어요</Condition>
           </ExplanationWrapper>
           <InterestWrapper>
-            {INTERESTS.map((interest) => (
+            {INTERESTS.map((interest, idx) => (
               <Interest
+                key={idx}
                 className="select_interest"
                 name={interest}
                 totalChoices={totalInterests}
