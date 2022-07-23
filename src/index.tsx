@@ -1,5 +1,6 @@
 import { createRoot } from 'react-dom/client';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
@@ -16,8 +17,21 @@ if (!rootElement) {
 
 const root = createRoot(rootElement);
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: process.env.REACT_APP_SERVER_URL,
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'Access-Token': process.env.REACT_APP_TOKEN && process.env.REACT_APP_TOKEN,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
