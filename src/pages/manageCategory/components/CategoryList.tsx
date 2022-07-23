@@ -13,9 +13,10 @@ export const CategoryList = () => {
   const { schedule_categories } = useScheduleCategories();
 
   const [categories, setCategories] = useState([]);
+  const [clickedIndex, setClickedIndex] = useState(-1);
   const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
 
-  const fetchInitialCategories = async () => {
+  const showCategories = async () => {
     const {
       data: { scheduleCategories },
     } = await schedule_categories({
@@ -29,7 +30,7 @@ export const CategoryList = () => {
   };
 
   useEffect(() => {
-    fetchInitialCategories();
+    showCategories();
   }, [sort]);
 
   return (
@@ -42,6 +43,7 @@ export const CategoryList = () => {
           visibility={category.visible}
           content={category.content}
           setIsCategoryClicked={setIsCategoryClicked}
+          setClickedIndex={setClickedIndex}
         />
       ))}
       {show && (
@@ -50,6 +52,7 @@ export const CategoryList = () => {
           pointX={pointX}
           pointY={pointY}
           setSort={setSort}
+          clickedIndex={clickedIndex}
         />
       )}
     </Wrapper>

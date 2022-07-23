@@ -1,4 +1,4 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery, useMutation } from '@apollo/client';
 
 const SCHEDULE_CATEGORIES = gql`
   query ScheduleCategories($sort: ScheduleCategorySort!, $page: Int!, $size: Int!) {
@@ -62,4 +62,16 @@ export const useSearchSchedules = () => {
   const [search_schedules, { data }] = useLazyQuery(SEARCH_SCHEDULES);
 
   return { search_schedules, data };
+};
+
+const DELETE_CATEGORY = gql`
+  mutation DeleteCategory($input: DeleteScheduleCategoryInput!) {
+    deleteCategory(input: $input)
+  }
+`;
+
+export const useDeleteCategory = () => {
+  const [delete_category, { data }] = useMutation(DELETE_CATEGORY);
+
+  return { delete_category, data };
 };

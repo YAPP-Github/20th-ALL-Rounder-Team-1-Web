@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
+import { useDeleteCategory } from '@/api';
 import { SORT } from '@/utils';
 
 interface CategorySubMenuProps {
@@ -9,6 +10,7 @@ interface CategorySubMenuProps {
   pointY: number;
   isSubMenu?: boolean;
   setSort: Dispatch<SetStateAction<SORT>>;
+  clickedIndex: number;
 }
 
 export const CategorySubMenu = ({
@@ -17,8 +19,20 @@ export const CategorySubMenu = ({
   pointY,
   isSubMenu = false,
   setSort,
+  clickedIndex,
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
+  const { delete_category } = useDeleteCategory();
+
+  const onClickDeleteCategory = () => {
+    delete_category({
+      variables: {
+        input: {
+          scheduleCategoryId: clickedIndex,
+        },
+      },
+    });
+  };
 
   const onClickSort = (sortType: SORT) => {
     setSort(sortType);
@@ -42,7 +56,7 @@ export const CategorySubMenu = ({
       {isCategoryClicked ? (
         <ContextMenu pointX={pointX} pointY={pointY}>
           <Menu>수정</Menu>
-          <Menu>삭제</Menu>
+          <Menu onClick={() => onClickDeleteCategory()}>삭제</Menu>
         </ContextMenu>
       ) : (
         <ContextMenu pointX={pointX} pointY={pointY}>

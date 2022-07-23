@@ -8,6 +8,7 @@ interface CategoryProps {
   visibility: string;
   content: string;
   setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
+  setClickedIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const Category = ({
@@ -16,6 +17,7 @@ export const Category = ({
   visibility,
   content,
   setIsCategoryClicked,
+  setClickedIndex,
 }: CategoryProps) => {
   const navigate = useNavigate();
 
@@ -26,6 +28,7 @@ export const Category = ({
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsCategoryClicked(true);
+    setClickedIndex(id);
   };
 
   return (
