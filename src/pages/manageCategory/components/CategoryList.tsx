@@ -6,20 +6,21 @@ import { Category } from '.';
 import { useScheduleCategories } from '@/api';
 import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
-import { CATEGORIES } from '@/utils';
+import { CATEGORIES, SORT } from '@/utils';
 
 export const CategoryList = () => {
   const { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked } = useContextMenu();
   const { schedule_categories } = useScheduleCategories();
 
   const [categories, setCategories] = useState([]);
+  const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
 
   const fetchInitialCategories = async () => {
     const {
       data: { scheduleCategories },
     } = await schedule_categories({
       variables: {
-        sort: 'DATE_CREATED_ASC',
+        sort,
         page: 0,
         size: 9,
       },
@@ -29,9 +30,7 @@ export const CategoryList = () => {
 
   useEffect(() => {
     fetchInitialCategories();
-  }, []);
-
-  console.log(categories);
+  }, [sort]);
 
   return (
     <Wrapper>
@@ -46,7 +45,12 @@ export const CategoryList = () => {
         />
       ))}
       {show && (
-        <CategorySubMenu isCategoryClicked={isCategoryClicked} pointX={pointX} pointY={pointY} />
+        <CategorySubMenu
+          isCategoryClicked={isCategoryClicked}
+          pointX={pointX}
+          pointY={pointY}
+          setSort={setSort}
+        />
       )}
     </Wrapper>
   );

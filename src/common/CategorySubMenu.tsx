@@ -1,11 +1,14 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
+
+import { SORT } from '@/utils';
 
 interface CategorySubMenuProps {
   isCategoryClicked: boolean;
   pointX: number;
   pointY: number;
   isSubMenu?: boolean;
+  setSort: Dispatch<SetStateAction<SORT>>;
 }
 
 export const CategorySubMenu = ({
@@ -13,8 +16,13 @@ export const CategorySubMenu = ({
   pointX,
   pointY,
   isSubMenu = false,
+  setSort,
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
+
+  const onClickSort = (sortType: SORT) => {
+    setSort(sortType);
+  };
 
   if (isSubMenu) {
     return (
@@ -45,7 +53,7 @@ export const CategorySubMenu = ({
             showSorting={showSorting}
           >
             <p>정렬</p>
-            <img src="../../assets/setting_right_button.png" alt="" />
+            <i className="right-btn" />
           </SortMenu>
           {showSorting && (
             <SortingMenu
@@ -54,10 +62,10 @@ export const CategorySubMenu = ({
               onMouseOver={() => setShowSorting(true)}
               onMouseLeave={() => setShowSorting(false)}
             >
-              <li>최신순</li>
-              <li>오래된순</li>
-              <li>오름차순</li>
-              <li>내림차순</li>
+              <li onClick={() => onClickSort(SORT.DATE_CREATED_ASC)}>최신순</li>
+              <li onClick={() => onClickSort(SORT.DATE_CREATED_DESC)}>오래된순</li>
+              <li onClick={() => onClickSort(SORT.NAME_ASC)}>오름차순</li>
+              <li onClick={() => onClickSort(SORT.NAME_DESC)}>내림차순</li>
             </SortingMenu>
           )}
         </ContextMenu>
@@ -106,6 +114,11 @@ const SortMenu = styled(Menu)<{ showSorting: boolean }>`
   justify-content: space-between;
   align-items: center;
   background-color: ${({ theme: { colors }, showSorting }) => showSorting && colors.Gray100};
+
+  .right-btn {
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 29, 30)};
+    background-position: -270px -251px;
+  }
 `;
 
 const SortingMenu = styled.ul<{ pointX: number; pointY: number }>`
