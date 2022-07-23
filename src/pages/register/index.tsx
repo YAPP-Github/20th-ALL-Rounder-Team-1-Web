@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useContext, useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
@@ -9,9 +9,11 @@ import {
   ValidationControlledInput,
   ValidationUncontrolledInput,
 } from '@/common';
+import { RegisterContext } from '@/contexts';
 
 const Register = () => {
   const navigate = useNavigate();
+  const { setPersonalInformation } = useContext(RegisterContext);
 
   const emailRef = useRef<InputRef>(null);
   const validationNumRef = useRef<InputRef>(null);
@@ -117,6 +119,11 @@ const Register = () => {
             type="submit"
             disabled={chkRegisterButtonDisabled()}
             onClick={() => {
+              setPersonalInformation({
+                email: emailRef.current?.value,
+                password: password,
+                nickname: nicknameRef.current?.value,
+              });
               navigate('/select-interest');
             }}
           >
