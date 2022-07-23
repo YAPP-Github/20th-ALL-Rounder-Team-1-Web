@@ -36,15 +36,13 @@ export const CategorySubMenu = ({
   };
 
   const onClickDeleteCategory = () => {
-    if (clickedIndex) {
-      delete_category({
-        variables: {
-          input: {
-            scheduleCategoryId: clickedIndex,
-          },
+    delete_category({
+      variables: {
+        input: {
+          scheduleCategoryId: clickedIndex,
         },
-      });
-    }
+      },
+    });
   };
 
   const onClickSort = (sortType: SORT) => {

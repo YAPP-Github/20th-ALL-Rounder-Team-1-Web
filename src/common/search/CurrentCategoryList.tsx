@@ -3,28 +3,31 @@ import styled from 'styled-components';
 
 import { SearchBar } from '.';
 
+import { SORT } from '@/utils';
+
 interface CurrentCategoryListProps {
   showAllowingRange?: boolean;
-  sortingMenus: string[];
   listingContents: ReactNode;
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
+  sort: SORT;
+  setSort: Dispatch<SetStateAction<SORT>>;
 }
 
 export const CurrentCategoryList = ({
   showAllowingRange = true,
-  sortingMenus,
   listingContents,
   setIsInputFocused,
+  sort,
+  setSort,
 }: CurrentCategoryListProps) => {
-  const [currentSort, setCurrentSort] = useState(sortingMenus[0]);
   const [isSortOpen, setIsSortOpen] = useState(false);
 
   const onClickSort = () => {
     setIsSortOpen(!isSortOpen);
   };
 
-  const onClickSortType = (name: string) => {
-    setCurrentSort(name);
+  const onClickSortType = (name: SORT) => {
+    setSort(name);
     setIsSortOpen(false);
   };
 
@@ -34,13 +37,14 @@ export const CurrentCategoryList = ({
       <Options showAllowingRange={showAllowingRange}>
         <p>공개여부 · nn개의 일정</p>
         <Sorting onClick={onClickSort}>
-          <h1>{currentSort}</h1>
+          <h1>{sort}</h1>
           <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
-              {sortingMenus.map((sortingMenu) => (
-                <li onClick={() => onClickSortType(sortingMenu)}>{sortingMenu}</li>
-              ))}
+              <li onClick={() => onClickSortType(SORT.DATE_CREATED_ASC)}>최신순</li>
+              <li onClick={() => onClickSortType(SORT.DATE_CREATED_DESC)}>오래된순</li>
+              <li onClick={() => onClickSortType(SORT.NAME_ASC)}>오름차순</li>
+              <li onClick={() => onClickSortType(SORT.NAME_DESC)}>내림차순</li>
             </SortMenu>
           )}
         </Sorting>

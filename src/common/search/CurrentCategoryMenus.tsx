@@ -1,12 +1,18 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from '.';
 
+import { useSearchSchedules } from '@/api';
 import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
-import { CERTAINCATEGORIES } from '@/utils';
+import { CERTAINCATEGORIES, SORT } from '@/utils';
 
-export const CurrentCategoryMenus = () => {
+interface CurrentCategoryMenusProps {
+  sort: SORT;
+}
+
+export const CurrentCategoryMenus = ({ sort }: CurrentCategoryMenusProps) => {
   const {
     pointX,
     pointY,
@@ -17,7 +23,26 @@ export const CurrentCategoryMenus = () => {
     setClickedIndex,
   } = useContextMenu();
 
-  console.log(clickedIndex);
+  const [certainCategories, setCertainCategories] = useState([]);
+  const { search_schedules } = useSearchSchedules();
+
+  const showCategories = async () => {
+    const {
+      data: { scheduleCategories },
+    } = await search_schedules({
+      variables: {
+        sort,
+        page: 0,
+        size: 9,
+        categoryId: 123,
+      },
+    });
+    setCertainCategories(scheduleCategories);
+  };
+
+  useEffect(() => {
+    showCategories();
+  }, [sort]);
 
   return (
     <Wrapper>

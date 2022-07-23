@@ -1,17 +1,22 @@
+import { useState } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategory } from './components';
 
 import { CurrentCategoryList, CurrentCategoryMenus, PageLayout } from '@/common';
+import { SORT } from '@/utils';
 
 const CertainCategory = () => {
+  const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
+
   return (
     <PageLayout isFooter={false}>
       <Wrapper>
         <CurrentCategory />
         <CurrentCategoryList
-          sortingMenus={['최신순', '오래된순', '오름차순', '내림차순']}
           listingContents={<CurrentCategoryMenus />}
+          sort={sort}
+          setSort={setSort}
         />
       </Wrapper>
     </PageLayout>
