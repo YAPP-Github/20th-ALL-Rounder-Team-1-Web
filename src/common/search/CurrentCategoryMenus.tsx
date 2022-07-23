@@ -17,6 +17,8 @@ export const CurrentCategoryMenus = () => {
     setClickedIndex,
   } = useContextMenu();
 
+  console.log(clickedIndex);
+
   return (
     <Wrapper>
       {CERTAINCATEGORIES.map((category, index) => (
@@ -39,6 +41,7 @@ export const CurrentCategoryMenus = () => {
           pointX={pointX}
           pointY={pointY}
           isSubMenu={true}
+          clickedIndex={clickedIndex}
         />
       )}
     </Wrapper>

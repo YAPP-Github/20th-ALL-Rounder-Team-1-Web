@@ -52,6 +52,8 @@ const SEARCH_SCHEDULES = gql`
         dateTimeStart
         dateTimeEnd
         repeatType
+        repeatSelectedValue
+        memo
         dateSkip
       }
     }
@@ -74,4 +76,16 @@ export const useDeleteCategory = () => {
   const [delete_category, { data }] = useMutation(DELETE_CATEGORY);
 
   return { delete_category, data };
+};
+
+const DELETE_SCHEDULE = gql`
+  mutation DeleteSchedule($input: DeleteScheduleInput!) {
+    deleteSchedule(input: $input)
+  }
+`;
+
+export const useDeleteSchedule = () => {
+  const [delete_schedule, { data }] = useMutation(DELETE_SCHEDULE);
+
+  return { delete_schedule, data };
 };
