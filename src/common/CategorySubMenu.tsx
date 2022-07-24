@@ -1,7 +1,7 @@
 import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
-import { useDeleteCategory, useDeleteSchedule } from '@/api';
+import { useDeleteCategory, useDeleteSchedule, useScheduleCategories } from '@/api';
 import { SORT } from '@/utils';
 
 interface CategorySubMenuProps {
@@ -24,6 +24,7 @@ export const CategorySubMenu = ({
   const [showSorting, setShowSorting] = useState(false);
   const { delete_category } = useDeleteCategory();
   const { delete_schedule } = useDeleteSchedule();
+  const { refetch } = useScheduleCategories();
 
   const onClickSkipSchedule = () => {
     delete_schedule({
@@ -43,6 +44,7 @@ export const CategorySubMenu = ({
         },
       },
     });
+    refetch();
   };
 
   const onClickSort = (sortType: SORT) => {

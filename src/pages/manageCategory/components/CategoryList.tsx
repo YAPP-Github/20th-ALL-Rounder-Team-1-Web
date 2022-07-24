@@ -8,17 +8,26 @@ import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
 import { CATEGORIES, SORT } from '@/utils';
 
+interface ICategories {
+  color: string;
+  id: string;
+  name: string;
+  openType: string;
+}
+
 export const CategoryList = () => {
   const { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked } = useContextMenu();
   const { schedule_categories } = useScheduleCategories();
 
-  const [categories, setCategories] = useState([]);
+  const [categories, setCategories] = useState<ICategories[]>([]);
   const [clickedIndex, setClickedIndex] = useState(-1);
   const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
 
   const showCategories = async () => {
     const {
-      data: { scheduleCategories },
+      data: {
+        scheduleCategories: { scheduleCategories },
+      },
     } = await schedule_categories({
       variables: {
         sort,
@@ -35,13 +44,13 @@ export const CategoryList = () => {
 
   return (
     <Wrapper>
-      {CATEGORIES.map((category) => (
+      {categories.map((category) => (
         <Category
           key={category.id}
-          id={category.id}
+          id={Number(category.id)}
           color={category.color}
-          visibility={category.visible}
-          content={category.content}
+          visibility={category.openType}
+          content={category.name}
           setIsCategoryClicked={setIsCategoryClicked}
           setClickedIndex={setClickedIndex}
         />

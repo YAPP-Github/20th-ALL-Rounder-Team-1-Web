@@ -17,9 +17,11 @@ const SCHEDULE_CATEGORIES = gql`
 `;
 
 export const useScheduleCategories = () => {
-  const [schedule_categories, { data }] = useLazyQuery(SCHEDULE_CATEGORIES);
+  const [schedule_categories, { data, refetch }] = useLazyQuery(SCHEDULE_CATEGORIES, {
+    pollInterval: 500,
+  });
 
-  return { schedule_categories, data };
+  return { schedule_categories, data, refetch };
 };
 
 const SEARCH_SCHEDULES = gql`
@@ -64,6 +66,18 @@ export const useSearchSchedules = () => {
   const [search_schedules, { data }] = useLazyQuery(SEARCH_SCHEDULES);
 
   return { search_schedules, data };
+};
+
+const CREATE_CATEGORY = gql`
+  mutation CreateCategory($scheduleCategoryInput: ScheduleCategoryInput!) {
+    createCategory(scheduleCategoryInput: $scheduleCategoryInput)
+  }
+`;
+
+export const useCreateCategory = () => {
+  const [create_category, { data }] = useMutation(CREATE_CATEGORY);
+
+  return { create_category, data };
 };
 
 const DELETE_CATEGORY = gql`

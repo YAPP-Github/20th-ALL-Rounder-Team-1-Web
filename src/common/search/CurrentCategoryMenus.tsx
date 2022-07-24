@@ -10,9 +10,28 @@ import { CERTAINCATEGORIES, SORT } from '@/utils';
 
 interface CurrentCategoryMenusProps {
   sort: SORT;
+  categoryId: string;
 }
 
-export const CurrentCategoryMenus = ({ sort }: CurrentCategoryMenusProps) => {
+interface ICategory {
+  id: string;
+  name: string;
+  color: string;
+  openType: string;
+}
+interface ISchedules {
+  id: string;
+  name: string;
+  category: ICategory;
+  dateTimeStart: string;
+  dateTimeEnd: string;
+  repeatType: string;
+  repeatSelectedValue?: string;
+  memo?: string;
+  dateSkip?: string[];
+}
+
+export const CurrentCategoryMenus = ({ sort, categoryId }: CurrentCategoryMenusProps) => {
   const {
     pointX,
     pointY,
@@ -23,21 +42,25 @@ export const CurrentCategoryMenus = ({ sort }: CurrentCategoryMenusProps) => {
     setClickedIndex,
   } = useContextMenu();
 
-  const [certainCategories, setCertainCategories] = useState([]);
+  const [schedules, setSchedules] = useState<ISchedules[]>([]);
   const { search_schedules } = useSearchSchedules();
 
   const showCategories = async () => {
     const {
-      data: { scheduleCategories },
+      data: {
+        searchSchedules: { schedules },
+      },
     } = await search_schedules({
       variables: {
         sort,
         page: 0,
         size: 9,
-        categoryId: 123,
+        categoryId,
       },
     });
-    setCertainCategories(scheduleCategories);
+    console.log(schedules);
+
+    setSchedules(schedules);
   };
 
   useEffect(() => {
@@ -46,15 +69,16 @@ export const CurrentCategoryMenus = ({ sort }: CurrentCategoryMenusProps) => {
 
   return (
     <Wrapper>
-      {CERTAINCATEGORIES.map((category, index) => (
+      {schedules.map((schedule, index) => (
         <CurrentCategoryMenu
           key={index}
           currentIndex={index}
-          name={category.name}
-          startDate={category.startDate}
-          startTime={category.startTime}
-          endDate={category.endDate}
-          endTime={category.endTime}
+          color={schedule.category.color}
+          name={schedule.name}
+          startTime={schedule.dateTimeStart}
+          endTime={schedule.dateTimeEnd}
+          repeatSelectedValue={schedule?.repeatSelectedValue}
+          repeatType={schedule.repeatType}
           setIsCategoryClicked={setIsCategoryClicked}
           clickedIndex={clickedIndex}
           setClickedIndex={setClickedIndex}
