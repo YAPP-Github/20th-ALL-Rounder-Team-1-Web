@@ -6,7 +6,7 @@ import { Category } from '.';
 import { useScheduleCategories } from '@/api';
 import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
-import { CATEGORIES, SORT } from '@/utils';
+import { SORT } from '@/utils';
 
 interface ICategories {
   color: string;

@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from '.';

@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { CategoryContext } from '@/contexts';
 
 export const CurrentCategory = () => {
-  const { color, categoryName } = useContext(CategoryContext);
+  const { categoryName, color } = useContext(CategoryContext);
 
   return (
     <Wrapper>

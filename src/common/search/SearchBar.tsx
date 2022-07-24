@@ -1,7 +1,7 @@
-import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
-import { DebounceInput } from '..';
+import { DebounceInput } from '@/common';
 
 interface SearchBarProps {
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
@@ -10,20 +10,6 @@ interface SearchBarProps {
 }
 
 export const SearchBar = ({ setIsInputFocused, inputValue, setInputValue }: SearchBarProps) => {
-  // const onClickInput = () => {
-  //   if (setIsInputFocused && inputValue.length === 0) {
-  //     setIsInputFocused(true);
-  //   }
-  // };
-
-  // const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-  //   const { value } = event.target;
-  //   setInputValue(value);
-  //   if (setIsInputFocused) {
-  //     setIsInputFocused(false);
-  //   }
-  // };
-
   return (
     <Wrapper>
       <i className="search_icon" />

@@ -1,4 +1,4 @@
-import { ChangeEvent, Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
+import { ChangeEvent, Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import { useLocation } from 'react-router-dom';
 
 import { useSearchSchedules } from '@/api';

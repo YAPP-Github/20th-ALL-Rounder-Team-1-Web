@@ -10,7 +10,6 @@ import { SORT } from '@/utils';
 const CertainCategory = () => {
   const { pathname } = useLocation();
   const categoryId = pathname.split('/')[2];
-
   const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
   const [openType, setOpenType] = useState('ALL_OPEN');
 
