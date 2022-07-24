@@ -9,6 +9,7 @@ import {
   CategoryContextProvider,
   DimmedLayerContextProvider,
   PopUpContextProvider,
+  RegisterContextProvider,
   ToastContextProvider,
 } from '@/contexts';
 import { GlobalStyle, theme } from '@/style';
@@ -46,6 +47,8 @@ root.render(
       components={[
         CategoryContextProvider,
         DimmedLayerContextProvider,
+        DimmedLayerContextProvider,
+        RegisterContextProvider,
         PopUpContextProvider,
         ToastContextProvider,
       ]}

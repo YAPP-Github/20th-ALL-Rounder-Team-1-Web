@@ -38,15 +38,21 @@ export const Input = forwardRef<InputRef, InputProps>(
           if (type === 'checkEmail') {
             const emailValidation = checkEmail(inputRef.current?.value!);
 
-            if (emailValidation.type === 'success') {
-              sendAuthkey({
-                variables: {
-                  email: inputRef.current?.value,
-                },
-              });
+            if (emailValidation.type === 'error') {
+              return emailValidation;
             }
 
-            return emailValidation;
+            const { data, error } = await sendAuthkey({
+              variables: {
+                email: inputRef.current?.value,
+              },
+            });
+
+            if (data) {
+              return { type: 'success', message: '유효한 이메일입니다' };
+            }
+
+            return { type: 'error', message: error!.message };
           }
 
           if (type === 'checkCertificateNumber') {
@@ -61,6 +67,7 @@ export const Input = forwardRef<InputRef, InputProps>(
                 },
               },
             });
+
             return checkCertificateNumber(validAuthKey);
           }
 
@@ -72,6 +79,7 @@ export const Input = forwardRef<InputRef, InputProps>(
                 nickname: inputRef.current?.value,
               },
             });
+
             return checkNicknameValidation(checkDuplicateNickname);
           }
           return { type: '', message: '' };

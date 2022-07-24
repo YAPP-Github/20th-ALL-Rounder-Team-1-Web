@@ -1,56 +1,42 @@
-import {
-  createContext,
-  Dispatch,
-  PropsWithChildren,
-  SetStateAction,
-  useEffect,
-  useState,
-} from 'react';
+import { createContext, PropsWithChildren, useEffect, useRef, useState } from 'react';
+
+type ToastType = 'success' | 'error';
 
 type ToastProps = {
-  isVisible: boolean;
-  setIsVisible: Dispatch<SetStateAction<boolean>>;
-  text: string;
-  setText: Dispatch<SetStateAction<string>>;
-  isSuccess: boolean;
-  setIsSuccess: Dispatch<SetStateAction<boolean>>;
-  isClicked: boolean;
-  setIsClicked: Dispatch<SetStateAction<boolean>>;
+  setToast: (type: ToastType, message: string) => void;
+  getToast: () => { isToasted: boolean; toastType: string; toastMessage: string };
 };
+
+const TOAST_MAINTAIN_TIME = 3000;
 
 export const ToastContext = createContext<ToastProps>({} as ToastProps);
 
 export const ToastContextProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [isVisible, setIsVisible] = useState(false);
-  const [text, setText] = useState('');
-  const [isSuccess, setIsSuccess] = useState(false);
-  const [isClicked, setIsClicked] = useState(false);
-
-  const handleToastMessage = () => {
-    setIsVisible(true);
-    setTimeout(() => {
-      setIsVisible(false);
-    }, 5000);
-  };
+  const [isToasted, setIsToasted] = useState(false);
+  const toastType = useRef<ToastType>('success');
+  const toastMessage = useRef('');
 
   useEffect(() => {
-    if (isClicked) {
-      handleToastMessage();
-      setIsClicked(false);
-    }
-  }, [isClicked]);
+    const timer = setTimeout(() => setIsToasted(false), TOAST_MAINTAIN_TIME);
+
+    return () => clearTimeout(timer);
+  }, [isToasted]);
+
+  const getToast = () => {
+    return { isToasted, toastType: toastType.current, toastMessage: toastMessage.current };
+  };
+
+  const setToast = (type: ToastType, message: string) => {
+    toastType.current = type;
+    toastMessage.current = message;
+    setIsToasted(true);
+  };
 
   return (
     <ToastContext.Provider
       value={{
-        isVisible,
-        setIsVisible,
-        text,
-        setText,
-        isSuccess,
-        setIsSuccess,
-        isClicked,
-        setIsClicked,
+        setToast,
+        getToast,
       }}
     >
       {children}
