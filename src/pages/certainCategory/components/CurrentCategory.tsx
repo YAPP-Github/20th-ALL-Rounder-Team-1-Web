@@ -1,13 +1,18 @@
+import { useContext } from 'react';
 import styled from 'styled-components';
 
+import { CategoryContext } from '@/contexts';
+
 export const CurrentCategory = () => {
+  const { categoryName, color } = useContext(CategoryContext);
+
   return (
     <Wrapper>
       <p>카테고리</p>
       <i className="right" />
       <Info>
-        <Color />
-        <p>Google 캘린더 시작 Google</p>
+        <Color color={color} />
+        <p>{categoryName}</p>
       </Info>
     </Wrapper>
   );
@@ -46,10 +51,10 @@ const Info = styled.div`
   }
 `;
 
-const Color = styled.div`
+const Color = styled.div<{ color: string }>`
   width: 24px;
   height: 24px;
   border-radius: 8px;
-  background-color: #ffc8c8;
+  background-color: ${({ color }) => color};
   margin-right: 8px;
 `;

@@ -1,46 +1,74 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { SearchBar } from '.';
 
+import { CategoryContext } from '@/contexts';
+import { SORT } from '@/utils';
+
 interface CurrentCategoryListProps {
   showAllowingRange?: boolean;
-  sortingMenus: string[];
   listingContents: ReactNode;
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
+  sort: SORT;
+  setSort: Dispatch<SetStateAction<SORT>>;
+  openType?: string;
 }
 
 export const CurrentCategoryList = ({
   showAllowingRange = true,
-  sortingMenus,
   listingContents,
   setIsInputFocused,
+  sort,
+  setSort,
+  openType,
 }: CurrentCategoryListProps) => {
-  const [currentSort, setCurrentSort] = useState(sortingMenus[0]);
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const { schedules } = useContext(CategoryContext);
 
   const onClickSort = () => {
     setIsSortOpen(!isSortOpen);
   };
 
-  const onClickSortType = (name: string) => {
-    setCurrentSort(name);
+  const onClickSortType = (name: SORT) => {
+    setSort(name);
     setIsSortOpen(false);
+  };
+
+  const sortToWord = (sort: SORT) => {
+    switch (sort) {
+      case SORT.DATE_CREATED_ASC:
+        return '최신순';
+      case SORT.DATE_CREATED_DESC:
+        return '오래된순';
+      case SORT.NAME_ASC:
+        return '오름차순';
+      case SORT.NAME_DESC:
+        return '내림차순';
+    }
   };
 
   return (
     <Wrapper>
-      <SearchBar setIsInputFocused={setIsInputFocused && setIsInputFocused} />
+      <SearchBar
+        setIsInputFocused={setIsInputFocused && setIsInputFocused}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
       <Options showAllowingRange={showAllowingRange}>
-        <p>공개여부 · nn개의 일정</p>
+        <p>
+          {openType} · {schedules.length}개의 일정
+        </p>
         <Sorting onClick={onClickSort}>
-          <h1>{currentSort}</h1>
+          <h1>{sortToWord(sort)}</h1>
           <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
-              {sortingMenus.map((sortingMenu) => (
-                <li onClick={() => onClickSortType(sortingMenu)}>{sortingMenu}</li>
-              ))}
+              <li onClick={() => onClickSortType(SORT.DATE_CREATED_ASC)}>최신순</li>
+              <li onClick={() => onClickSortType(SORT.DATE_CREATED_DESC)}>오래된순</li>
+              <li onClick={() => onClickSortType(SORT.NAME_ASC)}>오름차순</li>
+              <li onClick={() => onClickSortType(SORT.NAME_DESC)}>내림차순</li>
             </SortMenu>
           )}
         </Sorting>

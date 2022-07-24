@@ -1,17 +1,29 @@
+import { useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { CurrentCategory } from './components';
 
 import { CurrentCategoryList, CurrentCategoryMenus, PageLayout } from '@/common';
+import { SORT } from '@/utils';
 
 const CertainCategory = () => {
+  const { pathname } = useLocation();
+  const categoryId = pathname.split('/')[2];
+  const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
+  const [openType, setOpenType] = useState('ALL_OPEN');
+
   return (
     <PageLayout isFooter={false}>
       <Wrapper>
         <CurrentCategory />
         <CurrentCategoryList
-          sortingMenus={['최신순', '오래된순', '오름차순', '내림차순']}
-          listingContents={<CurrentCategoryMenus />}
+          listingContents={
+            <CurrentCategoryMenus sort={sort} categoryId={categoryId} setOpenType={setOpenType} />
+          }
+          sort={sort}
+          setSort={setSort}
+          openType={openType}
         />
       </Wrapper>
     </PageLayout>
