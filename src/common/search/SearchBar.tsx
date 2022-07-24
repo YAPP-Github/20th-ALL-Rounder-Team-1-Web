@@ -1,36 +1,36 @@
 import { ChangeEvent, Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
+import { DebounceInput } from '..';
+
 interface SearchBarProps {
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
 }
 
-export const SearchBar = ({ setIsInputFocused }: SearchBarProps) => {
-  const [inputValue, setInputValue] = useState('');
+export const SearchBar = ({ setIsInputFocused, inputValue, setInputValue }: SearchBarProps) => {
+  // const onClickInput = () => {
+  //   if (setIsInputFocused && inputValue.length === 0) {
+  //     setIsInputFocused(true);
+  //   }
+  // };
 
-  const onClickInput = () => {
-    if (setIsInputFocused && inputValue.length === 0) {
-      setIsInputFocused(true);
-    }
-  };
-
-  const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
-    const { value } = event.target;
-    setInputValue(value);
-    if (setIsInputFocused) {
-      setIsInputFocused(false);
-    }
-  };
+  // const onChangeInput = (event: ChangeEvent<HTMLInputElement>) => {
+  //   const { value } = event.target;
+  //   setInputValue(value);
+  //   if (setIsInputFocused) {
+  //     setIsInputFocused(false);
+  //   }
+  // };
 
   return (
     <Wrapper>
       <i className="search_icon" />
-      <input
-        value={inputValue}
-        onChange={onChangeInput}
-        type="text"
-        placeholder="일정을 검색해보세요"
-        onClick={onClickInput}
+      <DebounceInput
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+        setIsInputFocused={setIsInputFocused}
       />
     </Wrapper>
   );

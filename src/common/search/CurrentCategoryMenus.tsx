@@ -1,42 +1,23 @@
-import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from '.';
 
 import { useSearchSchedules } from '@/api';
 import { CategorySubMenu } from '@/common';
+import { CategoryContext } from '@/contexts';
 import { useContextMenu } from '@/hooks';
-import { CERTAINCATEGORIES, SORT } from '@/utils';
+import { SORT } from '@/utils';
 
 interface CurrentCategoryMenusProps {
   sort: SORT;
   categoryId: string;
-  setScheduleCount?: Dispatch<SetStateAction<number>>;
   setOpenType?: Dispatch<SetStateAction<string>>;
-}
-
-interface ICategory {
-  id: string;
-  name: string;
-  color: string;
-  openType: string;
-}
-interface ISchedules {
-  id: string;
-  name: string;
-  category: ICategory;
-  dateTimeStart: string;
-  dateTimeEnd: string;
-  repeatType: string;
-  repeatSelectedValue?: string;
-  memo?: string;
-  dateSkip?: string[];
 }
 
 export const CurrentCategoryMenus = ({
   sort,
   categoryId,
-  setScheduleCount,
   setOpenType,
 }: CurrentCategoryMenusProps) => {
   const {
@@ -48,9 +29,8 @@ export const CurrentCategoryMenus = ({
     clickedIndex,
     setClickedIndex,
   } = useContextMenu();
-
-  const [schedules, setSchedules] = useState<ISchedules[]>([]);
   const { search_schedules } = useSearchSchedules();
+  const { schedules, setSchedules } = useContext(CategoryContext);
 
   const showCategories = async () => {
     const {
@@ -65,9 +45,6 @@ export const CurrentCategoryMenus = ({
         categoryId,
       },
     });
-    if (setScheduleCount) {
-      setScheduleCount(schedules.length);
-    }
     if (setOpenType) {
       setOpenType(schedules[0].category.openType);
     }

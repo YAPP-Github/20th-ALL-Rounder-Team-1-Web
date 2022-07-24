@@ -1,8 +1,9 @@
-import { Dispatch, ReactNode, SetStateAction, useState } from 'react';
+import { Dispatch, ReactNode, SetStateAction, useContext, useState } from 'react';
 import styled from 'styled-components';
 
 import { SearchBar } from '.';
 
+import { CategoryContext } from '@/contexts';
 import { SORT } from '@/utils';
 
 interface CurrentCategoryListProps {
@@ -11,7 +12,6 @@ interface CurrentCategoryListProps {
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
   sort: SORT;
   setSort: Dispatch<SetStateAction<SORT>>;
-  scheduleCount?: number;
   openType?: string;
 }
 
@@ -21,10 +21,11 @@ export const CurrentCategoryList = ({
   setIsInputFocused,
   sort,
   setSort,
-  scheduleCount,
   openType,
 }: CurrentCategoryListProps) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
+  const [inputValue, setInputValue] = useState('');
+  const { schedules } = useContext(CategoryContext);
 
   const onClickSort = () => {
     setIsSortOpen(!isSortOpen);
@@ -50,10 +51,14 @@ export const CurrentCategoryList = ({
 
   return (
     <Wrapper>
-      <SearchBar setIsInputFocused={setIsInputFocused && setIsInputFocused} />
+      <SearchBar
+        setIsInputFocused={setIsInputFocused && setIsInputFocused}
+        inputValue={inputValue}
+        setInputValue={setInputValue}
+      />
       <Options showAllowingRange={showAllowingRange}>
         <p>
-          {openType} · {scheduleCount}개의 일정
+          {openType} · {schedules.length}개의 일정
         </p>
         <Sorting onClick={onClickSort}>
           <h1>{sortToWord(sort)}</h1>

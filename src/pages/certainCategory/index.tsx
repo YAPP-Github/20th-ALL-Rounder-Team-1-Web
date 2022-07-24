@@ -12,7 +12,6 @@ const CertainCategory = () => {
   const categoryId = pathname.split('/')[2];
 
   const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
-  const [scheduleCount, setScheduleCount] = useState(0);
   const [openType, setOpenType] = useState('ALL_OPEN');
 
   return (
@@ -21,16 +20,10 @@ const CertainCategory = () => {
         <CurrentCategory />
         <CurrentCategoryList
           listingContents={
-            <CurrentCategoryMenus
-              sort={sort}
-              categoryId={categoryId}
-              setScheduleCount={setScheduleCount}
-              setOpenType={setOpenType}
-            />
+            <CurrentCategoryMenus sort={sort} categoryId={categoryId} setOpenType={setOpenType} />
           }
           sort={sort}
           setSort={setSort}
-          scheduleCount={scheduleCount}
           openType={openType}
         />
       </Wrapper>
