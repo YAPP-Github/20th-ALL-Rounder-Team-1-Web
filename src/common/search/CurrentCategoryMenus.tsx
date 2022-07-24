@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from '.';
@@ -11,6 +11,8 @@ import { CERTAINCATEGORIES, SORT } from '@/utils';
 interface CurrentCategoryMenusProps {
   sort: SORT;
   categoryId: string;
+  setScheduleCount?: Dispatch<SetStateAction<number>>;
+  setOpenType?: Dispatch<SetStateAction<string>>;
 }
 
 interface ICategory {
@@ -31,7 +33,12 @@ interface ISchedules {
   dateSkip?: string[];
 }
 
-export const CurrentCategoryMenus = ({ sort, categoryId }: CurrentCategoryMenusProps) => {
+export const CurrentCategoryMenus = ({
+  sort,
+  categoryId,
+  setScheduleCount,
+  setOpenType,
+}: CurrentCategoryMenusProps) => {
   const {
     pointX,
     pointY,
@@ -58,8 +65,12 @@ export const CurrentCategoryMenus = ({ sort, categoryId }: CurrentCategoryMenusP
         categoryId,
       },
     });
-    console.log(schedules);
-
+    if (setScheduleCount) {
+      setScheduleCount(schedules.length);
+    }
+    if (setOpenType) {
+      setOpenType(schedules[0].category.openType);
+    }
     setSchedules(schedules);
   };
 

@@ -8,18 +8,30 @@ import { CurrentCategoryList, CurrentCategoryMenus, PageLayout } from '@/common'
 import { SORT } from '@/utils';
 
 const CertainCategory = () => {
-  const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
   const { pathname } = useLocation();
   const categoryId = pathname.split('/')[2];
+
+  const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
+  const [scheduleCount, setScheduleCount] = useState(0);
+  const [openType, setOpenType] = useState('ALL_OPEN');
 
   return (
     <PageLayout isFooter={false}>
       <Wrapper>
         <CurrentCategory />
         <CurrentCategoryList
-          listingContents={<CurrentCategoryMenus sort={sort} categoryId={categoryId} />}
+          listingContents={
+            <CurrentCategoryMenus
+              sort={sort}
+              categoryId={categoryId}
+              setScheduleCount={setScheduleCount}
+              setOpenType={setOpenType}
+            />
+          }
           sort={sort}
           setSort={setSort}
+          scheduleCount={scheduleCount}
+          openType={openType}
         />
       </Wrapper>
     </PageLayout>

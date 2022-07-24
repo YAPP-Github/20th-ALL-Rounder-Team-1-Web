@@ -1,6 +1,8 @@
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, SetStateAction, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { CategoryContext } from '@/contexts';
 
 interface CategoryProps {
   id: number;
@@ -20,8 +22,12 @@ export const Category = ({
   setClickedIndex,
 }: CategoryProps) => {
   const navigate = useNavigate();
+  const { setColor, setCategoryName, setVisibility } = useContext(CategoryContext);
 
   const onClickCategory = () => {
+    setColor(color);
+    setCategoryName(content);
+    setVisibility(visibility);
     navigate(`/manage-category/${id}`);
   };
 

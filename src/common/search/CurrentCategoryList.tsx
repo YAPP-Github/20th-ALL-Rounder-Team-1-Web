@@ -11,6 +11,8 @@ interface CurrentCategoryListProps {
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
   sort: SORT;
   setSort: Dispatch<SetStateAction<SORT>>;
+  scheduleCount?: number;
+  openType?: string;
 }
 
 export const CurrentCategoryList = ({
@@ -19,6 +21,8 @@ export const CurrentCategoryList = ({
   setIsInputFocused,
   sort,
   setSort,
+  scheduleCount,
+  openType,
 }: CurrentCategoryListProps) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
 
@@ -31,13 +35,28 @@ export const CurrentCategoryList = ({
     setIsSortOpen(false);
   };
 
+  const sortToWord = (sort: SORT) => {
+    switch (sort) {
+      case SORT.DATE_CREATED_ASC:
+        return '최신순';
+      case SORT.DATE_CREATED_DESC:
+        return '오래된순';
+      case SORT.NAME_ASC:
+        return '오름차순';
+      case SORT.NAME_DESC:
+        return '내림차순';
+    }
+  };
+
   return (
     <Wrapper>
       <SearchBar setIsInputFocused={setIsInputFocused && setIsInputFocused} />
       <Options showAllowingRange={showAllowingRange}>
-        <p>공개여부 · nn개의 일정</p>
+        <p>
+          {openType} · {scheduleCount}개의 일정
+        </p>
         <Sorting onClick={onClickSort}>
-          <h1>{sort}</h1>
+          <h1>{sortToWord(sort)}</h1>
           <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
