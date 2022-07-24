@@ -1,6 +1,8 @@
-import { Dispatch, MouseEvent, SetStateAction } from 'react';
+import { Dispatch, MouseEvent, SetStateAction, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
+
+import { CategoryContext } from '@/contexts';
 
 interface CategoryProps {
   id: number;
@@ -8,6 +10,7 @@ interface CategoryProps {
   visibility: string;
   content: string;
   setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
+  setClickedIndex: Dispatch<SetStateAction<number>>;
 }
 
 export const Category = ({
@@ -16,16 +19,22 @@ export const Category = ({
   visibility,
   content,
   setIsCategoryClicked,
+  setClickedIndex,
 }: CategoryProps) => {
   const navigate = useNavigate();
+  const { setColor, setCategoryName, setVisibility } = useContext(CategoryContext);
 
   const onClickCategory = () => {
+    setColor(color);
+    setCategoryName(content);
+    setVisibility(visibility);
     navigate(`/manage-category/${id}`);
   };
 
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setIsCategoryClicked(true);
+    setClickedIndex(id);
   };
 
   return (

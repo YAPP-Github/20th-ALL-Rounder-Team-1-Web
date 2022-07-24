@@ -1,10 +1,17 @@
 import { createRoot } from 'react-dom/client';
-import { ApolloClient, ApolloProvider, InMemoryCache } from '@apollo/client';
+import { ApolloClient, ApolloProvider, createHttpLink, InMemoryCache } from '@apollo/client';
+import { setContext } from '@apollo/client/link/context';
 import { ThemeProvider } from 'styled-components';
 
 import App from './App';
 
-import { DimmedLayerContextProvider, PopUpContextProvider, ToastContextProvider } from '@/contexts';
+import {
+  CategoryContextProvider,
+  DimmedLayerContextProvider,
+  PopUpContextProvider,
+  RegisterContextProvider,
+  ToastContextProvider,
+} from '@/contexts';
 import { GlobalStyle, theme } from '@/style';
 import { AppProvider } from '@/utils';
 
@@ -16,15 +23,35 @@ if (!rootElement) {
 
 const root = createRoot(rootElement);
 
-const client = new ApolloClient({
+const httpLink = createHttpLink({
   uri: process.env.REACT_APP_SERVER_URL,
+});
+
+const authLink = setContext((_, { headers }) => {
+  return {
+    headers: {
+      ...headers,
+      'Access-Token': process.env.REACT_APP_TOKEN && process.env.REACT_APP_TOKEN,
+    },
+  };
+});
+
+const client = new ApolloClient({
+  link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
 
 root.render(
   <ApolloProvider client={client}>
     <AppProvider
-      components={[DimmedLayerContextProvider, PopUpContextProvider, ToastContextProvider]}
+      components={[
+        CategoryContextProvider,
+        DimmedLayerContextProvider,
+        DimmedLayerContextProvider,
+        RegisterContextProvider,
+        PopUpContextProvider,
+        ToastContextProvider,
+      ]}
     >
       <ThemeProvider theme={theme}>
         <GlobalStyle />

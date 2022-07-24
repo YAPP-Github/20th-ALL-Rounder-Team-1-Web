@@ -1,12 +1,25 @@
+import { Dispatch, SetStateAction, useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { CurrentCategoryMenu } from '.';
 
+import { useSearchSchedules } from '@/api';
 import { CategorySubMenu } from '@/common';
+import { CategoryContext } from '@/contexts';
 import { useContextMenu } from '@/hooks';
-import { CERTAINCATEGORIES } from '@/utils';
+import { SORT } from '@/utils';
 
-export const CurrentCategoryMenus = () => {
+interface CurrentCategoryMenusProps {
+  sort: SORT;
+  categoryId: string;
+  setOpenType?: Dispatch<SetStateAction<string>>;
+}
+
+export const CurrentCategoryMenus = ({
+  sort,
+  categoryId,
+  setOpenType,
+}: CurrentCategoryMenusProps) => {
   const {
     pointX,
     pointY,
@@ -16,18 +29,44 @@ export const CurrentCategoryMenus = () => {
     clickedIndex,
     setClickedIndex,
   } = useContextMenu();
+  const { search_schedules } = useSearchSchedules();
+  const { schedules, setSchedules } = useContext(CategoryContext);
+
+  const showCategories = async () => {
+    const {
+      data: {
+        searchSchedules: { schedules },
+      },
+    } = await search_schedules({
+      variables: {
+        sort,
+        page: 0,
+        size: 9,
+        categoryId,
+      },
+    });
+    if (setOpenType) {
+      setOpenType(schedules[0].category.openType);
+    }
+    setSchedules(schedules);
+  };
+
+  useEffect(() => {
+    showCategories();
+  }, [sort]);
 
   return (
     <Wrapper>
-      {CERTAINCATEGORIES.map((category, index) => (
+      {schedules.map((schedule, index) => (
         <CurrentCategoryMenu
           key={index}
           currentIndex={index}
-          name={category.name}
-          startDate={category.startDate}
-          startTime={category.startTime}
-          endDate={category.endDate}
-          endTime={category.endTime}
+          color={schedule.category.color}
+          name={schedule.name}
+          startTime={schedule.dateTimeStart}
+          endTime={schedule.dateTimeEnd}
+          repeatSelectedValue={schedule?.repeatSelectedValue}
+          repeatType={schedule.repeatType}
           setIsCategoryClicked={setIsCategoryClicked}
           clickedIndex={clickedIndex}
           setClickedIndex={setClickedIndex}
@@ -39,6 +78,7 @@ export const CurrentCategoryMenus = () => {
           pointX={pointX}
           pointY={pointY}
           isSubMenu={true}
+          clickedIndex={clickedIndex}
         />
       )}
     </Wrapper>

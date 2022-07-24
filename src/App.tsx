@@ -29,7 +29,14 @@ const App = () => {
           <Route path="/agreement" element={<Agreement />} />
           <Route path="/login" element={<Login />} />
           <Route path="/find-password" element={<FindPassword />} />
-          <Route path="/select-interest" element={<SelectInterest />} />
+          <Route
+            path="/select-interest"
+            element={
+              <Suspense fallback={<></>}>
+                <SelectInterest />
+              </Suspense>
+            }
+          />
           <Route path="/manage-category" element={<ManageCategory />} />
           <Route path="/search" element={<Search />} />
           <Route path="/setting" element={<Setting />} />
@@ -37,14 +44,14 @@ const App = () => {
           <Route path="/manage-category/:id" element={<CertainCategory />} />
           <Route path="*" element={<div>아직 없는 페이지입니다.</div>} />
         </Routes>
-        <DimmedLayer />
-        <PopUpPortal>
-          <PopUp />
-        </PopUpPortal>
-        <ToastPortal>
-          <Toast />
-        </ToastPortal>
       </Suspense>
+      <DimmedLayer />
+      <PopUpPortal>
+        <PopUp />
+      </PopUpPortal>
+      <ToastPortal>
+        <Toast />
+      </ToastPortal>
       <FloatingButton />
     </Router>
   );
