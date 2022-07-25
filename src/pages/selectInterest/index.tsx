@@ -26,6 +26,7 @@ const SelectInterest = () => {
             {JOBS.map((job, idx) => (
               <Interest
                 key={idx}
+                interestType="job"
                 className="select_interest"
                 name={job}
                 totalChoices={totalJobs}
@@ -43,6 +44,7 @@ const SelectInterest = () => {
             {INTERESTS.map((interest, idx) => (
               <Interest
                 key={idx}
+                interestType="interest"
                 className="select_interest"
                 name={interest}
                 totalChoices={totalInterests}
