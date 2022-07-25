@@ -1,8 +1,11 @@
-import { useRef, useState } from 'react';
+import { useContext, useRef, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
+import { useLogin } from '@/api';
 import { Button, Input, InputRef, PageLayout } from '@/common';
+import { ToastContext } from '@/contexts';
+import { setStorage } from '@/utils';
 
 const Login = () => {
   const navigate = useNavigate();
@@ -12,14 +15,34 @@ const Login = () => {
 
   const [isChecked, setIsChecked] = useState(false);
 
+  const { setToast } = useContext(ToastContext);
+
+  const { login } = useLogin();
+
   const onClickAutoLogin = () => setIsChecked(!isChecked);
 
-  const chkLogin = () => {
-    if (emailRef.current?.value === 'test' && passwordRef.current?.value === '1234') {
+  const chkLogin = async () => {
+    const { data, error } = await login({
+      variables: {
+        loginInput: {
+          email: emailRef.current?.value,
+          password: passwordRef.current?.value,
+        },
+      },
+    });
+
+    if (data) {
+      const { login } = data;
+      setStorage('accessToken', login.accessToken);
+      setStorage('refreshToken', login.refreshToken);
       navigate('/');
       return;
     }
-    return;
+
+    if (error) {
+      setToast('error', error.message);
+      return;
+    }
   };
 
   return (
