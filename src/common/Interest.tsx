@@ -1,51 +1,76 @@
-import { ComponentPropsWithoutRef, Dispatch, SetStateAction, useEffect, useState } from 'react';
+import {
+  ComponentPropsWithoutRef,
+  Dispatch,
+  SetStateAction,
+  useContext,
+  useEffect,
+  useState,
+} from 'react';
 import styled from 'styled-components';
 
-interface InterestProps extends ComponentPropsWithoutRef<'button'> {
-  name: string;
-  totalChoices: string[];
-  setTotalChoices: Dispatch<SetStateAction<string[]>>;
-  isChosen?: boolean;
+import { Button } from '.';
+
+import { ToastContext } from '@/contexts';
+
+interface InterestProps {
+  className: string;
   defaultWhiteBgColor?: boolean;
+  interestType: 'job' | 'interest';
+  isChosen?: boolean;
+  name: string;
+  setTotalChoices: Dispatch<SetStateAction<string[]>>;
+  totalChoices: string[];
 }
 
+const MAX_INTEREST = 3;
+
 export const Interest = ({
-  name,
-  totalChoices,
-  setTotalChoices,
-  isChosen = false,
+  className,
   defaultWhiteBgColor = false,
+  interestType,
+  isChosen = false,
+  name,
+  setTotalChoices,
+  totalChoices,
   ...restProps
 }: InterestProps) => {
   const [isClicked, setIsClicked] = useState(isChosen);
 
+  const { setToast } = useContext(ToastContext);
+
   const onClick = () => {
     if (isClicked) {
       const exceptClickedName = totalChoices.filter((totalChoice) => totalChoice !== name);
-      setTotalChoices(exceptClickedName);
-    } else {
-      if (totalChoices.length === 3) {
-        return;
-      }
-      setTotalChoices([...totalChoices, name]);
-    }
-    setIsClicked(!isClicked);
-  };
-
-  useEffect(() => {
-    if (totalChoices.length === 0) {
       setIsClicked(false);
+      setTotalChoices(exceptClickedName);
+      return;
     }
-  }, [totalChoices]);
+
+    if (totalChoices.length === MAX_INTEREST) {
+      setToast(
+        'error',
+        `${interestType === 'job' ? '직업은' : '관심사는'} 최대 3개까지 선택할 수 있어요`
+      );
+      return;
+    }
+
+    setIsClicked(true);
+    setTotalChoices([...totalChoices, name]);
+  };
 
   return (
     <>
       {isClicked ? (
-        <Selected onClick={onClick} {...restProps}>
+        <Selected className={className} onClick={onClick} {...restProps}>
           {name}
         </Selected>
       ) : (
-        <NotSelected onClick={onClick} defaultWhiteBgColor={defaultWhiteBgColor} {...restProps}>
+        <NotSelected
+          className={className}
+          onClick={onClick}
+          defaultWhiteBgColor={defaultWhiteBgColor}
+          {...restProps}
+        >
           {name}
         </NotSelected>
       )}
@@ -53,7 +78,7 @@ export const Interest = ({
   );
 };
 
-const Selected = styled.button`
+const Selected = styled(Button)`
   background-color: ${({ theme: { colors } }) => colors.WeekandBlueSub};
   color: ${({ theme: { colors } }) => colors.WeekandBlue};
   border-radius: 108px;
@@ -80,7 +105,7 @@ const Selected = styled.button`
   }
 `;
 
-const NotSelected = styled.button<{ defaultWhiteBgColor: boolean }>`
+const NotSelected = styled(Button)<{ defaultWhiteBgColor: boolean }>`
   background-color: ${({ theme: { colors }, defaultWhiteBgColor }) =>
     defaultWhiteBgColor ? '#fff' : colors.Gray100};
   color: ${({ theme: { colors } }) => colors.Gray400};
