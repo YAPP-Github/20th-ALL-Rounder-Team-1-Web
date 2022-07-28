@@ -4,7 +4,7 @@ import { useLocation } from 'react-router';
 const BACKGROUND_COLOR_WHITE_PAGES = [
   '/agreement',
   '/login',
-  '/find-password',
+  '/get-temp-password',
   '/register',
   '/select-interest',
 ];
