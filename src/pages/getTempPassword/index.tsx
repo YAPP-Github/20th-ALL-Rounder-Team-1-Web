@@ -1,8 +1,8 @@
-import { useContext,useRef } from 'react';
+import { useContext, useRef } from 'react';
 import styled from 'styled-components';
 
 import { useGetTempPassword } from '@/api';
-import { Button, Input, InputRef,PageLayout } from '@/common';
+import { Button, Input, InputRef, PageLayout } from '@/common';
 import { ToastContext } from '@/contexts';
 
 const FindPassword = () => {
