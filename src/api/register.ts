@@ -7,9 +7,9 @@ const CHECK_DUPLICATE_NICKNAME = gql`
 `;
 
 export const useChkDuplicateNickname = () => {
-  const [check_duplicate_nickname, { data }] = useLazyQuery(CHECK_DUPLICATE_NICKNAME);
+  const [check_duplicate_nickname] = useLazyQuery(CHECK_DUPLICATE_NICKNAME);
 
-  return { check_duplicate_nickname, data };
+  return { check_duplicate_nickname };
 };
 
 const SEND_AUTH_KEY = gql`
@@ -19,9 +19,9 @@ const SEND_AUTH_KEY = gql`
 `;
 
 export const useSendAuthKey = () => {
-  const [sendAuthkey, { data }] = useLazyQuery(SEND_AUTH_KEY);
+  const [sendAuthkey] = useLazyQuery(SEND_AUTH_KEY);
 
-  return { sendAuthkey, data };
+  return { sendAuthkey };
 };
 
 const VALID_AUTH_KEY = gql`
@@ -31,7 +31,7 @@ const VALID_AUTH_KEY = gql`
 `;
 
 export const useValidAuthKey = () => {
-  const [validAuthkey, { data }] = useLazyQuery(VALID_AUTH_KEY);
+  const [validAuthkey] = useLazyQuery(VALID_AUTH_KEY);
 
-  return { validAuthkey, data };
+  return { validAuthkey };
 };

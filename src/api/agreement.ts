@@ -7,7 +7,7 @@ const SIGN_UP = gql`
 `;
 
 export const useSignUp = () => {
-  const [sign_up, { data }] = useMutation(SIGN_UP);
+  const [sign_up] = useMutation(SIGN_UP);
 
-  return { sign_up, data };
+  return { sign_up };
 };
