@@ -17,7 +17,7 @@ export const SearchContents = ({ users }: SearchContentsProps) => {
   return (
     <Wrapper>
       {users.map(({ id, goal, nickname, profileImageUrl }) => (
-        <SearchContent key={id} name={nickname} comment={goal} imgUrl={profileImageUrl} />
+        <SearchContent key={id} id={id} name={nickname} comment={goal} imgUrl={profileImageUrl} />
       ))}
     </Wrapper>
   );
@@ -25,4 +25,8 @@ export const SearchContents = ({ users }: SearchContentsProps) => {
 
 const Wrapper = styled.div`
   overflow-y: scroll;
+
+  ::-webkit-scrollbar {
+    display: none;
+  }
 `;

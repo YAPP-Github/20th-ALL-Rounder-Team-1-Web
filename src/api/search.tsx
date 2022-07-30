@@ -49,11 +49,36 @@ const SEARCH_USER = gql`
     }
   }
 `;
-// 특정 유저의 일정의 경우
-// 아직 완성이 되지 않아 추후에 SEARCH_USER에 추가
 
 export const useSearchUser = () => {
   const [search_user, { data }] = useLazyQuery(SEARCH_USER);
 
   return { search_user, data };
+};
+
+const SCHEDULES = gql`
+  query Schedules($date: Timestamp!, $userId: ID) {
+    schedules(date: $date, userId: $userId) {
+      schedules {
+        id
+        name
+        status
+        category {
+          id
+          color
+          openType
+        }
+        dateTimeStart
+        dateTimeEnd
+        stickerCount
+        stickerNames
+      }
+    }
+  }
+`;
+
+export const useSchedules = () => {
+  const [schedules, { data }] = useLazyQuery(SCHEDULES);
+
+  return { schedules, data };
 };

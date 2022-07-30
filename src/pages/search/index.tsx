@@ -41,12 +41,6 @@ const Search = () => {
     setUsers(users);
   };
 
-  console.log(searchQuery);
-
-  console.log(sort);
-  console.log(jobs);
-  console.log(interests);
-
   useEffect(() => {
     showUsers();
   }, [searchQuery, sort, jobs, interests]);

@@ -1,14 +1,22 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 interface SearchContentProps {
+  id: string;
   imgUrl?: string;
   name: string;
   comment: string;
 }
 
-export const SearchContent = ({ imgUrl, name, comment }: SearchContentProps) => {
+export const SearchContent = ({ id, imgUrl, name, comment }: SearchContentProps) => {
+  const navigate = useNavigate();
+
+  const onClickUser = (id: string) => {
+    navigate(`/search/${id}`);
+  };
+
   return (
-    <Wrapper>
+    <Wrapper onClick={() => onClickUser(id)}>
       {imgUrl ? <img src={imgUrl} alt={`${name} 이미지`} /> : <div className="default_img" />}
       <Info>
         <p className="name">{name}</p>
@@ -25,6 +33,7 @@ const Wrapper = styled.div`
   display: flex;
   padding: 16px 30px;
   gap: 2px;
+  cursor: pointer;
 
   img {
     width: 60px;

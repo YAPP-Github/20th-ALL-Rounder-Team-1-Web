@@ -10,7 +10,7 @@ interface CategorySubMenuProps {
   pointY: number;
   isSubMenu?: boolean;
   setSort?: Dispatch<SetStateAction<SORT>>;
-  clickedIndex: number;
+  clickedIndex?: number;
 }
 
 export const CategorySubMenu = ({
