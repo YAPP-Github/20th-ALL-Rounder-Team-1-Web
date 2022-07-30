@@ -1,14 +1,24 @@
-import { useState } from 'react';
+import { Dispatch, SetStateAction, useState } from 'react';
 import styled from 'styled-components';
 
 import { Interest } from '@/common';
 import { INTERESTS, JOBS } from '@/utils';
 
-export const FilterResult = () => {
+interface FilterResultProps {
+  totalJobs: string[];
+  setTotalJobs: Dispatch<SetStateAction<string[]>>;
+  totalInterests: string[];
+  setTotalInterests: Dispatch<SetStateAction<string[]>>;
+}
+
+export const FilterResult = ({
+  totalJobs,
+  setTotalJobs,
+  totalInterests,
+  setTotalInterests,
+}: FilterResultProps) => {
   const [isJobClicked, setIsJobClicked] = useState(false);
   const [isInterestClicked, setIsInterestClicked] = useState(false);
-  const [totalJobs, setTotalJobs] = useState<string[]>([]);
-  const [totalInterests, setTotalInterests] = useState<string[]>([]);
 
   const onClickJob = () => {
     setIsInterestClicked(false);
@@ -45,8 +55,9 @@ export const FilterResult = () => {
       <div>
         {isJobClicked && (
           <JobWrapper>
-            {JOBS.map((job) => (
+            {JOBS.map((job, index) => (
               <Interest
+                key={index}
                 className="search_interest"
                 name={job}
                 totalChoices={totalJobs}
@@ -59,8 +70,9 @@ export const FilterResult = () => {
         )}
         {isInterestClicked && (
           <JobWrapper>
-            {INTERESTS.map((interest) => (
+            {INTERESTS.map((interest, index) => (
               <Interest
+                key={index}
                 className="search_interest"
                 name={interest}
                 totalChoices={totalInterests}

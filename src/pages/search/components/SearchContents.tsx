@@ -1,13 +1,28 @@
+import styled from 'styled-components';
+
 import { SearchContent } from '.';
 
-const dummyData = Array(6).fill({ name: '유저 닉네임', comment: '오늘도 화이팅:)' });
+interface IUsers {
+  id: string;
+  goal: string;
+  nickname: string;
+  profileImageUrl: string;
+}
 
-export const SearchContents = () => {
+interface SearchContentsProps {
+  users: IUsers[];
+}
+
+export const SearchContents = ({ users }: SearchContentsProps) => {
   return (
-    <div>
-      {dummyData.map(({ name, comment }, index) => (
-        <SearchContent key={index} name={name} comment={comment} />
+    <Wrapper>
+      {users.map(({ id, goal, nickname, profileImageUrl }) => (
+        <SearchContent key={id} name={nickname} comment={goal} imgUrl={profileImageUrl} />
       ))}
-    </div>
+    </Wrapper>
   );
 };
+
+const Wrapper = styled.div`
+  overflow-y: scroll;
+`;

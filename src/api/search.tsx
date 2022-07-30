@@ -5,6 +5,7 @@ const SEARCH_USERS = gql`
     $searchQuery: String
     $jobs: [String!]
     $interests: [String!]
+    $sort: SearchUserSort
     $page: Int!
     $size: Int!
   ) {
@@ -12,23 +13,15 @@ const SEARCH_USERS = gql`
       searchQuery: $searchQuery
       jobs: $jobs
       interests: $interests
+      sort: $sort
       page: $page
       size: $size
     ) {
-      paginationInfo {
-        hasNext
-      }
       users {
         id
-        email
         nickname
         profileImageUrl
         goal
-        followerCount
-        followeeCount
-        jobs
-        interests
-        followed
       }
     }
   }
