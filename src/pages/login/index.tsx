@@ -70,7 +70,7 @@ const Login = () => {
             <label className="auto_login" onClick={onClickAutoLogin}>
               자동로그인
             </label>
-            <Link to="/find-password" className="find_password">
+            <Link to="/get-temp-password" className="get_temp_password">
               비밀번호 찾기
             </Link>
           </Utils>
@@ -152,7 +152,7 @@ const Utils = styled.div<{ isChecked: boolean }>`
     user-select: none;
   }
 
-  .find_password {
+  .get_temp_password {
     color: ${({ theme: { colors } }) => colors.Gray400};
     float: right;
     margin-right: 4px;

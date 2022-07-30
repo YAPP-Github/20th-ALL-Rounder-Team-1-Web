@@ -8,7 +8,7 @@ import { useDocumentTitle } from '@/hooks';
 import {
   Agreement,
   CertainCategory,
-  FindPassword,
+  GetTempPassword,
   Home,
   Login,
   ManageCategory,
@@ -28,7 +28,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/agreement" element={<Agreement />} />
           <Route path="/login" element={<Login />} />
-          <Route path="/find-password" element={<FindPassword />} />
+          <Route path="/get-temp-password" element={<GetTempPassword />} />
           <Route
             path="/select-interest"
             element={
