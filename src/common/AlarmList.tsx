@@ -1,25 +1,53 @@
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Alarm } from '.';
 
+import { useNotifications } from '@/api/notification';
 import { ALARMS } from '@/utils';
 
+interface IAlarm {
+  id: string;
+  message: string;
+  type: string;
+}
+
 export const AlarmList = () => {
+  const [alarms, setAlarms] = useState<IAlarm[]>();
+  const { notifications } = useNotifications();
+
+  const showNofications = async () => {
+    const {
+      data: {
+        notifications: { notifications: alarms },
+      },
+    } = await notifications({
+      variables: {
+        page: 0,
+        size: 10,
+      },
+    });
+    setAlarms(alarms);
+  };
+
+  useEffect(() => {
+    showNofications();
+  }, []);
+
   return (
     <Wrapper>
-      {ALARMS.map(({ id, type, content }) => (
-        <Alarm key={id} type={type} content={content} />
-      ))}
+      {alarms &&
+        alarms.map(({ id, type, message }) => <Alarm key={id} type={type} content={message} />)}
     </Wrapper>
   );
 };
 
 const Wrapper = styled.ul`
   width: 420px;
-  height: 500px;
+  height: 515px;
   position: absolute;
-  top: 76px;
-  left: 832px;
+  top: 66px;
+  right: 268px;
   padding: 24px;
   border-radius: 6px;
   background-color: #fff;

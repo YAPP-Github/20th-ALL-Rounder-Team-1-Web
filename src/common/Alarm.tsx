@@ -1,4 +1,3 @@
-import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 interface AlarmProps {
@@ -6,31 +5,13 @@ interface AlarmProps {
   content: string;
 }
 
-export const Alarm = ({ type, content }: AlarmProps) => {
-  const [currentText, setCurrentText] = useState('');
-
-  const handleContent = () => {
-    if (type === 'Follow') {
-      return setCurrentText(`${content}님이 팔로우하였습니다.`);
-    }
-    if (type === 'Start') {
-      return setCurrentText(`${content}가 시작되었습니다.`);
-    }
-    if (type === 'End') {
-      return setCurrentText(`${content}가 종료되었습니다.`);
-    }
-  };
-
-  useEffect(() => {
-    handleContent();
-  }, []);
-
+export const Alarm = ({ content }: AlarmProps) => {
   return (
     <Wrapper>
       <Icon>
         <i className="alarm" />
       </Icon>
-      <Content>{currentText}</Content>
+      <Content>{content}</Content>
     </Wrapper>
   );
 };
@@ -62,11 +43,12 @@ const Icon = styled.i`
 
 const Content = styled.span`
   width: 308px;
-  height: 22px;
+  height: 44px;
   font-weight: 500;
   font-size: 14px;
   text-align: start;
-  line-height: 22px;
+  line-height: 22.4px;
+  margin: auto;
   margin-left: 12px;
   color: ${({ theme: { colors } }) => colors.Gray900};
 `;
