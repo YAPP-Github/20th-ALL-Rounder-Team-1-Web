@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import { useGetTempPassword } from '@/api';
 import { Button, Input, InputRef, PageLayout } from '@/common';
 import { ToastContext } from '@/contexts';
+import { checkEmailTempPassword } from '@/utils';
 
 const FindPassword = () => {
   const emailRef = useRef<InputRef>(null);
@@ -14,14 +15,24 @@ const FindPassword = () => {
 
   const onClick = async () => {
     try {
-      const { data } = await issue_temp_password({
+      const { type, message } = checkEmailTempPassword(emailRef.current?.value);
+
+      if (type === 'error') {
+        setToast('error', message);
+        return;
+      }
+
+      const {
+        data: { issueTempPassword },
+      } = await issue_temp_password({
         variables: {
           input: {
             email: emailRef.current?.value,
           },
         },
       });
-      if (data) {
+
+      if (issueTempPassword) {
         setToast('success', '임시비밀번호가 발급되었습니다.');
         return;
       }

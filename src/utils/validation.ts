@@ -19,6 +19,16 @@ export const checkEmail = (email: string) => {
   return { type: 'success', message: '유효한 이메일입니다' };
 };
 
+export const checkEmailTempPassword = (email: string | undefined) => {
+  const emailRegex = REGEX.EMAIL;
+
+  if (!email || (email.length > 0 && !email.match(emailRegex))) {
+    return { type: 'error', message: '유효하지 않은 이메일 주소입니다' };
+  }
+
+  return { type: '', message: '' };
+};
+
 export const checkCertificateNumber = (isRightCertificateNumber: boolean) => {
   if (isRightCertificateNumber) {
     return { type: 'success', message: '인증이 완료되었습니다' };
