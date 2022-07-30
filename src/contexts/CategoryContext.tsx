@@ -1,7 +1,14 @@
-import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
+import {
+  createContext,
+  Dispatch,
+  PropsWithChildren,
+  SetStateAction,
+  useRef,
+  useState,
+} from 'react';
 
 interface ICategory {
-  id: string;
+  id: number;
   name: string;
   color: string;
   openType: string;
@@ -19,12 +26,8 @@ interface ISchedules {
 }
 
 type CategoryProps = {
-  color: string;
-  setColor: Dispatch<SetStateAction<string>>;
-  categoryName: string;
-  setCategoryName: Dispatch<SetStateAction<string>>;
-  visibility: string;
-  setVisibility: Dispatch<SetStateAction<string>>;
+  getCategory: () => ICategory;
+  setCategory: (props: Partial<ICategory>) => void;
   schedules: ISchedules[];
   setSchedules: Dispatch<SetStateAction<ISchedules[]>>;
 };
@@ -32,20 +35,31 @@ type CategoryProps = {
 export const CategoryContext = createContext<CategoryProps>({} as CategoryProps);
 
 export const CategoryContextProvider = ({ children }: PropsWithChildren<unknown>) => {
-  const [color, setColor] = useState('');
-  const [categoryName, setCategoryName] = useState('');
-  const [visibility, setVisibility] = useState('');
+  const category = useRef<ICategory>({
+    id: 0,
+    name: '',
+    color: '',
+    openType: '',
+  });
+
+  const getCategory = () => {
+    return category.current;
+  };
+
+  const setCategory = (props: Partial<ICategory>) => {
+    category.current = {
+      ...category.current,
+      ...props,
+    };
+  };
+
   const [schedules, setSchedules] = useState<ISchedules[]>([]);
 
   return (
     <CategoryContext.Provider
       value={{
-        color,
-        setColor,
-        categoryName,
-        setCategoryName,
-        visibility,
-        setVisibility,
+        getCategory,
+        setCategory,
         schedules,
         setSchedules,
       }}

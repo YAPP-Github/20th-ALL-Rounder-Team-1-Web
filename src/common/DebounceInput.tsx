@@ -3,7 +3,7 @@ import { useLocation } from 'react-router-dom';
 
 import { useSearchSchedules } from '@/api';
 import { CategoryContext } from '@/contexts';
-import { SORT } from '@/utils';
+import { SORT } from '@/models';
 
 interface DebounceInputProps {
   inputValue: string;

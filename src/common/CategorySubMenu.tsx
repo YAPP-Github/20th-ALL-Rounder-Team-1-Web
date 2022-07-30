@@ -1,14 +1,16 @@
-import { Dispatch, SetStateAction, useState } from 'react';
+import { Dispatch, SetStateAction, useContext, useState } from 'react';
+import { ApolloQueryResult } from '@apollo/client';
 import styled from 'styled-components';
 
 import { useDeleteCategory, useDeleteSchedule, useScheduleCategories } from '@/api';
-import { SORT } from '@/utils';
-
+import { PopUpContext } from '@/contexts';
+import { SORT } from '@/models';
 interface CategorySubMenuProps {
   isCategoryClicked: boolean;
   pointX: number;
   pointY: number;
   isSubMenu?: boolean;
+  refetch?: () => Promise<ApolloQueryResult<any>>;
   setSort?: Dispatch<SetStateAction<SORT>>;
   clickedIndex?: number;
 }
@@ -18,13 +20,15 @@ export const CategorySubMenu = ({
   pointX,
   pointY,
   isSubMenu = false,
+  refetch,
   setSort,
   clickedIndex,
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
+  const { setIsPopped } = useContext(PopUpContext);
+
   const { delete_category } = useDeleteCategory();
   const { delete_schedule } = useDeleteSchedule();
-  const { refetch } = useScheduleCategories();
 
   const onClickSkipSchedule = () => {
     delete_schedule({
@@ -44,7 +48,7 @@ export const CategorySubMenu = ({
         },
       },
     });
-    refetch();
+    refetch && refetch();
   };
 
   const onClickSort = (sortType: SORT) => {
@@ -70,7 +74,13 @@ export const CategorySubMenu = ({
     <>
       {isCategoryClicked ? (
         <ContextMenu pointX={pointX} pointY={pointY}>
-          <Menu>수정</Menu>
+          <Menu
+            onClick={() => {
+              setIsPopped(true);
+            }}
+          >
+            수정
+          </Menu>
           <Menu onClick={() => onClickDeleteCategory()}>삭제</Menu>
         </ContextMenu>
       ) : (

@@ -101,16 +101,23 @@ export const Input = forwardRef<InputRef, InputProps>(
 );
 
 const StyledInput = styled.input`
+  border: 0;
+  background-color: ${({ theme: { colors } }) => colors.Gray200};
+  border-radius: 12px;
+  box-sizing: border-box;
+  ${({ theme: { fonts } }) => fonts.Body1};
+
   &.login_input {
     width: 353px;
-    border: 0;
-    background-color: ${({ theme: { colors } }) => colors.Gray200};
     padding: 13px 20px;
-    border-radius: 12px;
-    box-sizing: border-box;
-    ${({ theme: { fonts } }) => fonts.Body1};
     ::placeholder {
       color: #aaaeb6;
     }
+  }
+
+  &.category_input {
+    width: 440px;
+    border: 0;
+    padding: 13px 16px;
   }
 `;

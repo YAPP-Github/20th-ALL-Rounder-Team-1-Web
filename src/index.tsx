@@ -31,7 +31,8 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'Access-Token': process.env.REACT_APP_TOKEN && process.env.REACT_APP_TOKEN,
+      'Access-Token':
+        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGQ2NTc2QG5hdmVyLmNvbSIsImlhdCI6MTY1OTE2NDI3NSwiZXhwIjoxNjU5MzQ0Mjc1fQ.nmOxDXAP-lUELvV-vn73Vk8AGZ9Czh1NPQsN9b6B4x4',
     },
   };
 });

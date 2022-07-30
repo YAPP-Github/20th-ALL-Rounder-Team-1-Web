@@ -1,4 +1,4 @@
-import { gql, useLazyQuery, useMutation,useQuery } from '@apollo/client';
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client';
 
 import { SORT } from '@/models';
 

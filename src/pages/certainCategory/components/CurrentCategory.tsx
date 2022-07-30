@@ -4,7 +4,9 @@ import styled from 'styled-components';
 import { CategoryContext } from '@/contexts';
 
 export const CurrentCategory = () => {
-  const { categoryName, color } = useContext(CategoryContext);
+  const { getCategory } = useContext(CategoryContext);
+
+  const { color, name } = getCategory();
 
   return (
     <Wrapper>
@@ -12,7 +14,7 @@ export const CurrentCategory = () => {
       <i className="right" />
       <Info>
         <Color color={color} />
-        <p>{categoryName}</p>
+        <p>{name}</p>
       </Info>
     </Wrapper>
   );
