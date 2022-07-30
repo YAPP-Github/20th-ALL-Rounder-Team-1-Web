@@ -4,15 +4,19 @@ import styled from 'styled-components';
 import { SearchBar } from '.';
 
 import { CategoryContext } from '@/contexts';
-import { SORT } from '@/utils';
+import { SORT, USER } from '@/utils';
 
 interface CurrentCategoryListProps {
   showAllowingRange?: boolean;
   listingContents: ReactNode;
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
-  sort: SORT;
-  setSort: Dispatch<SetStateAction<SORT>>;
+  sort: SORT | USER;
+  setSort?: Dispatch<SetStateAction<SORT>>;
+  setUserSort?: Dispatch<SetStateAction<USER>>;
   openType?: string;
+  isSearchContent?: boolean;
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
 }
 
 export const CurrentCategoryList = ({
@@ -21,10 +25,13 @@ export const CurrentCategoryList = ({
   setIsInputFocused,
   sort,
   setSort,
+  setUserSort,
   openType,
+  isSearchContent = false,
+  inputValue,
+  setInputValue,
 }: CurrentCategoryListProps) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
   const { schedules } = useContext(CategoryContext);
 
   const onClickSort = () => {
@@ -32,11 +39,20 @@ export const CurrentCategoryList = ({
   };
 
   const onClickSortType = (name: SORT) => {
-    setSort(name);
-    setIsSortOpen(false);
+    if (setSort) {
+      setSort(name);
+      setIsSortOpen(false);
+    }
   };
 
-  const sortToWord = (sort: SORT) => {
+  const onClickSortUserType = (name: USER) => {
+    if (setUserSort) {
+      setUserSort(name);
+      setIsSortOpen(false);
+    }
+  };
+
+  const sortToWord = (sort: SORT | USER) => {
     switch (sort) {
       case SORT.DATE_CREATED_ASC:
         return '최신순';
@@ -45,6 +61,14 @@ export const CurrentCategoryList = ({
       case SORT.NAME_ASC:
         return '오름차순';
       case SORT.NAME_DESC:
+        return '내림차순';
+      case USER.DATE_CREATED_DESC:
+        return '오래된순';
+      case USER.FOLLOWER_COUNT_DESC:
+        return '인기순';
+      case USER.NICKNAME_ASC:
+        return '오름차순';
+      case USER.NICKNAME_DESC:
         return '내림차순';
     }
   };
@@ -55,6 +79,7 @@ export const CurrentCategoryList = ({
         setIsInputFocused={setIsInputFocused && setIsInputFocused}
         inputValue={inputValue}
         setInputValue={setInputValue}
+        isSearchUser={isSearchContent}
       />
       <Options showAllowingRange={showAllowingRange}>
         <p>
@@ -65,10 +90,21 @@ export const CurrentCategoryList = ({
           <i className="sort_icon" />
           {isSortOpen && (
             <SortMenu>
-              <li onClick={() => onClickSortType(SORT.DATE_CREATED_ASC)}>최신순</li>
-              <li onClick={() => onClickSortType(SORT.DATE_CREATED_DESC)}>오래된순</li>
-              <li onClick={() => onClickSortType(SORT.NAME_ASC)}>오름차순</li>
-              <li onClick={() => onClickSortType(SORT.NAME_DESC)}>내림차순</li>
+              {isSearchContent ? (
+                <>
+                  <li onClick={() => onClickSortUserType(USER.FOLLOWER_COUNT_DESC)}>인기순</li>
+                  <li onClick={() => onClickSortUserType(USER.DATE_CREATED_DESC)}>오래된순</li>
+                  <li onClick={() => onClickSortUserType(USER.NICKNAME_ASC)}>오름차순</li>
+                  <li onClick={() => onClickSortUserType(USER.NICKNAME_DESC)}>내림차순</li>
+                </>
+              ) : (
+                <>
+                  <li onClick={() => onClickSortType(SORT.DATE_CREATED_ASC)}>최신순</li>
+                  <li onClick={() => onClickSortType(SORT.DATE_CREATED_DESC)}>오래된순</li>
+                  <li onClick={() => onClickSortType(SORT.NAME_ASC)}>오름차순</li>
+                  <li onClick={() => onClickSortType(SORT.NAME_DESC)}>내림차순</li>
+                </>
+              )}
             </SortMenu>
           )}
         </Sorting>

@@ -12,6 +12,7 @@ const CertainCategory = () => {
   const categoryId = pathname.split('/')[2];
   const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
   const [openType, setOpenType] = useState('ALL_OPEN');
+  const [searchQuery, setSearchQuery] = useState('');
 
   return (
     <PageLayout isFooter={false}>
@@ -24,6 +25,8 @@ const CertainCategory = () => {
           sort={sort}
           setSort={setSort}
           openType={openType}
+          inputValue={searchQuery}
+          setInputValue={setSearchQuery}
         />
       </Wrapper>
     </PageLayout>

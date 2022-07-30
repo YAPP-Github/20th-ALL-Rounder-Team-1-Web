@@ -9,12 +9,14 @@ interface DebounceInputProps {
   inputValue: string;
   setInputValue: Dispatch<SetStateAction<string>>;
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
+  isSearchUser: boolean;
 }
 
 export const DebounceInput = ({
   inputValue,
   setInputValue,
   setIsInputFocused,
+  isSearchUser,
   ...restProps
 }: DebounceInputProps) => {
   const { setSchedules } = useContext(CategoryContext);
@@ -54,6 +56,9 @@ export const DebounceInput = ({
   };
 
   useEffect(() => {
+    if (isSearchUser) {
+      return;
+    }
     const debounce = setTimeout(() => {
       showCategories();
       return;

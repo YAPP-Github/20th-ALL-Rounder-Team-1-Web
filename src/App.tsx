@@ -14,6 +14,7 @@ import {
   ManageCategory,
   Register,
   Search,
+  SearchUser,
   SelectInterest,
   Setting,
 } from '@/pages';
@@ -39,6 +40,7 @@ const App = () => {
           />
           <Route path="/manage-category" element={<ManageCategory />} />
           <Route path="/search" element={<Search />} />
+          <Route path="/search/:id" element={<SearchUser />} />
           <Route path="/setting" element={<Setting />} />
           <Route path="/register" element={<Register />} />
           <Route path="/manage-category/:id" element={<CertainCategory />} />

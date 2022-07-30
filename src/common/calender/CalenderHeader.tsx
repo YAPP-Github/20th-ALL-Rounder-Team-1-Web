@@ -26,9 +26,6 @@ export const CalenderHeader = ({ today, date, setDate, mode, setMode }: Calerder
     }
   };
 
-  console.log(date.week());
-  console.log(date.startOf('month').week());
-
   return (
     <StyledHeader>
       <span className="thisMonth">
