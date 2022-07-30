@@ -15,6 +15,8 @@ interface CurrentCategoryListProps {
   setUserSort?: Dispatch<SetStateAction<USER>>;
   openType?: string;
   isSearchContent?: boolean;
+  inputValue: string;
+  setInputValue: Dispatch<SetStateAction<string>>;
 }
 
 export const CurrentCategoryList = ({
@@ -26,9 +28,10 @@ export const CurrentCategoryList = ({
   setUserSort,
   openType,
   isSearchContent = false,
+  inputValue,
+  setInputValue,
 }: CurrentCategoryListProps) => {
   const [isSortOpen, setIsSortOpen] = useState(false);
-  const [inputValue, setInputValue] = useState('');
   const { schedules } = useContext(CategoryContext);
 
   const onClickSort = () => {
@@ -76,6 +79,7 @@ export const CurrentCategoryList = ({
         setIsInputFocused={setIsInputFocused && setIsInputFocused}
         inputValue={inputValue}
         setInputValue={setInputValue}
+        isSearchUser={isSearchContent}
       />
       <Options showAllowingRange={showAllowingRange}>
         <p>

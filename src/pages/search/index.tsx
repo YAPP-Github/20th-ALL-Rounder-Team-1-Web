@@ -20,6 +20,7 @@ const Search = () => {
   const [users, setUsers] = useState<IUsers[]>([]);
   const [jobs, setJobs] = useState<string[]>([]);
   const [interests, setInterests] = useState<string[]>([]);
+  const [searchQuery, setSearchQuery] = useState('');
   const { search_users } = useSearchUsers();
 
   const showUsers = async () => {
@@ -34,10 +35,13 @@ const Search = () => {
         size: 10,
         jobs,
         interests,
+        searchQuery,
       },
     });
     setUsers(users);
   };
+
+  console.log(searchQuery);
 
   console.log(sort);
   console.log(jobs);
@@ -45,7 +49,7 @@ const Search = () => {
 
   useEffect(() => {
     showUsers();
-  }, [sort, jobs, interests]);
+  }, [searchQuery, sort, jobs, interests]);
 
   return (
     <PageLayout isFooter={false}>
@@ -57,6 +61,8 @@ const Search = () => {
           sort={sort}
           setUserSort={setSort}
           isSearchContent={true}
+          inputValue={searchQuery}
+          setInputValue={setSearchQuery}
         />
         <FilterResult
           totalJobs={jobs}

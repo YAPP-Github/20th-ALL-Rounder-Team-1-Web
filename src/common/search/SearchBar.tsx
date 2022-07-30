@@ -7,9 +7,15 @@ interface SearchBarProps {
   setIsInputFocused?: Dispatch<SetStateAction<boolean>>;
   inputValue: string;
   setInputValue: Dispatch<SetStateAction<string>>;
+  isSearchUser?: boolean;
 }
 
-export const SearchBar = ({ setIsInputFocused, inputValue, setInputValue }: SearchBarProps) => {
+export const SearchBar = ({
+  setIsInputFocused,
+  inputValue,
+  setInputValue,
+  isSearchUser = false,
+}: SearchBarProps) => {
   return (
     <Wrapper>
       <i className="search_icon" />
@@ -17,6 +23,7 @@ export const SearchBar = ({ setIsInputFocused, inputValue, setInputValue }: Sear
         inputValue={inputValue}
         setInputValue={setInputValue}
         setIsInputFocused={setIsInputFocused}
+        isSearchUser={isSearchUser}
       />
     </Wrapper>
   );
