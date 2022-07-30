@@ -51,7 +51,7 @@ const Wrapper = styled.ul`
   padding: 24px;
   border-radius: 6px;
   background-color: #fff;
-  z-index: 2;
+  z-index: 21;
   box-shadow: 5.320000171661377px 7.980000019073486px 26.600000381469727px 0px #0000000f;
   overflow-y: auto;
   &::-webkit-scrollbar {
