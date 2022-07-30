@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { CategoryContext } from '@/contexts';
+import { OPEN_TYPE } from '@/models';
 
 interface CategoryProps {
   id: number;

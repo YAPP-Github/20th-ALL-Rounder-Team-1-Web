@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { CurrentCategory } from './components';
 
 import { CurrentCategoryList, CurrentCategoryMenus, PageLayout } from '@/common';
-import { SORT } from '@/utils';
+import { SORT } from '@/models';
 
 const CertainCategory = () => {
   const { pathname } = useLocation();
