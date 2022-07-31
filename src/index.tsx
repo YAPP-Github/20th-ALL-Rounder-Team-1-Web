@@ -13,7 +13,7 @@ import {
   ToastContextProvider,
 } from '@/contexts';
 import { GlobalStyle, theme } from '@/style';
-import { AppProvider } from '@/utils';
+import { AppProvider, getStorage } from '@/utils';
 
 const rootElement = document.getElementById('root');
 
@@ -31,8 +31,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'Access-Token':
-        'eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJ0aGQ2NTc2QG5hdmVyLmNvbSIsImlhdCI6MTY1OTE2NDI3NSwiZXhwIjoxNjU5MzQ0Mjc1fQ.nmOxDXAP-lUELvV-vn73Vk8AGZ9Czh1NPQsN9b6B4x4',
+      'Access-Token': getStorage('aceessToken'),
     },
   };
 });
