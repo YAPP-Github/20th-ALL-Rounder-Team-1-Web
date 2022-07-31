@@ -1,15 +1,14 @@
 import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
-import { DimmedLayerContext, PopUpContext } from '@/contexts';
+import { Category, Schedule } from '.';
 
-import { CategoryPopup } from '..';
+import { DimmedLayerContext, PopupContext } from '@/contexts';
 
-export const PopUp = () => {
+export const Popup = () => {
   const { setIsDimmed } = useContext(DimmedLayerContext);
 
-  // 팝업 종류 (string)를 받아서 이에 맞는 컴포넌트를 렌더하는 식으로 가야 할듯
-  const { isPopped } = useContext(PopUpContext);
+  const { isPopped, type } = useContext(PopupContext);
 
   useEffect(() => {
     if (isPopped) {
@@ -20,10 +19,20 @@ export const PopUp = () => {
     setIsDimmed(false);
   }, [isPopped]);
 
-  return <PopUpWrapper visible={isPopped}>{CategoryPopup()}</PopUpWrapper>;
+  const getPopupByType = () => {
+    if (type === 'category') {
+      return <Category />;
+    }
+
+    if (type === 'schedule') {
+      return <Schedule />;
+    }
+  };
+
+  return <PopupWrapper visible={isPopped}>{getPopupByType()}</PopupWrapper>;
 };
 
-const PopUpWrapper = styled.div<{ visible: boolean }>`
+const PopupWrapper = styled.div<{ visible: boolean }>`
   display: ${({ visible }) => (visible ? 'block' : 'none')};
   background-color: #fff;
   position: absolute;

@@ -3,7 +3,7 @@ import { ApolloQueryResult } from '@apollo/client';
 import styled from 'styled-components';
 
 import { useDeleteCategory, useDeleteSchedule, useScheduleCategories } from '@/api';
-import { PopUpContext } from '@/contexts';
+import { PopupContext } from '@/contexts';
 import { SORT } from '@/models';
 interface CategorySubMenuProps {
   isCategoryClicked: boolean;
@@ -25,7 +25,7 @@ export const CategorySubMenu = ({
   clickedIndex,
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
-  const { setIsPopped } = useContext(PopUpContext);
+  const { setPopup } = useContext(PopupContext);
 
   const { delete_category } = useDeleteCategory();
   const { delete_schedule } = useDeleteSchedule();
@@ -76,7 +76,7 @@ export const CategorySubMenu = ({
         <ContextMenu pointX={pointX} pointY={pointY}>
           <Menu
             onClick={() => {
-              setIsPopped(true);
+              setPopup('category');
             }}
           >
             수정

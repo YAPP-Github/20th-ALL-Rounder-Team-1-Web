@@ -1,23 +1,35 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
 
-type PopUpProps = {
+type PopupType = null | 'category' | 'schedule';
+
+type PopupProps = {
   isPopped: boolean;
   setIsPopped: Dispatch<SetStateAction<boolean>>;
+  type: PopupType;
+  setPopup: (type: PopupType) => void;
 };
 
-export const PopUpContext = createContext<PopUpProps>({} as PopUpProps);
+export const PopupContext = createContext<PopupProps>({} as PopupProps);
 
-export const PopUpContextProvider = ({ children }: PropsWithChildren<unknown>) => {
+export const PopupContextProvider = ({ children }: PropsWithChildren<unknown>) => {
   const [isPopped, setIsPopped] = useState(false);
+  const [type, setType] = useState<PopupType>(null);
+
+  const setPopup = (type: PopupType) => {
+    setIsPopped(true);
+    setType(type);
+  };
 
   return (
-    <PopUpContext.Provider
+    <PopupContext.Provider
       value={{
         isPopped,
         setIsPopped,
+        type,
+        setPopup,
       }}
     >
       {children}
-    </PopUpContext.Provider>
+    </PopupContext.Provider>
   );
 };

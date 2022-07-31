@@ -1,9 +1,9 @@
 import { Suspense } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
-import { PopUpPortal, ToastPortal } from './portals';
+import { PopupPortal, ToastPortal } from './portals';
 
-import { DimmedLayer, FloatingButton, PopUp, ProtectRoute,Toast } from '@/common';
+import { DimmedLayer, FloatingButton, Popup, ProtectRoute, Toast } from '@/common';
 import { useDocumentTitle } from '@/hooks';
 import {
   Agreement,
@@ -50,9 +50,9 @@ const App = () => {
         </ProtectRoute>
       </Suspense>
       <DimmedLayer />
-      <PopUpPortal>
-        <PopUp />
-      </PopUpPortal>
+      <PopupPortal>
+        <Popup />
+      </PopupPortal>
       <ToastPortal>
         <Toast />
       </ToastPortal>

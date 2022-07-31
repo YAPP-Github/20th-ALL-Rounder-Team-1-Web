@@ -8,7 +8,7 @@ import App from './App';
 import {
   CategoryContextProvider,
   DimmedLayerContextProvider,
-  PopUpContextProvider,
+  PopupContextProvider,
   RegisterContextProvider,
   ToastContextProvider,
 } from '@/contexts';
@@ -49,7 +49,7 @@ root.render(
         DimmedLayerContextProvider,
         DimmedLayerContextProvider,
         RegisterContextProvider,
-        PopUpContextProvider,
+        PopupContextProvider,
         ToastContextProvider,
       ]}
     >

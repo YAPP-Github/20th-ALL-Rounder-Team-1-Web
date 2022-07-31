@@ -1,2 +1,3 @@
-export * from './CategoryPopup';
-export * from './PopUp';
+export * from './Category';
+export * from './Schedule';
+export * from './Popup';

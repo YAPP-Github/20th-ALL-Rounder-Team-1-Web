@@ -1,2 +1,2 @@
-export * from './PopUpPortal';
+export * from './PopupPortal';
 export * from './ToastPortal';
