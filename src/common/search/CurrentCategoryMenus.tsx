@@ -7,7 +7,7 @@ import { useSearchSchedules } from '@/api';
 import { CategorySubMenu } from '@/common';
 import { CategoryContext } from '@/contexts';
 import { useContextMenu } from '@/hooks';
-import { SORT } from '@/utils';
+import { SORT } from '@/models';
 
 interface CurrentCategoryMenusProps {
   sort: SORT;

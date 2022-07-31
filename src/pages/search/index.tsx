@@ -5,7 +5,7 @@ import { FilterResult, SearchContents } from './components';
 
 import { useSearchUsers } from '@/api/search';
 import { CurrentCategoryList, PageLayout } from '@/common';
-import { USER } from '@/utils';
+import { USER } from '@/models';
 
 interface IUsers {
   id: string;

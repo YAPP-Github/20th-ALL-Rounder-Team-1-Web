@@ -3,12 +3,14 @@ import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { CategoryContext } from '@/contexts';
+import { OPEN_TYPE } from '@/models';
+import { getOpenTypeKR } from '@/utils';
 
 interface CategoryProps {
   id: number;
   color: string;
-  visibility: string;
-  content: string;
+  openType: OPEN_TYPE;
+  name: string;
   setIsCategoryClicked: Dispatch<SetStateAction<boolean>>;
   setClickedIndex: Dispatch<SetStateAction<number>>;
 }
@@ -16,23 +18,31 @@ interface CategoryProps {
 export const Category = ({
   id,
   color,
-  visibility,
-  content,
+  openType,
+  name,
   setIsCategoryClicked,
   setClickedIndex,
 }: CategoryProps) => {
   const navigate = useNavigate();
-  const { setColor, setCategoryName, setVisibility } = useContext(CategoryContext);
+  const { setCategory } = useContext(CategoryContext);
 
   const onClickCategory = () => {
-    setColor(color);
-    setCategoryName(content);
-    setVisibility(visibility);
+    setCategory({
+      id: id,
+      name: name,
+      color: color,
+      openType: openType,
+    });
     navigate(`/manage-category/${id}`);
   };
 
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
+    setCategory({
+      name: name,
+      color: color,
+      openType: openType,
+    });
     setIsCategoryClicked(true);
     setClickedIndex(id);
   };
@@ -41,8 +51,8 @@ export const Category = ({
     <Wrapper onClick={onClickCategory} onContextMenu={handleRightClick}>
       <Color color={color} />
       <Content>
-        <p>{visibility}</p>
-        <h1>{content}</h1>
+        <p>{getOpenTypeKR(openType)}</p>
+        <h1>{name}</h1>
       </Content>
     </Wrapper>
   );

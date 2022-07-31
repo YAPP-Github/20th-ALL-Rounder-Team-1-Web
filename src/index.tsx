@@ -13,7 +13,7 @@ import {
   ToastContextProvider,
 } from '@/contexts';
 import { GlobalStyle, theme } from '@/style';
-import { AppProvider } from '@/utils';
+import { AppProvider, getStorage } from '@/utils';
 
 const rootElement = document.getElementById('root');
 
@@ -31,7 +31,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'Access-Token': process.env.REACT_APP_TOKEN && process.env.REACT_APP_TOKEN,
+      'Access-Token': getStorage('aceessToken'),
     },
   };
 });

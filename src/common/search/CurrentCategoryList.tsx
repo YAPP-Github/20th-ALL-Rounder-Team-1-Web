@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { SearchBar } from '.';
 
 import { CategoryContext } from '@/contexts';
-import { SORT, USER } from '@/utils';
+import { SORT, USER } from '@/models';
 
 interface CurrentCategoryListProps {
   showAllowingRange?: boolean;
