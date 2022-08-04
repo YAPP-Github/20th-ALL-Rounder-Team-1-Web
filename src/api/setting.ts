@@ -65,3 +65,15 @@ export const useUpdatePassword = () => {
 
   return { update_password };
 };
+
+const SEND_INQUIRY = gql`
+  mutation Inquiry($contents: String!) {
+    inquiry(contents: $contents)
+  }
+`;
+
+export const useSendInquiry = () => {
+  const [send_inquiry] = useMutation(SEND_INQUIRY);
+
+  return { send_inquiry };
+};

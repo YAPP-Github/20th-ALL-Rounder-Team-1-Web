@@ -9,6 +9,6 @@ export const getCurrentSetting = (name: string) => {
     case '접근성 설정':
       return <Accessibility />;
     default:
-      return <></>;
+      return <Question />;
   }
 };

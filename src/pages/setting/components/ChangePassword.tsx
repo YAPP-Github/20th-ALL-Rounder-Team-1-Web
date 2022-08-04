@@ -99,6 +99,7 @@ export const ChangePassword = () => {
 
 const Wrapper = styled.div`
   width: 739px;
+  height: 500px;
   padding: 60px 40px 356px;
   border-radius: 10px;
   background-color: #fff;
