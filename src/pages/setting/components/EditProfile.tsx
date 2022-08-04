@@ -1,60 +1,117 @@
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ProfileInfo } from '.';
 
+import { useCheckDuplicateNickname, useUpdateUserProfile, useUserInfo } from '@/api/setting';
 import { Button, Interest } from '@/common';
 import { ToastContext } from '@/contexts';
 import { checkNicknameValidation, checkPurpose, INTERESTS, JOBS } from '@/utils';
 
-export const EditProfile = () => {
-  const userProfile = {
-    email: 'giannis@gmail.com',
-    imageUrl:
-      'https://fadeawayworld.net/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTgyMDU2NzMyMTM3MzY2NjU5/giannis.jpg',
-    nickName: 'Greek Freak',
-    purpose: 'We can do, Weekand!',
-    jobs: ['취준생', '프리랜서'],
-    interests: ['N잡', '사업', '자기계발'],
-  };
+interface IUserInfo {
+  id: string;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  goal: string;
+  jobs: string[];
+  interests: string[];
+}
+interface EditProfileProps {
+  userInfo: IUserInfo;
+}
 
-  const { email, imageUrl, nickName, purpose, jobs, interests } = userProfile;
+export const EditProfile = ({ userInfo }: EditProfileProps) => {
+  const { email, nickname, profileImageUrl, goal, jobs, interests } = userInfo;
 
-  const [currentNickname, setCurrentNickname] = useState(nickName);
-  const [currentPurpose, setCurrentPurpose] = useState(purpose);
-  const [totalJobs, setTotalJobs] = useState<string[]>([...jobs]);
-  const [totalInterests, setTotalInterests] = useState<string[]>([...interests]);
+  // const userProfile = {
+  //   email: 'giannis@gmail.com',
+  //   imageUrl:
+  //     'https://fadeawayworld.net/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTgyMDU2NzMyMTM3MzY2NjU5/giannis.jpg',
+  //   nickName: 'Greek Freak',
+  //   purpose: 'We can do, Weekand!',
+  //   jobs: ['취준생', '프리랜서'],
+  //   interests: ['N잡', '사업', '자기계발'],
+  // };
 
-  const { setIsClicked, setText, setIsSuccess } = useContext(ToastContext);
+  // const { email, imageUrl, nickName, purpose, jobs, interests } = userProfile;
+
+  const [currentProfileImageUrl, setCurrentProfileImageUrl] = useState(profileImageUrl);
+  const [currentNickname, setCurrentNickname] = useState(nickname);
+  const [currentPurpose, setCurrentPurpose] = useState(goal);
+  const [totalJobs, setTotalJobs] = useState<string[]>(jobs);
+  const [totalInterests, setTotalInterests] = useState<string[]>(interests);
+
+  const { setToast } = useContext(ToastContext);
+  const { check_duplicate_nickname } = useCheckDuplicateNickname();
+  const { update_user_profile } = useUpdateUserProfile();
 
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
     return totalSelected.includes(name);
   };
 
-  const isValid = () => {
-    const { type: nickNameType, message: nickNameMessage } = checkNicknameValidation(true);
+  const isDuplicateNickName = async (nickname: string) => {
+    const {
+      data: { checkDuplicateNickname },
+    } = await check_duplicate_nickname({
+      variables: {
+        nickname,
+      },
+    });
+
+    return checkDuplicateNickname;
+  };
+
+  const isValid = async () => {
+    const nickNameResult = await isDuplicateNickName(currentNickname);
+    const { type: nickNameType, message: nickNameMessage } =
+      checkNicknameValidation(nickNameResult);
     if (nickNameType === 'error') {
-      setText(nickNameMessage);
+      setToast('error', nickNameMessage);
       return false;
     }
 
     const { type: purposeType, message: purposeMessage } = checkPurpose(currentPurpose);
     if (purposeType === 'error') {
-      setText(purposeMessage);
+      setToast('error', purposeMessage);
       return false;
     }
 
     return true;
   };
 
-  const onClickSubmit = () => {
-    setIsClicked(true);
-    if (isValid()) {
-      setText('프로필 정보가 저장되었습니다.');
-      setIsSuccess(true);
+  const updateUserProfile = async () => {
+    const {
+      data: { checkDuplicateNickname },
+    } = await update_user_profile({
+      variables: {
+        input: {
+          profileImageFilename: currentProfileImageUrl,
+          nickname: currentNickname,
+          goal: currentPurpose,
+          jobs: totalJobs,
+          interests: totalInterests,
+        },
+      },
+    });
+
+    return checkDuplicateNickname;
+  };
+
+  const onClickSubmit = async () => {
+    if (await isValid()) {
+      console.log(
+        currentProfileImageUrl,
+        currentNickname,
+        currentPurpose,
+        totalJobs,
+        totalInterests
+      );
+
+      await updateUserProfile();
+      setToast('success', '프로필 정보가 저장되었습니다.');
       return;
     }
-    setIsSuccess(false);
     return;
   };
 
@@ -71,7 +128,7 @@ export const EditProfile = () => {
   return (
     <Wrapper>
       <ImageAndEmail>
-        <img src={imageUrl} alt="User Image" width={80} height={80} />
+        <img src={currentProfileImageUrl} alt="User Image" width={80} height={80} />
         <div>
           <p className="email">{email}</p>
           <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
@@ -101,6 +158,7 @@ export const EditProfile = () => {
             <Interest
               key={index}
               className="setting_interest"
+              interestType="job"
               name={job}
               totalChoices={totalJobs}
               setTotalChoices={setTotalJobs}
@@ -119,6 +177,7 @@ export const EditProfile = () => {
             <Interest
               key={index}
               className="setting_interest"
+              interestType="interest"
               name={interest}
               totalChoices={totalInterests}
               setTotalChoices={setTotalInterests}

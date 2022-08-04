@@ -1,12 +1,41 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { EditProfile, SettingSidebar } from './components';
 
+import { useUserInfo } from '@/api/setting';
 import { PageLayout } from '@/common';
 
+interface IUserInfo {
+  id: string;
+  email: string;
+  nickname: string;
+  profileImageUrl: string;
+  goal: string;
+  jobs: string[];
+  interests: string[];
+}
+
 const Setting = () => {
-  const [currentContent, setCurrentContent] = useState(<EditProfile />);
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+  const { user_info } = useUserInfo();
+  const [currentContent, setCurrentContent] = useState(<div />);
+
+  const showUser = async () => {
+    const {
+      data: { user },
+    } = await user_info({});
+    setUserInfo(user);
+  };
+
+  useEffect(() => {
+    showUser();
+    if (userInfo) {
+      setCurrentContent(<EditProfile userInfo={userInfo} />);
+    }
+  }, [userInfo]);
+
+  console.log(userInfo);
 
   return (
     <PageLayout isFooter={false}>
