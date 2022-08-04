@@ -53,3 +53,15 @@ export const useUpdateUserProfile = () => {
 
   return { update_user_profile };
 };
+
+const UPDATE_PASSWORD = gql`
+  mutation UpdatePassword($passwordInput: PasswordInput!) {
+    updatePassword(passwordInput: $passwordInput)
+  }
+`;
+
+export const useUpdatePassword = () => {
+  const [update_password] = useMutation(UPDATE_PASSWORD);
+
+  return { update_password };
+};
