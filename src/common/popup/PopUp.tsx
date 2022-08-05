@@ -6,7 +6,7 @@ import { CreateCategoryPopup } from './CreateCategoryPopup';
 import { Category, MainSchedule } from '@/common';
 import { DimmedLayerContext, PopUpContext } from '@/contexts';
 
-export const Popup = () => {
+export const PopUp = () => {
   const { setIsDimmed } = useContext(DimmedLayerContext);
 
   const { isPopped, type } = useContext(PopUpContext);
