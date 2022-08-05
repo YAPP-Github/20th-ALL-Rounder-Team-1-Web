@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from '@/common';
@@ -7,6 +8,8 @@ interface JobProps {
 }
 
 export const Job = ({ jobs }: JobProps) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Title>직업</Title>
@@ -19,7 +22,7 @@ export const Job = ({ jobs }: JobProps) => {
       ) : (
         <AddJobButton
           onClick={() => {
-            console.log(1);
+            navigate('/setting');
           }}
         >
           추가하러 가기
