@@ -4,12 +4,12 @@ import styled from 'styled-components';
 import { CreateCategoryPopup } from './CreateCategoryPopup';
 
 import { Category, MainSchedule } from '@/common';
-import { DimmedLayerContext, PopupContext } from '@/contexts';
+import { DimmedLayerContext, PopUpContext } from '@/contexts';
 
 export const Popup = () => {
   const { setIsDimmed } = useContext(DimmedLayerContext);
 
-  const { isPopped, type } = useContext(PopupContext);
+  const { isPopped, type } = useContext(PopUpContext);
 
   useEffect(() => {
     if (isPopped) {

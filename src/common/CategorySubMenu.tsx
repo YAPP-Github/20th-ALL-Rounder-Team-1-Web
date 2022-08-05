@@ -3,7 +3,7 @@ import { ApolloQueryResult } from '@apollo/client';
 import styled from 'styled-components';
 
 import { useDeleteCategory, useDeleteSchedule } from '@/api';
-import { PopupContext } from '@/contexts';
+import { PopUpContext } from '@/contexts';
 import { SORT } from '@/models';
 interface CategorySubMenuProps {
   isCategoryClicked: boolean;
@@ -25,8 +25,8 @@ export const CategorySubMenu = ({
   clickedIndex,
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
-  const { setPopup } = useContext(PopupContext);
-  const { setIsPopped, setCurrentPopUp } = useContext(PopupContext);
+  const { setPopup } = useContext(PopUpContext);
+  const { setIsPopped, setCurrentPopUp } = useContext(PopUpContext);
 
   const { delete_category } = useDeleteCategory();
   const { delete_schedule } = useDeleteSchedule();

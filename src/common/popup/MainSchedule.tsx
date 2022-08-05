@@ -4,7 +4,7 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 import { useCreateSchedule, useScheduleCategories } from '@/api';
-import { PopupContext } from '@/contexts';
+import { PopUpContext } from '@/contexts';
 import { useDate } from '@/hooks';
 import { DAY_NAME, REPEAT_TYPE, SORT } from '@/models';
 import { Day, ICategory } from '@/types';
@@ -14,7 +14,7 @@ import { Button, Calender, Input, InputRef, RepeatSchedule, TimePicker } from '.
 const categories = ['공부', '자기개발', '취미생활', '업무'];
 
 export const MainSchedule = () => {
-  const { setIsPopped } = useContext(PopupContext);
+  const { setIsPopped } = useContext(PopUpContext);
   const { today, date, setDate } = useDate();
   const [showCategory, setShowCategory] = useState(false);
   const [clickedCategory, setClickedCategory] = useState<ICategory>({} as ICategory);

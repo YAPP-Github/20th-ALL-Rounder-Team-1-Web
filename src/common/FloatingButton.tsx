@@ -5,11 +5,11 @@ import styled from 'styled-components';
 
 import { Button } from '.';
 
-import { PopupContext } from '@/contexts';
+import { PopUpContext } from '@/contexts';
 
 export const FloatingButton = () => {
   const location = useLocation();
-  const { setPopup } = useContext(PopupContext);
+  const { setPopup } = useContext(PopUpContext);
 
   const [isExist, setIsExist] = useState(false);
 
