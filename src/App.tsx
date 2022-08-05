@@ -1,6 +1,7 @@
-import { Suspense } from 'react';
+import { Suspense, useLayoutEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 
+import smiling_emoji from './assets/smiling_emoji.png';
 import { PopUpPortal, ToastPortal } from './portals';
 
 import { DimmedLayer, FloatingButton, PopUp, ProtectRoute, Toast } from '@/common';
@@ -21,6 +22,13 @@ import {
 
 const App = () => {
   useDocumentTitle('Weekand');
+
+  useLayoutEffect(() => {
+    const preLoadImages = [smiling_emoji];
+    preLoadImages.forEach((image) => {
+      new Image().src = image;
+    });
+  }, []);
 
   return (
     <Router>
