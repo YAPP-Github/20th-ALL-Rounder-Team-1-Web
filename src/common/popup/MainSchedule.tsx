@@ -4,6 +4,7 @@ import dayjs from 'dayjs';
 import styled from 'styled-components';
 
 import { useCreateSchedule, useScheduleCategories } from '@/api';
+import { useSchedules } from '@/api/search';
 import { PopUpContext } from '@/contexts';
 import { useDate } from '@/hooks';
 import { DAY_NAME, REPEAT_TYPE, SORT } from '@/models';
@@ -34,6 +35,7 @@ export const MainSchedule = () => {
   const { data } = useScheduleCategories(SORT.DATE_CREATED_ASC, 0, 9);
   const { create_schedule } = useCreateSchedule();
   const categories = data?.scheduleCategories.scheduleCategories;
+  const { refetch } = useSchedules();
 
   const closePopup = () => {
     setIsPopped(false);
@@ -185,52 +187,14 @@ export const MainSchedule = () => {
         },
       },
     });
+    refetch();
+    closePopup();
   };
 
   return (
     <>
       <Header>
         <Title>일정</Title>
-        <Button
-          onClick={() => {
-            const a = date.set('hour', 23);
-            setDate(a);
-            console.log(a.unix());
-            const tmp = a.unix();
-            console.log(dayjs.unix(tmp));
-          }}
-        >
-          바꿔보자
-        </Button>
-        <Button
-          onClick={() => {
-            console.log(date);
-            console.log(date.month());
-            console.log(date.date());
-            console.log(date.hour());
-            console.log(date.minute());
-          }}
-        >
-          장동균!!
-        </Button>
-        <Button
-          onClick={() => {
-            console.log('시작시간');
-            console.log(startTime);
-            console.log(startTime.hour());
-            console.log(startTime.minute());
-          }}
-        >
-          니니니니
-        </Button>
-        <Button
-          onClick={() => {
-            console.log('종료시간');
-            console.log(endTime);
-          }}
-        >
-          나나나나
-        </Button>
         <CloseButton onClick={closePopup}></CloseButton>
       </Header>
       <Selector>

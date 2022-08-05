@@ -16,19 +16,4 @@ export const GlobalStyle = createGlobalStyle`
       max-width: 1120px;
       margin: 0 auto;
    }
-
-   :focus {
-      outline-width: 0;
-      outline-style: solid;
-   }
-
-   :focus-visible{
-      border-radius: 12px;
-      box-shadow: 0 0 0 3px #5086ff;
-   }
-
-   input:focus {
-      border-radius: 12px;
-      box-shadow: 0 0 0 3px #5086ff;
-   }
 `;

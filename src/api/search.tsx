@@ -78,9 +78,9 @@ const SCHEDULES = gql`
 `;
 
 export const useSchedules = () => {
-  const [schedules, { data }] = useLazyQuery(SCHEDULES);
+  const [schedules, { data, refetch }] = useLazyQuery(SCHEDULES);
 
-  return { schedules, data };
+  return { schedules, data, refetch };
 };
 
 const FOLLOWEES = gql`

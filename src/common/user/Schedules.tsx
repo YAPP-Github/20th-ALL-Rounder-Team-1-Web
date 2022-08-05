@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 import { Schedule } from '.';
 
-import { useSchedules } from '@/api/search';
+import { useSchedules } from '@/api';
 import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
 import { SCHEDULES } from '@/utils';
@@ -63,8 +63,6 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
   useEffect(() => {
     showSchedules();
   }, [userId, date]);
-
-  console.log(userSchedules);
 
   return (
     <Wrapper>
