@@ -1,8 +1,12 @@
 import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { useCreateScheduleSticker } from '@/api';
 import { Button } from '@/common';
 interface ScheduleProps {
+  id: string;
+  chkChange: boolean;
+  setChkChange: Dispatch<SetStateAction<boolean>>;
   currentIndex: number;
   categoryColor: string;
   name: string;
@@ -18,6 +22,9 @@ interface ScheduleProps {
 }
 
 export const Schedule = ({
+  id,
+  chkChange,
+  setChkChange,
   currentIndex,
   categoryColor,
   name,
@@ -33,6 +40,8 @@ export const Schedule = ({
 }: ScheduleProps) => {
   const [isClicked, setIsClicked] = useState(false);
   const [show, setShow] = useState(false);
+
+  const { create_schedule_sticker } = useCreateScheduleSticker();
 
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -51,6 +60,20 @@ export const Schedule = ({
     const isClicked = currentIndex === clickedIndex;
     setIsClicked(isClicked);
   }, [clickedIndex]);
+
+  const onClickIcon = async (stickerName: string) => {
+    const { data } = await create_schedule_sticker({
+      variables: {
+        createScheduleStickerInput: {
+          scheduleId: id,
+          scheduleStickerName: stickerName,
+          scheduleDate: startTime,
+        },
+      },
+    });
+    setShow(false);
+    setChkChange(!chkChange);
+  };
 
   return (
     <Wrapper onContextMenu={handleRightClick} isClicked={isClicked}>
@@ -72,16 +95,16 @@ export const Schedule = ({
           </Icons>
           {show && (
             <LikeWrapper>
-              <LikeButton className="like">
+              <LikeButton onClick={() => onClickIcon('LIKE')} className="like">
                 <LinkButtonText>좋아요</LinkButtonText>
               </LikeButton>
-              <LikeButton className="nice">
+              <LikeButton onClick={() => onClickIcon('COOL')} className="nice">
                 <LinkButtonText>대단해요</LinkButtonText>
               </LikeButton>
-              <LikeButton className="good">
+              <LikeButton onClick={() => onClickIcon('GOOD')} className="good">
                 <LinkButtonText>멋져요</LinkButtonText>
               </LikeButton>
-              <LikeButton className="conglaturation">
+              <LikeButton onClick={() => onClickIcon('CHEER_UP')} className="conglaturation">
                 <LinkButtonText>응원해요</LinkButtonText>
               </LikeButton>
             </LikeWrapper>
@@ -187,22 +210,22 @@ const Icons = styled.div<{ isFriend: boolean }>`
 
   i.GOOD {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
-    background-position: -106px -303px;
+    background-position: -58px -303px;
   }
 
   i.CHEER_UP {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
-    background-position: -154px -303px;
+    background-position: -10px -303px;
   }
 
   i.COOL {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
-    background-position: -58px -303px;
+    background-position: -154px -303px;
   }
 
   i.LIKE {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
-    background-position: -10px -303px;
+    background-position: -106px -303px;
   }
 
   i:first-child {

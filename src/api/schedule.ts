@@ -11,3 +11,15 @@ export const useCreateSchedule = () => {
 
   return { create_schedule };
 };
+
+const CREATE_SCHEDULE_STICKER = gql`
+  mutation CreateScheduleSticker($createScheduleStickerInput: CreateScheduleStickerInput!) {
+    createScheduleSticker(input: $createScheduleStickerInput)
+  }
+`;
+
+export const useCreateScheduleSticker = () => {
+  const [create_schedule_sticker] = useMutation(CREATE_SCHEDULE_STICKER);
+
+  return { create_schedule_sticker };
+};

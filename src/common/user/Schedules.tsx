@@ -35,6 +35,7 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
   const [userSchedules, setUserSchedules] = useState<ISchedules[]>([]);
   const { schedules, refetch } = useSchedules();
   const { isPopped } = useContext(PopUpContext);
+  const [chkChange, setChkChange] = useState(false);
 
   const {
     pointX,
@@ -62,7 +63,6 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
 
   useEffect(() => {
     (async () => {
-      console.log('장동균');
       const {
         data: {
           schedules: { schedules: userSchedules },
@@ -78,8 +78,9 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
   }, [isPopped]);
 
   useEffect(() => {
+    console.log('다시 실행');
     showSchedules();
-  }, [userId, date]);
+  }, [userId, date, chkChange]);
 
   return (
     <Wrapper>
@@ -106,6 +107,9 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
             ) => (
               <Schedule
                 key={id}
+                id={id}
+                chkChange={chkChange}
+                setChkChange={setChkChange}
                 currentIndex={index}
                 categoryColor={color}
                 name={name}
