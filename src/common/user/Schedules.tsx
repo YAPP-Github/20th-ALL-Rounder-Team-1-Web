@@ -75,12 +75,11 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
       });
       setUserSchedules(userSchedules);
     })();
-  }, [isPopped]);
+  }, [isPopped, chkChange]);
 
   useEffect(() => {
-    console.log('다시 실행');
     showSchedules();
-  }, [userId, date, chkChange]);
+  }, [userId, date]);
 
   return (
     <Wrapper>
