@@ -13,6 +13,7 @@ import {
   Purpose,
   Schedules,
 } from '@/common';
+import { useDate } from '@/hooks';
 
 interface IUser {
   email: string;
@@ -34,8 +35,7 @@ const SearchUser = () => {
   const { search_user } = useSearchUser();
 
   const [userInfo, setUserInfo] = useState<IUser>();
-  const [today, setToday] = useState('');
-  const [clickedDay, setClickedDay] = useState(today);
+  const { today, date, setDate } = useDate();
 
   const showUser = async () => {
     const {
@@ -56,7 +56,7 @@ const SearchUser = () => {
     <PageLayout isFooter={false}>
       <Wrapper>
         <div>
-          <Schedules userId={userId} date={Number(clickedDay)} />
+          <Schedules userId={userId} date={Number(date)} />
         </div>
         <Right>
           {userInfo && (
@@ -66,7 +66,7 @@ const SearchUser = () => {
                 email={userInfo.email}
                 profileImageUrl={userInfo.profileImageUrl}
               />
-              <Calender setToday={setToday} setClickedDay={setClickedDay} />
+              <Calender today={today} date={date} setDate={setDate} />
               <Purpose goal={userInfo.goal} />
               <TopSeparator />
               <Job jobs={userInfo.jobs} />

@@ -6,6 +6,7 @@ import styled from 'styled-components';
 import { Day } from '@/hooks';
 
 interface CalenderBodyProps {
+  className?: string;
   today: Day;
   date: Day;
   setDate: Dispatch<SetStateAction<Day>>;
@@ -13,7 +14,7 @@ interface CalenderBodyProps {
 }
 const weekdays = ['일', '월', '화', '수', '목', '금', '토'];
 
-export const CalenderBody = ({ today, date, setDate, mode }: CalenderBodyProps) => {
+export const CalenderBody = ({ className, today, date, setDate, mode }: CalenderBodyProps) => {
   const getEndWeek = () => {
     if (date.endOf('month').week() === 1) {
       return 53;
@@ -67,7 +68,7 @@ export const CalenderBody = ({ today, date, setDate, mode }: CalenderBodyProps) 
   };
 
   return (
-    <Wrapper>
+    <Wrapper className={className}>
       <div className="row">
         {weekdays.map((day) => {
           return <div className="day_name">{day}</div>;
@@ -80,6 +81,11 @@ export const CalenderBody = ({ today, date, setDate, mode }: CalenderBodyProps) 
 
 const Wrapper = styled.div`
   ${({ theme: { fonts } }) => fonts.Body2('Gray400')}
+
+  &.schedule,
+  &.repeat_schedule {
+    margin-left: -17px;
+  }
 
   .row {
     display: flex;

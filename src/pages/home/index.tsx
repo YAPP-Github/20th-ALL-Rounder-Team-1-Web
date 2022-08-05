@@ -15,6 +15,7 @@ import {
   Purpose,
   Schedules,
 } from '@/common';
+import { useDate } from '@/hooks';
 
 interface IUser {
   email: string;
@@ -45,9 +46,8 @@ const Home = () => {
   const [userProfile, setUserProfile] = useState<IFollowees>();
   const [userFollowees, setUserFollowees] = useState<IFollowees[]>([]);
   const [userId, setUserId] = useState('');
-  const [today, setToday] = useState('');
-  const [clickedDay, setClickedDay] = useState(today);
   const [hasNextFriend, setHasNextFriend] = useState(false);
+  const { today, date, setDate } = useDate();
 
   const showUser = async () => {
     if (userId.length) {
@@ -115,7 +115,7 @@ const Home = () => {
               hasNextFriend={hasNextFriend}
             />
           )}
-          {userInfo && <Schedules userId={userId} date={Number(clickedDay)} />}
+          {userInfo && <Schedules userId={userId} date={Number(date)} />}
         </div>
         <Right>
           {userInfo && (
@@ -125,7 +125,7 @@ const Home = () => {
                 email={userInfo.email}
                 profileImageUrl={userInfo.profileImageUrl}
               />
-              <Calender setToday={setToday} setClickedDay={setClickedDay} />
+              <Calender today={today} date={date} setDate={setDate} />
               <Purpose goal={userInfo.goal} />
               <TopSeparator />
               <Job jobs={userInfo.jobs} />
