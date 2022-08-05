@@ -1,6 +1,7 @@
 import { Dispatch, MouseEvent, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
+import { Button } from '@/common';
 interface ScheduleProps {
   currentIndex: number;
   categoryColor: string;
@@ -31,6 +32,7 @@ export const Schedule = ({
   setClickedIndex,
 }: ScheduleProps) => {
   const [isClicked, setIsClicked] = useState(false);
+  const [show, setShow] = useState(false);
 
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
@@ -68,7 +70,23 @@ export const Schedule = ({
               <i className={likeType} />
             ))}
           </Icons>
-          {isFriend && <LikeSticker />}
+          {show && (
+            <LikeWrapper>
+              <LikeButton className="like">
+                <LinkButtonText>좋아요</LinkButtonText>
+              </LikeButton>
+              <LikeButton className="nice">
+                <LinkButtonText>대단해요</LinkButtonText>
+              </LikeButton>
+              <LikeButton className="good">
+                <LinkButtonText>멋져요</LinkButtonText>
+              </LikeButton>
+              <LikeButton className="conglaturation">
+                <LinkButtonText>응원해요</LinkButtonText>
+              </LikeButton>
+            </LikeWrapper>
+          )}
+          {isFriend && <LikeSticker onClick={() => setShow(!show)} />}
         </LikeCountAndIcon>
       </TimeAndLike>
     </Wrapper>
@@ -208,7 +226,97 @@ const Icons = styled.div<{ isFriend: boolean }>`
   }
 `;
 
-const LikeSticker = styled.i`
+const LikeSticker = styled(Button)`
   ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 32, 32)}
   background-position: -321px -62px;
+`;
+
+const LikeWrapper = styled.div`
+  position: absolute;
+  box-sizing: border-box;
+  top: -220px;
+  left: -330px;
+  width: 452px;
+  height: 177px;
+  background-color: #fff;
+  border-radius: 10px;
+  box-shadow: 10px 10px 10px 10px ${({ theme: { colors } }) => colors.Gray200};
+  padding: 40px 40px 35px;
+
+  &:after {
+    content: '';
+    position: absolute;
+    top: 160px;
+    right: 80px;
+    display: block;
+    width: 37px;
+    height: 36px;
+    background-color: #fff;
+    border-radius: 4px;
+    transform: rotate(135deg);
+  }
+`;
+
+const LikeButton = styled(Button)`
+  width: 72px;
+  height: 72px;
+  position: relative;
+  z-index: 10;
+
+  &.like:before {
+    content: '';
+    display: block;
+    margin-top: 16px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 43, 43)}
+    background-position: -150px -73px;
+    z-index: 10;
+  }
+
+  &.nice:before {
+    content: '';
+    display: block;
+    margin-top: 16px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 43, 43)}
+    background-position: -150px -10px;
+    z-index: 10;
+  }
+
+  &.good:before {
+    content: '';
+    display: block;
+    margin-top: 16px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 43, 43)}
+    background-position: -73px -80px;
+    z-index: 10;
+  }
+
+  &.conglaturation:before {
+    content: '';
+    display: block;
+    margin-top: 16px;
+    ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 43, 43)}
+    background-position: -10px -80px;
+    z-index: 10;
+  }
+
+  & + & {
+    margin-left: 28px;
+  }
+`;
+
+const LinkButtonText = styled.div`
+  ${({ theme: { fonts } }) => fonts.Body2}
+  margin-top: 25px;
+
+  &:before {
+    content: '';
+    z-index: -1;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 72px;
+    height: 72px;
+    background-color: #f5f7f8;
+    border-radius: 28.8px;
+  }
 `;
