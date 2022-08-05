@@ -17,9 +17,9 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 auto;
    }
 
-   element:focus {
-	outline-style: none;
-	box-shadow: none;
-	border-color: transparent; 
+   *:focus {
+	outline-style: none !important;
+	box-shadow: none !important;
+	border-color: transparent !important; 
 }
 `;
