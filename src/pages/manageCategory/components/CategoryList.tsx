@@ -1,20 +1,25 @@
-import { useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Category } from '.';
 
 import { useScheduleCategories } from '@/api';
 import { CategorySubMenu } from '@/common';
+import { PopUpContext } from '@/contexts';
 import { useContextMenu } from '@/hooks';
 import { SORT } from '@/models';
 import { ICategory } from '@/types';
 
 export const CategoryList = () => {
   const { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked } = useContextMenu();
-
+  const { isPopped } = useContext(PopUpContext);
   const [clickedIndex, setClickedIndex] = useState(-1);
   const [sort, setSort] = useState(SORT.DATE_CREATED_ASC);
   const { data, refetch } = useScheduleCategories(sort, 0, 9);
+
+  useEffect(() => {
+    refetch();
+  }, [isPopped]);
 
   return (
     <Wrapper>

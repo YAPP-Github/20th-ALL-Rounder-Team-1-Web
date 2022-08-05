@@ -1,12 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { Schedule } from '.';
 
 import { useSchedules } from '@/api';
 import { CategorySubMenu } from '@/common';
+import { PopUpContext } from '@/contexts';
 import { useContextMenu } from '@/hooks';
-import { SCHEDULES } from '@/utils';
 
 interface ICategory {
   id: string;
@@ -33,7 +33,8 @@ interface SchedulesProps {
 export const Schedules = ({ userId, date }: SchedulesProps) => {
   const [isFriend, setIsFriend] = useState(true);
   const [userSchedules, setUserSchedules] = useState<ISchedules[]>([]);
-  const { schedules } = useSchedules();
+  const { schedules, refetch } = useSchedules();
+  const { isPopped } = useContext(PopUpContext);
 
   const {
     pointX,
@@ -56,9 +57,25 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
         userId,
       },
     });
-
     setUserSchedules(userSchedules);
   };
+
+  useEffect(() => {
+    (async () => {
+      console.log('장동균');
+      const {
+        data: {
+          schedules: { schedules: userSchedules },
+        },
+      } = await refetch({
+        variables: {
+          date,
+          userId,
+        },
+      });
+      setUserSchedules(userSchedules);
+    })();
+  }, [isPopped]);
 
   useEffect(() => {
     showSchedules();

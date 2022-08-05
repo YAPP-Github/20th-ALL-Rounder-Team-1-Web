@@ -39,6 +39,7 @@ export const Category = ({
   const handleRightClick = (event: MouseEvent<HTMLDivElement>) => {
     event.preventDefault();
     setCategory({
+      id: id,
       name: name,
       color: color,
       openType: openType,
