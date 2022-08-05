@@ -6,7 +6,7 @@ interface InterestProps {
   interests: string[];
 }
 
-export const Interest = ({ interests }: InterestProps) => {
+export const Interests = ({ interests }: InterestProps) => {
   return (
     <>
       <Title>관심사</Title>

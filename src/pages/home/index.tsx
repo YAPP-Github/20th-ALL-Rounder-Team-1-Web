@@ -1,26 +1,93 @@
+import { useEffect, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Follow, FriendStories, Interest, Job, Profile, Purpose, Schedules } from './components';
+import { FriendStories } from './components';
 
-import { Calender, PageLayout } from '@/common';
+import { useSearchUser } from '@/api/search';
+import {
+  Calender,
+  Follow,
+  Interests,
+  Job,
+  PageLayout,
+  Profile,
+  Purpose,
+  Schedules,
+} from '@/common';
+
+interface IUser {
+  email: string;
+  followed: boolean;
+  followeeCount: number;
+  followerCount: number;
+  goal: string;
+  id: string;
+  interests: string[];
+  jobs: string[];
+  nickname: string;
+  profileImageUrl: string;
+}
 
 const Home = () => {
+  const { pathname } = useLocation();
+
+  const { search_user } = useSearchUser();
+
+  const [userInfo, setUserInfo] = useState<IUser>();
+  const [userId, setUserId] = useState('');
+  const [today, setToday] = useState('');
+  const [clickedDay, setClickedDay] = useState(today);
+
+  const showUser = async () => {
+    if (userId.length) {
+      const {
+        data: { user },
+      } = await search_user({
+        variables: {
+          id: userId,
+        },
+      });
+      setUserInfo(user);
+      return;
+    }
+    const {
+      data: { user },
+    } = await search_user();
+    setUserInfo(user);
+  };
+
+  useEffect(() => {
+    showUser();
+  }, [userId]);
+
   return (
     <PageLayout isFooter={false}>
       <Wrapper>
         <div>
           <FriendStories />
-          <Schedules />
+          {userInfo && <Schedules userId={userInfo.id} date={Number(clickedDay)} />}
         </div>
         <Right>
-          <Profile />
-          <Calender />
-          <Purpose />
-          <TopSeparator />
-          <Job />
-          <Interest />
-          <BottomSeparator />
-          <Follow />
+          {userInfo && (
+            <>
+              <Profile
+                nickname={userInfo.nickname}
+                email={userInfo.email}
+                profileImageUrl={userInfo.profileImageUrl}
+              />
+              <Calender setToday={setToday} setClickedDay={setClickedDay} />
+              <Purpose goal={userInfo.goal} />
+              <TopSeparator />
+              <Job jobs={userInfo.jobs} />
+              <Interests interests={userInfo.interests} />
+              <BottomSeparator />
+              <Follow
+                followeeCount={userInfo.followeeCount}
+                followerCount={userInfo.followerCount}
+              />
+            </>
+          )}
         </Right>
       </Wrapper>
     </PageLayout>
