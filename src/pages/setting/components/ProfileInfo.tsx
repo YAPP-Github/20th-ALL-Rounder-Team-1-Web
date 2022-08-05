@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 interface ProfileInfoProps {
   title: string;
-  content: string;
+  content: string | undefined;
   changeContent?: Dispatch<SetStateAction<string>>;
   isInput?: boolean;
 }

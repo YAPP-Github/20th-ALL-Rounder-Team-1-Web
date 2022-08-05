@@ -32,6 +32,7 @@ const authLink = setContext((_, { headers }) => {
     headers: {
       ...headers,
       'Access-Token': getStorage('accessToken'),
+      'Refresh-Token': getStorage('refreshToken'),
     },
   };
 });

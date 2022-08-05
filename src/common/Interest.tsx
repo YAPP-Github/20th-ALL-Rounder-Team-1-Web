@@ -18,7 +18,7 @@ interface InterestProps {
   interestType: 'job' | 'interest';
   isChosen?: boolean;
   name: string;
-  setTotalChoices: Dispatch<SetStateAction<string[]>>;
+  setTotalChoices: Dispatch<SetStateAction<string[] | undefined>>;
   totalChoices: string[];
 }
 
