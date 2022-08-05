@@ -13,4 +13,5 @@ export * from './calender';
 export * from './layer';
 export * from './search';
 export * from './popup';
+export * from './user';
 export * from './ProtectRoute';

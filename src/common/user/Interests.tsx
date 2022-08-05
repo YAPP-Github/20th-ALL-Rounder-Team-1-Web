@@ -1,3 +1,4 @@
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { Button } from '@/common';
@@ -6,7 +7,9 @@ interface InterestProps {
   interests: string[];
 }
 
-export const Interest = ({ interests }: InterestProps) => {
+export const Interests = ({ interests }: InterestProps) => {
+  const navigate = useNavigate();
+
   return (
     <>
       <Title>관심사</Title>
@@ -19,7 +22,7 @@ export const Interest = ({ interests }: InterestProps) => {
       ) : (
         <AddInterestButton
           onClick={() => {
-            console.log(1);
+            navigate('/setting');
           }}
         >
           추가하러 가기

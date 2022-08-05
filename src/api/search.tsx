@@ -82,3 +82,24 @@ export const useSchedules = () => {
 
   return { schedules, data };
 };
+
+const FOLLOWEES = gql`
+  query Followees($page: Int!, $size: Int!, $userId: ID) {
+    followees(page: $page, size: $size, userId: $userId) {
+      paginationInfo {
+        hasNext
+      }
+      followees {
+        id
+        nickname
+        profileImageUrl
+      }
+    }
+  }
+`;
+
+export const useFollowees = () => {
+  const [followees, { data }] = useLazyQuery(FOLLOWEES);
+
+  return { followees, data };
+};
