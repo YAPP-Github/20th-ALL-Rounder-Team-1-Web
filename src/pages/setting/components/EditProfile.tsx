@@ -133,38 +133,32 @@ export const EditProfile = () => {
     return;
   };
 
-  const onChangeUserImage = async (event: ChangeEvent<HTMLInputElement>) => {
-    const files = event.target.files;
-    console.log(files);
+  // const onChangeUserImage = async (event: ChangeEvent<HTMLInputElement>) => {
+  //   const files = event.target.files;
+  //   console.log(files);
 
-    if (files) {
-      console.log(files[0]);
-      // const url =URL.createObjectURL(files[0])
-      const fileReader = new FileReader();
-      fileReader.readAsArrayBuffer(files[0]);
-      // fileReader.onload = function (e) {
-      //   console.log(fileReader.result); // ArrayBuffer 객체
-      // };
+  //   if (files) {
+  //     console.log(files[0]);
+  //     // const url =URL.createObjectURL(files[0])
+  //     const fileReader = new FileReader();
+  //     fileReader.readAsArrayBuffer(files[0]);
+  //     // fileReader.onload = function (e) {
+  //     //   console.log(fileReader.result); // ArrayBuffer 객체
+  //     // };
 
-      // new Blob([new Uint8Array(fileReader.result!)], { type: 'image/jpeg' });
-      if (files) {
-        // const { data } = await create_user_profile_img({
-        //   variables: {
-        //     input: {
-        //       extension: "JPEG",
-        //     },
-        //   },
-        // });
-        // console.log(data);
-      }
-    }
-  };
-
-  const createImage = (files: FileList) => {
-    const formData = new FormData();
-    formData.append('image', files[0]);
-    return formData;
-  };
+  //     // new Blob([new Uint8Array(fileReader.result!)], { type: 'image/jpeg' });
+  //     if (files) {
+  //       // const { data } = await create_user_profile_img({
+  //       //   variables: {
+  //       //     input: {
+  //       //       extension: "JPEG",
+  //       //     },
+  //       //   },
+  //       // });
+  //       // console.log(data);
+  //     }
+  //   }
+  // };
 
   return (
     <Wrapper>
@@ -177,7 +171,7 @@ export const EditProfile = () => {
               <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
                 프로필 사진 바꾸기
               </button>
-              <input
+              {/* <input
                 type="file"
                 name="profileImg-change"
                 id="profileImg-change"
@@ -185,7 +179,7 @@ export const EditProfile = () => {
               />
               <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
                 프로필 사진 수정
-              </button>
+              </button> */}
             </div>
           </ImageAndEmail>
           <ProfileInfo
