@@ -35,8 +35,6 @@ const Setting = () => {
     }
   }, [userInfo]);
 
-  console.log(userInfo);
-
   return (
     <PageLayout isFooter={false}>
       <Wrapper>

@@ -77,3 +77,27 @@ export const useSendInquiry = () => {
 
   return { send_inquiry };
 };
+
+const LOGOUT = gql`
+  mutation Logout {
+    logout
+  }
+`;
+
+export const useLogout = () => {
+  const [logout] = useMutation(LOGOUT);
+
+  return { logout };
+};
+
+const DELETE_USER = gql`
+  mutation DeleteUser {
+    deleteUser
+  }
+`;
+
+export const useDeleteUser = () => {
+  const [delete_user] = useMutation(DELETE_USER);
+
+  return { delete_user };
+};
