@@ -45,12 +45,23 @@ const Search = () => {
     showUsers();
   }, [searchQuery, sort, jobs, interests]);
 
+  const getListingContents = () => {
+    if (users.length === 0) {
+      return (
+        <NoListWrapper>
+          <img src="../../assets/no_search_result.png" alt="Blank Schedule" />
+          <NoListText>찾으시는 검색 결과가 없어요</NoListText>
+        </NoListWrapper>
+      );
+    }
+    return <SearchContents users={users} />;
+  };
   return (
     <PageLayout isFooter={false}>
       <Wrapper>
         <CurrentCategoryList
           showAllowingRange={false}
-          listingContents={<SearchContents users={users} />}
+          listingContents={getListingContents()}
           // setIsInputFocused={setIsInputFocused}
           sort={sort}
           setUserSort={setSort}
@@ -75,4 +86,13 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
+const NoListWrapper = styled.div`
+  margin-top: 250px;
+  text-align: center;
+`;
+
+const NoListText = styled.p`
+  margin-top: 16px;
+  ${({ theme: { fonts } }) => fonts.Body1('Gray400')};
+`;
 export default Search;
