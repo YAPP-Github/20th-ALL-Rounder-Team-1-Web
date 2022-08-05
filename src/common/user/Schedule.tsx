@@ -6,8 +6,8 @@ interface ScheduleProps {
   categoryColor: string;
   name: string;
   process: string;
-  startTime: string;
-  endTime: string;
+  startTime: number;
+  endTime: number;
   likeNumber: number;
   likeTypes: string[];
   isFriend?: boolean;
@@ -38,6 +38,13 @@ export const Schedule = ({
     setClickedIndex(currentIndex);
   };
 
+  const getTime = (time: number) => {
+    const hour = new Date(time).getHours();
+    const minute = new Date(time).getMinutes();
+
+    return `${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}`;
+  };
+
   useEffect(() => {
     const isClicked = currentIndex === clickedIndex;
     setIsClicked(isClicked);
@@ -52,9 +59,7 @@ export const Schedule = ({
       <TimeAndLike>
         <ProcessAndTime>
           <i className={process} />
-          <h2>
-            {startTime} - {endTime}
-          </h2>
+          <h2>{`${getTime(startTime)} - ${getTime(endTime)}`}</h2>
         </ProcessAndTime>
         <LikeCountAndIcon count={likeTypes.length} isFriend={isFriend}>
           {likeNumber > 0 && <p>{likeNumber}</p>}
@@ -116,27 +121,27 @@ const ProcessAndTime = styled.div`
     color: ${({ theme: { colors } }) => colors.Gray400};
   }
 
-  i.uncompleted {
+  i.INCOMPLETED {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -373px -106px;
   }
 
-  i.completed {
+  i.COMPLETED {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -298px -303px;
   }
 
-  i.beforecheck {
+  i.SKIP {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -373px -154px;
   }
 
-  i.ongoing {
+  i.UNDETERMINED {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -202px -303px;
   }
 
-  i.prearranged {
+  i.NOT_YET {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -373px -10px;
   }
@@ -162,22 +167,22 @@ const Icons = styled.div<{ isFriend: boolean }>`
   display: flex;
   align-items: center;
 
-  i.smile {
+  i.GOOD {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -106px -303px;
   }
 
-  i.good {
+  i.CHEER_UP {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -154px -303px;
   }
 
-  i.cool {
+  i.COOL {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -58px -303px;
   }
 
-  i.congrats {
+  i.LIKE {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -10px -303px;
   }

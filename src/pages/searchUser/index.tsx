@@ -2,10 +2,18 @@ import { useEffect, useState } from 'react';
 import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { Follow, Interest, Job, Profile, Purpose, Schedules } from './components';
-
 import { useSchedules, useSearchUser } from '@/api/search';
-import { Calender, PageLayout } from '@/common';
+import {
+  Calender,
+  Follow,
+  Interests,
+  Job,
+  PageLayout,
+  Profile,
+  Purpose,
+  Schedules,
+} from '@/common';
+import { useDate } from '@/hooks';
 
 interface IUser {
   email: string;
@@ -20,15 +28,14 @@ interface IUser {
   profileImageUrl: string;
 }
 
-const Home = () => {
+const SearchUser = () => {
   const { pathname } = useLocation();
   const userId = pathname.split('/')[2];
 
   const { search_user } = useSearchUser();
 
   const [userInfo, setUserInfo] = useState<IUser>();
-  const [today, setToday] = useState('');
-  const [clickedDay, setClickedDay] = useState(today);
+  const { today, date, setDate } = useDate();
 
   const showUser = async () => {
     const {
@@ -39,6 +46,7 @@ const Home = () => {
       },
     });
     setUserInfo(user);
+    console.log(user);
   };
 
   useEffect(() => {
@@ -49,7 +57,7 @@ const Home = () => {
     <PageLayout isFooter={false}>
       <Wrapper>
         <div>
-          <Schedules userId={userId} date={Number(clickedDay)} />
+          <Schedules userId={userId} date={Number(date)} />
         </div>
         <Right>
           {userInfo && (
@@ -58,12 +66,15 @@ const Home = () => {
                 nickname={userInfo.nickname}
                 email={userInfo.email}
                 profileImageUrl={userInfo.profileImageUrl}
+                isFollowed={userInfo.followed}
+                isSearchingUser={true}
+                id={userInfo.id}
               />
-              <Calender setToday={setToday} setClickedDay={setClickedDay} />
+              <Calender today={today} date={date} setDate={setDate} />
               <Purpose goal={userInfo.goal} />
               <TopSeparator />
               <Job jobs={userInfo.jobs} />
-              <Interest interests={userInfo.interests} />
+              <Interests interests={userInfo.interests} />
               <BottomSeparator />
               <Follow
                 followeeCount={userInfo.followeeCount}
@@ -76,8 +87,6 @@ const Home = () => {
     </PageLayout>
   );
 };
-
-export default Home;
 
 const Wrapper = styled.div`
   display: flex;
@@ -100,3 +109,5 @@ const BottomSeparator = styled.div`
   background-color: ${({ theme: { colors } }) => colors.Gray300};
   margin: 24px 0 20px 0;
 `;
+
+export default SearchUser;

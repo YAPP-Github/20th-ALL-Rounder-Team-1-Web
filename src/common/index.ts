@@ -15,4 +15,5 @@ export * from './layer';
 export * from './RepeatSchedule';
 export * from './search';
 export * from './popup';
+export * from './user';
 export * from './ProtectRoute';

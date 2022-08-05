@@ -2,7 +2,7 @@ import { Dispatch, SetStateAction, useContext, useState } from 'react';
 import { ApolloQueryResult } from '@apollo/client';
 import styled from 'styled-components';
 
-import { useDeleteCategory, useDeleteSchedule, useScheduleCategories } from '@/api';
+import { useDeleteCategory, useDeleteSchedule } from '@/api';
 import { PopupContext } from '@/contexts';
 import { SORT } from '@/models';
 interface CategorySubMenuProps {
@@ -26,6 +26,7 @@ export const CategorySubMenu = ({
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
   const { setPopup } = useContext(PopupContext);
+  const { setIsPopped, setCurrentPopUp } = useContext(PopupContext);
 
   const { delete_category } = useDeleteCategory();
   const { delete_schedule } = useDeleteSchedule();
@@ -76,7 +77,7 @@ export const CategorySubMenu = ({
         <ContextMenu pointX={pointX} pointY={pointY}>
           <Menu
             onClick={() => {
-              setPopup('category');
+              setPopup('edit-category');
             }}
           >
             수정
@@ -85,7 +86,14 @@ export const CategorySubMenu = ({
         </ContextMenu>
       ) : (
         <ContextMenu pointX={pointX} pointY={pointY}>
-          <Menu>새 카테고리</Menu>
+          <Menu
+            onClick={() => {
+              setCurrentPopUp('create-category');
+              setIsPopped(true);
+            }}
+          >
+            새 카테고리
+          </Menu>
           <SortMenu
             onMouseOver={() => setShowSorting(true)}
             onMouseLeave={() => setShowSorting(false)}

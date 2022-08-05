@@ -1,6 +1,7 @@
 import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
+import { CreateCategoryPopup } from './CreateCategoryPopup';
 import { Category, Schedule } from '.';
 
 import { DimmedLayerContext, PopupContext } from '@/contexts';
@@ -26,6 +27,14 @@ export const Popup = () => {
 
     if (type === 'schedule') {
       return <Schedule />;
+    }
+
+    if (type === 'create-category') {
+      return <CreateCategoryPopup />;
+    }
+
+    if (type === 'edit-category') {
+      return <Category />;
     }
   };
 

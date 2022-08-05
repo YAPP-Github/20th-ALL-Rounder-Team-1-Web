@@ -3,10 +3,10 @@ import cn from 'classnames';
 import dayjs from 'dayjs';
 import styled from 'styled-components';
 
-import { useCreateSchedule,useScheduleCategories } from '@/api';
+import { useCreateSchedule, useScheduleCategories } from '@/api';
 import { PopupContext } from '@/contexts';
 import { useDate } from '@/hooks';
-import { DAY_NAME,REPEAT_TYPE, SORT } from '@/models';
+import { DAY_NAME, REPEAT_TYPE, SORT } from '@/models';
 import { Day, ICategory } from '@/types';
 
 import { Button, Calender, Input, InputRef, RepeatSchedule, TimePicker } from '..';

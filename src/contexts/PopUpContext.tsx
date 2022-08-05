@@ -7,6 +7,8 @@ type PopupProps = {
   setIsPopped: Dispatch<SetStateAction<boolean>>;
   type: PopupType;
   setPopup: (type: PopupType) => void;
+  currentPopUp: string;
+  setCurrentPopUp: Dispatch<SetStateAction<string>>;
 };
 
 export const PopupContext = createContext<PopupProps>({} as PopupProps);
@@ -19,6 +21,7 @@ export const PopupContextProvider = ({ children }: PropsWithChildren<unknown>) =
     setIsPopped(true);
     setType(type);
   };
+  const [currentPopUp, setCurrentPopUp] = useState('');
 
   return (
     <PopupContext.Provider
@@ -27,6 +30,8 @@ export const PopupContextProvider = ({ children }: PropsWithChildren<unknown>) =
         setIsPopped,
         type,
         setPopup,
+        currentPopUp,
+        setCurrentPopUp,
       }}
     >
       {children}

@@ -1,12 +1,15 @@
 import { ChangeEvent, useState } from 'react';
 import styled from 'styled-components';
 
+import { getStorage, setStorage } from '@/utils';
+
 export const Accessibility = () => {
-  const [selected, setSelected] = useState('5초');
+  const [selected, setSelected] = useState(getStorage('accessibility') ?? '3초');
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
     const { value } = event.target;
     setSelected(value);
+    setStorage('accessibility', value);
   };
 
   return (

@@ -1,4 +1,4 @@
-import { gql, useLazyQuery } from '@apollo/client';
+import { gql, useLazyQuery, useMutation } from '@apollo/client';
 
 const SEARCH_USERS = gql`
   query SearchUsers(
@@ -81,4 +81,37 @@ export const useSchedules = () => {
   const [schedules, { data }] = useLazyQuery(SCHEDULES);
 
   return { schedules, data };
+};
+
+const FOLLOWEES = gql`
+  query Followees($page: Int!, $size: Int!, $userId: ID) {
+    followees(page: $page, size: $size, userId: $userId) {
+      paginationInfo {
+        hasNext
+      }
+      followees {
+        id
+        nickname
+        profileImageUrl
+      }
+    }
+  }
+`;
+
+export const useFollowees = () => {
+  const [followees, { data }] = useLazyQuery(FOLLOWEES);
+
+  return { followees, data };
+};
+
+const CREATE_FOLLOW = gql`
+  mutation CreateFollow($input: CreateFollowInput!) {
+    createFollow(input: $input)
+  }
+`;
+
+export const useCreateFollow = () => {
+  const [create_follow] = useMutation(CREATE_FOLLOW);
+
+  return { create_follow };
 };

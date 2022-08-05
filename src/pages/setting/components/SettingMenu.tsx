@@ -1,7 +1,9 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import styled from 'styled-components';
 
-import { getCurrentSetting } from '@/utils';
+import { useDeleteUser, useLogout } from '@/api/setting';
+import { deleteStorage, getCurrentSetting } from '@/utils';
 
 interface SettingMenuProps {
   name: string;
@@ -20,12 +22,48 @@ export const SettingMenu = ({
 }: SettingMenuProps) => {
   const [isClicked, setIsClicked] = useState(false);
 
+  const { logout } = useLogout();
+  const { delete_user } = useDeleteUser();
+  const navigate = useNavigate();
+
+  const handleLogout = async () => {
+    await logout();
+    deleteStorage('accessToken');
+    deleteStorage('refreshToken');
+    localStorage.removeItem('refreshToken');
+  };
+
+  const handleDeleteUser = async () => {
+    await delete_user();
+    deleteStorage('accessToken');
+    deleteStorage('refreshToken');
+    localStorage.removeItem('refreshToken');
+  };
+
   const onClick = () => {
     const content = getCurrentSetting(name);
     if (content && setCurrentContent) {
       setCurrentContent(content);
     }
     setCurrentClicked(name);
+    if (name === '로그아웃') {
+      if (confirm('로그아웃 하시겠습니까?')) {
+        handleLogout();
+        alert('로그아웃 되었습니다.');
+        navigate('/login');
+        return;
+      }
+      alert('취소합니다.');
+    }
+    if (name === '회원탈퇴') {
+      if (confirm('회원탈퇴 하시겠습니까?')) {
+        handleDeleteUser();
+        alert('회원탈퇴 되었습니다.');
+        navigate('/login');
+        return;
+      }
+      alert('취소합니다.');
+    }
   };
 
   const handleIsClicked = () => {

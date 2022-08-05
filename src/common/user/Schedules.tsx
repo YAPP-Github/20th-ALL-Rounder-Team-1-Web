@@ -62,40 +62,51 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
 
   useEffect(() => {
     showSchedules();
-  }, [date]);
+  }, [userId, date]);
+
+  console.log(userSchedules);
 
   return (
     <Wrapper>
-      {userSchedules.map(
-        (
-          {
-            id,
-            name,
-            status,
-            category: { color },
-            dateTimeStart,
-            dateTimeEnd,
-            stickerCount,
-            stickerNames,
-          },
-          index
-        ) => (
-          <Schedule
-            key={id}
-            currentIndex={index}
-            categoryColor={color}
-            name={name}
-            process={status}
-            startTime={dateTimeStart}
-            endTime={dateTimeEnd}
-            likeNumber={stickerCount}
-            likeTypes={stickerNames}
-            isFriend={isFriend}
-            setIsCategoryClicked={setIsCategoryClicked}
-            clickedIndex={clickedIndex}
-            setClickedIndex={setClickedIndex}
-          />
-        )
+      {userSchedules.length === 0 ? (
+        <BlankImage>
+          <img src="../../assets/blank_schedule.png" alt="Blank Schedule" />
+          <p>일정을 만들어보세요!</p>
+        </BlankImage>
+      ) : (
+        <>
+          {userSchedules.map(
+            (
+              {
+                id,
+                name,
+                status,
+                category: { color },
+                dateTimeStart,
+                dateTimeEnd,
+                stickerCount,
+                stickerNames,
+              },
+              index
+            ) => (
+              <Schedule
+                key={id}
+                currentIndex={index}
+                categoryColor={color}
+                name={name}
+                process={status}
+                startTime={dateTimeStart}
+                endTime={dateTimeEnd}
+                likeNumber={stickerCount}
+                likeTypes={stickerNames}
+                isFriend={isFriend}
+                setIsCategoryClicked={setIsCategoryClicked}
+                clickedIndex={clickedIndex}
+                setClickedIndex={setClickedIndex}
+              />
+            )
+          )}
+        </>
       )}
 
       {show && (
@@ -117,4 +128,18 @@ const Wrapper = styled.div`
   border-radius: 10px;
   margin-top: 20px;
   padding: 32px 0px;
+`;
+
+const BlankImage = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16.42px;
+  margin-top: 228px;
+
+  p {
+    ${({ theme: { fonts } }) => fonts.Body1}
+    color: ${({ theme: { colors } }) => colors.Gray400};
+  }
 `;
