@@ -1,7 +1,7 @@
 import { PropsWithChildren } from 'react';
 import { createPortal } from 'react-dom';
 
-export const PopupPortal = ({ children }: PropsWithChildren<unknown>) => {
+export const PopUpPortal = ({ children }: PropsWithChildren<unknown>) => {
   const popupElement = document.getElementById('popup');
 
   if (!popupElement) {
