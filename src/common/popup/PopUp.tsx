@@ -2,8 +2,8 @@ import { useContext, useEffect } from 'react';
 import styled from 'styled-components';
 
 import { CreateCategoryPopup } from './CreateCategoryPopup';
-import { Category, MainSchedule } from '.';
 
+import { Category, MainSchedule } from '@/common';
 import { DimmedLayerContext, PopupContext } from '@/contexts';
 
 export const Popup = () => {
