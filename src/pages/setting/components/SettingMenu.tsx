@@ -30,12 +30,14 @@ export const SettingMenu = ({
     await logout();
     deleteStorage('accessToken');
     deleteStorage('refreshToken');
+    localStorage.removeItem('refreshToken');
   };
 
   const handleDeleteUser = async () => {
     await delete_user();
     deleteStorage('accessToken');
     deleteStorage('refreshToken');
+    localStorage.removeItem('refreshToken');
   };
 
   const onClick = () => {

@@ -33,6 +33,9 @@ const Login = () => {
 
     if (data) {
       const { login } = data;
+      if (isChecked) {
+        localStorage.setItem('refreshToken', login.refreshToken);
+      }
       setStorage('accessToken', login.accessToken);
       setStorage('refreshToken', login.refreshToken);
       navigate('/');

@@ -14,3 +14,17 @@ export const useLogin = () => {
 
   return { login };
 };
+
+const REISSUE = gql`
+  query Reissue {
+    reissue {
+      accessToken
+    }
+  }
+`;
+
+export const useReissue = () => {
+  const [reissue] = useLazyQuery(REISSUE);
+
+  return { reissue };
+};

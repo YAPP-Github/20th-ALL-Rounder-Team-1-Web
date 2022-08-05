@@ -46,6 +46,7 @@ const SearchUser = () => {
       },
     });
     setUserInfo(user);
+    console.log(user);
   };
 
   useEffect(() => {
@@ -65,6 +66,9 @@ const SearchUser = () => {
                 nickname={userInfo.nickname}
                 email={userInfo.email}
                 profileImageUrl={userInfo.profileImageUrl}
+                isFollowed={userInfo.followed}
+                isSearchingUser={true}
+                id={userInfo.id}
               />
               <Calender today={today} date={date} setDate={setDate} />
               <Purpose goal={userInfo.goal} />

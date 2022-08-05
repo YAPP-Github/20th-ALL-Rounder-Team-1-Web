@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import { useLocation } from 'react-router-dom';
 import styled from 'styled-components';
 
 import { FriendStories } from './components';
@@ -37,8 +36,6 @@ interface IFollowees {
 }
 
 const Home = () => {
-  const { pathname } = useLocation();
-
   const { search_user } = useSearchUser();
   const { followees } = useFollowees();
 
@@ -51,57 +48,67 @@ const Home = () => {
 
   const showUser = async () => {
     if (userId.length) {
+      try {
+        const {
+          data: { user },
+        } = await search_user({
+          variables: {
+            id: userId,
+          },
+        });
+        setUserInfo(user);
+        return;
+      } catch (e) {
+        window.location.reload();
+      }
+    }
+    try {
       const {
         data: { user },
-      } = await search_user({
-        variables: {
-          id: userId,
-        },
-      });
+      } = await search_user();
+      const { id, nickname, profileImageUrl } = user;
       setUserInfo(user);
-      return;
+      setUserProfile({ id, nickname, profileImageUrl });
+      setUserId(id);
+    } catch (e) {
+      window.location.reload;
     }
-    const {
-      data: { user },
-    } = await search_user();
-    const { id, nickname, profileImageUrl } = user;
-    setUserInfo(user);
-    setUserProfile({ id, nickname, profileImageUrl });
-    setUserId(id);
   };
 
-  console.log(userProfile);
-
-  console.log(userFollowees);
-
   const showFollowees = async () => {
-    const {
-      data: {
-        followees: {
-          paginationInfo: { hasNext },
-          followees: userFollowee,
+    try {
+      const {
+        data: {
+          followees: {
+            paginationInfo: { hasNext },
+            followees: userFollowee,
+          },
         },
-      },
-    } = await followees({
-      variables: {
-        page: 0,
-        size: 6,
-      },
-    });
-    setHasNextFriend(hasNext);
-    setUserFollowees([...userFollowees, ...userFollowee]);
+      } = await followees({
+        variables: {
+          page: 0,
+          size: 6,
+        },
+      });
+      setHasNextFriend(hasNext);
+      setUserFollowees([...userFollowees, ...userFollowee]);
+    } catch (e) {
+      window.location.reload();
+    }
   };
 
   useEffect(() => {
-    showUser();
-    showFollowees();
+    try {
+      showUser();
+      showFollowees();
+    } catch (e) {
+      window.location.reload();
+    }
   }, []);
 
   useEffect(() => {
     showUser();
   }, [userId]);
-
-  console.log(userId);
 
   return (
     <PageLayout isFooter={false}>
@@ -124,6 +131,7 @@ const Home = () => {
                 nickname={userInfo.nickname}
                 email={userInfo.email}
                 profileImageUrl={userInfo.profileImageUrl}
+                id={userInfo.id}
               />
               <Calender today={today} date={date} setDate={setDate} />
               <Purpose goal={userInfo.goal} />
