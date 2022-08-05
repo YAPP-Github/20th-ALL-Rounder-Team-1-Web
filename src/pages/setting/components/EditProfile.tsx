@@ -165,7 +165,13 @@ export const EditProfile = () => {
       {userInfo && (
         <>
           <ImageAndEmail>
-            <img src={currentProfileImageUrl} alt="User Image" width={80} height={80} />
+            {currentProfileImageUrl.startsWith(
+              'https://weekand.s3.ap-northeast-2.amazonaws.com/profile-images/200/https://weekan'
+            ) ? (
+              <DefaultImage></DefaultImage>
+            ) : (
+              <img src={currentProfileImageUrl} width={80} height={80} />
+            )}
             <div>
               <p className="email">{userInfo.email}</p>
               <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
@@ -242,6 +248,13 @@ export const EditProfile = () => {
     </Wrapper>
   );
 };
+
+const DefaultImage = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background-color: #c9ced5;
+`;
 
 const Wrapper = styled.div`
   width: 689px;

@@ -99,7 +99,6 @@ const Home = () => {
 
   useEffect(() => {
     (async () => {
-      console.log('ㅅ;ㄹ행되나용');
       const {
         data: {
           followees: {

@@ -53,11 +53,24 @@ export const Profile = ({
         )}
       </Informations>
       <ImageWrapper>
-        <img src={profileImageUrl} alt={nickname} width={80} height={80} />
+        {profileImageUrl.startsWith(
+          'https://weekand.s3.ap-northeast-2.amazonaws.com/profile-images/200/https://weekand.s3.ap-n'
+        ) ? (
+          <DefaultImage></DefaultImage>
+        ) : (
+          <img src={profileImageUrl} width={80} height={80} />
+        )}
       </ImageWrapper>
     </Wrapper>
   );
 };
+
+const DefaultImage = styled.div`
+  width: 80px;
+  height: 80px;
+  border-radius: 24px;
+  background-color: #c9ced5;
+`;
 
 const Wrapper = styled.div`
   padding: 31px 0;
