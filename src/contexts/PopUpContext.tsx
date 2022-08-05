@@ -1,6 +1,6 @@
 import { createContext, Dispatch, PropsWithChildren, SetStateAction, useState } from 'react';
 
-type PopupType = null | 'category' | 'schedule';
+type PopupType = null | 'category' | 'schedule' | 'edit-category' | 'create-category';
 
 type PopupProps = {
   isPopped: boolean;

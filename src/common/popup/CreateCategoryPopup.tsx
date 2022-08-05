@@ -5,7 +5,7 @@ import styled from 'styled-components';
 
 import { useCreateCategory } from '@/api';
 import { Button, Input, InputRef } from '@/common';
-import { PopUpContext, ToastContext } from '@/contexts';
+import { PopupContext, ToastContext } from '@/contexts';
 import { OPEN_TYPE } from '@/models';
 
 const colors = [
@@ -33,7 +33,7 @@ const colors = [
 ];
 
 export const CreateCategoryPopup = () => {
-  const { setIsPopped } = useContext(PopUpContext);
+  const { setIsPopped } = useContext(PopupContext);
   const { setToast } = useContext(ToastContext);
 
   const [selectedOpenType, setSelectedOpenType] = useState('');

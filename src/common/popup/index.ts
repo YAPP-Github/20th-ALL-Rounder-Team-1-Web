@@ -1,3 +1,4 @@
 export * from './Category';
-export * from './Schedule';
+export * from './MainSchedule';
 export * from './Popup';
+export * from './CreateCategoryPopup';

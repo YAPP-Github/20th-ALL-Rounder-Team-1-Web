@@ -13,7 +13,7 @@ import { Button, Calender, Input, InputRef, RepeatSchedule, TimePicker } from '.
 
 const categories = ['공부', '자기개발', '취미생활', '업무'];
 
-export const Schedule = () => {
+export const MainSchedule = () => {
   const { setIsPopped } = useContext(PopupContext);
   const { today, date, setDate } = useDate();
   const [showCategory, setShowCategory] = useState(false);

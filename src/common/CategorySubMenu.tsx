@@ -88,8 +88,7 @@ export const CategorySubMenu = ({
         <ContextMenu pointX={pointX} pointY={pointY}>
           <Menu
             onClick={() => {
-              setCurrentPopUp('create-category');
-              setIsPopped(true);
+              setPopup('create-category');
             }}
           >
             새 카테고리
