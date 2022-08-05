@@ -16,4 +16,8 @@ export const GlobalStyle = createGlobalStyle`
       max-width: 1120px;
       margin: 0 auto;
    }
+
+   :focus {
+      outline: none;
+   }
 `;
