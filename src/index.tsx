@@ -31,7 +31,7 @@ const authLink = setContext((_, { headers }) => {
   return {
     headers: {
       ...headers,
-      'Access-Token': getStorage('aceessToken'),
+      'Access-Token': getStorage('accessToken'),
     },
   };
 });
