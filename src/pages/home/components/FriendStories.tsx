@@ -1,19 +1,37 @@
-import { useEffect, useState } from 'react';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { FriendStory } from '.';
 
 import { calculateEndX, FRIENDS } from '@/utils';
 
-export const FriendStories = () => {
+interface IFollowees {
+  id: string;
+  nickname: string;
+  profileImageUrl: string;
+}
+
+interface FriendStoriesProps {
+  followees: IFollowees[];
+  userId: string;
+  setUserId: Dispatch<SetStateAction<string>>;
+  hasNextFriend: boolean;
+}
+
+export const FriendStories = ({
+  followees,
+  userId,
+  setUserId,
+  hasNextFriend,
+}: FriendStoriesProps) => {
+  const [clickedNext, setClickedNext] = useState(0);
   const [currentX, setCurrentX] = useState(0);
   const endX = calculateEndX(FRIENDS.length);
-  const [clickedFriend, setClickedFriend] = useState(FRIENDS[0].id);
   const [showLeftButton, setShowLeftButton] = useState(false);
   const [showRightButton, setShowRightButton] = useState(false);
 
-  const isSelected = (id: number) => {
-    if (id === clickedFriend) {
+  const isSelected = (id: string) => {
+    if (id === userId) {
       return true;
     }
     return false;
@@ -23,6 +41,7 @@ export const FriendStories = () => {
     if (currentX + 360 > 0) {
       return setCurrentX(0);
     }
+    setClickedNext(clickedNext - 1);
     setCurrentX(currentX + 360);
   };
 
@@ -30,6 +49,7 @@ export const FriendStories = () => {
     if (currentX - 360 < endX) {
       return setCurrentX(endX);
     }
+    setClickedNext(clickedNext + 1);
     setCurrentX(currentX - 360);
   };
 
@@ -54,22 +74,23 @@ export const FriendStories = () => {
 
   return (
     <Wrapper currentLoc={currentX}>
-      {FRIENDS.map(({ id, name, imgUrl }) => (
-        <FriendStory
-          key={id}
-          id={id}
-          name={name}
-          imgUrl={imgUrl}
-          isSelected={isSelected(id)}
-          setClickedFriend={setClickedFriend}
-        />
-      ))}
-      {showLeftButton && (
+      {followees &&
+        followees.map(({ id, nickname, profileImageUrl }) => (
+          <FriendStory
+            key={id}
+            id={id}
+            name={nickname}
+            imgUrl={profileImageUrl}
+            isSelected={isSelected(id)}
+            setClickedFriend={setUserId}
+          />
+        ))}
+      {hasNextFriend && (
         <Button onClick={onClickLeft} className="left">
           <i className="left-icon" />
         </Button>
       )}
-      {showRightButton && (
+      {clickedNext > 0 && (
         <Button onClick={onClickRight} className="right">
           <i className="right-icon" />
         </Button>

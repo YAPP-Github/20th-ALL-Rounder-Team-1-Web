@@ -4,7 +4,7 @@ import styled from 'styled-components';
 
 import { FriendStories } from './components';
 
-import { useSearchUser } from '@/api/search';
+import { useFollowees, useSearchUser } from '@/api/search';
 import {
   Calender,
   Follow,
@@ -29,15 +29,24 @@ interface IUser {
   profileImageUrl: string;
 }
 
+interface IFollowees {
+  id: string;
+  nickname: string;
+  profileImageUrl: string;
+}
+
 const Home = () => {
   const { pathname } = useLocation();
 
   const { search_user } = useSearchUser();
+  const { followees } = useFollowees();
 
   const [userInfo, setUserInfo] = useState<IUser>();
+  const [userFollowees, setUserFollowees] = useState<IFollowees[]>([]);
   const [userId, setUserId] = useState('');
   const [today, setToday] = useState('');
   const [clickedDay, setClickedDay] = useState(today);
+  const [hasNextFriend, setHasNextFriend] = useState(false);
 
   const showUser = async () => {
     if (userId.length) {
@@ -57,15 +66,41 @@ const Home = () => {
     setUserInfo(user);
   };
 
+  const showFollowees = async () => {
+    const {
+      data: {
+        followees: {
+          paginationInfo: { hasNext },
+          followees: userFollowee,
+        },
+      },
+    } = await followees({
+      variables: {
+        page: 0,
+        size: 6,
+      },
+    });
+    setHasNextFriend(hasNext);
+    setUserFollowees(userFollowee);
+  };
+
   useEffect(() => {
+    showFollowees();
     showUser();
   }, [userId]);
+
+  console.log(userId);
 
   return (
     <PageLayout isFooter={false}>
       <Wrapper>
         <div>
-          <FriendStories />
+          <FriendStories
+            followees={userFollowees}
+            userId={userId}
+            setUserId={setUserId}
+            hasNextFriend={hasNextFriend}
+          />
           {userInfo && <Schedules userId={userInfo.id} date={Number(clickedDay)} />}
         </div>
         <Right>

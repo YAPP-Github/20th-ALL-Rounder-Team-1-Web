@@ -2,11 +2,11 @@ import { Dispatch, SetStateAction } from 'react';
 import styled from 'styled-components';
 
 interface FriendStoryProps {
-  id: number;
+  id: string;
   imgUrl?: string;
   name: string;
   isSelected: boolean;
-  setClickedFriend: Dispatch<SetStateAction<number>>;
+  setClickedFriend: Dispatch<SetStateAction<string>>;
 }
 
 export const FriendStory = ({
