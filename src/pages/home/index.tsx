@@ -131,6 +131,7 @@ const Home = () => {
                 nickname={userInfo.nickname}
                 email={userInfo.email}
                 profileImageUrl={userInfo.profileImageUrl}
+                id={userInfo.id}
               />
               <Calender today={today} date={date} setDate={setDate} />
               <Purpose goal={userInfo.goal} />
