@@ -17,37 +17,39 @@ interface IUserInfo {
   jobs: string[];
   interests: string[];
 }
-interface EditProfileProps {
-  userInfo: IUserInfo;
-}
 
-export const EditProfile = ({ userInfo }: EditProfileProps) => {
-  const { email, nickname, profileImageUrl, goal, jobs, interests } = userInfo;
+export const EditProfile = () => {
+  const [userInfo, setUserInfo] = useState<IUserInfo>();
+  const [currentProfileImageUrl, setCurrentProfileImageUrl] = useState('');
+  const [currentNickname, setCurrentNickname] = useState('');
+  const [currentPurpose, setCurrentPurpose] = useState('');
+  const [totalJobs, setTotalJobs] = useState<string[] | undefined>([]);
+  const [totalInterests, setTotalInterests] = useState<string[] | undefined>([]);
+  const { user_info } = useUserInfo();
 
-  // const userProfile = {
-  //   email: 'giannis@gmail.com',
-  //   imageUrl:
-  //     'https://fadeawayworld.net/.image/ar_1:1%2Cc_fill%2Ccs_srgb%2Cfl_progressive%2Cq_auto:good%2Cw_1200/MTgyMDU2NzMyMTM3MzY2NjU5/giannis.jpg',
-  //   nickName: 'Greek Freak',
-  //   purpose: 'We can do, Weekand!',
-  //   jobs: ['취준생', '프리랜서'],
-  //   interests: ['N잡', '사업', '자기계발'],
-  // };
+  const showUser = async () => {
+    const {
+      data: { user },
+    } = await user_info({});
+    const { nickname, profileImageUrl, goal, jobs, interests } = user;
+    setUserInfo(user);
+    setCurrentProfileImageUrl(profileImageUrl);
+    setCurrentNickname(nickname);
+    setCurrentPurpose(goal);
+    setTotalJobs(jobs);
+    setTotalInterests(interests);
+  };
 
-  // const { email, imageUrl, nickName, purpose, jobs, interests } = userProfile;
-
-  const [currentProfileImageUrl, setCurrentProfileImageUrl] = useState(profileImageUrl);
-  const [currentNickname, setCurrentNickname] = useState(nickname);
-  const [currentPurpose, setCurrentPurpose] = useState(goal);
-  const [totalJobs, setTotalJobs] = useState<string[]>(jobs);
-  const [totalInterests, setTotalInterests] = useState<string[]>(interests);
+  useEffect(() => {
+    showUser();
+  }, []);
 
   const { setToast } = useContext(ToastContext);
   const { check_duplicate_nickname } = useCheckDuplicateNickname();
   const { update_user_profile } = useUpdateUserProfile();
 
   const isSelectedInterest = (name: string, totalSelected: string[]) => {
-    return totalSelected.includes(name);
+    return totalSelected?.includes(name);
   };
 
   const isDuplicateNickName = async (nickname: string) => {
@@ -63,7 +65,7 @@ export const EditProfile = ({ userInfo }: EditProfileProps) => {
   };
 
   const isValid = async () => {
-    const nickNameResult = await isDuplicateNickName(currentNickname);
+    const nickNameResult = await isDuplicateNickName(currentNickname!);
     const { type: nickNameType, message: nickNameMessage } =
       checkNicknameValidation(nickNameResult);
     if (nickNameType === 'error') {
@@ -71,7 +73,7 @@ export const EditProfile = ({ userInfo }: EditProfileProps) => {
       return false;
     }
 
-    const { type: purposeType, message: purposeMessage } = checkPurpose(currentPurpose);
+    const { type: purposeType, message: purposeMessage } = checkPurpose(currentPurpose!);
     if (purposeType === 'error') {
       setToast('error', purposeMessage);
       return false;
@@ -127,70 +129,74 @@ export const EditProfile = ({ userInfo }: EditProfileProps) => {
 
   return (
     <Wrapper>
-      <ImageAndEmail>
-        <img src={currentProfileImageUrl} alt="User Image" width={80} height={80} />
-        <div>
-          <p className="email">{email}</p>
-          <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
-            프로필 사진 바꾸기
-          </button>
-        </div>
-      </ImageAndEmail>
-      <ProfileInfo
-        title="닉네임"
-        content={currentNickname}
-        changeContent={setCurrentNickname}
-        isInput={true}
-      />
-      <ProfileInfo
-        title="한줄목표"
-        content={currentPurpose}
-        changeContent={setCurrentPurpose}
-        isInput={true}
-      />
-      <ProfileInfo title="직업" content={totalJobs.join(', ')} />
-      <SelectInterests>
-        <button className="reset" onClick={() => onClickReset('JOBS')}>
-          초기화
-        </button>
-        <div className="interest_list">
-          {JOBS.map((job, index) => (
-            <Interest
-              key={index}
-              className="setting_interest"
-              interestType="job"
-              name={job}
-              totalChoices={totalJobs}
-              setTotalChoices={setTotalJobs}
-              isChosen={isSelectedInterest(job, totalJobs)}
-            />
-          ))}
-        </div>
-      </SelectInterests>
-      <ProfileInfo title="관심사" content={totalInterests.join(', ')} />
-      <SelectInterests>
-        <button className="reset" onClick={() => onClickReset('INTERESTS')}>
-          초기화
-        </button>
-        <div className="interest_list">
-          {INTERESTS.map((interest, index) => (
-            <Interest
-              key={index}
-              className="setting_interest"
-              interestType="interest"
-              name={interest}
-              totalChoices={totalInterests}
-              setTotalChoices={setTotalInterests}
-              isChosen={isSelectedInterest(interest, totalInterests)}
-            />
-          ))}
-        </div>
-      </SelectInterests>
-      <ButtonWrapper>
-        <Button className="question_button" onClick={onClickSubmit}>
-          확인
-        </Button>
-      </ButtonWrapper>
+      {userInfo && (
+        <>
+          <ImageAndEmail>
+            <img src={currentProfileImageUrl} alt="User Image" width={80} height={80} />
+            <div>
+              <p className="email">{userInfo.email}</p>
+              <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
+                프로필 사진 바꾸기
+              </button>
+            </div>
+          </ImageAndEmail>
+          <ProfileInfo
+            title="닉네임"
+            content={currentNickname!}
+            changeContent={setCurrentNickname}
+            isInput={true}
+          />
+          <ProfileInfo
+            title="한줄목표"
+            content={currentPurpose!}
+            changeContent={setCurrentPurpose}
+            isInput={true}
+          />
+          <ProfileInfo title="직업" content={totalJobs?.join(', ')} />
+          <SelectInterests>
+            <button className="reset" onClick={() => onClickReset('JOBS')}>
+              초기화
+            </button>
+            <div className="interest_list">
+              {JOBS.map((job, index) => (
+                <Interest
+                  key={index}
+                  className="setting_interest"
+                  interestType="job"
+                  name={job}
+                  totalChoices={totalJobs!}
+                  setTotalChoices={setTotalJobs}
+                  isChosen={isSelectedInterest(job, totalJobs!)}
+                />
+              ))}
+            </div>
+          </SelectInterests>
+          <ProfileInfo title="관심사" content={totalInterests?.join(', ')} />
+          <SelectInterests>
+            <button className="reset" onClick={() => onClickReset('INTERESTS')}>
+              초기화
+            </button>
+            <div className="interest_list">
+              {INTERESTS.map((interest, index) => (
+                <Interest
+                  key={index}
+                  className="setting_interest"
+                  interestType="interest"
+                  name={interest}
+                  totalChoices={totalInterests!}
+                  setTotalChoices={setTotalInterests}
+                  isChosen={isSelectedInterest(interest, totalInterests!)}
+                />
+              ))}
+            </div>
+          </SelectInterests>
+          <ButtonWrapper>
+            <Button className="question_button" onClick={onClickSubmit}>
+              확인
+            </Button>
+          </ButtonWrapper>
+        </>
+      )}
     </Wrapper>
   );
 };
