@@ -1,9 +1,14 @@
-import { useContext, useEffect, useState } from 'react';
+import { ChangeEvent, useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
 
 import { ProfileInfo } from '.';
 
-import { useCheckDuplicateNickname, useUpdateUserProfile, useUserInfo } from '@/api/setting';
+import {
+  useCheckDuplicateNickname,
+  useCreateUserProfileImage,
+  useUpdateUserProfile,
+  useUserInfo,
+} from '@/api/setting';
 import { Button, Interest } from '@/common';
 import { ToastContext } from '@/contexts';
 import { checkNicknameValidation, checkPurpose, INTERESTS, JOBS } from '@/utils';
@@ -26,6 +31,7 @@ export const EditProfile = () => {
   const [totalJobs, setTotalJobs] = useState<string[] | undefined>([]);
   const [totalInterests, setTotalInterests] = useState<string[] | undefined>([]);
   const { user_info } = useUserInfo();
+  const { create_user_profile_img } = useCreateUserProfileImage();
 
   const showUser = async () => {
     const {
@@ -127,6 +133,39 @@ export const EditProfile = () => {
     return;
   };
 
+  const onChangeUserImage = async (event: ChangeEvent<HTMLInputElement>) => {
+    const files = event.target.files;
+    console.log(files);
+
+    if (files) {
+      console.log(files[0]);
+      // const url =URL.createObjectURL(files[0])
+      const fileReader = new FileReader();
+      fileReader.readAsArrayBuffer(files[0]);
+      // fileReader.onload = function (e) {
+      //   console.log(fileReader.result); // ArrayBuffer 객체
+      // };
+
+      // new Blob([new Uint8Array(fileReader.result!)], { type: 'image/jpeg' });
+      if (files) {
+        // const { data } = await create_user_profile_img({
+        //   variables: {
+        //     input: {
+        //       extension: "JPEG",
+        //     },
+        //   },
+        // });
+        // console.log(data);
+      }
+    }
+  };
+
+  const createImage = (files: FileList) => {
+    const formData = new FormData();
+    formData.append('image', files[0]);
+    return formData;
+  };
+
   return (
     <Wrapper>
       {userInfo && (
@@ -137,6 +176,15 @@ export const EditProfile = () => {
               <p className="email">{userInfo.email}</p>
               <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
                 프로필 사진 바꾸기
+              </button>
+              <input
+                type="file"
+                name="profileImg-change"
+                id="profileImg-change"
+                onChange={(event) => onChangeUserImage(event)}
+              />
+              <button className="edit_profile_img" onClick={() => console.log('이미지 변경')}>
+                프로필 사진 수정
               </button>
             </div>
           </ImageAndEmail>

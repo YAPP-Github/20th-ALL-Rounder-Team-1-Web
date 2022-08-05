@@ -36,7 +36,11 @@ export const Question = () => {
   return (
     <Wrapper>
       {isSubmitted ? (
-        <h1>제출완료</h1>
+        <Submitted>
+          <img src="../../assets/question_confirmed.png" alt="Question Submitted" />
+          <span className="question_text">문의가 정상적으로 접수되었습니다!</span>
+          <span className="question_result">문의에 대한 답변은 로그인된 이메일로 전송됩니다.</span>
+        </Submitted>
       ) : (
         <>
           <Title>문의하실 내용을 작성해주세요 :)</Title>
@@ -91,5 +95,29 @@ const TextArea = styled.textarea`
 
   ::placeholder {
     color: ${({ theme: { colors } }) => colors.Gray400};
+  }
+`;
+
+const Submitted = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin-top: 220px;
+
+  .question_text {
+    width: 177px;
+    height: 72px;
+    font-size: 24px;
+    line-height: 36px;
+    margin-top: 24px;
+    margin-bottom: 20px;
+    font-weight: 700;
+    text-align: center;
+    color: ${({ theme: { colors } }) => colors.Gray900};
+  }
+  .question_result {
+    ${({ theme: { fonts } }) => fonts.Body1}
+    color: ${({ theme: { colors } }) => colors.Gray500};
   }
 `;

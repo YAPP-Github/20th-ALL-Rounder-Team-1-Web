@@ -101,3 +101,20 @@ export const useDeleteUser = () => {
 
   return { delete_user };
 };
+
+const CREATE_USER_PROFILE_IMAGE = gql`
+  mutation CreateUserProfileImageS3PresignedUrl(
+    $input: CreateUserProfileImageS3PresignedUrlInput!
+  ) {
+    createUserProfileImageS3PresignedUrl(input: $input) {
+      url
+      filename
+    }
+  }
+`;
+
+export const useCreateUserProfileImage = () => {
+  const [create_user_profile_img] = useMutation(CREATE_USER_PROFILE_IMAGE);
+
+  return { create_user_profile_img };
+};
