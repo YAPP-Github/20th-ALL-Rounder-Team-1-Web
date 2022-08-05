@@ -98,6 +98,27 @@ const Home = () => {
   };
 
   useEffect(() => {
+    (async () => {
+      console.log('ㅅ;ㄹ행되나용');
+      const {
+        data: {
+          followees: {
+            paginationInfo: { hasNext },
+            followees: userFollowee,
+          },
+        },
+      } = await followees({
+        variables: {
+          page: 0,
+          size: 6,
+        },
+      });
+      setHasNextFriend(hasNext);
+      setUserFollowees([...userFollowees, ...userFollowee]);
+    })();
+  }, [location.pathname]);
+
+  useEffect(() => {
     try {
       showUser();
       showFollowees();
