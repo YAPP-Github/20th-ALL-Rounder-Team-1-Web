@@ -14,7 +14,7 @@ const Home = () => {
         </div>
         <Right>
           <Profile />
-          <Calender />
+          {/* <Calender /> */}
           <Purpose />
           <TopSeparator />
           <Job />

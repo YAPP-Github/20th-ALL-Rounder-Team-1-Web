@@ -6,14 +6,8 @@ import { Category } from '.';
 import { useScheduleCategories } from '@/api';
 import { CategorySubMenu } from '@/common';
 import { useContextMenu } from '@/hooks';
-import { OPEN_TYPE, SORT } from '@/models';
-
-interface ICategories {
-  color: string;
-  id: string;
-  name: string;
-  openType: OPEN_TYPE;
-}
+import { SORT } from '@/models';
+import { ICategory } from '@/types';
 
 export const CategoryList = () => {
   const { pointX, pointY, show, isCategoryClicked, setIsCategoryClicked } = useContextMenu();
@@ -24,7 +18,7 @@ export const CategoryList = () => {
 
   return (
     <Wrapper>
-      {data?.scheduleCategories?.scheduleCategories.map((category: ICategories) => (
+      {data?.scheduleCategories?.scheduleCategories.map((category: ICategory) => (
         <Category
           key={category.id}
           id={Number(category.id)}

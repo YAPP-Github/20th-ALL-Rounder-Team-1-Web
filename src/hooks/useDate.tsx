@@ -4,7 +4,7 @@ import isoWeeek from 'dayjs/plugin/isoWeek';
 import weekday from 'dayjs/plugin/weekday';
 import weekOfYear from 'dayjs/plugin/weekOfYear';
 
-export type Day = ReturnType<typeof dayjs>;
+import { Day } from '@/types';
 
 export const useDate = () => {
   dayjs.extend(weekday);
@@ -12,7 +12,7 @@ export const useDate = () => {
   dayjs.extend(weekOfYear);
 
   const today = dayjs();
-  const [date, setDate] = useState(dayjs());
+  const [date, setDate] = useState<Day>(dayjs());
 
   return { today, date, setDate };
 };

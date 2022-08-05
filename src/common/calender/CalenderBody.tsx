@@ -3,7 +3,7 @@ import cn from 'classnames';
 import { ManipulateType } from 'dayjs';
 import styled from 'styled-components';
 
-import { Day } from '@/hooks';
+import { Day } from '@/types';
 
 interface CalenderBodyProps {
   className?: string;
@@ -52,7 +52,8 @@ export const CalenderBody = ({ className, today, date, setDate, mode }: Calender
                   className={cn('box', 'day', isToday && 'today', isNone && 'none')}
                   key={`${week}_${idx}`}
                   onClick={() => {
-                    setDate(current);
+                    const a = current.set('hour', date.hour()).set('minute', date.minute());
+                    setDate(a);
                   }}
                 >
                   <span className={cn(isSelected && 'selected')}>{current.format('D')}</span>
