@@ -167,22 +167,22 @@ const Icons = styled.div<{ isFriend: boolean }>`
   display: flex;
   align-items: center;
 
-  i.smile {
+  i.GOOD {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -106px -303px;
   }
 
-  i.good {
+  i.CHEER_UP {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -154px -303px;
   }
 
-  i.cool {
+  i.COOL {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -58px -303px;
   }
 
-  i.congrats {
+  i.LIKE {
     ${({ theme: { icon } }) => icon('../assets/css_sprites.png', 28, 28)}
     background-position: -10px -303px;
   }
