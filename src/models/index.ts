@@ -17,3 +17,21 @@ export enum OPEN_TYPE {
   FOLLOWER_OPEN = 'FOLLOWER_OPEN',
   CLOSED = 'CLOSED',
 }
+
+export enum REPEAT_TYPE {
+  DAILY = 'DAILY',
+  WEEKLY = 'WEEKLY',
+  MONTHLY = 'MONTHLY',
+  YEARLY = 'YEARLY',
+  ONCE = 'ONCE',
+}
+
+export enum DAY_NAME {
+  월 = 'MONDAY',
+  화 = 'TUESDAY',
+  수 = 'WEDNESDAY',
+  목 = 'THURSDAY',
+  금 = 'FRIDAY',
+  토 = 'SATURDAY',
+  일 = 'SUNDAY',
+}

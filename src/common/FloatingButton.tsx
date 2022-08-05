@@ -1,12 +1,15 @@
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { useLocation } from 'react-router';
 import cn from 'classnames';
 import styled from 'styled-components';
 
 import { Button } from '.';
 
+import { PopUpContext } from '@/contexts';
+
 export const FloatingButton = () => {
   const location = useLocation();
+  const { setPopup } = useContext(PopUpContext);
 
   const [isExist, setIsExist] = useState(false);
 
@@ -19,7 +22,7 @@ export const FloatingButton = () => {
   }, [location.pathname]);
 
   const clickFloatingButton = () => {
-    alert('일정 작성');
+    setPopup('schedule');
   };
 
   return (

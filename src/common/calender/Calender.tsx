@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { CalenderBody } from './CalenderBody';
 import { CalenderHeader } from './CalenderHeader';
 
-import { Day } from '@/hooks';
+import { Day } from '@/types';
 
 interface CalendarProps {
   className?: string;

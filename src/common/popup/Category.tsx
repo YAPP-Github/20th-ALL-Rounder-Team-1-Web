@@ -31,7 +31,7 @@ const colors = [
   '#e9d3ff',
 ];
 
-export const CategoryPopup = () => {
+export const Category = () => {
   const { getCategory } = useContext(CategoryContext);
   const { setIsPopped } = useContext(PopUpContext);
   const { setToast } = useContext(ToastContext);
@@ -79,10 +79,10 @@ export const CategoryPopup = () => {
     <>
       <Title>카테고리</Title>
       <CloseButton onClick={closePopup}></CloseButton>
-      <Category>
+      <CategoryName>
         <CategoryLabel htmlFor="category">카테고리 이름</CategoryLabel>
         <Input className="category_input" id="category" ref={categoryName} />
-      </Category>
+      </CategoryName>
       <OpenType>
         <OpenTypeLabel>공개</OpenTypeLabel>
         <OpenTypeButton
@@ -146,7 +146,7 @@ const CloseButton = styled(Button)`
   }
 `;
 
-const Category = styled.div`
+const CategoryName = styled.div`
   margin-top: 39px;
 `;
 

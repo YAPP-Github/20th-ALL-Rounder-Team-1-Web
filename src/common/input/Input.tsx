@@ -120,4 +120,10 @@ const StyledInput = styled.input`
     border: 0;
     padding: 13px 16px;
   }
+
+  &.schedule_input {
+    width: 327px;
+    border: 0;
+    padding: 13px 16px;
+  }
 `;

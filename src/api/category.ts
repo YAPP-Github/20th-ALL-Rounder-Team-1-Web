@@ -19,7 +19,7 @@ const SCHEDULE_CATEGORIES = gql`
 `;
 
 export const useScheduleCategories = (sort: SORT, page: number, size: number) => {
-  const { data, refetch } = useQuery(SCHEDULE_CATEGORIES, {
+  const { data, loading, refetch } = useQuery(SCHEDULE_CATEGORIES, {
     variables: {
       sort,
       page,
@@ -27,7 +27,7 @@ export const useScheduleCategories = (sort: SORT, page: number, size: number) =>
     },
   });
 
-  return { data, refetch };
+  return { data, loading, refetch };
 };
 
 const SEARCH_SCHEDULES = gql`
