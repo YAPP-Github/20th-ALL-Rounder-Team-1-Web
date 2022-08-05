@@ -62,7 +62,7 @@ export const Schedules = ({ userId, date }: SchedulesProps) => {
 
   useEffect(() => {
     showSchedules();
-  }, [date]);
+  }, [userId, date]);
 
   return (
     <Wrapper>

@@ -42,6 +42,7 @@ const Home = () => {
   const { followees } = useFollowees();
 
   const [userInfo, setUserInfo] = useState<IUser>();
+  const [userProfile, setUserProfile] = useState<IFollowees>();
   const [userFollowees, setUserFollowees] = useState<IFollowees[]>([]);
   const [userId, setUserId] = useState('');
   const [today, setToday] = useState('');
@@ -63,8 +64,15 @@ const Home = () => {
     const {
       data: { user },
     } = await search_user();
+    const { id, nickname, profileImageUrl } = user;
     setUserInfo(user);
+    setUserProfile({ id, nickname, profileImageUrl });
+    setUserId(id);
   };
+
+  console.log(userProfile);
+
+  console.log(userFollowees);
 
   const showFollowees = async () => {
     const {
@@ -81,11 +89,15 @@ const Home = () => {
       },
     });
     setHasNextFriend(hasNext);
-    setUserFollowees(userFollowee);
+    setUserFollowees([...userFollowees, ...userFollowee]);
   };
 
   useEffect(() => {
+    showUser();
     showFollowees();
+  }, []);
+
+  useEffect(() => {
     showUser();
   }, [userId]);
 
@@ -95,13 +107,15 @@ const Home = () => {
     <PageLayout isFooter={false}>
       <Wrapper>
         <div>
-          <FriendStories
-            followees={userFollowees}
-            userId={userId}
-            setUserId={setUserId}
-            hasNextFriend={hasNextFriend}
-          />
-          {userInfo && <Schedules userId={userInfo.id} date={Number(clickedDay)} />}
+          {userProfile && (
+            <FriendStories
+              followees={[userProfile, ...userFollowees]}
+              userId={userId}
+              setUserId={setUserId}
+              hasNextFriend={hasNextFriend}
+            />
+          )}
+          {userInfo && <Schedules userId={userId} date={Number(clickedDay)} />}
         </div>
         <Right>
           {userInfo && (
