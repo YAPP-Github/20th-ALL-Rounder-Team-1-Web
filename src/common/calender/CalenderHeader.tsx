@@ -7,6 +7,7 @@ import { Day } from '@/hooks';
 
 import { Button } from '..';
 interface CalerderHeaderProps {
+  className?: string;
   today: Day;
   date: Day;
   setDate: Dispatch<SetStateAction<Day>>;
@@ -14,7 +15,14 @@ interface CalerderHeaderProps {
   setMode: Dispatch<SetStateAction<ManipulateType>>;
 }
 
-export const CalenderHeader = ({ today, date, setDate, mode, setMode }: CalerderHeaderProps) => {
+export const CalenderHeader = ({
+  className,
+  today,
+  date,
+  setDate,
+  mode,
+  setMode,
+}: CalerderHeaderProps) => {
   const changeDate = (date: Day, changeString: string) => () => {
     switch (changeString) {
       case 'add':
@@ -26,6 +34,8 @@ export const CalenderHeader = ({ today, date, setDate, mode, setMode }: Calerder
     }
   };
 
+  const isMakeSchedule = className === 'schedule' || className === 'repeat_schedule';
+
   return (
     <StyledHeader>
       <span className="thisMonth">
@@ -33,25 +43,29 @@ export const CalenderHeader = ({ today, date, setDate, mode, setMode }: Calerder
           ? `${date.format('M')}월 ${date.week() - date.startOf('month').week() + 1}주차`
           : `${date.format('YYYY')}년 ${date.format('M')}월`}
       </span>
-      <ToggleCalenderButton
-        className={cn(mode === 'month' && 'month')}
-        onClick={() => {
-          if (mode === 'week') {
-            setMode('month');
-            return;
-          }
-          setMode('week');
-        }}
-      ></ToggleCalenderButton>
-      <WrapperButtons>
-        <Button
-          className="today"
+      {!isMakeSchedule && (
+        <ToggleCalenderButton
+          className={cn(mode === 'month' && 'month')}
           onClick={() => {
-            setDate(today);
+            if (mode === 'week') {
+              setMode('month');
+              return;
+            }
+            setMode('week');
           }}
-        >
-          오늘
-        </Button>
+        ></ToggleCalenderButton>
+      )}
+      <WrapperButtons>
+        {!isMakeSchedule && (
+          <Button
+            className="today"
+            onClick={() => {
+              setDate(today);
+            }}
+          >
+            오늘
+          </Button>
+        )}
         <Button className="previous_icon" onClick={changeDate(date, 'subtract')}></Button>
         <Button className="next_icon" onClick={changeDate(date, 'add')}></Button>
       </WrapperButtons>

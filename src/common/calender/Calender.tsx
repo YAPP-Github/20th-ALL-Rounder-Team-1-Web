@@ -5,35 +5,35 @@ import styled from 'styled-components';
 import { CalenderBody } from './CalenderBody';
 import { CalenderHeader } from './CalenderHeader';
 
-import { useDate } from '@/hooks';
+import { Day } from '@/hooks';
 
 interface CalendarProps {
-  setToday?: Dispatch<SetStateAction<string>>;
-  setClickedDay?: Dispatch<SetStateAction<string>>;
+  className?: string;
+  today: Day;
+  date: Day;
+  setDate: Dispatch<SetStateAction<Day>>;
 }
 
-export const Calender = ({ setToday, setClickedDay }: CalendarProps) => {
+export const Calender = ({ className, today, date, setDate }: CalendarProps) => {
   const [mode, setMode] = useState<ManipulateType>('week');
-  const { today, date, setDate } = useDate();
-
-  console.log(today, date);
 
   useEffect(() => {
-    if (setToday) {
-      setToday(today.unix() + '0000');
+    if (className === 'schedule' || className === 'repeat_schedule') {
+      setMode('month');
     }
-  }, [today]);
-
-  useEffect(() => {
-    if (setClickedDay) {
-      setClickedDay(date.unix() + '0000');
-    }
-  }, [date]);
+  }, []);
 
   return (
-    <Wrapper>
-      <CalenderHeader today={today} date={date} setDate={setDate} mode={mode} setMode={setMode} />
-      <CalenderBody today={today} date={date} setDate={setDate} mode={mode} />
+    <Wrapper className={className}>
+      <CalenderHeader
+        className={className}
+        today={today}
+        date={date}
+        setDate={setDate}
+        mode={mode}
+        setMode={setMode}
+      />
+      <CalenderBody className={className} today={today} date={date} setDate={setDate} mode={mode} />
     </Wrapper>
   );
 };
@@ -42,4 +42,14 @@ const Wrapper = styled.div`
   width: 392px;
   margin: 0 auto;
   margin-top: 50px;
+
+  &.schedule {
+    margin-top: 0;
+    width: 375px;
+  }
+
+  &.repeat_schedule {
+    margin-top: 19px;
+    width: 375px;
+  }
 `;
