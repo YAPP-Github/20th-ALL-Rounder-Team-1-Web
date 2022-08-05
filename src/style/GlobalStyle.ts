@@ -17,7 +17,9 @@ export const GlobalStyle = createGlobalStyle`
       margin: 0 auto;
    }
 
-   input:focus, select:focus, option:focus, textarea:focus, button:focus {
-	   outline: none;
-   }
+   element:focus {
+	outline-style: none;
+	box-shadow: none;
+	border-color: transparent; 
+}
 `;
