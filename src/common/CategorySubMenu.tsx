@@ -25,7 +25,7 @@ export const CategorySubMenu = ({
   clickedIndex,
 }: CategorySubMenuProps) => {
   const [showSorting, setShowSorting] = useState(false);
-  const { setIsPopped } = useContext(PopUpContext);
+  const { setIsPopped, setCurrentPopUp } = useContext(PopUpContext);
 
   const { delete_category } = useDeleteCategory();
   const { delete_schedule } = useDeleteSchedule();
@@ -76,6 +76,7 @@ export const CategorySubMenu = ({
         <ContextMenu pointX={pointX} pointY={pointY}>
           <Menu
             onClick={() => {
+              setCurrentPopUp('edit-category');
               setIsPopped(true);
             }}
           >
@@ -85,7 +86,14 @@ export const CategorySubMenu = ({
         </ContextMenu>
       ) : (
         <ContextMenu pointX={pointX} pointY={pointY}>
-          <Menu>새 카테고리</Menu>
+          <Menu
+            onClick={() => {
+              setCurrentPopUp('create-category');
+              setIsPopped(true);
+            }}
+          >
+            새 카테고리
+          </Menu>
           <SortMenu
             onMouseOver={() => setShowSorting(true)}
             onMouseLeave={() => setShowSorting(false)}

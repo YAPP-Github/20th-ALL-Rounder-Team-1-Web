@@ -1,5 +1,7 @@
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import styled from 'styled-components';
+
+import { CreateCategoryPopup } from './CreateCategoryPopup';
 
 import { DimmedLayerContext, PopUpContext } from '@/contexts';
 
@@ -9,7 +11,21 @@ export const PopUp = () => {
   const { setIsDimmed } = useContext(DimmedLayerContext);
 
   // 팝업 종류 (string)를 받아서 이에 맞는 컴포넌트를 렌더하는 식으로 가야 할듯
-  const { isPopped } = useContext(PopUpContext);
+  const { isPopped, currentPopUp } = useContext(PopUpContext);
+  const [popUp, setPopUp] = useState<JSX.Element>();
+
+  const showingPopUp = (currentPopUp: string) => {
+    switch (currentPopUp) {
+      case 'create-category':
+        return <CreateCategoryPopup />;
+      case 'edit-category':
+        return <CategoryPopup />;
+    }
+  };
+
+  useEffect(() => {
+    setPopUp(showingPopUp(currentPopUp));
+  }, [currentPopUp]);
 
   useEffect(() => {
     if (isPopped) {
@@ -20,7 +36,7 @@ export const PopUp = () => {
     setIsDimmed(false);
   }, [isPopped]);
 
-  return <PopUpWrapper visible={isPopped}>{CategoryPopup()}</PopUpWrapper>;
+  return <PopUpWrapper visible={isPopped}>{popUp}</PopUpWrapper>;
 };
 
 const PopUpWrapper = styled.div<{ visible: boolean }>`
